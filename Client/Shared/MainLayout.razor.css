@@ -7,6 +7,8 @@
 
 main {
 	background-color: var(--branding-color-background);
+	overflow: auto;
+	padding-bottom: 10px;
 }
 
 	main::before {
