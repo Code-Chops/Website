@@ -1,0 +1,16 @@
+﻿.box {
+	position: relative;
+	border-radius: 0.25rem;
+	border-color: #999999;
+	border-style: dashed;
+	border-width: 2px;
+}
+
+.box-text {
+
+	color: white;
+}
+
+.box-code {
+
+}

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <AnalysisLevel>latest</AnalysisLevel>
+	  <AssemblyName>Website.Client</AssemblyName>
+	  <RootNamespace>CodeChops.Website.Client</RootNamespace>
+	  <Version>0.4.0</Version>
+	  <LangVersion>10</LangVersion>
+	  <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Website.RazorComponents\RazorComponents\RazorComponents.csproj" />
+    <ProjectReference Include="..\Shared\Website.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <PropertyGroup>
+  	<!-- CA1822: Instance member does not access instance data and can be marked as static -->
+  	<!-- CS1573: Undocumented public symbol while -doc compiler option is used -->
+  	<!-- CS1591: Missing XML comment for publicly visible type -->
+  	<!-- CA1816: Dispose() should call GC.SuppressFinalize()-->
+  	<NoWarn>CA1822,CS1573,CS1591,CA1816</NoWarn>
+  </PropertyGroup>
+</Project>

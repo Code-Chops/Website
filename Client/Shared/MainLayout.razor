@@ -1,0 +1,70 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Http;
+
+<style>
+    html {
+	    background-color: var(--branding-color-background);
+    }
+
+    :root {
+        --branding-color-main:         @Branding.Color.Main;
+        --branding-color-accent:       @Branding.Color.Accent;
+        --branding-color-background:   @Branding.Color.Background;
+    }
+</style>
+
+<div class="page">
+    <MenuBar 
+        BackgroundColor="black"
+        AccentColor=@Branding.Color.Accent
+        TextColor="white"
+        FontFamily=@Branding.FontFamily 
+        LogoPath="/favicon.ico" 
+        Title=@Branding.Name 
+        ShowTitle=SquareIsAttached
+        Height="80" 
+        ShowLogo="false"></MenuBar>
+
+    <main>
+        <div class="top-row px-4 auth">
+            <LoginDisplay />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-2">
+            @Body
+            
+            <div id="overlayWrapper" class="@(SquareIsAttached ? "dissolveOverlay": "")">
+                <div id="overlay"></div>
+            </div>
+
+            @if (ShowAnimation)
+            {
+                <div id="logoWrapper" class="@(SquareIsAttached ? "attachedLogo": "splashLogo")" @onclick=OnSplashClick>
+ 		            <div id="logoBackground"></div>
+		            <div id="logoM"></div>
+		            <div id="logoA"></div>
+		            <div id="logoX"></div> 
+		            <div id="logoB"></div>
+                </div>
+            }            
+        </article>
+    </main>
+</div>
+
+@code
+{
+    [Inject] private RenderLocation RenderLocation { get; set; } = null!;
+    private bool SquareIsAttached { get; set; }
+    private bool ShowAnimation { get; set; }
+
+    protected override void OnAfterRender(bool isFirstRender)
+    {
+        this.ShowAnimation = RenderLocation is RenderedOnClient;
+    }
+
+    private void OnSplashClick(MouseEventArgs args)
+    {
+        this.SquareIsAttached = true;
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "CodeChops",
+    "short_name": "CodeChops",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#1e1e1e",
+    "theme_color": "#730030",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "type": "image/ico",
+            "sizes": "256x256"
+        },
+        {
+            "src": "favicon.ico",
+            "type": "image/ico",
+            "sizes": "128x128"
+        }
+    ]
+}
