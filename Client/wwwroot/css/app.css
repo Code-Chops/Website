@@ -3,6 +3,7 @@
 html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     overflow: hidden;
+    background-color: var(--branding-color-accent);
 }
 
 h1:focus {
@@ -114,3 +115,13 @@ html {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+.alert-secondary {
+    background-color: var(--branding-color-accent) !important;
+    opacity: .6;
+    color: white !important;
+}
+
+.pointerCursor {
+    cursor: pointer;
+}

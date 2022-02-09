@@ -1,0 +1,45 @@
+﻿<CascadingValue Value="@ShowApp">
+    
+    @if (!ShowApp)
+    {
+        <div id="clickOverlay" @onclick=OnSplashClick></div>
+    }
+
+    @ChildContent
+
+</CascadingValue> 
+
+<style>
+    html {
+	    background-color: var(--branding-color-background);
+    }
+
+    :root {
+        --branding-color-main:         @Branding.Color.Main;
+        --branding-color-accent:       @Branding.Color.Accent;
+        --branding-color-background:   @Branding.Color.Background;
+    }
+</style>
+
+@code
+{
+    [Inject] private RenderLocation RenderLocation { get; set; } = null!;
+    [Inject] private IJSRuntime JsInterop { get; set; } = null!;
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    private bool ShowApp { get; set; }
+    private bool IsRenderedOnClient { get; set; }
+
+    protected override void OnInitialized()
+    {
+        this.IsRenderedOnClient = RenderLocation is RenderedOnClient;
+    }
+
+    private async Task OnSplashClick(MouseEventArgs args)
+    {
+        if (this.ShowApp || !this.IsRenderedOnClient) return;
+
+        await this.JsInterop.InvokeVoidAsync("onSplashClick");
+        this.ShowApp = true;
+        this.StateHasChanged();
+    }
+}
