@@ -2,15 +2,21 @@
 
 <div class="page">
     <MenuBar 
-        BackgroundColor="black"
-        AccentColor=@Branding.Color.Accent
-        TextColor="white"
-        FontFamily=@Branding.FontFamily 
-        LogoPath="/favicon.ico" 
-        Title=@Branding.Name 
-        ShowTitle=ShowTitle
-        Height="80" 
-        ShowLogo="false"></MenuBar>
+            BackgroundColor="black"
+            AccentColor=@Branding.Color.Accent
+            TextColor="white"
+            FontFamily=@Branding.FontFamily 
+            LogoPath="/favicon.ico" 
+            Title=@Branding.Name 
+            ShowTitle=ShowTitle
+            Height="80" 
+            ShowLogo="false">
+        <MenuButton FontAwesomeIcon="fa-th-large">Game</MenuButton>
+        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
+        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
+        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
+        <MenuButton FontAwesomeIcon="fa-user-circle">Profile</MenuButton>
+    </MenuBar>
 
     <main>
 @*        <div class="top-row px-4 auth">

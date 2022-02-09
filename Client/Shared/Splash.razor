@@ -21,6 +21,7 @@
     }
 </style>
 
+
 @code
 {
     [Inject] private RenderLocation RenderLocation { get; set; } = null!;
@@ -40,6 +41,5 @@
 
         await this.JsInterop.InvokeVoidAsync("onSplashClick");
         this.ShowApp = true;
-        this.StateHasChanged();
     }
 }

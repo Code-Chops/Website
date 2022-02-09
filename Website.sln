@@ -4,9 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Server", "Server\Website.Server.csproj", "{60A61F4C-6D2B-4552-95F5-4E20F3F031DE}"
-EndProject                                           
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Client", "Client\Website.Client.csproj", "{F1B94B32-20FA-4150-8630-606209BEB7EB}"
-EndProject                                           
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Shared", "Shared\Website.Shared.csproj", "{9A543D5F-F731-447E-98F3-4F3B22C276B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorComponents", "..\Website.RazorComponents\RazorComponents\RazorComponents.csproj", "{7FCDBBD4-C0A1-463C-AAE7-0D71105E3ECB}"
