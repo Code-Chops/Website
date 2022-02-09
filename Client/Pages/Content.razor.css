@@ -1,0 +1,22 @@
+﻿.content {
+	margin: 15px 10px 15px 10px;
+	font-size: larger;
+	display: flex;
+}
+
+@media (min-width: 1000px) {
+	.content {
+		justify-content: center;
+	}
+}
+
+h2 {
+	opacity: .8;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	font-weight: 600;
+}
+
+article {
+	max-width: 1000px;
+}

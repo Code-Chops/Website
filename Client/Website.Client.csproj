@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<None Include="wwwroot\css\app.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\CodeChopsSplash.css" />
   </ItemGroup>
 

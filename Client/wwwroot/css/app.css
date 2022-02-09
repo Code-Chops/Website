@@ -3,7 +3,8 @@
 html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     overflow: hidden;
-    background-color: var(--branding-color-accent);
+    background-color: var(--branding-color-background);
+    color: var(--textcolor);
 }
 
 h1:focus {
@@ -25,9 +26,6 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
-}
-
-.content {
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -89,6 +87,7 @@ a, .btn-link {
 
 pre.code {
     margin: 0 !important;
+    tab-size: 4;
 }
 
 html {
@@ -96,25 +95,28 @@ html {
     -webkit-overflow-scrolling: touch;
 }
 
-    ::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
-    }
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
 
 ::-webkit-scrollbar-thumb {
     scrollbar-color: #666 #201c29;
     background: #434343;
-    /* border-radius: 16px; */
     box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%), inset -2px -2px 2px rgb(0 0 0 / 25%);
 }
-
-    :-webkit-scrollbar-track {
-        background: linear-gradient(90deg,#434343,#434343 1px,#111 0,#111);
-    }
 
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(90deg,#434343,#434343 1px,#111 0,#111);
+}
+
+::-webkit-scrollbar-corner {
+    scrollbar-color: #201c29 #201c29;
+}
 
 .alert-secondary {
     background-color: var(--branding-color-accent) !important;
@@ -124,4 +126,8 @@ html {
 
 .pointerCursor {
     cursor: pointer;
+}
+
+p {
+    margin-bottom: 2rem;
 }
