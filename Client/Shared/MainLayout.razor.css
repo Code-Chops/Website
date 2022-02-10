@@ -1,7 +1,9 @@
 .page {
+	max-height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	max-height: 100vh;
+	height: 100%;
 }
 
 .border {
@@ -14,40 +16,13 @@ main {
 	background-color: var(--branding-color-background);
 	overflow: auto;
 	padding-bottom: 10px;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	background: repeating-linear-gradient( 45deg, var(--branding-color-background), var(--branding-color-background) 10px, rgba(var(--branding-color-accent-rgb), .20) 14px);
 }
-
-	main::before {
-		opacity: .4;
-		content: "";
-		display: block;
-		z-index: 100;
-		width: 100%;
-		height:0px;
-	}
 
 .sidebar {
 	background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
-
-.oi-image {
-	color: #7e1843;
-}
-
-.top-row {
-	background-color: #f7f7f7;
-	border-bottom: 1px solid #d6d5d5;
-	justify-content: flex-end;
-	display: flex;
-	align-items: center;
-}
-
-	.top-row ::deep a, .top-row ::deep .btn-link {
-		white-space: nowrap;
-		margin-left: 1.5rem;
-		text-decoration: none;
-	}
-
-		.top-row ::deep a:first-child {
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}

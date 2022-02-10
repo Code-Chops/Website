@@ -1,15 +1,17 @@
-﻿namespace CodeChops.Website.Client;
+﻿using CodeChops.Website.RazorComponents.Helpers;
+
+namespace CodeChops.Website.Client;
 
 public static class Branding
 {
 	public const string Name = "CodeChops";
 	public const string FontFamily = "DotGothic";
 
-	public static class Color
+	public static class Colors
 	{
-		public const string Main = "#730030";
-		public const string Accent = "#8c3459";
-		public const string Background = "#1e1e1e";
+		public static readonly Color Main = new("#730030");
+		public static readonly Color Accent = new("#8c3459");
+		public static readonly Color Background = new("#1e1e1e");
 	}
 }
 

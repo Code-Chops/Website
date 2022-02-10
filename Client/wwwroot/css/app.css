@@ -1,10 +1,13 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
-html, body {
+﻿html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     overflow: hidden;
     background-color: var(--branding-color-background);
     color: var(--textcolor);
+    height: 100%;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
 }
 
 h1:focus {
@@ -76,11 +79,6 @@ a, .btn-link {
 }
 
 @font-face {
-    font-family: Pacifico;
-    src: url(../fonts/Pacifico/Pacifico-Regular.ttf);
-}
-
-@font-face {
     font-family: DotGothic;
     src: url(../fonts/DotGothic/DotGothic16-Regular.ttf);
 }
@@ -119,8 +117,7 @@ html {
 }
 
 .alert-secondary {
-    background-color: var(--branding-color-accent) !important;
-    opacity: .6;
+    background-color: rgba(var(--branding-color-accent-rgb), .6) !important;
     color: white !important;
 }
 

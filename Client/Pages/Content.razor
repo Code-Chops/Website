@@ -1,13 +1,15 @@
 ﻿<div class="content">
-	<article class="px-2">
+	<Box>
+		<article class="px-2">
 			<PageTitle>@Branding.Name - @Title</PageTitle>
 			<h2>@Title</h2>
 
 			@ChildContent	
-	</article>
+		</article>
+	</Box>
 </div>
 
-<Footer></Footer>
+<Footer/>
 
 @code {
 	[Parameter] public string Title { get; set; } = null!;
