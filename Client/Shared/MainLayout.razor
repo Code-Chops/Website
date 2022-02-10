@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@using CodeChops.Website.RazorComponents.Navigation;
+@using static CodeChops.Website.RazorComponents.Navigation.MenuButton
 
 <div class="page">
     <MenuBar 
@@ -10,14 +12,11 @@
             Title=@Branding.Name 
             ShowTitle=ShowTitle
             Height="80" 
-            ShowLogo="false">
-        <MenuButton FontAwesomeIcon="fa-th-large" HRef="/">Game</MenuButton>
-        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
-        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
-        <MenuButton FontAwesomeIcon="fa-image">Save Image</MenuButton>
-        <MenuButton FontAwesomeIcon="fa-user-circle" HRef="/about">About</MenuButton>
-    </MenuBar>
+            ShowLogo="false"
+            Buttons=Buttons />
+
     <div class="border"></div>
+
     <main>
         @Body           
     </main>
@@ -26,4 +25,12 @@
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
+    private ICollection<MenuButtonData> Buttons { get; } = new MenuButtonData[]
+        {
+            new() { FontAwesomeIcon="fa-th-large",      HRef="/",       Text="Game" },
+            new() { FontAwesomeIcon="fa-image",         HRef="/",       Text="Save Image" },
+            new() { FontAwesomeIcon="fa-image",         HRef="/",       Text="Save Image" },
+            new() { FontAwesomeIcon="fa-image",         HRef="/",       Text="Save Image" },
+            new() { FontAwesomeIcon="fa-user-circle",   HRef="/about",  Text="About" },
+        };
 }
