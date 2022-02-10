@@ -1,13 +1,62 @@
-﻿html, body {
+﻿html {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    overflow: hidden;
-    background-color: var(--branding-color-background);
+    scroll-behavior: smooth;
+    line-height: 1.5;
     color: var(--textcolor);
+}
+
+html, body {
+    overflow: hidden;
     height: 100%;
+}
+
+body {
+    margin: 0;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[type=button], [type=reset], [type=submit], button {
+    -webkit-appearance: button;
+}
+
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+        cursor: pointer;
+    }
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
 }
 
 *, ::after, ::before {
     box-sizing: border-box;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h2 {
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.h2, h2 {
+    font-size: calc(1.325rem + .9vw);
+}
+
+.h4, h4 {
+    font-size: calc(1.275rem + .3vw);
+}
+
+@media (min-width: 1200px) {
+    .h2, h2 {
+        font-size: 2rem;
+    }
 }
 
 h1:focus {
@@ -83,6 +132,8 @@ a, .btn-link {
     src: url(../fonts/DotGothic/DotGothic16-Regular.ttf);
 }
 
+/* TODO user better faster fonts: https://iainbean.com/posts/2021/5-steps-to-faster-web-fonts/ */
+
 pre.code {
     margin: 0 !important;
     tab-size: 4;
@@ -116,9 +167,16 @@ html {
     scrollbar-color: #201c29 #201c29;
 }
 
-.alert-secondary {
+.alert {
     background-color: rgba(var(--branding-color-accent-rgb), .6) !important;
     color: white !important;
+    margin-top: 1.5rem !important;
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    border-color: #d3d6d8;
 }
 
 .pointerCursor {

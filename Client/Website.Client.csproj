@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Website.RazorComponents\RazorComponents\RazorComponents.csproj" />
-    <ProjectReference Include="..\Shared\Website.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

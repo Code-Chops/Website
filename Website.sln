@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Server", "Server\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Client", "Client\Website.Client.csproj", "{F1B94B32-20FA-4150-8630-606209BEB7EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Shared", "Shared\Website.Shared.csproj", "{9A543D5F-F731-447E-98F3-4F3B22C276B1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorComponents", "..\Website.RazorComponents\RazorComponents\RazorComponents.csproj", "{7FCDBBD4-C0A1-463C-AAE7-0D71105E3ECB}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{F1B94B32-20FA-4150-8630-606209BEB7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1B94B32-20FA-4150-8630-606209BEB7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1B94B32-20FA-4150-8630-606209BEB7EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A543D5F-F731-447E-98F3-4F3B22C276B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A543D5F-F731-447E-98F3-4F3B22C276B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A543D5F-F731-447E-98F3-4F3B22C276B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A543D5F-F731-447E-98F3-4F3B22C276B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FCDBBD4-C0A1-463C-AAE7-0D71105E3ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FCDBBD4-C0A1-463C-AAE7-0D71105E3ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FCDBBD4-C0A1-463C-AAE7-0D71105E3ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU

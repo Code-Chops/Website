@@ -15,23 +15,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//	.AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentityServer()
-	.AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+//builder.Services.AddIdentityServer()
+//	.AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-builder.Services.AddAuthentication()
-	.AddIdentityServerJwt();
+//builder.Services.AddAuthentication()
+//	.AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<AuthenticationStateProvider,ServerAuthenticationStateProvider>();
-builder.Services.AddScoped<SignOutSessionStateManager>();
+//builder.Services.AddScoped<AuthenticationStateProvider,ServerAuthenticationStateProvider>();
+//builder.Services.AddScoped<SignOutSessionStateManager>();
 builder.Services.AddSingleton<RenderLocation, RenderedOnServer>();
 
 CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
@@ -58,9 +58,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseIdentityServer();
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseIdentityServer();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 
 app.MapRazorPages();

@@ -22,7 +22,7 @@ public class Program
 		builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CodeChops.Website.ServerAPI"));
 		builder.Services.AddSingleton<RenderLocation, RenderedOnClient>();
 
-		builder.Services.AddApiAuthorization();
+		//builder.Services.AddApiAuthorization();
 		builder.Services.AddHttpContextAccessor();
 
 		await builder.Build().RunAsync();

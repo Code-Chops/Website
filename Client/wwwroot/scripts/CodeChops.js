@@ -8,9 +8,8 @@ window.highlightCode = () => {
 // Register the click on the splash screen.
 document.addEventListener("click", onClick);
 
-// Remove click event listener. Fire click event and so .NET registers it.
+// Fire click event and so .NET registers it.
 function onClick(doc, e) {
-    document.removeEventListener("click", onClick);
     const element = document.getElementById("clickOverlay");
     fireEvent(element, "click");
 }
@@ -28,6 +27,7 @@ function fireEvent(element, eventType) {
 
 // Remove splash, attach logo, and dissolve overlay.
 // Gets fired from .NET.
+// Remove click event listener.
 window.onSplashClick = () => {
     const logo = document.getElementById("logo");
     logo.classList.add("attachedLogo");
@@ -35,4 +35,6 @@ window.onSplashClick = () => {
 
     const overlay = document.getElementById("overlay");
     overlay.classList.add("dissolveOverlay");
+
+    document.removeEventListener("click", onClick);
 }
