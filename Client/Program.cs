@@ -20,6 +20,7 @@ public class Program
 
 		//builder.Services.AddApiAuthorization();
 		builder.Services.AddHttpContextAccessor();
+		builder.Services.AddLocalization();
 
 		await builder.Build().RunAsync();
 	}

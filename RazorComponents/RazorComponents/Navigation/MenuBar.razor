@@ -14,11 +14,14 @@
             }
         </div>
 
-        <div class="navbar-buttons">
-            @foreach(var button in Buttons)
-            {
-                <MenuButton Data=button OnClick=@(args => OnClickButton(args, button))></MenuButton>
-            }
+        <div class="button-container">
+            <div class="navbar-buttons">
+                @foreach(var button in Buttons)
+                {
+                    <MenuButton Data=button OnClick=@(args => OnClickButton(args, button))></MenuButton>
+                }
+            </div>
+            @ChildContent
         </div>
 
         <button class="navbar-toggler" @onclick="Toggle">
@@ -51,6 +54,7 @@
     [Parameter] public bool ShowTitle { get; set; } = true;
     [Parameter] public ICollection<MenuButtonData> Buttons { get; set; } = new List<MenuButtonData>();
     [Parameter] public int CollapseWidth { get; set; } = 600;
+	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     private bool IsCollapsed { get; set; } = true;
 

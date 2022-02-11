@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Projects" xml:space="preserve">
-    <value>Projects</value>
+  <data name="Author" xml:space="preserve">
+    <value>Logo, design en website door CodeChops</value>
+  </data>
+  <data name="Paragraph1" xml:space="preserve">
+    <value>Ik ben Max Bergman, een full-stack senior software ontwikkelaar.
+Dit is een plek waar ik mijn laatste projecten, mijn ervaringen in applicatie-ontwikkeling, en tips voor andere ontwikkelaars deel. 
+Er zullen regelmatig updates op deze website verschijnen, omdat mijn streven om de nieuwste technieken te gebruiken een voortdurend proces is.</value>
+  </data>
+  <data name="Paragraph2" xml:space="preserve">
+    <value>Mijn carrière in software-ontwikkeling focust zich hoofdzakelijk rondom het .NET framework.
+Momenteel gebruik ik meestal: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.</value>
+  </data>
+  <data name="Paragraph3" xml:space="preserve">
+    <value>Voel je vrij om contact met me op te nemen bij vragen of opmerkingen. Dit wordt gewaardeerd!</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Over</value>
   </data>
 </root>

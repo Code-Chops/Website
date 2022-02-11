@@ -1,22 +1,21 @@
-﻿@using CodeChops.Website.Client.Pages.Articles
+﻿@using Resource = CodeChops.Website.Client.Resources.Home;
+@using CodeChops.Website.Client.Pages.Articles
 @using CodeChops.Website.Client.Pages.Projects
 
 @page "/"
 
-<Content Title="Welcome" AlternativeHeader="Welcome to CodeChops">
+<Content Title="@Resource.Title" AlternativeHeader="@Resource.FullTitle">
 	<p>
-		At CodeChops we focus on delivering top-notch, creative, tailor-made applications.
-		Our solutions will perfectly suit your company's needs as we will think along with you during the development process.
+		@Resource.Paragraph1
 	</p>
 	<p>
-		Our portfolio varies from front-end to back-end (see <a href="projects">projects</a>).
-		We prefer to work on solutions that encompass both, in order to give you a seamless integrated experience.
+		@Resource.Paragraph2
 	</p>
-	<p>
+@*	<p>
 		(websites, applications, games)
 		(<a href="projects/website">Website</a>, <a href="projects/game">single player browser games</a>) to back-end (<a href="projects/magicenum">MagicEnums</a>, <a href="projects/maths">Maths</a>)
 		back-end (<a href="projects/junctions">Junctions</a>)
-	</p>
+	</p>*@
 </Content>
 
 @code {

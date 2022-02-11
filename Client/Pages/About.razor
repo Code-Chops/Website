@@ -1,22 +1,20 @@
-﻿@page "/about"
+﻿@using Resource = CodeChops.Website.Client.Resources.About;
+@page "/about"
 
-<Content Title="About">
+<Content Title="@Resources.About.Title">
 	<p>
-		I am Max Bergman, a full-stack senior software engineer.
-		This website is a place where I share my latest projects, my experiences in application development, and tips for other developers. 
-		It will be regularly updated, as my endeavour to use the newest techniques is never-ending.		
+		@Resource.Paragraph1	
 	</p>
 
 	<p>
-		My development career has mainly focused on the .NET ecosystem.
-		Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL. 
+		@Resource.Paragraph2
 	</p>
 
 	<p>
-		Feel free to contact me if you have any questions, remarks or comments. It'll be greatly appreciated!
+		@Resource.Paragraph3
 	</p>
 
 	<div id="author">
-		Logo, design and website by CodeChops
+		@Resource.Author
 	</div>
 </Content>

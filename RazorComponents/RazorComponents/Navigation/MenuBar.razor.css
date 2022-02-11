@@ -96,6 +96,12 @@
         box-shadow: 0 0 0 0.1rem var(--accentcolor);
     }
 
+.button-container {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+}
+
 .navbar-buttons {
     display: flex;
     padding-top: 5px;
@@ -131,10 +137,6 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-}
-
-.top-bar-shadow {
-    display: none !important;
 }
 
 #title {

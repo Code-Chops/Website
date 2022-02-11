@@ -1,0 +1,60 @@
+﻿@using System.Globalization
+@using System.Resources
+@using Microsoft.Extensions.Localization;
+@using System.Collections.Immutable;
+
+@if (FlagsByLanguageCode.Any())
+{
+	<MenuButton Data=@(new() { Text=GetCurrentLanguageFlag() }) OnClick=@ChangeLanguage></MenuButton>
+}
+
+@code {
+	public IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["EN"] = "🇬🇧", ["NL"] = "🇳🇱" };
+	public ImmutableList<string> LanguageCodes { get; set; } = ImmutableList.Create<string>();
+
+	private void ChangeLanguage(MouseEventArgs args)
+	{
+		var index = this.LanguageCodes.IndexOf(CultureInfo.CurrentCulture.TwoLetterISOLanguageName) % this.LanguageCodes.Count;
+		var newLanguageCode = this.LanguageCodes[index];
+
+		this.SetCurrentCulture(newLanguageCode);
+	}
+
+	protected override void OnInitialized()
+	{
+		var resourceManager = Resources.Languages.ResourceManager;
+		resourceManager.IgnoreCase = true;
+		var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: false, tryParents: false)!;
+
+		if (resourceSet is not null)
+		{
+			this.FlagsByLanguageCode = resourceSet
+				.Cast<KeyValuePair<string, string>>()
+				.ToDictionary(codeAndFlag => codeAndFlag.Key, codeAndFlag => codeAndFlag.Value, StringComparer.OrdinalIgnoreCase);
+		}
+
+		if (this.FlagsByLanguageCode is not null)
+		{
+			this.LanguageCodes = this.FlagsByLanguageCode.Keys.ToImmutableList();
+		}
+	}
+
+
+	public void SetCurrentCulture(string languageCode)
+	{
+		var culture = CultureInfo.GetCultureInfo(languageCode);
+
+		if (culture is null) return;
+
+		CultureInfo.CurrentCulture = culture;
+	}
+
+	public string GetCurrentLanguageFlag()
+	{
+		var languageCode = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+
+		if (!this.FlagsByLanguageCode.TryGetValue(languageCode, out var flag)) return null!;
+
+		return flag;
+	}
+}
