@@ -50,6 +50,7 @@
     [Parameter] public bool ShowLogo { get; set; } = true;
     [Parameter] public bool ShowTitle { get; set; } = true;
     [Parameter] public ICollection<MenuButtonData> Buttons { get; set; } = new List<MenuButtonData>();
+    [Parameter] public int CollapseWidth { get; set; } = 600;
 
     private bool IsCollapsed { get; set; } = true;
 
@@ -73,10 +74,10 @@
 
 <style>
     :root{
-        --backgroundcolor: @this.BackgroundColor;
-        --accentcolor: @this.AccentColor;
-        --textcolor: @this.TextColor;
-        --hrefcolor: @this.HRefColor;
+        --backgroundcolor:  @this.BackgroundColor;
+        --accentcolor:      @this.AccentColor;
+        --textcolor:        @this.TextColor;
+        --hrefcolor:        @this.HRefColor;
     }
 
     ::selection {
@@ -93,5 +94,17 @@
 
     .menu-bar {
         height: @(this.Height)px;
+    }
+
+    @@media (min-width: @(CollapseWidth)px) {
+        .navbar-toggler {
+            display: none;
+        }
+    }
+
+    @@media (max-width: @(CollapseWidth-1)px) {
+        .navbar-buttons {
+            display: none !important;
+        }
     }
 </style>

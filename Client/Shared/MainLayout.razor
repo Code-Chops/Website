@@ -28,10 +28,8 @@
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
     private ICollection<MenuButtonData> Buttons { get; } = new MenuButtonData[]
         {
-            new() {                                     HRef="/",       Text="Home" },
-            new() {                                     HRef="/",       Text="Save Image" },
-            new() {                                     HRef="/",       Text="Save Image" },
-            new() {                                     HRef="/",       Text="Save Image" },
-            new() { FontAwesomeIcon="fa-user-circle",   HRef="/about",  Text="About" },
+            new() { HRef="/",           Text="Home" },
+            new() { HRef="/projects",   Text="Projects" },
+            new() { HRef="/about",      Text="About" },
         };
 }

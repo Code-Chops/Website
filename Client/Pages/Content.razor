@@ -1,8 +1,11 @@
 ﻿<div class="content">
 	<Box>
 		<article>
-			<PageTitle>@Branding.Name - @Title</PageTitle>
-			<h2>@Title</h2>
+			<PageTitle>@Branding.Name @If(Title is not null, $"- {Title}")</PageTitle>
+			@if(Title is not null || AlternativeHeader is not null)
+			{
+				<h2>@(AlternativeHeader ?? Title)</h2>					
+			}
 
 			@ChildContent	
 		</article>
@@ -11,7 +14,20 @@
 
 <Footer/>
 
+<style>
+	@@media (min-width: @(Width)px) {
+	.content {
+		justify-content: center;
+	}
+
+	article {
+		max-width: @(Width)px;
+	}
+</style>
+
 @code {
-	[Parameter] public string Title { get; set; } = null!;
+	[Parameter] public string? Title { get; set; } = null;
+	[Parameter] public string? AlternativeHeader { get; set; } = null;
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
+	[Parameter] public int Width { get; set; } = 800;
 }

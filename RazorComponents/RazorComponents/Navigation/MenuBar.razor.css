@@ -133,20 +133,8 @@
     overflow: hidden;
 }
 
-@media (min-width: 1000px) {
-    .navbar-toggler {
-        display: none;
-    }
-
-    .top-bar-shadow {
-        display: none !important;
-    }
-}
-
-@media (max-width: 1000px) {
-    .navbar-buttons {
-        display: none !important;
-    }
+.top-bar-shadow {
+    display: none !important;
 }
 
 #title {

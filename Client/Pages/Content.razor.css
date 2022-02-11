@@ -3,13 +3,3 @@
 	font-size: larger;
 	display: flex;
 }
-
-@media (min-width: 1000px) {
-	.content {
-		justify-content: center;
-	}
-}
-
-article {
-	max-width: 1000px;
-}
