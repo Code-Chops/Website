@@ -1,0 +1,18 @@
+﻿<div class="nav-item">
+    <a class="nav-link pointerCursor" href=@Data.HRef @onclick=Data.OnClick>
+        <span class="@If(Data.FontAwesomeIcon is not null, $"fa {Data.FontAwesomeIcon} fa-2x")"></span> @Data.Text
+    </a>
+</div>
+
+@code {
+    [Parameter] public MenuButtonData Data { get; set; } = null!;
+    [Parameter] public Action<MouseEventArgs> OnClick { get; set; } = null!;
+
+    public record MenuButtonData
+    {
+	    public Action<MouseEventArgs> OnClick { get; set; } = null!;
+        public string FontAwesomeIcon { get; set; } = null!;
+        public string Text { get; set; } = null!;
+        public string HRef { get; set; } = "#";
+    }
+}
