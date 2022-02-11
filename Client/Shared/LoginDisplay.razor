@@ -4,7 +4,7 @@
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 
-<AuthorizeView>
+@*<AuthorizeView>
     <Authorized>
         <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
@@ -22,3 +22,4 @@
         Navigation.NavigateTo("authentication/logout");
     }
 }
+*@

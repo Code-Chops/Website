@@ -1,6 +1,7 @@
 ﻿@using Resource = CodeChops.Website.Client.Resources.Home;
 @using CodeChops.Website.Client.Pages.Articles
 @using CodeChops.Website.Client.Pages.Projects
+@using Microsoft.AspNetCore.Html;
 
 @page "/"
 
@@ -9,7 +10,7 @@
 		@Resource.Paragraph1
 	</p>
 	<p>
-		@Resource.Paragraph2
+		@((MarkupString)Resource.Paragraph2)
 	</p>
 @*	<p>
 		(websites, applications, games)
