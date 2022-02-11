@@ -65,13 +65,14 @@ h1:focus {
 
 a, .btn-link {
     font-weight: bolder;
-    text-shadow: 0 0rem 0.1rem rgb(25 25 25);
-    color: black;
+    color: var(--hrefcolor);
+    text-decoration: unset;
 }
 
     a:hover {
-        color: var(--branding-color-accent);
+        color: var(--branding-color-text);
         text-decoration: none;
+        text-shadow: 0px 0px 4px #ffffff;
     }
 
 .btn-primary {
@@ -134,7 +135,7 @@ a, .btn-link {
 
 /* TODO user better faster fonts: https://iainbean.com/posts/2021/5-steps-to-faster-web-fonts/ */
 
-pre.code {
+        pre .code {
     margin: 0 !important;
     tab-size: 4;
 }
@@ -179,6 +180,13 @@ html {
     border: 1px solid transparent;
     border-radius: 0.25rem;
     border-color: #d3d6d8;
+}
+
+.alert-info {
+    border: none;
+    width: 900px;
+    background-color: #ffffff21 !important;
+    opacity: .8;
 }
 
 .pointerCursor {

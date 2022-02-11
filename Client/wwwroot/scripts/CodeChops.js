@@ -11,7 +11,10 @@ document.addEventListener("click", onClick);
 // Fire click event and so .NET registers it.
 function onClick(doc, e) {
     const element = document.getElementById("clickOverlay");
-    fireEvent(element, "click");
+    if (element) {
+        document.removeEventListener("click", onClick);
+        fireEvent(element, "click");
+	}
 }
 
 // Fire event.
@@ -35,6 +38,8 @@ window.onSplashClick = () => {
 
     const overlay = document.getElementById("overlay");
     overlay.classList.add("dissolveOverlay");
+}
 
-    document.removeEventListener("click", onClick);
+function showBanner(text) {
+    console.log(text);
 }

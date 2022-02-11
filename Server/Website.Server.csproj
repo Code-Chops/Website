@@ -4,6 +4,7 @@
 	  <TargetFramework>net6.0</TargetFramework>
 	  <Nullable>enable</Nullable>
 	  <AnalysisLevel>latest</AnalysisLevel>
+	  <ImplicitUsings>enable</ImplicitUsings>
 	  <AssemblyName>Website.Server</AssemblyName>
 	  <RootNamespace>CodeChops.Website.Server</RootNamespace>
 	  <Version>0.4.0</Version>

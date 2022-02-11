@@ -6,7 +6,8 @@
 	<AnalysisLevel>latest</AnalysisLevel>
 	<AssemblyName>Website.RazorComponents</AssemblyName>
 	<RootNamespace>CodeChops.Website.RazorComponents</RootNamespace>
-    <Version>0.4.0</Version>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Version>0.4.0</Version>
 	<LangVersion>10</LangVersion>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

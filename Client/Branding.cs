@@ -13,6 +13,16 @@ public static class Branding
 		public static readonly Color Accent = new("#8c3459");
 		public static readonly Color Background = new("#1e1e1e");
 	}
+
+	public static readonly string BannerText = $@"
+   ___          _        ___ _                     
+  / __\___   __| | ___  / __| |__   ___  _ __  ___ 
+ / /  / _ \ / _` |/ _ \/ /  | '_ \ / _ \| '_ \/ __|
+/ /__| (_) | (_| |  __/ /___| | | | (_) | |_) \__ \
+\____/\___/ \__,_|\___\____/|_| |_|\___/| .__/|___/
+                                        |_|        
+                               ©{DateTime.Now.Year} by Max Bergman
+";
 }
 
 // Mosque: #9DB6BD

@@ -16,6 +16,8 @@ public record struct Color
 	/// </summary>
 	public string Rgb { get; }
 
+	private RGB Value { get; }
+
 	public Color(byte r, byte g, byte b)
 		: this(new RGB(r, g, b))
 	{
@@ -45,5 +47,23 @@ public record struct Color
 	{
 		this.Hex = $"#{hexColor}";
 		this.Rgb = $"{rgbColor.R}, {rgbColor.G}, {rgbColor.B}";
+		this.Value = rgbColor;
+	}
+
+	public Color GetWhiterColor(byte delta = 40)
+	{
+		var r = GetWhiterPrimaryColor(this.Value.R);
+		var g = GetWhiterPrimaryColor(this.Value.G);
+		var b = GetWhiterPrimaryColor(this.Value.B);
+		var color = new Color(r, g, b);
+
+		return color;
+
+
+		byte GetWhiterPrimaryColor(byte primaryColor)
+		{
+			var addition = primaryColor + delta;
+			return addition > 255 ? (byte)255 : (byte)addition;
+		}
 	}
 }

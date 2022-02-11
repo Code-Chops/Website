@@ -42,6 +42,7 @@
     [Parameter] public Color BackgroundColor { get; set; }
     [Parameter] public Color AccentColor { get; set; }
     [Parameter] public Color TextColor { get; set; }
+    [Parameter] public Color HRefColor { get; set; }
     [Parameter] public string FontFamily { get; set; } = null!;
     [Parameter] public string CustomToggleImage { get; set; } = null!;
     [Parameter] public string LogoPath { get; set; } = null!;
@@ -75,6 +76,7 @@
         --backgroundcolor: @this.BackgroundColor;
         --accentcolor: @this.AccentColor;
         --textcolor: @this.TextColor;
+        --hrefcolor: @this.HRefColor;
     }
 
     ::selection {
