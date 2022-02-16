@@ -9,6 +9,8 @@ public record struct Color
 	/// </summary>
 	public override string ToString() => this.Hex;
 
+	public static Color White { get; } = new(255, 255, 255);
+
 	public string Hex { get; }
 	
 	/// <summary>
@@ -50,20 +52,23 @@ public record struct Color
 		this.Value = rgbColor;
 	}
 
-	public Color GetWhiterColor(byte delta = 40)
+	public Color ChangeBrightness(sbyte delta = 40)
 	{
-		var r = GetWhiterPrimaryColor(this.Value.R);
-		var g = GetWhiterPrimaryColor(this.Value.G);
-		var b = GetWhiterPrimaryColor(this.Value.B);
+		var r = ChangeBrightnessOfPrimaryColor(this.Value.R);
+		var g = ChangeBrightnessOfPrimaryColor(this.Value.G);
+		var b = ChangeBrightnessOfPrimaryColor(this.Value.B);
 		var color = new Color(r, g, b);
 
 		return color;
 
 
-		byte GetWhiterPrimaryColor(byte primaryColor)
+		byte ChangeBrightnessOfPrimaryColor(byte primaryColor)
 		{
-			var addition = primaryColor + delta;
-			return addition > 255 ? (byte)255 : (byte)addition;
+			var newColor = primaryColor + delta;
+			if (newColor > 255) return 255;
+			if (newColor < 0) return 0;
+
+			return (byte)newColor;
 		}
 	}
 }

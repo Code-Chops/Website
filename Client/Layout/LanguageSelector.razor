@@ -12,14 +12,13 @@
 
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-	[Inject] NavigationManager UriHelper { get; set; } = null!;
 	
-	internal static event Action LanguageChangedEvent = null!;
+	internal static event Action ChangedEvent = null!;
 
 	/// <summary>
 	/// The first culture is the default culture.
 	/// </summary>
-	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["EN"] = "🇬🇧", ["NL"] = "🇳🇱" };
+	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["en"] = "🇬🇧", ["nl"] = "🇳🇱" };
 	public static ImmutableList<string> SupportedLanguages { get; set; } = FlagsByLanguageCode.Keys.ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
 
@@ -30,28 +29,27 @@
 
 	private void ChangeLanguage(MouseEventArgs args)
 	{
-		var index = SupportedLanguages.IndexOf(CultureInfo.DefaultThreadCurrentUICulture!.TwoLetterISOLanguageName.ToUpperInvariant());
+		var index = SupportedLanguages.IndexOf(CultureInfo.DefaultThreadCurrentUICulture!.TwoLetterISOLanguageName.ToLowerInvariant());
 		var newIndex = (index + 1) % SupportedLanguages.Count;
 		var newLanguageCode = SupportedLanguages[newIndex];
 
-		SetNewCulture(newLanguageCode, this.JsRuntime);
+		SetNewCulture(newLanguageCode);
 		this.SetCurrentLanguageFlag();
 
-		LanguageChangedEvent.Invoke();
+		ChangedEvent?.Invoke();
+
+		if (this.JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
+		inProcessRuntime.InvokeVoid("blazorCulture.set", newLanguageCode);
 	}
 
-	public static void SetNewCulture(string languageCode, IJSRuntime jsRuntime)
+	public static void SetNewCulture(string languageCode)
 	{
-		if (jsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-
 		var culture = CultureInfo.GetCultureInfo(languageCode);
 		if (culture is null) return;
 
 		CultureInfo.CurrentCulture = culture;
 		CultureInfo.DefaultThreadCurrentCulture = culture;
 		CultureInfo.DefaultThreadCurrentUICulture = culture;
-
-		inProcessRuntime.InvokeVoid("blazorCulture.set", culture.Name);
 	}
 
 	private void SetCurrentLanguageFlag()
@@ -61,5 +59,6 @@
 		if (!FlagsByLanguageCode.TryGetValue(languageCode, out var flag)) return;
 
 		this.CurrentLanguageFlag = flag;
+		this.StateHasChanged();
 	}
 }

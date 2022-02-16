@@ -4,7 +4,7 @@
 			<PageTitle>@Branding.Name @If(Title is not null, $"- {Title}")</PageTitle>
 			@if(Title is not null || AlternativeHeader is not null)
 			{
-				<h2>@(AlternativeHeader ?? Title)</h2>					
+				<h4>@(AlternativeHeader ?? Title)</h4>					
 			}
 
 			@ChildContent	
@@ -33,6 +33,6 @@
 
 	protected override void OnInitialized()
     {
-        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+        LanguageSelector.ChangedEvent += this.StateHasChanged;
     }
 }

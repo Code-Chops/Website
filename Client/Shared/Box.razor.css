@@ -9,7 +9,7 @@
 }
 
 .box-text {
-	color: white;
+	color: var(--text-color);
 }
 
 .box-code {

@@ -24,29 +24,36 @@ public class Program
 		//builder.Services.AddApiAuthorization();
 		builder.Services.AddHttpContextAccessor();
 
-		ConfigureSharedServices(builder.Services, out var defaultCulture);
 
 		var host = builder.Build();
 
 		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
-		var result = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
+		var defaultCulture = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
+		LanguageSelector.SetNewCulture(defaultCulture);
 
-		Layout.LanguageSelector.SetNewCulture("nl", jsRuntime);
+		var value = await jsRuntime.InvokeAsync<string>("blazorColorMode.get");
+		ColorMode colorMode = value == nameof(DarkMode)
+			? DarkMode.Instance
+			: LightMode.Instance;
+
+		ColorModeSelector.SetMode(colorMode);
+
+		ConfigureSharedServices(builder.Services, defaultCulture);
 
 		await host.RunAsync();
 	}
 
-	public static void ConfigureSharedServices(IServiceCollection services, out string defaultCulture)
+	public static void ConfigureSharedServices(IServiceCollection services, string? defaultCulture = null)
 	{
-		// Common service registrations that both apps use
-		//services.Add...;
 		services.AddLocalization();
+
 		var supportedCultures = LanguageSelector.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
+		defaultCulture ??= supportedCultures.First().TwoLetterISOLanguageName;
+
 		services.Configure<RequestLocalizationOptions>(options =>
 		{
-			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCultures.First());
+			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture);
 			options.SupportedUICultures = supportedCultures;
 		});
-		defaultCulture = supportedCultures.First().TwoLetterISOLanguageName;
 	}
 }

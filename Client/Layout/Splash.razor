@@ -10,20 +10,6 @@
 </CascadingValue> 
 
 <style>
-    html {
-	    background-color: var(--branding-color-background);
-    }
-
-    :root {
-        --branding-color-main:              @Branding.Colors.Main;
-        --branding-color-accent:            @Branding.Colors.Accent;
-        --branding-color-background:        @Branding.Colors.Background;
-        
-        --branding-color-main-rgb:          @Branding.Colors.Main.Rgb;
-        --branding-color-accent-rgb:        @Branding.Colors.Accent.Rgb;
-        --branding-color-background-rgb:    @Branding.Colors.Background.Rgb;
-    }
-
     @If(this.IsRenderedOnClient, @".splashLogo {
         animation: logoShake 2.5s;
         animation-iteration-count: infinite;

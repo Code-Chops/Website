@@ -1,13 +1,12 @@
-﻿@using Microsoft.Extensions.Localization
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @using static CodeChops.Website.RazorComponents.Navigation.MenuButton
 
 <div class="page">
     <MenuBar @ref=MenuBar
-            BackgroundColor=@new(ColorName.Black)
+            BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
             AccentColor=@Branding.Colors.Accent
-            TextColor=@new((byte)255, (byte)255, (byte)255)
-            HRefColor=@(Branding.Colors.Accent.GetWhiterColor())
+            TextColor=@(IsDarkMode ? Color.White : new(ColorName.Black))
+            HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? (sbyte)40 : (sbyte)-40))
             FontFamily=@Branding.FontFamily 
             LogoPath="/favicon.ico" 
             Title=@Branding.Name 
@@ -16,8 +15,9 @@
             ShowLogo="false"
             Buttons=Buttons>
         
+            <ColorModeSelector />
             <LanguageSelector />
-    </MenuBar>
+ </MenuBar>
 
     <div class="border"></div>
 
@@ -26,17 +26,34 @@
     </main>
 </div>
 
+<style>
+    :root {
+        --branding-color-main:              @Branding.Colors.Main;
+        --branding-color-accent:            @Branding.Colors.Accent;
+        --branding-color-background:        @Branding.Colors.Background;
+        
+        --branding-color-main-rgb:          @Branding.Colors.Main.Rgb;
+        --branding-color-accent-rgb:        @Branding.Colors.Accent.Rgb;
+        --branding-color-background-rgb:    @Branding.Colors.Background.Rgb;
+    
+        @If(ColorModeSelector.ColorMode is LightMode, "font-weight: 700;")
+    }
+
+</style>
+
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
-    internal static ColorMode ColorMode { get; set; }
+    internal static ColorMode ColorMode { get; set; } = null!;
     private MenuBar MenuBar { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
+    private bool IsDarkMode => ColorModeSelector.ColorMode is DarkMode;
 
     protected override void OnInitialized()
     {
         OnLanguageChanged();
-        LanguageSelector.LanguageChangedEvent += this.OnLanguageChanged;
+        LanguageSelector.ChangedEvent += this.OnLanguageChanged;
+        ColorModeSelector.ChangedEvent += this.StateHasChanged;
     }
 
     private void OnLanguageChanged()
