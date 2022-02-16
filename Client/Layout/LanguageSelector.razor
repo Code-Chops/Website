@@ -5,7 +5,9 @@
 
 @if (FlagsByLanguageCode.Any())
 {
-	<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
+	<div class="menu-setting">
+		<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
+	</div>
 }
 
 @code {

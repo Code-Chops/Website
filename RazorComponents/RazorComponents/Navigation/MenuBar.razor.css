@@ -85,7 +85,9 @@
     border-top-width: 1px;
     border-radius: 0rem !important;
     color: var(--accentcolor);
-}
+    align-self: center;
+    min-height: 40px;
+}}
 
     .navbar-toggler:hover {
         background-color: rgba(255,255,255,0.2);
