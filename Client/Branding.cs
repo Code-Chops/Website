@@ -12,7 +12,8 @@ public static class Branding
 	{
 		public static readonly Color Main = new("#730030");
 		public static readonly Color Accent = new("#8c3459");
-		public static Color Background => ColorModeSelector.ColorMode is DarkMode ? new("#1e1e1e") : Color.White;
+		public static readonly Color DarkGray = new("#1e1e1e");
+		public static Color Background => ColorModeSelector.ColorMode is DarkMode ? DarkGray : Color.White;
 	}
 
 	public static readonly string BannerText = $@"
