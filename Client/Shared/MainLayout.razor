@@ -1,9 +1,9 @@
-﻿@inherits LayoutComponentBase
-@using CodeChops.Website.RazorComponents.Navigation;
+﻿@using Microsoft.Extensions.Localization
+@inherits LayoutComponentBase
 @using static CodeChops.Website.RazorComponents.Navigation.MenuButton
 
 <div class="page">
-    <MenuBar 
+    <MenuBar @ref=MenuBar
             BackgroundColor=@new(ColorName.Black)
             AccentColor=@Branding.Colors.Accent
             TextColor=@new((byte)255, (byte)255, (byte)255)
@@ -29,6 +29,13 @@
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
+    private MenuBar MenuBar { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += () => this.MenuBar.Refresh();
+    }
+
     private ICollection<MenuButtonData> Buttons { get; } = new MenuButtonData[]
         {
             new() { HRef="/",           Text="Home" },

@@ -1,16 +1,15 @@
-﻿@using Resource = CodeChops.Website.Client.Resources.Home;
-@using CodeChops.Website.Client.Pages.Articles
+﻿@using CodeChops.Website.Client.Pages.Articles
 @using CodeChops.Website.Client.Pages.Projects
 @using Microsoft.AspNetCore.Html;
 
 @page "/"
 
-<Content Title="@Resource.Title" AlternativeHeader="@Resource.FullTitle">
+<Content Title="@HomeResource.Title" AlternativeHeader="@HomeResource.FullTitle">
 	<p>
-		@Resource.Paragraph1
+		@HomeResource.Paragraph1
 	</p>
 	<p>
-		@((MarkupString)Resource.Paragraph2)
+		@((MarkupString)HomeResource.Paragraph2)
 	</p>
 @*	<p>
 		(websites, applications, games)
@@ -20,4 +19,8 @@
 </Content>
 
 @code {
+	protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+    }
 }

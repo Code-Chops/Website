@@ -1,0 +1,26 @@
+﻿@page "/about"
+
+<Content Title="@AboutResource.Title">
+	<p>
+		@AboutResource.Paragraph1	
+	</p>
+
+	<p>
+		@AboutResource.Paragraph2
+	</p>
+
+	<p>
+		@AboutResource.Paragraph3
+	</p>
+
+	<div id="author">
+		@AboutResource.Author
+	</div>
+</Content>
+
+@code {
+	protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+    }
+}

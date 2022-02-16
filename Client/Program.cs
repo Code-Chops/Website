@@ -1,7 +1,14 @@
+using System.Globalization;
 using System.Net.Http;
+using CodeChops.Website.Client.Shared;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
 
 namespace CodeChops.Website.Client;
 
@@ -21,14 +28,30 @@ public class Program
 
 		//builder.Services.AddApiAuthorization();
 		builder.Services.AddHttpContextAccessor();
-		builder.Services.AddLocalization();
 
-		await builder.Build().RunAsync();
+		ConfigureSharedServices(builder.Services, out var defaultCulture);
+
+		var host = builder.Build();
+
+		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
+		var result = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
+
+		LanguageSelector.SetNewCulture("nl", jsRuntime);
+
+		await host.RunAsync();
 	}
 
-	public static void ConfigureSharedServices(IServiceCollection services)
+	public static void ConfigureSharedServices(IServiceCollection services, out string defaultCulture)
 	{
 		// Common service registrations that both apps use
 		//services.Add...;
+		services.AddLocalization();
+		var supportedCultures = LanguageSelector.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
+		services.Configure<RequestLocalizationOptions>(options =>
+		{
+			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCultures.First());
+			options.SupportedUICultures = supportedCultures;
+		});
+		defaultCulture = supportedCultures.First().TwoLetterISOLanguageName;
 	}
 }

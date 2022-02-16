@@ -12,13 +12,14 @@ document.addEventListener("click", onClick);
 function onClick(doc, e) {
     const element = document.getElementById("clickOverlay");
     if (element) {
-        document.removeEventListener("click", onClick);
         fireEvent(element, "click");
 	}
 }
 
 // Fire event.
 function fireEvent(element, eventType) {
+    document.removeEventListener("click", onClick);
+
     if (element.fireEvent) {
         element.fireEvent("on" + eventType);
     } else {
@@ -26,6 +27,8 @@ function fireEvent(element, eventType) {
         eventObject.initEvent(eventType, true, false);
         element.dispatchEvent(eventObject);
     }
+
+    document.addEventListener("click", onClick);
 }
 
 // Remove splash, attach logo, and dissolve overlay.
@@ -38,8 +41,15 @@ window.onSplashClick = () => {
 
     const overlay = document.getElementById("overlay");
     overlay.classList.add("dissolveOverlay");
+
+    document.removeEventListener("click", onClick);
 }
 
 function showBanner(text) {
     console.log(text);
 }
+
+window.blazorCulture = {
+    get: () => window.localStorage["BlazorCulture"] ? window.localStorage["BlazorCulture"] : navigator.language || navigator.userLanguage || "en",
+    set: (value) => window.localStorage["BlazorCulture"] = value
+};

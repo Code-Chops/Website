@@ -1,0 +1,19 @@
+﻿@using CodeChops.Website.Client.Pages.Projects
+
+@page "/Projects"
+
+<Content Title=@ProjectsResource.Title>
+	<Box>
+		<Project_VendingMachine></Project_VendingMachine>
+	</Box>
+	<Box>
+		<Project_VendingMachine></Project_VendingMachine>
+	</Box>
+</Content>
+
+@code {
+	protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+    }
+}

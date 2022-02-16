@@ -10,10 +10,7 @@
 	  <Version>0.4.0</Version>
 	  <LangVersion>10</LangVersion>
 	  <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+      <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -29,10 +26,15 @@
 	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <!--<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />-->
   </ItemGroup>
 
+  <ItemGroup>
+	<EmbeddedResource Update="**/Resources/*.resx" />
+  </ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\RazorComponents\RazorComponents\RazorComponents.csproj" />
   </ItemGroup>
@@ -41,59 +43,66 @@
     <ServiceWorker Include="wwwroot\scripts\service-worker.js" PublishedContent="wwwroot\scripts\service-worker.published.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Resources\Home.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Home.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Articles.Designer.cs">
-      <DependentUpon>Articles.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Languages.Designer.cs">
-      <DependentUpon>Languages.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Projects.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Projects.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\About.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>About.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<PropertyGroup>
+		<ResXFileCodeGenerator_UseVocaDbResManager>true</ResXFileCodeGenerator_UseVocaDbResManager>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Home.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Home.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Articles.resx">
-      <LastGenOutput>Articles.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Languages.resx">
-      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Projects.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Projects.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\About.NL.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\About.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>About.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\About\AboutResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AboutResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Articles\ArticlesResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ArticlesResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Home\HomeResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>HomeResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Projects\ProjectsResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ProjectsResource.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Pages\About\AboutResource.nl.resx">
+			<SubType>Designer</SubType>
+			<Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\About\AboutResource.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>AboutResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Articles\ArticlesResource.nl.resx">
+			<SubType>Designer</SubType>
+			<Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Articles\ArticlesResource.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>ArticlesResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Home\HomeResource.nl.resx">
+			<SubType>Designer</SubType>
+			<Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Home\HomeResource.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>HomeResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Projects\ProjectsResource.nl.resx">
+			<SubType>Designer</SubType>
+			<Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Pages\Projects\ProjectsResource.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>ProjectsResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
   <PropertyGroup>
   	<!-- CA1822: Instance member does not access instance data and can be marked as static -->

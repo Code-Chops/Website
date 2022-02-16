@@ -5,56 +5,59 @@
 
 @if (FlagsByLanguageCode.Any())
 {
-	<MenuButton Data=@(new() { Text=GetCurrentLanguageFlag() }) OnClick=@ChangeLanguage></MenuButton>
+	<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
 }
 
 @code {
-	public IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["EN"] = "🇬🇧", ["NL"] = "🇳🇱" };
-	public ImmutableList<string> LanguageCodes { get; set; } = ImmutableList.Create<string>();
+	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+	[Inject] NavigationManager UriHelper { get; set; } = null!;
+	
+	internal static event Action LanguageChangedEvent = null!;
+
+	/// <summary>
+	/// The first culture is the default culture.
+	/// </summary>
+	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["EN"] = "🇬🇧", ["NL"] = "🇳🇱" };
+	public static ImmutableList<string> SupportedLanguages { get; set; } = FlagsByLanguageCode.Keys.ToImmutableList();
+	public string CurrentLanguageFlag { get; set; } = null!;
+
+	protected override void OnInitialized()
+    {
+   		this.SetCurrentLanguageFlag();
+	}
 
 	private void ChangeLanguage(MouseEventArgs args)
 	{
-		var index = this.LanguageCodes.IndexOf(CultureInfo.CurrentCulture.TwoLetterISOLanguageName) % this.LanguageCodes.Count;
-		var newLanguageCode = this.LanguageCodes[index];
+		var index = SupportedLanguages.IndexOf(CultureInfo.DefaultThreadCurrentUICulture!.TwoLetterISOLanguageName.ToUpperInvariant());
+		var newIndex = (index + 1) % SupportedLanguages.Count;
+		var newLanguageCode = SupportedLanguages[newIndex];
 
-		this.SetCurrentCulture(newLanguageCode);
+		SetNewCulture(newLanguageCode, this.JsRuntime);
+		this.SetCurrentLanguageFlag();
+
+		LanguageChangedEvent.Invoke();
 	}
 
-	protected override void OnInitialized()
+	public static void SetNewCulture(string languageCode, IJSRuntime jsRuntime)
 	{
-		var resourceManager = Resources.Languages.ResourceManager;
-		resourceManager.IgnoreCase = true;
-		var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: false, tryParents: false)!;
+		if (jsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
 
-		if (resourceSet is not null)
-		{
-			this.FlagsByLanguageCode = resourceSet
-				.Cast<KeyValuePair<string, string>>()
-				.ToDictionary(codeAndFlag => codeAndFlag.Key, codeAndFlag => codeAndFlag.Value, StringComparer.OrdinalIgnoreCase);
-		}
-
-		if (this.FlagsByLanguageCode is not null)
-		{
-			this.LanguageCodes = this.FlagsByLanguageCode.Keys.ToImmutableList();
-		}
-	}
-
-
-	public void SetCurrentCulture(string languageCode)
-	{
 		var culture = CultureInfo.GetCultureInfo(languageCode);
-
 		if (culture is null) return;
 
 		CultureInfo.CurrentCulture = culture;
+		CultureInfo.DefaultThreadCurrentCulture = culture;
+		CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+		inProcessRuntime.InvokeVoid("blazorCulture.set", culture.Name);
 	}
 
-	public string GetCurrentLanguageFlag()
+	private void SetCurrentLanguageFlag()
 	{
 		var languageCode = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 
-		if (!this.FlagsByLanguageCode.TryGetValue(languageCode, out var flag)) return null!;
+		if (!FlagsByLanguageCode.TryGetValue(languageCode, out var flag)) return;
 
-		return flag;
+		this.CurrentLanguageFlag = flag;
 	}
 }

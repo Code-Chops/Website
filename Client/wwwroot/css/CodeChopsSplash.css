@@ -94,12 +94,6 @@
     filter: drop-shadow(20px 20px 10px #4B4B4B);
 }
 
-    .splashLogo:hover {
-        animation: logoShake 2.5s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate-reverse;
-    }
-
 @keyframes logoShake {
     0% {
         transform: translate(1px, 1px) rotate(0deg) scale(2, 2);

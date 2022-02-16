@@ -1,0 +1,19 @@
+﻿@using CodeChops.Website.Client.Pages.Articles
+
+@page "/Articles"
+
+<Content Title=@ArticlesResource.Title>
+	<Box>
+		<Article_ImplicitUsings/>
+	</Box>
+	<Box>
+		<Article_ImplicitUsings/>
+	</Box>
+</Content>
+
+@code {
+	protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+    }
+}

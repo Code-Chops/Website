@@ -30,4 +30,9 @@
 	[Parameter] public string? AlternativeHeader { get; set; } = null;
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 	[Parameter] public int Width { get; set; } = 800;
+
+	protected override void OnInitialized()
+    {
+        LanguageSelector.LanguageChangedEvent += this.StateHasChanged;
+    }
 }

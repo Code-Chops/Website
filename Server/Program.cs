@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -24,7 +24,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddScoped<SignOutSessionStateManager>();
 builder.Services.AddSingleton<RenderLocation, RenderedOnServer>();
 
-CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
+CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services, out _);
 
 var app = builder.Build();
 

@@ -23,6 +23,13 @@
         --branding-color-accent-rgb:        @Branding.Colors.Accent.Rgb;
         --branding-color-background-rgb:    @Branding.Colors.Background.Rgb;
     }
+
+    @If(this.IsRenderedOnClient, @".splashLogo {
+        animation: logoShake 2.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+    }")
+    
 </style>
 
 
