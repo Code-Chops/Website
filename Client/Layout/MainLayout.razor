@@ -29,6 +29,7 @@
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
+    internal static ColorMode ColorMode { get; set; }
     private MenuBar MenuBar { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
 

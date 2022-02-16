@@ -5,7 +5,7 @@ namespace CodeChops.Website.Client;
 public static class Branding
 {
 	public const string Name = "CodeChops";
-	public const string FontFamily = "DotGothic";
+	public const string FontFamily = "Kaufmann";
 
 	public static class Colors
 	{

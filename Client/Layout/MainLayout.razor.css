@@ -11,6 +11,7 @@
 	width: 100%;
 	border-color: var(--branding-color-accent) !important;
 	margin-top: -1px;
+	opacity: .5;
 }
 
 main {

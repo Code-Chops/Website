@@ -12,7 +12,7 @@
 	  <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
       <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
-	
+
   <ItemGroup>
 	<None Include="wwwroot\css\app.css" />
   </ItemGroup>

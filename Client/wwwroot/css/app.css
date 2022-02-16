@@ -1,5 +1,5 @@
 ﻿html {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'NeutraText', Helvetica, Arial, sans-serif;
     scroll-behavior: smooth;
     line-height: 1.5;
     color: var(--textcolor);
@@ -128,13 +128,19 @@ a, .btn-link {
 
 
 @font-face {
-    font-family: Roboto;
-    src: url(../fonts/Roboto/Roboto-Light.ttf);
+    font-family: NeutraText;
+    src: url('../fonts/NeutraText/NeutraText-Light.woff2')  format('woff2'),
+         url('../fonts/NeutraText/NeutraText-Light.woff')   format('woff'),
+         url('../fonts/NeutraText/NeutraText-Light.ttf')    format('ttf');
+    font-display: block;
 }
 
 @font-face {
-    font-family: DotGothic;
-    src: url(../fonts/DotGothic/DotGothic16-Regular.ttf);
+    font-family: Kaufmann;
+    src: url('../fonts/Kaufmann/Kaufmann W01 Regular.woff2')  format('woff2'), 
+         url('../fonts/Kaufmann/Kaufmann W01 Regular.woff')   format('woff'),
+         url('../fonts/Kaufmann/Kaufmann W01 Regular.ttf')    format('ttf');
+    font-display: block;
 }
 
 /* TODO user better faster fonts: https://iainbean.com/posts/2021/5-steps-to-faster-web-fonts/ */

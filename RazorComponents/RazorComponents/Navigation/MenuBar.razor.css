@@ -47,9 +47,9 @@
     text-shadow: 0 0 1rem var(--accentcolor);
     font-weight: 100;
     margin: unset;
-    font-size: clamp(1rem, 10vw, 3.2rem);
+    font-size: clamp(1rem, 10vw, 2.5rem);
     cursor: default;
-    padding-bottom: 4px;
+    padding-top: 4px;
     padding-left: 5px;
 }
 
@@ -79,10 +79,10 @@
     border-color: var(--accentcolor);
     border-bottom-style: outset;
     border-right-style: outset;
-    border-bottom-width: 3px;
-    border-left-width: 3px;
-    border-right-width: 3px;
-    border-top-width: 3px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
     border-radius: 0rem !important;
     color: var(--accentcolor);
 }

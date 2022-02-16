@@ -53,3 +53,8 @@ window.blazorCulture = {
     get: () => window.localStorage["BlazorCulture"] ? window.localStorage["BlazorCulture"] : navigator.language || navigator.userLanguage || "en",
     set: (value) => window.localStorage["BlazorCulture"] = value
 };
+
+window.blazorDarkMode = {
+    get: () => window.localStorage["BlazorDarkMode"] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+    set: (value) => window.localStorage["BlazorDarkMode"] = value
+};

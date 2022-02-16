@@ -1,5 +1,4 @@
 using CodeChops.Website.Client;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -3,7 +3,7 @@
 	border-radius: 0.25rem;
 	border-color: #999999;
 	border-style: dashed;
-	border-width: 2px;
+	border-width: 1px;
 	padding: 15px 15px 15px 15px;
 	background-color: var(--branding-color-background);
 }

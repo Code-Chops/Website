@@ -24,13 +24,13 @@
             @ChildContent
         </div>
 
-        <button class="navbar-toggler">
+        <button class="navbar-toggler" @onclick="Toggle">
             <span class="@(CustomToggleImage is not null ? "custom-toggler-icon" : "fa fa-bars")"></span>
         </button>
     </div>
 
     <div class="top-bar-shadow @(IsCollapsed ? "hide" : "show")">
-        <div class="menu-item-container" @onclick="Toggle">
+        <div class="menu-item-container">
             @foreach(var button in Buttons)
             {
                 <MenuButton Data=button OnClick=@(args => OnClickButton(args))></MenuButton>
