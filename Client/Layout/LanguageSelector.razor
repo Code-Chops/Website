@@ -29,7 +29,7 @@
 
 	private void ChangeLanguage(MouseEventArgs args)
 	{
-		var index = SupportedLanguages.IndexOf(CultureInfo.DefaultThreadCurrentUICulture!.TwoLetterISOLanguageName.ToLowerInvariant());
+		var index = SupportedLanguages.IndexOf(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLowerInvariant());
 		var newIndex = (index + 1) % SupportedLanguages.Count;
 		var newLanguageCode = SupportedLanguages[newIndex];
 
