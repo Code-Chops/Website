@@ -30,16 +30,22 @@
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
     private MenuBar MenuBar { get; set; } = null!;
+    private ICollection<MenuButtonData> Buttons { get; set; } = null!;
 
     protected override void OnInitialized()
     {
-        LanguageSelector.LanguageChangedEvent += () => this.MenuBar.Refresh();
+        OnLanguageChanged();
+        LanguageSelector.LanguageChangedEvent += this.OnLanguageChanged;
     }
 
-    private ICollection<MenuButtonData> Buttons { get; } = new MenuButtonData[]
-        {
-            new() { HRef="/",           Text="Home" },
-            new() { HRef="/projects",   Text="Projects" },
-            new() { HRef="/about",      Text="About" },
-        };
+    private void OnLanguageChanged()
+    {
+        this.Buttons = new MenuButtonData[]
+            {
+                new() { HRef="/",           Text=Pages.Home.HomeResource.Title },
+                new() { HRef="/projects",   Text=Pages.Projects.ProjectsResource.Title },
+                new() { HRef="/about",      Text=Pages.About.AboutResource.Title },
+            };
+        this.StateHasChanged();
+    }
 }
