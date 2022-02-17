@@ -6,7 +6,7 @@
     <MenuBar @ref=MenuBar
             BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
             AccentColor=@Branding.Colors.Accent
-            TextColor=@(IsDarkMode ? Color.White : new(ColorName.Black))
+            TextColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -100)
             HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40))
             FontFamily=@Branding.FontFamily 
             LogoPath="/favicon.ico" 
@@ -36,8 +36,6 @@
         --branding-color-main-rgb:          @Branding.Colors.Main.Rgb;
         --branding-color-accent-rgb:        @Branding.Colors.Accent.Rgb;
         --branding-color-background-rgb:    @Branding.Colors.Background.Rgb;
-    
-        @If(ColorModeSelector.ColorMode is LightMode, "font-weight: 700;")
     }
 
     ::selection {

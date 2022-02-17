@@ -27,7 +27,8 @@ public class Program
 		var host = builder.Build();
 
 		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
-		var defaultCulture = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
+		var defaultCultureCode = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
+		var defaultCulture = new CultureInfo(defaultCultureCode);
 		LanguageSelector.SetNewCulture(defaultCulture);
 
 		var value = await jsRuntime.InvokeAsync<string>("blazorColorMode.get");
@@ -42,17 +43,16 @@ public class Program
 		await host.RunAsync();
 	}
 
-	public static void ConfigureSharedServices(IServiceCollection services, string? defaultCulture = null)
+	public static void ConfigureSharedServices(IServiceCollection services, CultureInfo? defaultCulture = null)
 	{
 		services.AddLocalization();
 
-		var supportedCultures = LanguageSelector.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
-		defaultCulture ??= supportedCultures.First().TwoLetterISOLanguageName;
+		var culture = defaultCulture ?? LanguageSelector.SupportedCultures.First();
 
 		services.Configure<RequestLocalizationOptions>(options =>
 		{
-			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture);
-			options.SupportedUICultures = supportedCultures;
+			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(culture);
+			options.SupportedUICultures = LanguageSelector.SupportedCultures;
 		});
 	}
 }

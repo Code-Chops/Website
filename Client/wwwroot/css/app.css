@@ -4,6 +4,7 @@
     line-height: 1.5;
     color: var(--textcolor);
     background-color: var(--branding-color-background);
+    text-shadow: 0 0 black; /* In order to make dark text on a white background clearer */
 }
 
 html, body {
@@ -223,7 +224,11 @@ p {
     background-color: var(--backgroundcolor);
     border: 0;
     margin-right: 2px;
-}}
+}
+
+.menu-setting > .fa:hover {
+    color: var(--textcolor) !important;
+}
 
 @media (max-width: 350px) {
     .small-screen-hide {

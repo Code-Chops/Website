@@ -23,6 +23,7 @@
     padding: 0.5rem 1rem;
     text-decoration: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    justify-content: space-around;
 }
 
     .nav-link:focus {
@@ -36,10 +37,6 @@
         color: var(--textcolor) !important;
         background-color: rgba(255,255,255,0.10);
     }
-
-.nav-item:hover .fa {
-    color: var(--hrefcolor);
-}
 
 .nav {
     flex-wrap: wrap;

@@ -32,7 +32,7 @@
         this.IsRenderedOnClient = RenderLocation is RenderedOnClient;
     }
 
-    private async Task OnSplashClick(MouseEventArgs args)
+    private async Task OnSplashClick()
     {
         if (this.ShowApp || !this.IsRenderedOnClient) return;
 

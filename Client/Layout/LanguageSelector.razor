@@ -11,8 +11,9 @@
 }
 
 @code {
-	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-	
+	[Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+	[Inject] private NavigationManager UriHelper { get; set; } = null!;
+
 	internal static event Action ChangedEvent = null!;
 
 	/// <summary>
@@ -22,32 +23,34 @@
 	{ 
 		["en"] = "🇬🇧", ["nl"] = "🇳🇱", ["zh"] = "🇹🇼" 
 	};
-	public static ImmutableList<string> SupportedLanguages { get; set; } = FlagsByLanguageCode.Keys.ToImmutableList();
+	public static ImmutableList<CultureInfo> SupportedCultures { get; set; } = FlagsByLanguageCode.Keys.Select(language => new CultureInfo(language)).ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
 
 	protected override void OnInitialized()
-    {
-   		this.SetCurrentLanguageFlag();
+	{
+		this.SetCurrentLanguageFlag();
 	}
 
 	private void ChangeLanguage(MouseEventArgs args)
 	{
-		var index = SupportedLanguages.IndexOf(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLowerInvariant());
-		var newIndex = (index + 1) % SupportedLanguages.Count;
-		var newLanguageCode = SupportedLanguages[newIndex];
+		var index = SupportedCultures.IndexOf(CultureInfo.CurrentCulture);
+		var newIndex = (index + 1) % SupportedCultures.Count;
+		var newCulture = SupportedCultures[newIndex];
 
-		SetNewCulture(newLanguageCode);
+		SetNewCulture(newCulture);
 		this.SetCurrentLanguageFlag();
 
 		ChangedEvent?.Invoke();
 
 		if (this.JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-		inProcessRuntime.InvokeVoid("blazorCulture.set", newLanguageCode);
+		inProcessRuntime.InvokeVoid("blazorCulture.set", newCulture.TwoLetterISOLanguageName);
+		
+		// TODO temporary workaround
+		if (newIndex > 0) this.UriHelper.NavigateTo("/", forceLoad: true);
 	}
 
-	public static void SetNewCulture(string languageCode)
+	public static void SetNewCulture(CultureInfo culture)
 	{
-		var culture = CultureInfo.GetCultureInfo(languageCode);
 		if (culture is null) return;
 
 		CultureInfo.CurrentCulture = culture;
