@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Globalization
+@inherits LayoutComponentBase
 @using static CodeChops.Website.RazorComponents.Navigation.MenuButton
 
 <div class="page">
@@ -6,7 +7,7 @@
             BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
             AccentColor=@Branding.Colors.Accent
             TextColor=@(IsDarkMode ? Color.White : new(ColorName.Black))
-            HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? (sbyte)40 : (sbyte)-40))
+            HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40))
             FontFamily=@Branding.FontFamily 
             LogoPath="/favicon.ico" 
             Title=@Branding.Name 
@@ -39,6 +40,9 @@
         @If(ColorModeSelector.ColorMode is LightMode, "font-weight: 700;")
     }
 
+    ::selection {
+        background: @(ColorModeSelector.ColorMode is LightMode ? Branding.Colors.Accent.ChangeBrightness(140) : "var(--branding-color-accent)");
+    }
 </style>
 
 @code

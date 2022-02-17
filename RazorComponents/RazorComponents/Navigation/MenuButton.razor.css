@@ -14,7 +14,7 @@
     }
 
         .nav-item a:hover {
-            background-color: rgba(255,255,255,0.25);
+            background-color: rgb(var(--textcolor-rgb), .3);
         }
 
 .nav-link {
@@ -29,7 +29,7 @@
         border-width: 1px;
         border-color: var(--accentcolor);
         border-style: double;
-        margin: 0px -1px -1px -1px;
+        margin: -1px -1px -1px -1px;
     }
 
     .nav-link.active {

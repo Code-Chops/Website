@@ -24,7 +24,6 @@ public class Program
 		//builder.Services.AddApiAuthorization();
 		builder.Services.AddHttpContextAccessor();
 
-
 		var host = builder.Build();
 
 		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();

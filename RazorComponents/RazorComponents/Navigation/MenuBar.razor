@@ -5,7 +5,7 @@
         <div class="brand">
             @if (LogoPath is not null)
             {
-                <img src=@LogoPath class="logo" alt="Logo @Title" href="#" style=@If(!ShowLogo,"opacity:0;")>
+                <img src=@LogoPath class="logo" alt="Logo @Title" style=@If(!ShowLogo,"opacity:0;")>
             }
 
             @if (ShowTitle)
@@ -82,14 +82,15 @@
 
 <style>
     :root{
-        --backgroundcolor:  @this.BackgroundColor;
-        --accentcolor:      @this.AccentColor;
-        --textcolor:        @this.TextColor;
-        --hrefcolor:        @this.HRefColor;
-    }
+        --backgroundcolor:  @BackgroundColor;
+        --accentcolor:      @AccentColor;
+        --textcolor:        @TextColor;
+        --hrefcolor:        @HRefColor;
 
-    ::selection {
-        background: var(--accentcolor);
+        --backgroundcolor-rgb:  @BackgroundColor.Rgb;
+        --accentcolor-rgb:      @AccentColor.Rgb;
+        --textcolor-rgb:        @TextColor.Rgb;
+        --hrefcolor-rgb:        @HRefColor.Rgb;
     }
 
     .navbar-brand {

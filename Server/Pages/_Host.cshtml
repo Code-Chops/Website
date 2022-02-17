@@ -29,13 +29,15 @@
         <persist-component-state />
                 
         <div id="overlay"></div>
-        <div id="logo" class="splashLogo" >
- 		    <div id="logoBackground"></div>
-		    <div id="logoM"></div>
-		    <div id="logoA"></div>
-		    <div id="logoX"></div> 
-		    <div id="logoB"></div>
-        </div>
+        <a href="/">
+            <div id="logo" class="splashLogo" >
+ 		        <div id="logoBackground"></div>
+		        <div id="logoM"></div>
+		        <div id="logoA"></div>
+		        <div id="logoX"></div> 
+		        <div id="logoB"></div>
+            </div>
+        </a>
 
         @* Do not use prerendered pages when authentication is involved *@
 @*        @if (HttpContext.Request.Path.StartsWithSegments("/authentication"))

@@ -52,7 +52,7 @@ public record struct Color
 		this.Value = rgbColor;
 	}
 
-	public Color ChangeBrightness(sbyte delta = 40)
+	public Color ChangeBrightness(int delta = 40)
 	{
 		var r = ChangeBrightnessOfPrimaryColor(this.Value.R);
 		var g = ChangeBrightnessOfPrimaryColor(this.Value.G);

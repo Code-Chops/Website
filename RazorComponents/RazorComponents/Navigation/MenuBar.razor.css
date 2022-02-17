@@ -45,14 +45,14 @@
     text-shadow: 0 0 1rem var(--accentcolor);
     font-weight: 100;
     margin: unset;
-    font-size: clamp(1rem, 10vw, 2.5rem);
+    font-size: clamp(0.5rem, 8vw, 2.5rem);
     cursor: default;
     padding-top: 4px;
     padding-left: 5px;
 }
 
     .navbar-brand:hover {
-        text-shadow: 0 0 1rem white;
+        text-shadow: 0 0 1rem var(--textcolor);
         border-color: var(--accentcolor);
     }
 
@@ -82,7 +82,7 @@
     border-right-width: 1px;
     border-top-width: 1px;
     border-radius: 0rem !important;
-    color: var(--accentcolor);
+    color: var(--textcolor);
     align-self: center;
     min-height: 40px;
     margin-left: 10px;
@@ -90,7 +90,6 @@
 
     .navbar-toggler:hover {
         background-color: rgba(255,255,255,0.2);
-        color: var(--backgroundcolor);
     }
 
     .navbar-toggler:focus {

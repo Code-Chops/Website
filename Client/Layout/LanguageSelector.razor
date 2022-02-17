@@ -5,9 +5,9 @@
 
 @if (FlagsByLanguageCode.Any())
 {
-	<div class="menu-setting">
+	<button class="menu-setting">
 		<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
-	</div>
+	</button>
 }
 
 @code {
@@ -18,7 +18,10 @@
 	/// <summary>
 	/// The first culture is the default culture.
 	/// </summary>
-	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["en"] = "🇬🇧", ["nl"] = "🇳🇱" };
+	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) 
+	{ 
+		["en"] = "🇬🇧", ["nl"] = "🇳🇱", ["zh"] = "🇹🇼" 
+	};
 	public static ImmutableList<string> SupportedLanguages { get; set; } = FlagsByLanguageCode.Keys.ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
 

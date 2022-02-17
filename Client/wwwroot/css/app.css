@@ -28,6 +28,7 @@ body {
 button, input, optgroup, select, textarea {
     margin: 0;
     font-family: inherit;
+    border-radius: unset !important;
 }
 
 *, ::after, ::before {
@@ -72,7 +73,7 @@ a, .btn-link {
     a:hover {
         color: var(--branding-color-text);
         text-decoration: none;
-        text-shadow: 0px 0px 4px #ffffff;
+        text-shadow: 0px 0px 4px var(--branding-color-text);
     }
 
 .fa {
@@ -144,9 +145,7 @@ a, .btn-link {
     font-display: block;
 }
 
-/* TODO user better faster fonts: https://iainbean.com/posts/2021/5-steps-to-faster-web-fonts/ */
-
-    pre .code {
+pre .code {
     margin: 0 !important;
     tab-size: 4;
 }
@@ -163,27 +162,27 @@ html {
 
 ::-webkit-scrollbar-thumb {
     scrollbar-color: #666 #201c29;
-    background: #434343;
+    background: rgb(var(--textcolor-rgb), .2);
     box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%), inset -2px -2px 2px rgb(0 0 0 / 25%);
 }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: rgb(var(--textcolor-rgb), .4);
     }
 
 ::-webkit-scrollbar-track {
-    background: linear-gradient(90deg,#434343,#434343 1px,#111 0,#111);
+    background-color: var(--branding-color-background);
 }
 
 ::-webkit-scrollbar-corner {
     scrollbar-color: #201c29 #201c29;
-    background: #434343;
+    background: var(--backgroundcolor);
     box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%), inset -2px -2px 2px rgb(0 0 0 / 25%);
 }
 
 .alert {
     background-color: rgba(var(--branding-color-accent-rgb), .6) !important;
-    color: white !important;
+    color: var(--textcolor) !important;
     margin-top: 1.5rem !important;
     position: relative;
     padding: 1rem 1rem;
@@ -221,4 +220,13 @@ p {
     align-self: center;
     max-width: 50px;
     max-height: 50px;
+    background-color: var(--backgroundcolor);
+    border: 0;
+    margin-right: 2px;
+}}
+
+@media (max-width: 350px) {
+    .small-screen-hide {
+        display: none;
+    }
 }
