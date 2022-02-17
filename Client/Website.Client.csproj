@@ -54,30 +54,15 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AboutResource.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Articles\ArticlesResource.zh.Designer.cs">
-	    <DependentUpon>ArticlesResource.zh.resx</DependentUpon>
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	  </Compile>
 	  <Compile Update="Pages\Articles\ArticlesResource.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>ArticlesResource.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Home\HomeResource.zh.Designer.cs">
-	    <DependentUpon>HomeResource.zh.resx</DependentUpon>
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	  </Compile>
 	  <Compile Update="Pages\Home\HomeResource.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>HomeResource.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Pages\Projects\ProjectsResource.zh.Designer.cs">
-	    <DependentUpon>ProjectsResource.zh.resx</DependentUpon>
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
 	  </Compile>
 	  <Compile Update="Pages\Projects\ProjectsResource.Designer.cs">
 	    <DesignTime>True</DesignTime>
@@ -98,8 +83,7 @@
 		  <LastGenOutput>AboutResource.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Articles\ArticlesResource.zh.resx">
-		  <LastGenOutput>ArticlesResource.zh.Designer.cs</LastGenOutput>
-		  <Generator>ResXFileCodeGenerator</Generator>
+		  <Generator></Generator>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Articles\ArticlesResource.nl.resx">
 			<SubType>Designer</SubType>
@@ -110,8 +94,7 @@
 		  <LastGenOutput>ArticlesResource.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Home\HomeResource.zh.resx">
-		  <LastGenOutput>HomeResource.zh.Designer.cs</LastGenOutput>
-		  <Generator>ResXFileCodeGenerator</Generator>
+		  <Generator></Generator>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Home\HomeResource.nl.resx">
 			<SubType>Designer</SubType>
@@ -122,8 +105,7 @@
 		  <LastGenOutput>HomeResource.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Projects\ProjectsResource.zh.resx">
-		  <LastGenOutput>ProjectsResource.zh.Designer.cs</LastGenOutput>
-		  <Generator>ResXFileCodeGenerator</Generator>
+		  <Generator></Generator>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Pages\Projects\ProjectsResource.nl.resx">
 			<SubType>Designer</SubType>
