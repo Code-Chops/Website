@@ -59,6 +59,6 @@ window.blazorCulture = {
 window.blazorColorMode = {
     get: () => window.localStorage["BlazorColorMode"]
         ? window.localStorage["BlazorColorMode"]
-        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "DarkMode" : "LightMode",
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? "LightMode" : "DarkMode",
     set: (value) => window.localStorage["BlazorColorMode"] = value
 };
