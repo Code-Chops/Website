@@ -6,7 +6,7 @@
     <MenuBar @ref=MenuBar
             BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
             AccentColor=@Branding.Colors.Accent
-            TextColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -100)
+            TextColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -60)
             HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40))
             FontFamily=@Branding.FontFamily 
             LogoPath="/favicon.ico" 
@@ -18,7 +18,7 @@
         
             <ColorModeSelector />
             <LanguageSelector />
- </MenuBar>
+    </MenuBar>
 
     <div class="border"></div>
 
