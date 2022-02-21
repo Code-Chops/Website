@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Client", "Client\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorComponents", "RazorComponents\RazorComponents\RazorComponents.csproj", "{F8BFCBDE-630D-43AC-B815-06D03D308AF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maths", "..\..\Helpers\Maths\Maths\Maths.csproj", "{42E15520-F835-4242-AC75-8A99964A7290}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{F8BFCBDE-630D-43AC-B815-06D03D308AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8BFCBDE-630D-43AC-B815-06D03D308AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8BFCBDE-630D-43AC-B815-06D03D308AF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42E15520-F835-4242-AC75-8A99964A7290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42E15520-F835-4242-AC75-8A99964A7290}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42E15520-F835-4242-AC75-8A99964A7290}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42E15520-F835-4242-AC75-8A99964A7290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

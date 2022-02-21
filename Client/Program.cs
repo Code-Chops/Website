@@ -22,7 +22,6 @@ public class Program
 		builder.Services.AddSingleton<RenderLocation, RenderedOnClient>();
 
 		//builder.Services.AddApiAuthorization();
-		builder.Services.AddHttpContextAccessor();
 
 		var host = builder.Build();
 
@@ -45,8 +44,6 @@ public class Program
 
 	public static void ConfigureSharedServices(IServiceCollection services, CultureInfo? defaultCulture = null)
 	{
-		services.AddLocalization();
-
 		var culture = defaultCulture ?? LanguageSelector.SupportedCultures.First();
 
 		services.Configure<RequestLocalizationOptions>(options =>
