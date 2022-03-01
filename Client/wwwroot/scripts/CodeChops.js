@@ -29,3 +29,5 @@ window.blazorColorMode = {
         : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? "LightMode" : "DarkMode",
     set: (value) => window.localStorage["BlazorColorMode"] = value
 }
+
+document.documentElement.style.setProperty("--overlay-background-color", window.blazorColorMode.get() == "DarkMode" ? "#1e1e1e" : "white");
