@@ -10,6 +10,7 @@ html {
     background-color: var(--branding-color-background);
     text-shadow: 0 0 black; /* In order to make dark text on a white background clearer */
     transition: all .25s ease-in;
+    tab-size: 4;
 }
 
 html, body {

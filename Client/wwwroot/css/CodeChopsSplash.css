@@ -19,7 +19,7 @@
 /* Dissolve overlay */
 
 .dissolveOverlay {
-    animation-duration: 1.5s;
+    animation-duration: 1.25s;
     animation-name: dissolveOverlay;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
@@ -28,10 +28,6 @@
 @keyframes dissolveOverlay {
     0% {
         opacity: 1;
-    }
-
-    99% {
-        opacity: 0;
     }
 
     100% {
@@ -51,6 +47,7 @@
     animation-fill-mode: forwards;
     margin-left: 10px;
     margin-top: 15px;
+    animation-timing-function: ease-in;
 }
 
     .attachedLogo:hover {

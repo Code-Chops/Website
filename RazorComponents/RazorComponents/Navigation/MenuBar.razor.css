@@ -140,9 +140,10 @@
 }
 
 #title {
-    animation: titleFadeIn 0.4s;
-    animation-delay: .5s;
+    animation: titleFadeIn 0.75s;
+    animation-delay: .25s;
     animation-fill-mode: both;
+    animation-timing-function: ease-out;
 }
 
 @keyframes titleFadeIn {

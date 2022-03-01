@@ -33,7 +33,7 @@
 
 	private void ChangeLanguage(EventArgs? e)
 	{
-		if (e is KeyboardEventArgs keyEventArgs && (keyEventArgs.Code is "Enter" or "NumpadEnter")) return;
+		if (e is KeyboardEventArgs keyEventArgs && keyEventArgs.Code is not "Enter" and not "NumpadEnter") return;
 
 		var index = SupportedCultures.IndexOf(CultureInfo.CurrentCulture);
 		var newIndex = (index + 1) % SupportedCultures.Count;
