@@ -27,7 +27,7 @@
   <ItemGroup>
 	<PackageReference Include="ColorHelper" Version="1.6.1" />
 	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
-	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'"/>
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
 	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.2" />
 	<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
@@ -72,6 +72,12 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>ProjectsResource.resx</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\scripts\CodeChops.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Update="Pages\About\AboutResource.zh.resx">

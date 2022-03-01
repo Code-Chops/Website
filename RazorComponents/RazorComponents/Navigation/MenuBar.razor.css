@@ -41,7 +41,7 @@
 
 .navbar-brand {
     color: var(--textcolor) !important;
-    text-shadow: 0 0 1rem var(--accentcolor);
+    text-shadow: 0 0 .05rem var(--accentcolor);
     font-weight: 100;
     margin: unset;
     font-size: clamp(0.5rem, 8vw, 2.5rem);
@@ -52,7 +52,7 @@
 }
 
     .navbar-brand:hover {
-        text-shadow: 0 0 1rem var(--textcolor);
+        text-shadow: 0 0 0.08rem var(--textcolor);
         border-color: var(--accentcolor);
     }
 
@@ -140,8 +140,8 @@
 }
 
 #title {
-    animation: titleFadeIn 0.25s;
-    animation-delay: .4s;
+    animation: titleFadeIn 0.4s;
+    animation-delay: .5s;
     animation-fill-mode: both;
 }
 

@@ -18,7 +18,7 @@
             <div class="navbar-buttons">
                 @foreach(var button in Buttons)
                 {
-                    <MenuButton Data=button OnClick=@(args => OnClickButton(args))></MenuButton>
+                    <MenuButton Data=button OnClick=@OnClickButton></MenuButton>
                 }
             </div>
             @ChildContent
@@ -33,7 +33,7 @@
         <div class="menu-item-container">
             @foreach(var button in Buttons)
             {
-                <MenuButton Data=button OnClick=@(args => OnClickButton(args))></MenuButton>
+                <MenuButton Data=button OnClick=@OnClickButton></MenuButton>
             }
         </div>
     </div>
@@ -69,7 +69,7 @@
         if (!this.IsCollapsed) this.Toggle();
     }
 
-    public void OnClickButton(MouseEventArgs args)
+    public void OnClickButton(EventArgs e)
     {
         this.Collapse();
     }

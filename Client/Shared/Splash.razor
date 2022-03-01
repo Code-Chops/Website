@@ -1,0 +1,24 @@
+﻿<CascadingValue Value="@ShowApp">
+    
+    @ChildContent
+
+</CascadingValue> 
+
+@code {
+    [Inject] private RenderLocation RenderLocation { get; set; } = null!;
+    [Inject] private IJSRuntime JsInterop { get; set; } = null!;
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    private bool ShowApp { get; set; }
+    private bool IsRenderedOnClient { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.IsRenderedOnClient = RenderLocation is RenderedOnClient;
+
+        if (this.IsRenderedOnClient)
+        {
+            await this.JsInterop.InvokeVoidAsync("removeSplash");
+            this.ShowApp = true;
+        }
+    }
+}

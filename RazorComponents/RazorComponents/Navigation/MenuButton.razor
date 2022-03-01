@@ -6,6 +6,6 @@
 
 @code {
     [Parameter] public MenuButtonData? Data { get; set; }
-	[Parameter] public Action<MouseEventArgs> OnClick { get; set; } = null!;
+	[Parameter] public Action<EventArgs> OnClick { get; set; } = null!;
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 }

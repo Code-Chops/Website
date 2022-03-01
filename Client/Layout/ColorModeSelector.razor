@@ -1,4 +1,4 @@
-﻿<button class="menu-setting small-screen-hide">
+﻿<button class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
 	<MenuButton OnClick=@ChangeMode Data=MenuButtonData></MenuButton>
 </button>
 
@@ -23,8 +23,10 @@
 		};
 	}
 
-	private void ChangeMode(MouseEventArgs args)
+	private void ChangeMode(EventArgs? e)
 	{
+		if (e is KeyboardEventArgs keyEventArgs && (keyEventArgs.Code is "Enter" or "NumpadEnter")) return;
+
 		ColorMode mode = ColorMode is DarkMode ? LightMode.Instance : DarkMode.Instance;
 		SetMode(mode);	
 		this.SetMenuButtonData();

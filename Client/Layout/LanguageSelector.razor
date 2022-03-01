@@ -5,7 +5,7 @@
 
 @if (FlagsByLanguageCode.Any())
 {
-	<button class="menu-setting">
+	<button class="menu-setting small-screen-hide" @onkeydown="@ChangeLanguage">
 		<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
 	</button>
 }
@@ -31,8 +31,10 @@
 		this.SetCurrentLanguageFlag();
 	}
 
-	private void ChangeLanguage(MouseEventArgs args)
+	private void ChangeLanguage(EventArgs? e)
 	{
+		if (e is KeyboardEventArgs keyEventArgs && (keyEventArgs.Code is "Enter" or "NumpadEnter")) return;
+
 		var index = SupportedCultures.IndexOf(CultureInfo.CurrentCulture);
 		var newIndex = (index + 1) % SupportedCultures.Count;
 		var newCulture = SupportedCultures[newIndex];
