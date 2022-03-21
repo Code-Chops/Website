@@ -6,4 +6,9 @@ public static class RazorHelpers
     {
         return predicate is true ? output : null;
     }
+
+    public static string? If(string? value, string output)
+	{
+        return value is not null ? output : null;
+	}
 }

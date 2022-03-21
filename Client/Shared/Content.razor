@@ -1,18 +1,8 @@
 ﻿<div class="content">
-	<Box>
-		<article>
-			<PageTitle>@Branding.Name @If(Title is not null, $"- {Title}")</PageTitle>
-			@if(Title is not null || AlternativeHeader is not null)
-			{
-				<h4>@(AlternativeHeader ?? Title)</h4>					
-			}
-
-			@ChildContent	
-		</article>
-	</Box>
+	<article>
+		@ChildContent	
+	</article>
 </div>
-
-<Footer/>
 
 <style>
 	@@media (min-width: @(Width)px) {
@@ -26,10 +16,8 @@
 </style>
 
 @code {
-	[Parameter] public string? Title { get; set; } = null;
-	[Parameter] public string? AlternativeHeader { get; set; } = null;
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
-	[Parameter] public int Width { get; set; } = 800;
+	[Parameter] public int Width { get; set; } = 900;
 
 	protected override void OnInitialized()
     {

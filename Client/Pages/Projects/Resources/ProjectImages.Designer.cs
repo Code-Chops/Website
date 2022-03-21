@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.Website.Client.Pages.Projects {
+namespace CodeChops.Website.Client.Pages.Projects.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CodeChops.Website.Client.Pages.Projects {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ProjectsResource {
+    internal class ProjectImages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ProjectsResource() {
+        internal ProjectImages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeChops.Website.Client.Pages.Projects {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Projects.ProjectsResource", typeof(ProjectsResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Projects.Resources.ProjectImages", typeof(ProjectImages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,22 @@ namespace CodeChops.Website.Client.Pages.Projects {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Projects.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static string Title {
+        internal static byte[] MagicEnums {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                object obj = ResourceManager.GetObject("MagicEnums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] VendingMachine {
+            get {
+                object obj = ResourceManager.GetObject("VendingMachine", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

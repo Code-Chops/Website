@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.Website.Client.Pages.Articles {
+namespace CodeChops.Website.Client.Pages.Projects.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CodeChops.Website.Client.Pages.Articles {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ArticlesResource___Copy {
+    internal class ProjectsResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ArticlesResource___Copy() {
+        internal ProjectsResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeChops.Website.Client.Pages.Articles {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Articles.ArticlesResource - Copy", typeof(ArticlesResource___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Projects.Resources.ProjectsResource", typeof(ProjectsResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,49 @@ namespace CodeChops.Website.Client.Pages.Articles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blog.
+        ///   Looks up a localized string similar to Better enums in C# &lt;br/&gt;
+        ///Flexible, extendable, and customizable.
+        /// </summary>
+        internal static string MagicEnums_Text {
+            get {
+                return ResourceManager.GetString("MagicEnums_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MagicEnums.
+        /// </summary>
+        internal static string MagicEnums_Title {
+            get {
+                return ResourceManager.GetString("MagicEnums_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projects.
         /// </summary>
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A demo of a solution to&lt;br/&gt;
+        ///the vending machine change problem.
+        /// </summary>
+        internal static string VendingMachine_Text {
+            get {
+                return ResourceManager.GetString("VendingMachine_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FoodChops.
+        /// </summary>
+        internal static string VendingMachine_Title {
+            get {
+                return ResourceManager.GetString("VendingMachine_Title", resourceCulture);
             }
         }
     }

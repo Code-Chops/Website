@@ -121,12 +121,12 @@
     <value>Welcome to CodeChops</value>
   </data>
   <data name="Paragraph1" xml:space="preserve">
-    <value>At CodeChops we focus on delivering top-notch, creative, tailor-made applications.
-Our solutions will perfectly suit your company's needs as we will think along with you during the development process.</value>
+    <value>CodeChops delivers top-notch software tailor-made to meet your specific needs. 
+Solutions are built through careful consideration of your company's unique situation during the development process</value>
   </data>
   <data name="Paragraph2" xml:space="preserve">
-    <value>Our portfolio varies from front-end to back-end (see &lt;a href="projects"&gt;projects&lt;/a&gt;).
-We prefer to work on solutions that encompass both, in order to give you a seamless integrated experience.</value>
+    <value>The current portfolio varies from front-end to back-end (see &lt;a href="projects"&gt;projects&lt;/a&gt;). 
+CodeChops preferably delivers full-stack solutions in order to provide a seamless integrated experience.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Welcome</value>

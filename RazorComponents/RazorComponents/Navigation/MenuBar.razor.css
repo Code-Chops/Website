@@ -8,11 +8,11 @@
 }
 
 .top-bar-shadow {
-    box-shadow: 0 1rem 1rem rgb(25, 25, 25);
+    box-shadow: 0 1rem 1rem rgb(0, 0, 0, 0.4);
     position: absolute;
     background-color: var(--backgroundcolor);
     width: 100%;
-    transition: all .25s ease-in;
+    transition: all .25s ease-in, color: unset;
     opacity: 0;
 }
 
@@ -140,8 +140,7 @@
 }
 
 #title {
-    animation: titleFadeIn 0.75s;
-    animation-delay: .25s;
+    animation: titleFadeIn 1s;
     animation-fill-mode: both;
     animation-timing-function: ease-out;
 }

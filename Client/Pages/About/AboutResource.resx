@@ -122,11 +122,11 @@
   </data>
   <data name="Paragraph1" xml:space="preserve">
     <value>I am Max Bergman, a full-stack senior software engineer.
-This website is a place where I share my latest projects, my experiences in application development, and tips for other developers. 
-It will be regularly updated, as my endeavour to use the newest techniques is never-ending.</value>
+This is a place where I share updates of my latest projects and post tips for other developers. 
+I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending</value>
   </data>
   <data name="Paragraph2" xml:space="preserve">
-    <value>My development career has mainly focused on the .NET ecosystem.
+    <value>My development career focuses mainly on the .NET ecosystem.
 Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.</value>
   </data>
   <data name="Paragraph3" xml:space="preserve">

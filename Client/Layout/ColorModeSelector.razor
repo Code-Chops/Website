@@ -1,4 +1,5 @@
-﻿<button class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
+﻿@using static CodeChops.Website.Client.Layout.ColorMode
+<button class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
 	<MenuButton OnClick=@ChangeMode Data=MenuButtonData></MenuButton>
 </button>
 
@@ -19,7 +20,7 @@
 	{
 		this.MenuButtonData = new MenuButtonData()
 		{
-			FontAwesomeIcon = ColorMode is DarkMode ? "fa-moon" : "fa-sun"
+			FontAwesomeIcon = ColorMode == DarkMode ? "fa-moon" : "fa-sun"
 		};
 	}
 
@@ -27,14 +28,14 @@
 	{
 		if (e is KeyboardEventArgs keyEventArgs && keyEventArgs.Code is not "Enter" and not "NumpadEnter") return;
 
-		ColorMode mode = ColorMode is DarkMode ? LightMode.Instance : DarkMode.Instance;
+		ColorMode mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
 		SetMode(mode);	
 		this.SetMenuButtonData();
 
 		ChangedEvent?.Invoke();
 
 		if (this.JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode is DarkMode ? nameof(DarkMode) : nameof(LightMode));
+		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode == ColorMode.DarkMode ? nameof(ColorMode.DarkMode) : nameof(ColorMode.LightMode));
 	}
 
 	internal static void SetMode(ColorMode mode)

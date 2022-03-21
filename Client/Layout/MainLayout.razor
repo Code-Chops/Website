@@ -7,7 +7,7 @@
             BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
             AccentColor=@Branding.Colors.Accent
             TextColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -60)
-            HRefColor=@(Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40))
+            HRefColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40)
             FontFamily=@Branding.FontFamily 
             LogoPath="/favicon.ico" 
             Title=@Branding.Name 
@@ -23,8 +23,11 @@
     <div class="border"></div>
 
     <main>
-        @Body           
+        @Body    
+        
+        <Footer/>
     </main>
+
 </div>
 
 <style>
@@ -39,7 +42,7 @@
     }
 
     ::selection {
-        background: @(ColorModeSelector.ColorMode is LightMode ? Branding.Colors.Accent.ChangeBrightness(140) : "var(--branding-color-accent)");
+        background: @(ColorModeSelector.ColorMode == ColorMode.LightMode ? Branding.Colors.Accent.ChangeBrightness(140) : "var(--branding-color-accent)");
     }
 </style>
 
@@ -49,7 +52,7 @@
     internal static ColorMode ColorMode { get; set; } = null!;
     private MenuBar MenuBar { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
-    private bool IsDarkMode => ColorModeSelector.ColorMode is DarkMode;
+    private bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
 
     protected override void OnInitialized()
     {
@@ -63,7 +66,7 @@
         this.Buttons = new MenuButtonData[]
             {
                 new() { HRef="/",           Text=Pages.Home.HomeResource.Title },
-                new() { HRef="/projects",   Text=Pages.Projects.ProjectsResource.Title },
+                new() { HRef="/projects",   Text=Pages.Projects.Resources.ProjectsResource.Title },
                 new() { HRef="/about",      Text=Pages.About.AboutResource.Title },
             };
         this.StateHasChanged();

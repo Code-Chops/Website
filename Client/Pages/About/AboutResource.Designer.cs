@@ -71,8 +71,8 @@ namespace CodeChops.Website.Client.Pages.About {
         
         /// <summary>
         ///   Looks up a localized string similar to I am Max Bergman, a full-stack senior software engineer.
-        ///This website is a place where I share my latest projects, my experiences in application development, and tips for other developers. 
-        ///It will be regularly updated, as my endeavour to use the newest techniques is never-ending..
+        ///This is a place where I share updates of my latest projects and post tips for other developers. 
+        ///I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending.
         /// </summary>
         internal static string Paragraph1 {
             get {
@@ -81,7 +81,7 @@ namespace CodeChops.Website.Client.Pages.About {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My development career has mainly focused on the .NET ecosystem.
+        ///   Looks up a localized string similar to My development career focuses mainly on the .NET ecosystem.
         ///Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL..
         /// </summary>
         internal static string Paragraph2 {

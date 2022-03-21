@@ -31,9 +31,9 @@ public class Program
 		LanguageSelector.SetNewCulture(defaultCulture);
 
 		var value = await jsRuntime.InvokeAsync<string>("blazorColorMode.get");
-		ColorMode colorMode = value == nameof(DarkMode)
-			? DarkMode.Instance
-			: LightMode.Instance;
+		var colorMode = value == nameof(ColorMode.DarkMode)
+			? ColorMode.DarkMode
+			: ColorMode.LightMode;
 
 		ColorModeSelector.SetMode(colorMode);
 

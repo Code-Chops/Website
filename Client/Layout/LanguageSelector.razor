@@ -21,7 +21,7 @@
 	/// </summary>
 	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) 
 	{ 
-		["en"] = "🇬🇧", ["nl"] = "🇳🇱", ["zh"] = "🇹🇼" 
+		["en"] = "🇬🇧", ["nl"] = "🇳🇱"
 	};
 	public static ImmutableList<CultureInfo> SupportedCultures { get; set; } = FlagsByLanguageCode.Keys.Select(language => new CultureInfo(language)).ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
@@ -48,7 +48,7 @@
 		inProcessRuntime.InvokeVoid("blazorCulture.set", newCulture.TwoLetterISOLanguageName);
 		
 		// TODO temporary workaround
-		if (newIndex > 0) this.UriHelper.NavigateTo("/", forceLoad: true);
+		this.UriHelper.NavigateTo("/", forceLoad: true);
 	}
 
 	public static void SetNewCulture(CultureInfo culture)

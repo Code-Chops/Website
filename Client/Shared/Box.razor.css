@@ -1,17 +1,18 @@
 ﻿.box {
 	position: relative;
-	border-radius: 0.25rem;
-	border-color: #999999;
-	border-style: dashed;
-	border-width: 1px;
-	padding: 15px 15px 15px 15px;
-	background-color: var(--branding-color-background);
+	padding: 15px 20px 15px 20px;
+	height: 100%;
 }
 
 .box-text {
 	color: var(--text-color);
+	text-shadow: 0 0 1px var(--textcolor);
 }
 
 .box-code {
 
+}
+
+.background {
+	background-color:rgb(var(--branding-color-background-rgb), 0.7) ;
 }

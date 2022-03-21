@@ -4,6 +4,7 @@
     [Inject] private RenderLocation RenderLocation { get; set; } = null!;
     [Inject] private IJSRuntime JsInterop { get; set; } = null!;
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+
     private bool ShowApp { get; set; }
     private bool IsRenderedOnClient { get; set; }
 

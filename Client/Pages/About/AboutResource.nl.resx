@@ -121,16 +121,17 @@
     <value>Logo, design en website door CodeChops</value>
   </data>
   <data name="Paragraph1" xml:space="preserve">
-    <value>Ik ben Max Bergman, een full-stack senior software ontwikkelaar.
-Dit is een plek waar ik mijn laatste projecten, mijn ervaringen in applicatie-ontwikkeling, en tips voor andere ontwikkelaars deel. 
-Er zullen regelmatig updates op deze website verschijnen, omdat mijn streven om de nieuwste technieken te gebruiken een voortdurend proces is.</value>
+    <value>Ik ben Max Bergman, een full-stack senior software ontwikkelaar. 
+Op deze plek deel ik updates van mijn laatste projecten en plaats ik tips voor andere ontwikkelaars.
+Omdat mijn streven om de nieuwste technieken te gebruiken een voortdurend proces is, zal ik hier regelmatig updates geven van mijn laatste ervaringen in software-ontwikkeling.</value>
   </data>
   <data name="Paragraph2" xml:space="preserve">
-    <value>Mijn carrière in software-ontwikkeling focust zich hoofdzakelijk rondom het .NET framework.
-Momenteel gebruik ik meestal: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.</value>
+    <value>Mijn carrière in software-ontwikkeling focust zich hoofdzakelijk rondom het .NET ecosysteem.
+Momenteel gebruik ik voornamelijk: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.</value>
   </data>
   <data name="Paragraph3" xml:space="preserve">
-    <value>Voel je vrij om contact met me op te nemen bij vragen of opmerkingen. Dit wordt gewaardeerd!</value>
+    <value>Voel je vrij om contact met me op te nemen bij vragen of opmerkingen. 
+Dit wordt erg gewaardeerd!</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Over</value>

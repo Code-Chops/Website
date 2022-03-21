@@ -12,6 +12,9 @@ window.removeSplash = () => {
     logo.classList.add("attachedLogo");
     logo.classList.remove("splashLogo");
 
+    const clickableLogo = document.getElementById("clickableLogo");
+    clickableLogo.href = "/";
+
     const overlay = document.getElementById("overlay");
     overlay.classList.add("dissolveOverlay");
 }

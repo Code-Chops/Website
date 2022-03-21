@@ -2,6 +2,10 @@
 | By CodeChops - www.CodeChops.nl |
 **********************************/
 
+:root {
+    --logo-radius: 5px;
+}
+
 
 /* Overlay */
 
@@ -19,10 +23,11 @@
 /* Dissolve overlay */
 
 .dissolveOverlay {
-    animation-duration: 1.25s;
+    animation-duration: .75s;
     animation-name: dissolveOverlay;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
+    animation-delay: 0.25s;
 }
 
 @keyframes dissolveOverlay {
@@ -42,12 +47,12 @@
 /* Logo */
 
 .attachedLogo {
-    animation-duration: .75s;
+    animation-duration: 1s;
     animation-name: attachLogoToCorner;
     animation-fill-mode: forwards;
     margin-left: 10px;
     margin-top: 15px;
-    animation-timing-function: ease-in;
+    animation-timing-function: cubic-bezier(.69,.07,.25,.33);
 }
 
     .attachedLogo:hover {
@@ -146,6 +151,7 @@
     animation: logoBackgroundFadeIn 0.25s;
     animation-fill-mode: forwards;
     position: absolute;
+    border-radius: var(--logo-radius);
 }
 
 @keyframes logoBackgroundFadeIn {
@@ -170,6 +176,8 @@
     animation: logoMFadeIn 0.25s;
     animation-delay: 0.50s;
     animation-fill-mode: forwards;
+    border-bottom-left-radius: var(--logo-radius);
+    border-bottom-right-radius: var(--logo-radius);
 }
 
     #logoM:before {
@@ -177,11 +185,13 @@
         border-left: 50px solid var(--branding-color-main);
         border-right: 50px solid var(--branding-color-main);
         content: "";
-        height: 0;
+        height: 51px;
         left: 0;
         position: absolute;
-        top: -49px;
+        top: -50px;
         width: 0;
+        border-top-left-radius: var(--logo-radius);
+        border-top-right-radius: var(--logo-radius);
     }
 
 @keyframes logoMFadeIn {
@@ -207,6 +217,7 @@
     animation: logoAFadeIn 0.25s;
     animation-delay: 0.75s;
     animation-fill-mode: forwards;
+    border-radius: var(--logo-radius);
 }
 
 @keyframes logoAFadeIn {
@@ -231,6 +242,7 @@
     animation: logoXFadeIn 0.25s;
     animation-delay: 1s;
     animation-fill-mode: forwards;
+    border-radius: var(--logo-radius);
 }
 
     #logoX::after {
@@ -265,6 +277,7 @@
     animation: logoBFadeIn 0.25s;
     animation-delay: 1.25s;
     animation-fill-mode: forwards;
+    border-top-left-radius: var(--logo-radius);
 }
 
     #logoB::after {
@@ -276,6 +289,7 @@
         height: 0;
         border: 25px solid transparent;
         border-left-color: var(--branding-color-main);
+        border-bottom-left-radius: var(--logo-radius);
     }
 
 @keyframes logoBFadeIn {

@@ -1,21 +1,24 @@
 ﻿@page "/about"
 
-<Content Title="@AboutResource.Title">
-	<p>
-		@AboutResource.Paragraph1	
-	</p>
+<Content>
+	<Box>
+		<Title Value="@AboutResource.Title" />
+		<p>
+			@AboutResource.Paragraph1	
+		</p>
 
-	<p>
-		@AboutResource.Paragraph2
-	</p>
+		<p>
+			@AboutResource.Paragraph2
+		</p>
 
-	<p>
-		@AboutResource.Paragraph3
-	</p>
+		<p>
+			@AboutResource.Paragraph3
+		</p>
 
-	<div id="author">
-		@AboutResource.Author
-	</div>
+		<div id="author">
+			@AboutResource.Author
+		</div>
+	</Box>
 </Content>
 
 @code {

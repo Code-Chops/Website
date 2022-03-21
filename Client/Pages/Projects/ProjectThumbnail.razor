@@ -1,0 +1,23 @@
+﻿@using CodeChops.Website.Client.Pages.Projects
+@using CodeChops.Website.Client.Pages.Projects.Resources
+
+<a class="project" href="/projects/">
+	<div class="text">
+		<h4>@Title</h4>
+		<span class="small-screen-hide">@Text</span>
+	</div>	
+	<img class="image dashed-border" src=@GetImageSource() />
+</a>
+
+@code {
+	[Parameter] public string Title { get; set; }
+	[Parameter] public MarkupString Text { get; set; }
+	[Parameter] public byte[]? Image { get; set; } = null!;
+
+	public string? GetImageSource() => this.Image is null ? null : $"data:image/png;base64,{Convert.ToBase64String(this.Image)}";
+
+	protected override void OnInitialized()
+    {
+        LanguageSelector.ChangedEvent += this.StateHasChanged;
+    }
+}

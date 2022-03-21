@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.Website.Client.Pages.Home {
+namespace CodeChops.Website.Client.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CodeChops.Website.Client.Pages.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HomeResource___Copy {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HomeResource___Copy() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeChops.Website.Client.Pages.Home {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Home.HomeResource - Copy", typeof(HomeResource___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,44 +57,6 @@ namespace CodeChops.Website.Client.Pages.Home {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome to CodeChops.
-        /// </summary>
-        internal static string FullTitle {
-            get {
-                return ResourceManager.GetString("FullTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to At CodeChops we focus on delivering top-notch, creative, tailor-made applications.
-        ///Our solutions will perfectly suit your company&apos;s needs as we will think along with you during the development process..
-        /// </summary>
-        internal static string Paragraph1 {
-            get {
-                return ResourceManager.GetString("Paragraph1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Our portfolio varies from front-end to back-end (see &lt;a href=&quot;projects&quot;&gt;projects&lt;/a&gt;).
-        ///We prefer to work on solutions that encompass both, in order to give you a seamless integrated experience..
-        /// </summary>
-        internal static string Paragraph2 {
-            get {
-                return ResourceManager.GetString("Paragraph2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome.
-        /// </summary>
-        internal static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

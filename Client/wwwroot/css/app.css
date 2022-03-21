@@ -2,6 +2,18 @@
 | By CodeChops - www.CodeChops.nl |
 **********************************/
 
+@font-face {
+    font-family: NeutraText;
+    src: url('../fonts/NeutraText/NeutraText-Light.woff2') format('woff2'), url('../fonts/NeutraText/NeutraText-Light.woff') format('woff'), url('../fonts/NeutraText/NeutraText-Light.ttf') format('ttf');
+    font-display: block;
+}
+
+@font-face {
+    font-family: Kaufmann;
+    src: url('../fonts/Kaufmann/Kaufmann W01 Regular.woff2') format('woff2'), url('../fonts/Kaufmann/Kaufmann W01 Regular.woff') format('woff'), url('../fonts/Kaufmann/Kaufmann W01 Regular.ttf') format('ttf');
+    font-display: block;
+}
+
 html {
     font-family: 'NeutraText', Helvetica, Arial, sans-serif;
     scroll-behavior: smooth;
@@ -48,17 +60,15 @@ button, input, optgroup, select, textarea {
     line-height: 1.2;
 }
 
-h2 {
+.h2, h2 {
+    font-size: calc(1.325rem + .9vw);
     padding-top: 15px;
     padding-bottom: 20px;
 }
 
-.h2, h2 {
-    font-size: calc(1.325rem + .9vw);
-}
-
 .h4, h4 {
     font-size: calc(1.275rem + .3vw);
+    line-height: 2;
 }
 
 @media (min-width: 1200px) {
@@ -135,23 +145,6 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
-
-@font-face {
-    font-family: NeutraText;
-    src: url('../fonts/NeutraText/NeutraText-Light.woff2')  format('woff2'),
-         url('../fonts/NeutraText/NeutraText-Light.woff')   format('woff'),
-         url('../fonts/NeutraText/NeutraText-Light.ttf')    format('ttf');
-    font-display: block;
-}
-
-@font-face {
-    font-family: Kaufmann;
-    src: url('../fonts/Kaufmann/Kaufmann W01 Regular.woff2')  format('woff2'), 
-         url('../fonts/Kaufmann/Kaufmann W01 Regular.woff')   format('woff'),
-         url('../fonts/Kaufmann/Kaufmann W01 Regular.ttf')    format('ttf');
-    font-display: block;
-}
-
 pre .code {
     margin: 0 !important;
     tab-size: 4;
@@ -221,6 +214,7 @@ p {
     -moz-user-select: none;         /* Old versions of Firefox */
     -ms-user-select: none;          /* Internet Explorer/Edge */
     user-select: none;              /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    -webkit-user-drag: none;
 }
 
 .menu-setting {
@@ -240,4 +234,15 @@ p {
     .small-screen-hide {
         display: none;
     }
+}
+
+.dashed-border {
+    border-radius: 0.5rem;
+    border-color: rgba(var(--textcolor-rgb), 0.2);
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.text-center {
+    text-align: center;
 }

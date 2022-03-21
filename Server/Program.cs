@@ -22,6 +22,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddScoped<AuthenticationStateProvider,ServerAuthenticationStateProvider>();
 //builder.Services.AddScoped<SignOutSessionStateManager>();
 builder.Services.AddSingleton<RenderLocation, RenderedOnServer>();
+builder.Services.AddLocalization();
 
 CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
 

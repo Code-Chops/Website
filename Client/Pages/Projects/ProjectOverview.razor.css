@@ -1,0 +1,6 @@
+﻿.grid {
+	display: grid;
+	justify-content: space-between;
+	grid-template-columns: minmax(50%, 500px) minmax(50%, 500px);
+	padding-bottom: 20px;
+}

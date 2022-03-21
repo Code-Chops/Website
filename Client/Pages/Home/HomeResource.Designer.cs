@@ -70,8 +70,8 @@ namespace CodeChops.Website.Client.Pages.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At CodeChops we focus on delivering top-notch, creative, tailor-made applications.
-        ///Our solutions will perfectly suit your company&apos;s needs as we will think along with you during the development process..
+        ///   Looks up a localized string similar to CodeChops delivers top-notch software tailor-made to meet your specific needs. 
+        ///Solutions are built through careful consideration of your company&apos;s unique situation during the development process.
         /// </summary>
         internal static string Paragraph1 {
             get {
@@ -80,8 +80,8 @@ namespace CodeChops.Website.Client.Pages.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our portfolio varies from front-end to back-end (see &lt;a href=&quot;projects&quot;&gt;projects&lt;/a&gt;).
-        ///We prefer to work on solutions that encompass both, in order to give you a seamless integrated experience..
+        ///   Looks up a localized string similar to The current portfolio varies from front-end to back-end (see &lt;a href=&quot;projects&quot;&gt;projects&lt;/a&gt;). 
+        ///CodeChops preferably delivers full-stack solutions in order to provide a seamless integrated experience..
         /// </summary>
         internal static string Paragraph2 {
             get {

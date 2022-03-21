@@ -29,7 +29,7 @@
         <persist-component-state />
                 
         <div id="overlay"></div>
-        <a href="/">
+        <a id="clickableLogo">
             <div id="logo" class="splashLogo" >
  		        <div id="logoBackground"></div>
 		        <div id="logoM"></div>
@@ -46,7 +46,8 @@
         }
         else
         {
-*@            <component type="typeof(CodeChops.Website.Client.App)" render-mode="WebAssemblyPrerendered" />
+*@
+<component type="typeof(CodeChops.Website.Client.App)" render-mode="WebAssemblyPrerendered" />
 @*        }
 *@
         <div id="blazor-error-ui">
