@@ -7,7 +7,7 @@
 	  <AnalysisLevel>latest</AnalysisLevel>
 	  <AssemblyName>Website.Client</AssemblyName>
 	  <RootNamespace>CodeChops.Website.Client</RootNamespace>
-	  <Version>0.5.1</Version>
+	  <Version>0.5.2</Version>
 	  <LangVersion>10</LangVersion>
 	  <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
       <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
