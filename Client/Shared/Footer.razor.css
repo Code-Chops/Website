@@ -3,8 +3,13 @@
 	opacity: .8;
 	align-items: center;
 	flex-direction: column;
-	padding-top: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
+
+	footer h4 {
+		line-height: 1;
+	}
 
 	footer a {
 		color: var(--branding-color-text);

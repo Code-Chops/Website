@@ -6,11 +6,13 @@
 		<h4>@Title</h4>
 		<span class="small-screen-hide">@Text</span>
 	</div>	
-	<img class="image dashed-border" src=@GetImageSource() />
+	<span class="image-container border">
+		<img class="image noSelect" src=@GetImageSource() />
+	</span>
 </a>
 
 @code {
-	[Parameter] public string Title { get; set; }
+	[Parameter] public string Title { get; set; } = null!;
 	[Parameter] public MarkupString Text { get; set; }
 	[Parameter] public byte[]? Image { get; set; } = null!;
 

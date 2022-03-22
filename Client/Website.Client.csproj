@@ -7,7 +7,7 @@
 	  <AnalysisLevel>latest</AnalysisLevel>
 	  <AssemblyName>Website.Client</AssemblyName>
 	  <RootNamespace>CodeChops.Website.Client</RootNamespace>
-	  <Version>0.5.0</Version>
+	  <Version>0.5.1</Version>
 	  <LangVersion>10</LangVersion>
 	  <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
       <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
@@ -15,10 +15,6 @@
 	  <RunAOTCompilation>true</RunAOTCompilation>
 	  <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Pages\Projects\ProjectThumbnail.razor~RF1507d5b.TMP" />
-  </ItemGroup>
 
   <ItemGroup>
 	<None Include="wwwroot\css\app.css" />

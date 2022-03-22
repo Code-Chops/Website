@@ -89,7 +89,7 @@ namespace CodeChops.Website.Client.Pages.Projects.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A demo of a solution to&lt;br/&gt;
+        ///   Looks up a localized string similar to Demo of a solution to&lt;br/&gt;
         ///the vending machine change problem.
         /// </summary>
         internal static string VendingMachine_Text {
