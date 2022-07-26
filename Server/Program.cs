@@ -57,4 +57,4 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToPage("/_Host");
 
-app.Run();
+	app.Run();

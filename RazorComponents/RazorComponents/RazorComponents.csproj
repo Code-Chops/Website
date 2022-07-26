@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
 	<AnalysisLevel>latest</AnalysisLevel>
-	<AssemblyName>Website.RazorComponents</AssemblyName>
+	<AssemblyName>CodeChops.Website.RazorComponents</AssemblyName>
 	<RootNamespace>CodeChops.Website.RazorComponents</RootNamespace>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Version>0.4.0</Version>
@@ -21,10 +21,10 @@
 
   <ItemGroup>
     <PackageReference Include="ColorHelper" Version="1.6.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
     <!--<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.1" />-->
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" /> 
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.7" PrivateAssets="all" /> 
   </ItemGroup>
 
   <Target Name="AddNugetPackage" AfterTargets="Pack" Condition="'$(Configuration)' == 'Debug'">

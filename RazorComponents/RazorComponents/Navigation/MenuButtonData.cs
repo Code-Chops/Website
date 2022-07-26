@@ -2,7 +2,7 @@
 
 public record MenuButtonData
 {
-    public string FontAwesomeIcon { get; set; } = null!;
-    public string Text { get; set; } = null!;
-    public string HRef { get; set; }
+    public string? FontAwesomeIcon { get; set; }
+    public string Text { get; init; } = null!;
+    public string? HRef { get; set; }
 }
