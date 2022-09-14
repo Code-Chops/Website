@@ -1,41 +1,40 @@
-﻿@using static CodeChops.Website.Client.Layout.ColorMode
-<button class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
-	<MenuButton OnClick=@ChangeMode Data=MenuButtonData></MenuButton>
-</button>
+﻿<span class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
+	<MenuButton OnClick="@ChangeMode" Data="MenuButtonData"></MenuButton>
+</span>
 
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
-	internal static event Action ChangedEvent = null!;
+	internal static event Action? ChangedEvent;
 
-	internal static ColorMode ColorMode { get; set; } = null!;
+	internal static ColorMode ColorMode { get; private set; } = null!;
 	private MenuButtonData MenuButtonData { get; set; } = null!;
 
 	protected override void OnInitialized()
 	{
-		this.SetMenuButtonData();
+		SetMenuButtonData();
 	}
 
 	private void SetMenuButtonData()
 	{
-		this.MenuButtonData = new MenuButtonData()
+		MenuButtonData = new MenuButtonData()
 		{
-			FontAwesomeIcon = ColorMode == DarkMode ? "fa-moon" : "fa-sun"
+			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun"
 		};
 	}
 
 	private void ChangeMode(EventArgs? e)
 	{
-		if (e is KeyboardEventArgs keyEventArgs && keyEventArgs.Code is not "Enter" and not "NumpadEnter") return;
+		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
 
-		ColorMode mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
+		var mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
 		SetMode(mode);	
-		this.SetMenuButtonData();
+		SetMenuButtonData();
 
 		ChangedEvent?.Invoke();
 
-		if (this.JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode == ColorMode.DarkMode ? nameof(ColorMode.DarkMode) : nameof(ColorMode.LightMode));
+		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
+		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode.Name);
 	}
 
 	internal static void SetMode(ColorMode mode)

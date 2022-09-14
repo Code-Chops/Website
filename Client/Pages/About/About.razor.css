@@ -1,6 +1,11 @@
-﻿#author {
+﻿#chamber-of-commerce {
 	color: var(--textcolor);
 	opacity: .4;
 	font-size: small;
 	text-align: right;
+	font-variation-settings: 'wght' 300;
+}
+
+#contact span {
+	width: 30px;
 }

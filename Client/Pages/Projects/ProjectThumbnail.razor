@@ -7,7 +7,7 @@
 		<span class="small-screen-hide">@Text</span>
 	</div>	
 	<span class="image-container border">
-		<img class="image noSelect" src=@GetImageSource() />
+		<img class="image noSelect" src="@GetImageSource()" />
 	</span>
 </a>
 
@@ -16,10 +16,10 @@
 	[Parameter] public MarkupString Text { get; set; }
 	[Parameter] public byte[]? Image { get; set; } = null!;
 
-	public string? GetImageSource() => this.Image is null ? null : $"data:image/png;base64,{Convert.ToBase64String(this.Image)}";
+	public string? GetImageSource() => Image is null ? null : $"data:image/png;base64,{Convert.ToBase64String(Image)}";
 
 	protected override void OnInitialized()
     {
-        LanguageSelector.ChangedEvent += this.StateHasChanged;
+        LanguageSelector.ChangedEvent += StateHasChanged;
     }
 }

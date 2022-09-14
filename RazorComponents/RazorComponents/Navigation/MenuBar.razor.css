@@ -1,5 +1,4 @@
 ﻿.top-bar {
-    z-index: 1;
     color: var(--accentcolor);
     z-index: 100;
     width: 100%;
@@ -12,7 +11,7 @@
     position: absolute;
     background-color: var(--backgroundcolor);
     width: 100%;
-    transition: all .25s ease-in, color: unset;
+    transition: all .25s ease-in;
     opacity: 0;
 }
 
@@ -42,9 +41,9 @@
 .navbar-brand {
     color: var(--textcolor) !important;
     text-shadow: 0 0 .05rem var(--accentcolor);
-    font-weight: 100;
+    font-variation-settings: 'wght' 100;
     margin: unset;
-    font-size: clamp(0.5rem, 8vw, 2.5rem);
+    font-size: 40px;
     cursor: default;
     padding-top: 4px;
     padding-left: 5px;
@@ -52,44 +51,39 @@
 }
 
     .navbar-brand:hover {
-        text-shadow: 0 0 0.08rem var(--textcolor);
-        border-color: var(--accentcolor);
+        text-shadow: 0 0 0 var(--textcolor);
     }
 
 
+@media (max-width: 800px) {
+    .navbar-brand {
+        font-size: clamp(1.1rem, 5vw, 6.5vw) !important;
+    }
+}
+    
 .menu-bar {
     align-items: center;
     background-color: var(--backgroundcolor);
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
-    flex-wrap: nowrap;
 }
 
 .navbar-toggler {
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
     transition: box-shadow .15s ease-in-out;
-    outline: none !important;
-    border-color: var(--accentcolor);
-    border-bottom-style: outset;
-    border-right-style: outset;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-width: 1px;
-    border-radius: 0rem !important;
     color: var(--textcolor);
     align-self: center;
     min-height: 40px;
     margin-left: 10px;
+    margin-top: 5px;
+    border: none;
 }
 
     .navbar-toggler:hover {
-        background-color: rgba(255,255,255,0.2);
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
     .navbar-toggler:focus {
@@ -99,12 +93,14 @@
 .button-container {
     display: flex;
     align-items: baseline;
-    flex-direction: row;
+    flex-direction: row;min-height: 40px;
 }
 
 .navbar-buttons {
     display: flex;
     padding-top: 5px;
+    font-variation-settings: 'wght' 100;
+    text-shadow: 0 0 var(--branding-text-shadow) var(--textcolor);
 }
 
 .custom-toggler-icon {
@@ -152,7 +148,7 @@
     }
 
     to {
-        margin-left: 0px;
+        margin-left: 0;
         opacity: 1;
     }
 }

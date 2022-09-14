@@ -1,4 +1,4 @@
-﻿// Format and beautify code.
+﻿// Format and beautify code for display.
 window.highlightCode = () => {
     document.querySelectorAll("pre code").forEach((element) => {
         hljs.highlightElement(element);
@@ -22,7 +22,7 @@ window.removeSplash = () => {
 window.blazorCulture = {
     get: () => window.localStorage["BlazorCulture"]
         ? window.localStorage["BlazorCulture"]
-        : navigator.language || navigator.userLanguage || "en",
+        : navigator.language || "en",
     set: (value) => window.localStorage["BlazorCulture"] = value
 }
 
@@ -33,4 +33,4 @@ window.blazorColorMode = {
     set: (value) => window.localStorage["BlazorColorMode"] = value
 }
 
-document.documentElement.style.setProperty("--overlay-background-color", window.blazorColorMode.get() == "DarkMode" ? "#1e1e1e" : "white");
+document.documentElement.style.setProperty("--overlay-background-color", window.blazorColorMode.get() === "DarkMode" ? "#1e1e1e" : "white");

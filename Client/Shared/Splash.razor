@@ -10,11 +10,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.IsRenderedOnClient = RenderLocation is RenderedOnClient;
+        IsRenderedOnClient = RenderLocation is RenderedOnClient;
 
-        if (this.IsRenderedOnClient)
+        if (IsRenderedOnClient)
         {
-            await this.JsInterop.InvokeVoidAsync("removeSplash");
+            await JsInterop.InvokeVoidAsync("removeSplash");
         }
     }
 }

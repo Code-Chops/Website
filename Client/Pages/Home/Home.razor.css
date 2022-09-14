@@ -1,0 +1,7 @@
+﻿#author {
+    color: var(--textcolor);
+    opacity: .4;
+    font-size: small;
+    text-align: right;
+    font-variation-settings: 'wght' 300;
+}

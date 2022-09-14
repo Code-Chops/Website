@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Author" xml:space="preserve">
-    <value>Logo, design en website door CodeChops</value>
-  </data>
   <data name="Paragraph1" xml:space="preserve">
     <value>Ik ben Max Bergman, een full-stack senior software ontwikkelaar. 
 Op deze plek deel ik updates van mijn laatste projecten en plaats ik tips voor andere ontwikkelaars.
@@ -135,5 +132,8 @@ Dit wordt erg gewaardeerd!</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Over</value>
+  </data>
+  <data name="ChamberOfCommerce" xml:space="preserve">
+    <value>KvK-nummer: 86790390 - btw-nummer: NL004317143B09</value>
   </data>
 </root>

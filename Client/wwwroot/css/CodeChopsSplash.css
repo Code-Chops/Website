@@ -57,12 +57,13 @@
 
     .attachedLogo:hover {
         z-index: -1;
-        filter: opacity(0.8);
+        opacity: 0.9;
     }
 
 @keyframes attachLogoToCorner {
     from {
-        transform: rotate(0deg) scale(2, 2)
+        transform: rotate(0deg) scale(2, 2);
+        filter: drop-shadow(20px 20px 10px #4B4B4B);
     }
 
     to {
@@ -76,6 +77,7 @@
         height: 50px;
         transform: rotate(360deg) scale(.5, .5);
         padding-top: 8px;
+        filter: drop-shadow(0px 0px 0px #4B4B4B);
     }
 }
 
@@ -304,12 +306,6 @@
 
 html {
     background-color: var(--branding-color-background);
-}
-
-:root {
-    --branding-color-main: @Branding.Color.Main;
-    --branding-color-accent: @Branding.Color.Accent;
-    --branding-color-background: @Branding.Color.Background;
 }
 
 .splashLogo {

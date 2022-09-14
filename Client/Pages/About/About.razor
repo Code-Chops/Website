@@ -14,9 +14,48 @@
 		<p>
 			@AboutResource.Paragraph3
 		</p>
-
-		<div id="author">
-			@AboutResource.Author
+		
+		<p>
+			<div id="contact">
+				<div>
+					<a href="https://goo.gl/maps/RYXDfLQx4sBVmRTN6" target="_blank">
+						<span class="fa fa-map-marker"></span>
+						Oudenoord 330 Utrecht
+					</a>
+				</div>
+	
+				<div>
+					<a href="tel:+31-620937730">
+						<span class="fa fa-phone"></span>
+						+31 (0)6 2093 7730
+					</a>
+				</div>
+	
+				<div>
+					<a href="mailto: hello@codechops.nl">
+						<span class="fa fa-envelope"></span>
+						hello@codechops.nl
+					</a>
+				</div>
+	
+				<div>
+					<a href="https://github.com/Code-Chops" target="_blank">
+						<span class="fa fa-github" aria-hidden="true"></span>
+						GitHub
+					</a>
+				</div>
+	
+				<div>
+					<a href="#">
+						<span class="fa fa-linkedin" aria-hidden="true"></span>
+						LinkedIn
+					</a>
+				</div>
+			</div>
+		</p>
+		
+		<div id="chamber-of-commerce">
+			@AboutResource.ChamberOfCommerce
 		</div>
 	</Box>
 </Content>
@@ -24,6 +63,6 @@
 @code {
 	protected override void OnInitialized()
     {
-        Layout.LanguageSelector.ChangedEvent += this.StateHasChanged;
+        LanguageSelector.ChangedEvent += StateHasChanged;
     }
 }

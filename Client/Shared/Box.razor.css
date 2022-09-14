@@ -7,7 +7,6 @@
 
 .box-text {
 	color: var(--text-color);
-	text-shadow: 0 0 1px var(--textcolor);
 }
 
 .box-code {
@@ -15,5 +14,5 @@
 }
 
 .background {
-	background-color:rgb(var(--branding-color-background-rgb), 0.7) ;
+	background-color:rgb(var(--branding-color-background-rgb), 0.8) ;
 }

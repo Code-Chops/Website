@@ -1,23 +1,13 @@
-﻿@page "/"
+﻿@page "/blog"
 
 <Content>
 	<Box>
-		<Title Value="@HomeResource.Title" AlternativeHeader="@HomeResource.FullTitle" />
-		<p>
-			@HomeResource.Paragraph1
-		</p>
-		<p>
-			@((MarkupString)HomeResource.Paragraph2)
-		</p>
-		@*	<p>
+		<Title Value="@BlogResource.Title" AlternativeHeader="@BlogResource.FullTitle" />
+	@*	<p>
 			(websites, applications, games)
 			(<a href="projects/website">Website</a>, <a href="projects/game">single player browser games</a>) to back-end (<a href="projects/magicenum">MagicEnums</a>, <a href="projects/maths">Maths</a>)
 			back-end (<a href="projects/junctions">Junctions</a>)
 		</p>*@
-		
-		<div id="author">
-        	@HomeResource.Author
-        </div>
 	</Box>
 
 </Content>

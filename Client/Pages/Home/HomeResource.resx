@@ -131,4 +131,7 @@ CodeChops preferably delivers full-stack solutions in order to provide a seamles
   <data name="Title" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Logo, design and website by CodeChops</value>
+  </data>
 </root>

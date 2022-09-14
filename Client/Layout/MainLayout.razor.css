@@ -3,25 +3,23 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
 }
 
 .border {
-	border: 1px solid #dee2e6 !important;
+	border: 1px solid var(--branding-color-accent) !important;
 	width: 100%;
-	border-color: var(--branding-color-accent) !important;
 	margin-top: -1px;
 	opacity: .5;
 }
 
 main {
-	background-color: var(--branding-color-background);
 	overflow: auto;
 	display: flex;
 	height: 100%;
 	flex-direction: column;
 	justify-content: space-between;
-	background: repeating-linear-gradient( 45deg, var(--branding-color-background), var(--branding-color-background) 10px, rgba(var(--branding-color-accent-rgb), .20) 14px);
+	background: repeating-linear-gradient(45deg, var(--branding-color-background), var(--branding-color-background) 10px, rgba(var(--branding-color-accent-rgb), .20) 14px);
+	text-shadow: 0 0 var(--branding-text-shadow) var(--textcolor);
 }
 
 .sidebar {

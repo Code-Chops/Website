@@ -5,13 +5,16 @@ namespace CodeChops.Website.Client;
 
 public static class Branding
 {
-	public const string Name = "CodeChops";
-	public const string FontFamily = "Kaufmann";
+	public const string Name		= "CodeChops";
+	public const string FontFamily	= "Montserrat";
+	
+	public static int FontWeight => ColorModeSelector.ColorMode == ColorMode.DarkMode ? 100 : 150;
+	public static string TextShadow => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "-1px" : "1px";
 
 	public static class Colors
 	{
 		public static readonly Color Main		= new("#730030");
-		public static readonly Color Accent		= new("#8c3459");
+		public static readonly Color Accent		= new("#9f607a");
 		public static readonly Color DarkGray	= new("#1e1e1e");
 		public static Color Background => ColorModeSelector.ColorMode == ColorMode.DarkMode ? DarkGray : Color.White;
 	}

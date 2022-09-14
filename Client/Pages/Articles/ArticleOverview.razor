@@ -1,10 +1,8 @@
-﻿@using CodeChops.Website.Client.Pages.Articles
-
-@page "/Articles"
+﻿@page "/Articles"
 
 <Content>
 	<Box>
-		<Title Value=@ArticlesResource.Title />
+		<Title Value="@ArticlesResource.Title" />
 		<Box>
 			<Article_ImplicitUsings/>
 		</Box>
@@ -17,6 +15,6 @@
 @code {
 	protected override void OnInitialized()
     {
-        LanguageSelector.ChangedEvent += this.StateHasChanged;
+        LanguageSelector.ChangedEvent += StateHasChanged;
     }
 }

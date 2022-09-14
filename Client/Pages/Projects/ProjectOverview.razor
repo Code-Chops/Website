@@ -1,22 +1,21 @@
-﻿@using CodeChops.Website.Client.Pages.Projects
-@using CodeChops.Website.Client.Pages.Projects.Resources
+﻿@using CodeChops.Website.Client.Pages.Projects.Resources
 @using Image = Projects.Resources.ProjectImages
 
 @page "/Projects"
 
 	<Content>
 		<span class="title text-center">
-			<Title Value=@ProjectsResource.Title />
+			<Title Value="@ProjectsResource.Title" />
 		</span>
 		<div class="grid">
-			<ProjectThumbnail Image=Image.VendingMachine	Title=@ProjectsResource.VendingMachine_Title	Text=new(ProjectsResource.VendingMachine_Text) />
-			<ProjectThumbnail Image=Image.MagicEnums		Title=@ProjectsResource.MagicEnums_Title		Text=new(ProjectsResource.MagicEnums_Text) />
+			<ProjectThumbnail Image="Image.VendingMachine"	Title="@ProjectsResource.VendingMachine_Title"	Text="new(ProjectsResource.VendingMachine_Text)" />
+			<ProjectThumbnail Image="Image.MagicEnums"		Title="@ProjectsResource.MagicEnums_Title"		Text="new(ProjectsResource.MagicEnums_Text)" />
 		</div>
 	</Content>
 
 @code {
 	protected override void OnInitialized()
     {
-        LanguageSelector.ChangedEvent += this.StateHasChanged;
+        LanguageSelector.ChangedEvent += StateHasChanged;
     }
 }

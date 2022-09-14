@@ -5,11 +5,10 @@
 }
 
     .nav-item a {
-        height: 40px;
-        display: flex;
         align-items: center;
         line-height: 3rem;
         color: var(--textcolor) !important;
+        display: ruby;
     }
 
         .nav-item a:hover {
@@ -31,7 +30,7 @@
         border-style: double;
         margin: -1px -1px -1px -1px;
     }
-
+    
     .nav-link.active {
         color: var(--textcolor) !important;
         background-color: rgba(255,255,255,0.10);

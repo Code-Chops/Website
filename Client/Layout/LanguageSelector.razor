@@ -1,54 +1,49 @@
 ﻿@using System.Globalization
-@using System.Resources
-@using Microsoft.Extensions.Localization;
 @using System.Collections.Immutable;
 
 @if (FlagsByLanguageCode.Any())
 {
-	<button class="menu-setting small-screen-hide" @onkeydown="@ChangeLanguage">
+	<span class="menu-setting small-screen-hide" @onkeydown="@ChangeLanguage">
 		<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
-	</button>
+	</span>
 }
 
 @code {
 	[Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 	[Inject] private NavigationManager UriHelper { get; set; } = null!;
 
-	internal static event Action ChangedEvent = null!;
+	internal static event Action? ChangedEvent = null;
 
 	/// <summary>
 	/// The first culture is the default culture.
 	/// </summary>
-	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) 
+	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) 
 	{ 
 		["en"] = "🇬🇧", ["nl"] = "🇳🇱"
 	};
-	public static ImmutableList<CultureInfo> SupportedCultures { get; set; } = FlagsByLanguageCode.Keys.Select(language => new CultureInfo(language)).ToImmutableList();
+	public static ImmutableList<CultureInfo> SupportedCultures { get; } = FlagsByLanguageCode.Keys.Select(language => new CultureInfo(language)).ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
 
 	protected override void OnInitialized()
 	{
-		this.SetCurrentLanguageFlag();
+		SetCurrentLanguageFlag();
 	}
 
 	private void ChangeLanguage(EventArgs? e)
 	{
-		if (e is KeyboardEventArgs keyEventArgs && keyEventArgs.Code is not "Enter" and not "NumpadEnter") return;
+		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
 
 		var index = SupportedCultures.IndexOf(CultureInfo.CurrentCulture);
 		var newIndex = (index + 1) % SupportedCultures.Count;
 		var newCulture = SupportedCultures[newIndex];
 
 		SetNewCulture(newCulture);
-		this.SetCurrentLanguageFlag();
+		SetCurrentLanguageFlag();
 
 		ChangedEvent?.Invoke();
 
-		if (this.JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
+		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
 		inProcessRuntime.InvokeVoid("blazorCulture.set", newCulture.TwoLetterISOLanguageName);
-		
-		// TODO temporary workaround
-		this.UriHelper.NavigateTo("/", forceLoad: true);
 	}
 
 	public static void SetNewCulture(CultureInfo culture)
@@ -66,7 +61,7 @@
 
 		if (!FlagsByLanguageCode.TryGetValue(languageCode, out var flag)) return;
 
-		this.CurrentLanguageFlag = flag;
-		this.StateHasChanged();
+		CurrentLanguageFlag = flag;
+		StateHasChanged();
 	}
 }

@@ -1,20 +1,19 @@
-﻿@using System.Globalization
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Services
 @inherits LayoutComponentBase
-@using static CodeChops.Website.RazorComponents.Navigation.MenuButton
 
 <div class="page">
-    <MenuBar @ref=MenuBar
-            BackgroundColor=@(IsDarkMode ? new(ColorName.Black) : Color.White)
-            AccentColor=@Branding.Colors.Accent
-            TextColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -60)
-            HRefColor=@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : -40)
-            FontFamily=@Branding.FontFamily 
+    <MenuBar @ref="MenuBar"
+            BackgroundColor="@(IsDarkMode ? new(ColorName.Black) : Color.White)"
+            AccentColor="@Branding.Colors.Accent"
+            TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -40)"
+            HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : 0)"
+            FontFamily="@Branding.FontFamily" 
             LogoPath="/favicon.ico" 
-            Title=@Branding.Name 
-            ShowTitle=ShowTitle
+            Title="@Branding.Name" 
+            ShowTitle="ShowTitle"
             Height="80" 
             ShowLogo="false"
-            Buttons=Buttons>
+            Buttons="Buttons">
         
             <ColorModeSelector />
             <LanguageSelector />
@@ -25,13 +24,16 @@
     <main>
         @Body    
         
-        <Footer/>
+        <Footer></Footer>
     </main>
 
 </div>
 
 <style>
     :root {
+        --branding-text-weight:             @Branding.FontWeight;
+        --branding-text-shadow:             @Branding.TextShadow;
+        
         --branding-color-main:              @Branding.Colors.Main;
         --branding-color-accent:            @Branding.Colors.Accent;
         --branding-color-background:        @Branding.Colors.Background;
@@ -49,26 +51,30 @@
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
-    internal static ColorMode ColorMode { get; set; } = null!;
+    [Inject] LazyAssemblyLoader AssemblyLoader { get; set; } = null!;
+    [Inject] RenderLocation RenderLocation { get; set; } = null!;
+    
     private MenuBar MenuBar { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
-    private bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
-
-    protected override void OnInitialized()
+    private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
+    
+    protected override async Task OnInitializedAsync()
     {
         OnLanguageChanged();
-        LanguageSelector.ChangedEvent += this.OnLanguageChanged;
-        ColorModeSelector.ChangedEvent += this.StateHasChanged;
+        
+        LanguageSelector.ChangedEvent += OnLanguageChanged;
+        ColorModeSelector.ChangedEvent += StateHasChanged;
     }
 
     private void OnLanguageChanged()
     {
-        this.Buttons = new MenuButtonData[]
+        Buttons = new MenuButtonData[]
             {
                 new() { HRef="/",           Text=Pages.Home.HomeResource.Title },
+                // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
                 new() { HRef="/projects",   Text=Pages.Projects.Resources.ProjectsResource.Title },
                 new() { HRef="/about",      Text=Pages.About.AboutResource.Title },
             };
-        this.StateHasChanged();
+        StateHasChanged();
     }
 }

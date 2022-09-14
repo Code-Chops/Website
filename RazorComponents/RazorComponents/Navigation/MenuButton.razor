@@ -1,5 +1,5 @@
 ﻿<div class="nav-item">
-    <a class="nav-link pointerCursor noSelect" href=@Data?.HRef @onclick=@OnClick>
+    <a class="nav-link pointerCursor noSelect" href="@(Data?.HRef ?? NavigationManager.Uri)" @onclick="@OnClick">
         <span class="@If(Data?.FontAwesomeIcon is not null, $"fa {Data?.FontAwesomeIcon}")"></span> @Data?.Text @ChildContent
     </a>
 </div>
@@ -8,4 +8,5 @@
     [Parameter] public MenuButtonData? Data { get; set; }
 	[Parameter] public Action<EventArgs> OnClick { get; set; } = null!;
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
 }

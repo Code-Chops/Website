@@ -1,6 +1,4 @@
-﻿@using static CodeChops.Website.RazorComponents.Navigation.MenuButton
-
-<div class="top-bar">
+﻿<div class="top-bar">
     <div class="menu-bar navbar navbar-dark">
         <div class="brand noSelect">
             @if (LogoPath is not null)
@@ -21,6 +19,7 @@
                     <MenuButton Data=button OnClick=@OnClickButton></MenuButton>
                 }
             </div>
+            
             @ChildContent
 
             <button class="navbar-toggler" @onclick="Toggle">
@@ -46,37 +45,37 @@
     [Parameter] public Color AccentColor { get; set; }
     [Parameter] public Color TextColor { get; set; }
     [Parameter] public Color HRefColor { get; set; }
-    [Parameter] public string FontFamily { get; set; } = null!;
-    [Parameter] public string CustomToggleImage { get; set; } = null!;
-    [Parameter] public string LogoPath { get; set; } = null!;
+    [Parameter] public string? FontFamily { get; set; }
+    [Parameter] public string? CustomToggleImage { get; set; }
+    [Parameter] public string? LogoPath { get; set; }
     [Parameter] public int Height { get; set; } = 80;
     [Parameter] public bool ShowLogo { get; set; } = true;
     [Parameter] public bool ShowTitle { get; set; } = true;
     [Parameter] public ICollection<MenuButtonData> Buttons { get; set; } = new List<MenuButtonData>();
-    [Parameter] public int CollapseWidth { get; set; } = 600;
+    [Parameter] public int CollapseWidth { get; set; } = 720;
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     private bool IsCollapsed { get; set; } = true;
 
     private void Toggle()
     {
-        this.IsCollapsed = !this.IsCollapsed;
-        this.StateHasChanged();
+        IsCollapsed = !IsCollapsed;
+        StateHasChanged();
     }
 
     public void Collapse()
     {
-        if (!this.IsCollapsed) this.Toggle();
+        if (!IsCollapsed) Toggle();
     }
 
     public void OnClickButton(EventArgs e)
     {
-        this.Collapse();
+        Collapse();
     }
 
     public void Refresh()
     {
-        this.StateHasChanged();
+        StateHasChanged();
     }
 }
 
@@ -94,15 +93,15 @@
     }
 
     .navbar-brand {
-        @(this.FontFamily != null ? $"font-family: {this.FontFamily};" : null)
+        @(FontFamily is not null ? $"font-family: {FontFamily};" : null)
     }
 
     .custom-toggler-icon {
-        @(this.CustomToggleImage != null ? $"background-image: url({this.CustomToggleImage});" : null)
+        @(CustomToggleImage != null ? $"background-image: url({CustomToggleImage});" : null)
     }
 
     .menu-bar {
-        height: @(this.Height)px;
+        height: @(Height)px;
     }
 
     @@media (min-width: @(CollapseWidth)px) {
@@ -118,6 +117,12 @@
     @@media (max-width: @(CollapseWidth-1)px) {
         .navbar-buttons {
             display: none !important;
+        }
+        
+        .menu-setting {
+            padding-top: 3px;
+            max-width: 20px;
+            padding-right: 40px;
         }
     }
 </style>

@@ -1,4 +1,5 @@
 using CodeChops.Website.Client;
+using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddScoped<SignOutSessionStateManager>();
 builder.Services.AddSingleton<RenderLocation, RenderedOnServer>();
 builder.Services.AddLocalization();
-
+builder.Services.AddScoped<LazyAssemblyLoader>();
 CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
 
 var app = builder.Build();

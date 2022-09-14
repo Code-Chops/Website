@@ -3,26 +3,32 @@
 **********************************/
 
 @font-face {
-    font-family: NeutraText;
-    src: url('../fonts/NeutraText/NeutraText-Light.woff2') format('woff2'), url('../fonts/NeutraText/NeutraText-Light.woff') format('woff'), url('../fonts/NeutraText/NeutraText-Light.ttf') format('ttf');
-    font-display: block;
-}
-
-@font-face {
     font-family: Kaufmann;
     src: url('../fonts/Kaufmann/Kaufmann W01 Regular.woff2') format('woff2'), url('../fonts/Kaufmann/Kaufmann W01 Regular.woff') format('woff'), url('../fonts/Kaufmann/Kaufmann W01 Regular.ttf') format('ttf');
     font-display: block;
 }
 
+@font-face {
+    font-family: TriakisFont;
+    src: url('../fonts/TriakisFont-Regular.otf') format('otf');
+    font-display: block;
+}
+
+@font-face {
+    font-family: Avenue;
+    src: url('../fonts/Avenue Mono.ttf') format('ttf');
+    font-display: block;
+}
+
 html {
-    font-family: 'NeutraText', Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
     line-height: 1.5;
     color: var(--textcolor);
     background-color: var(--branding-color-background);
-    text-shadow: 0 0 black; /* In order to make dark text on a white background clearer */
     transition: all .25s ease-in;
     tab-size: 4;
+    font-variation-settings: 'wght' var(--branding-text-weight);
 }
 
 html, body {
@@ -55,9 +61,10 @@ button, input, optgroup, select, textarea {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
+    margin-top: 0.4rem;
     margin-bottom: 0.5rem;
     line-height: 1.2;
+    font-weight: 100;
 }
 
 .h2, h2 {
@@ -82,13 +89,13 @@ h1:focus {
 }
 
 a, .btn-link {
-    font-weight: bolder;
-    color: var(--hrefcolor);
+    font-variation-settings: 'wght' 300;
+    color: var(--hrefcolor) !important;
     text-decoration: unset;
 }
 
     a:hover {
-        color: var(--branding-color-text);
+        color: var(--branding-color-text) !important;
         text-decoration: none;
         text-shadow: 0px 0px 4px var(--branding-color-text);
     }

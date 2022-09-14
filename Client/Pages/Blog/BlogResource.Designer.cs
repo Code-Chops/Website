@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.Website.Client.Pages.About {
+namespace CodeChops.Website.Client.Pages.Blog {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CodeChops.Website.Client.Pages.About {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AboutResource {
+    internal class BlogResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AboutResource() {
+        internal BlogResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeChops.Website.Client.Pages.About {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.About.AboutResource", typeof(AboutResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.Website.Client.Pages.Blog.BlogResource", typeof(BlogResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,46 +61,16 @@ namespace CodeChops.Website.Client.Pages.About {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to COC number: 86790390 - VAT number: NL004317143B09.
+        ///   Looks up a localized string similar to Blog.
         /// </summary>
-        internal static string ChamberOfCommerce {
+        internal static string FullTitle {
             get {
-                return ResourceManager.GetString("ChamberOfCommerce", resourceCulture);
+                return ResourceManager.GetString("FullTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I am Max Bergman, a full-stack senior software engineer.
-        ///This is a place where I share updates of my latest projects and post tips for other developers. 
-        ///I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending.
-        /// </summary>
-        internal static string Paragraph1 {
-            get {
-                return ResourceManager.GetString("Paragraph1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to My development career focuses mainly on the .NET ecosystem.
-        ///Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL..
-        /// </summary>
-        internal static string Paragraph2 {
-            get {
-                return ResourceManager.GetString("Paragraph2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Feel free to contact me if you have any questions, remarks or comments. It&apos;ll be greatly appreciated!.
-        /// </summary>
-        internal static string Paragraph3 {
-            get {
-                return ResourceManager.GetString("Paragraph3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to About.
+        ///   Looks up a localized string similar to Blog.
         /// </summary>
         internal static string Title {
             get {

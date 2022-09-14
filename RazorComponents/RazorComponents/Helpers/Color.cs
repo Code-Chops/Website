@@ -2,7 +2,7 @@
 
 namespace CodeChops.Website.RazorComponents.Helpers;
 
-public record struct Color
+public readonly record struct Color
 {
 	/// <summary>
 	/// HEX representation.
@@ -52,7 +52,7 @@ public record struct Color
 		this.Value = rgbColor;
 	}
 
-	public Color ChangeBrightness(int delta = 40)
+	public readonly Color ChangeBrightness(int delta = 40)
 	{
 		var r = ChangeBrightnessOfPrimaryColor(this.Value.R);
 		var g = ChangeBrightnessOfPrimaryColor(this.Value.G);
