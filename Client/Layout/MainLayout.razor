@@ -3,7 +3,7 @@
 
 <div class="page">
     <MenuBar @ref="MenuBar"
-            BackgroundColor="@(IsDarkMode ? new(ColorName.Black) : Color.White)"
+            BackgroundColor="@(IsDarkMode ? new(hexColor: "#141313") : new(hexColor: "#f9f4f6"))"
             AccentColor="@Branding.Colors.Accent"
             TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -40)"
             HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : 0)"
@@ -15,8 +15,8 @@
             ShowLogo="false"
             Buttons="Buttons">
         
-            <ColorModeSelector />
-            <LanguageSelector />
+        <ColorModeSelector />
+        <LanguageSelector />
     </MenuBar>
 
     <div class="border"></div>

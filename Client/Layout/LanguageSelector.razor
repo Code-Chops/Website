@@ -44,6 +44,9 @@
 
 		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
 		inProcessRuntime.InvokeVoid("blazorCulture.set", newCulture.TwoLetterISOLanguageName);
+				
+		// TODO temporary workaround
+		this.UriHelper.NavigateTo("/", forceLoad: true);
 	}
 
 	public static void SetNewCulture(CultureInfo culture)
