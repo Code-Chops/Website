@@ -1,18 +1,19 @@
-﻿@page "/about"
+﻿@implements IDisposable
+@page "/about"
 
 <Content>
 	<Box>
-		<Title Value="@AboutResource.Title" />
+		<Title Value="@Resource.Title" />
 		<p>
-			@AboutResource.Paragraph1	
+			@Resource.Paragraph1	
 		</p>
 
 		<p>
-			@AboutResource.Paragraph2
+			@Resource.Paragraph2
 		</p>
 
 		<p>
-			@AboutResource.Paragraph3
+			@Resource.Paragraph3
 		</p>
 		
 		<p>
@@ -55,14 +56,27 @@
 		</p>
 		
 		<div id="chamber-of-commerce">
-			@AboutResource.ChamberOfCommerce
+			@Resource.ChamberOfCommerce
 		</div>
 	</Box>
 </Content>
 
 @code {
+	public static IAboutResource Resource { get; set; } = IAboutResource.Get();
+	
 	protected override void OnInitialized()
-    {
-        LanguageSelector.ChangedEvent += StateHasChanged;
-    }
+	{
+		LanguageSelector.ChangedEvent += OnLanguageChanged;
+	}
+
+	private void OnLanguageChanged()
+	{
+		Resource = IAboutResource.Get();
+		StateHasChanged();
+	}
+	
+	public void Dispose()
+	{
+		LanguageSelector.ChangedEvent -= OnLanguageChanged;
+	}
 }

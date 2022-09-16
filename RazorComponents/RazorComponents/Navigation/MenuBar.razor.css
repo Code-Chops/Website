@@ -11,13 +11,12 @@
     position: absolute;
     background-color: var(--backgroundcolor);
     width: 100%;
-    transition: all .25s ease-in;
     opacity: 0;
 }
 
     .top-bar-shadow.show {
         opacity: 1;
-        transition: all .25s ease-in;
+        transition: all .25s ease-in;*/
         padding-left: 12px;
         padding-right: 12px;
     }

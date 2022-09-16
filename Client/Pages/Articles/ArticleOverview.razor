@@ -1,8 +1,9 @@
-﻿@page "/Articles"
+﻿@implements IDisposable
+@page "/Articles"
 
 <Content>
 	<Box>
-		<Title Value="@ArticlesResource.Title" />
+		<Title Value="@Resource.Title" />
 		<Box>
 			<Article_ImplicitUsings/>
 		</Box>
@@ -13,8 +14,21 @@
 </Content>
 
 @code {
+	public static IArticlesResource Resource { get; set; } = IArticlesResource.Get();
+	
 	protected override void OnInitialized()
-    {
-        LanguageSelector.ChangedEvent += StateHasChanged;
-    }
+	{
+		LanguageSelector.ChangedEvent += OnLanguageChanged;
+	}
+
+	private void OnLanguageChanged()
+	{
+		Resource = IArticlesResource.Get();
+		StateHasChanged();
+	}
+	
+	public void Dispose()
+	{
+		LanguageSelector.ChangedEvent -= OnLanguageChanged;
+	}
 }

@@ -1,21 +1,34 @@
-﻿@using CodeChops.Website.Client.Pages.Projects.Resources
+﻿@implements IDisposable
+@page "/Projects"
+@using CodeChops.Website.Client.Pages.Projects.Resources
 @using Image = Projects.Resources.ProjectImages
 
-@page "/Projects"
-
-	<Content>
-		<span class="title text-center">
-			<Title Value="@ProjectsResource.Title" />
-		</span>
-		<div class="grid">
-			<ProjectThumbnail Image="Image.VendingMachine"	Title="@ProjectsResource.VendingMachine_Title"	Text="new(ProjectsResource.VendingMachine_Text)" />
-			<ProjectThumbnail Image="Image.MagicEnums"		Title="@ProjectsResource.MagicEnums_Title"		Text="new(ProjectsResource.MagicEnums_Text)" />
-		</div>
-	</Content>
+<Content>
+	<span class="title text-center">
+		<Title Value="@Resource.Title" />
+	</span>
+	<div class="grid">
+		<ProjectThumbnail Image="Image.VendingMachine"	Title="@Resource.VendingMachine_Title"	Text="new(Resource.VendingMachine_Text)" />
+		<ProjectThumbnail Image="Image.MagicEnums"		Title="@Resource.MagicEnums_Title"		Text="new(Resource.MagicEnums_Text)" />
+	</div>
+</Content>
 
 @code {
+	public static IProjectsResource Resource { get; set; } = IProjectsResource.Get();
+	
 	protected override void OnInitialized()
-    {
-        LanguageSelector.ChangedEvent += StateHasChanged;
-    }
+	{
+		LanguageSelector.ChangedEvent += OnLanguageChanged;
+	}
+
+	private void OnLanguageChanged()
+	{
+		Resource = IProjectsResource.Get();
+		StateHasChanged();
+	}
+	
+	public void Dispose()
+	{
+		LanguageSelector.ChangedEvent -= OnLanguageChanged;
+	}
 }

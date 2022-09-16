@@ -1,8 +1,9 @@
-﻿@page "/blog"
+﻿@implements IDisposable
+@page "/blog"
 
 <Content>
 	<Box>
-		<Title Value="@BlogResource.Title" AlternativeHeader="@BlogResource.FullTitle" />
+		<Title Value="@Resource.Title" AlternativeHeader="@Resource.Title" />
 	@*	<p>
 			(websites, applications, games)
 			(<a href="projects/website">Website</a>, <a href="projects/game">single player browser games</a>) to back-end (<a href="projects/magicenum">MagicEnums</a>, <a href="projects/maths">Maths</a>)
@@ -13,8 +14,21 @@
 </Content>
 
 @code {
+	public static IBlogResource Resource { get; set; } = IBlogResource.Get();
+	
 	protected override void OnInitialized()
-    {
-        LanguageSelector.ChangedEvent += StateHasChanged;
-    }
+	{
+		LanguageSelector.ChangedEvent += OnLanguageChanged;
+	}
+
+	private void OnLanguageChanged()
+	{
+		Resource = IBlogResource.Get();
+		StateHasChanged();
+	}
+	
+	public void Dispose()
+	{
+		LanguageSelector.ChangedEvent -= OnLanguageChanged;
+	}
 }

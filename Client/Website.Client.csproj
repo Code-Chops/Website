@@ -1,90 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
-    <PropertyGroup>
+    
+    <PropertyGroup Label="Main">
+        <AssemblyName>CodeChops.Website.Client</AssemblyName>
+        <RootNamespace>CodeChops.Website.Client</RootNamespace>
+        <Version>0.7.0</Version>
         <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AnalysisLevel>latest</AnalysisLevel>
-        <AssemblyName>Website.Client</AssemblyName>
-        <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.6.2</Version>
-        <LangVersion>10</LangVersion>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <BlazorWebAssemblyLoadAllGlobalizationData>false</BlazorWebAssemblyLoadAllGlobalizationData>
         <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+		<BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
         <PublishTrimmed>true</PublishTrimmed>
         <EnablePreviewFeatures>true</EnablePreviewFeatures>
+	    <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
     </PropertyGroup>
-
+    
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <None Include="wwwroot\css\app.css" />
-        <None Include="wwwroot\css\CodeChopsSplash.css" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="CodeChops.MagicEnums" Version="2.9.3" />
+        <PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.20.7" />
+        <PackageReference Include="CodeChops.MagicEnums" Version="2.9.7" />
         <PackageReference Include="ColorHelper" Version="1.8.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <Compile Update="Pages\About\AboutResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>AboutResource.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Articles\ArticlesResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ArticlesResource.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Home\HomeResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>HomeResource.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Projects\ProjectsResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ProjectsResource.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Projects\Resources\ProjectImages.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ProjectImages.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Projects\Resources\ProjectsResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ProjectsResource.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Properties\Resources.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Pages\Blog\BlogResource.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>HomeResource.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Update="**/Resources/*.resx" />
-        <EmbeddedResource Update="Pages\Blog\BlogResource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>BlogResource.Designer.cs</LastGenOutput>
-            <SubType>Designer</SubType>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Blog\BlogResource.nl.resx">
-            <SubType>Designer</SubType>
-        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -95,64 +41,17 @@
         <ServiceWorker Include="wwwroot\scripts\service-worker.js" PublishedContent="wwwroot\scripts\service-worker.published.js" />
     </ItemGroup>
 
-<!--    <ItemGroup>-->
-<!--        <BlazorWebAssemblyLazyLoad Include="Website.Client.resources.dll" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--        <Content Include="$(OutputPath)\nl\$(AssemblyName).resources.dll">-->
-<!--            <CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
-<!--        </Content>-->
-<!--    </ItemGroup>-->
-    
     <ItemGroup>
         <Content Update="wwwroot\scripts\CodeChops.js">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="Properties\icon.png" />
     </ItemGroup>
-    
-    <ItemGroup>
-        <EmbeddedResource Update="Pages\About\AboutResource.nl.resx">
-            <SubType>Designer</SubType>
-            <Generator></Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\About\AboutResource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>AboutResource.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Articles\ArticlesResource.nl.resx">
-            <SubType>Designer</SubType>
-            <Generator></Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Articles\ArticlesResource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>ArticlesResource.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Home\HomeResource.nl.resx">
-            <SubType>Designer</SubType>
-            <Generator></Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Home\HomeResource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>HomeResource.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Projects\Resources\ProjectImages.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>ProjectImages.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Projects\Resources\ProjectsResource.nl.resx">
-            <SubType>Designer</SubType>
-            <Generator></Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Pages\Projects\Resources\ProjectsResource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>ProjectsResource.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Properties\Resources.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
+
+    <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <TypeScriptSourceMap>False</TypeScriptSourceMap>
+      <DebugType>none</DebugType>
+    </PropertyGroup>
 
     <PropertyGroup>
         <!-- CA1822: Instance member does not access instance data and can be marked as static -->

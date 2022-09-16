@@ -1,4 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Components.WebAssembly.Services
+@using CodeChops.Website.Client.Pages.About
+@using CodeChops.Website.Client.Pages.Blog
+@using CodeChops.Website.Client.Pages.Home
+@using CodeChops.Website.Client.Pages.Projects.Resources
 @inherits LayoutComponentBase
 
 <div class="page">
@@ -22,11 +26,10 @@
     <div class="border"></div>
 
     <main>
-        @Body    
-        
+        @Body
+
         <Footer></Footer>
     </main>
-
 </div>
 
 <style>
@@ -57,8 +60,12 @@
     private MenuBar MenuBar { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
+    public static IHomeResource HomeResource { get; set; } = null!;
+    public static IBlogResource BlogResource { get; set;} = null!;
+    public static IProjectsResource ProjectsResource { get; set;} = null!;
+    public static IAboutResource AboutResource { get; set;} = null!;
     
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         OnLanguageChanged();
         
@@ -68,13 +75,19 @@
 
     private void OnLanguageChanged()
     {
+        HomeResource = IHomeResource.Get();
+        BlogResource = IBlogResource.Get();
+        ProjectsResource = IProjectsResource.Get();
+        AboutResource = IAboutResource.Get();
+        
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text=Pages.Home.HomeResource.Title },
+                new() { HRef="/",           Text = HomeResource.Title },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
-                new() { HRef="/projects",   Text=Pages.Projects.Resources.ProjectsResource.Title },
-                new() { HRef="/about",      Text=Pages.About.AboutResource.Title },
+                new() { HRef="/projects",   Text = ProjectsResource.Title },
+                new() { HRef="/about",      Text = AboutResource.Title },
             };
+        
         StateHasChanged();
     }
 }
