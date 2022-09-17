@@ -26,14 +26,11 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;475&display=swap" rel="stylesheet">
-        @*
-        <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
-        *@      
         <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
         <script src="highlight/highlight.js"></script>
         <script src="highlight/csharp.min.js"></script>
         <script src="scripts/CodeChops.js"></script>
-        <script>console.log("@Html.Raw(Branding.BannerText.Replace("\\", "\\\\").Replace(Environment.NewLine, " \\n"))");</script>
+        <script>console.log("@Html.Raw(Branding.BannerText.Replace("\\", "\\\\").Replace("\r\n", "\\n"))");</script>
     </head>
 
     <body>
