@@ -11,7 +11,8 @@
     justify-content: center;
     padding: 10px 10px 10px 10px;
     position: relative;
-
+    aspect-ratio: 1 / 1;
+    
     transition: 0.5s linear;            /* vendorless fallback */
     -o-transition: 0.5s linear;         /* opera */
     -ms-transition: 0.5s linear;        /* IE 10 */

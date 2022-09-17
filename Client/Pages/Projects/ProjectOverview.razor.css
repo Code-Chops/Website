@@ -1,7 +1,6 @@
 ﻿.grid {
 	display: grid;
 	justify-content: space-between;
-	grid-template-columns: minmax(50%, 500px) minmax(50%, 500px);
-	padding-bottom: 20px;
-	margin: -10px -10px -10px -10px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+	grid-gap: 10px;
 }

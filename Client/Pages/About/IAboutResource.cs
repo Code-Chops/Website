@@ -20,7 +20,7 @@ public record AboutResourceEN : MagicStringEnum<AboutResourceEN>, IAboutResource
 	public string Paragraph1 { get; } = CreateMember(@"
 I am Max Bergman, a full-stack senior software engineer.
 This is a place where I share updates of my latest projects and post tips for other developers. 
-I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending
+I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending.
 ").Value;
 
 	public string Paragraph2 { get; } = CreateMember(@"

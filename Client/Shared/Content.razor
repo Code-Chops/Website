@@ -5,19 +5,19 @@
 </div>
 
 <style>
-	@@media (min-width: @(Width)px) {
+	@@media (min-width: @(MaxWidth ?? "0"))  {
 		.content {
 			justify-content: center;
 		}
 	}
 	article {
-		max-width: @(Width)px;
+		max-width: @(MaxWidth ?? "none");
 	}
 </style>
 
 @code {
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
-	[Parameter] public int Width { get; set; } = 900;
+	[Parameter] public string? MaxWidth { get; set; } = "900px";
 
 	protected override void OnInitialized()
     {
