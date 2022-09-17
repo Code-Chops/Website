@@ -22,7 +22,7 @@ window.removeSplash = () => {
 window.blazorCulture = {
     get: () => window.localStorage["BlazorCulture"]
         ? window.localStorage["BlazorCulture"]
-        : navigator.language || "en",
+        : navigator.language.substring(0, 2) || "en",
     set: (value) => window.localStorage["BlazorCulture"] = value
 }
 
