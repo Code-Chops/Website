@@ -14,7 +14,7 @@
 </Content>
 
 @code {
-	public static IArticlesResource Resource { get; set; } = IArticlesResource.Get();
+	public IArticlesResource Resource { get; set; } = IArticlesResource.Get();
 	
 	protected override void OnInitialized()
 	{

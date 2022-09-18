@@ -24,7 +24,7 @@
 </Content>
 
 @code {
-	public static IHomeResource Resource { get; set; } = IHomeResource.Get();
+	public IHomeResource Resource { get; set; } = IHomeResource.Get();
 	
 	protected override void OnInitialized()
 	{

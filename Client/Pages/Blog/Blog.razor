@@ -14,7 +14,7 @@
 </Content>
 
 @code {
-	public static IBlogResource Resource { get; set; } = IBlogResource.Get();
+	public IBlogResource Resource { get; set; } = IBlogResource.Get();
 	
 	protected override void OnInitialized()
 	{

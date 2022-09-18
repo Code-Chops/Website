@@ -16,7 +16,6 @@
 			@Resource.Paragraph3
 		</p>
 		
-		<p>
 			<div id="contact">
 				<div>
 					<a href="https://goo.gl/maps/RYXDfLQx4sBVmRTN6" target="_blank">
@@ -53,8 +52,7 @@
 					</a>
 				</div>
 			</div>
-		</p>
-		
+
 		<div id="chamber-of-commerce">
 			@Resource.ChamberOfCommerce
 		</div>
@@ -62,7 +60,7 @@
 </Content>
 
 @code {
-	public static IAboutResource Resource { get; set; } = IAboutResource.Get();
+	public IAboutResource Resource { get; set; } = IAboutResource.Get();
 	
 	protected override void OnInitialized()
 	{
@@ -72,7 +70,7 @@
 	private void OnLanguageChanged()
 	{
 		Resource = IAboutResource.Get();
-		StateHasChanged();
+		this.StateHasChanged();
 	}
 	
 	public void Dispose()
