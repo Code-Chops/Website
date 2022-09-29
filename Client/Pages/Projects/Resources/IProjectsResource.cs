@@ -1,9 +1,10 @@
 ﻿using CodeChops.ImplementationDiscovery.Attributes;
 using CodeChops.MagicEnums;
+using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Projects.Resources;
 
-[DiscoverImplementations(hasNewableImplementations: true)]
+[DiscoverImplementations]
 public partial interface IProjectsResource : IResource<IProjectsResource, IProjectsResourceEnum>
 {
 	string MagicEnums_Text { get; }

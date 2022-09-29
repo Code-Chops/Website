@@ -1,9 +1,10 @@
 ﻿using CodeChops.ImplementationDiscovery.Attributes;
 using CodeChops.MagicEnums;
+using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.About;
 
-[DiscoverImplementations(hasNewableImplementations: true)]
+[DiscoverImplementations]
 public partial interface IAboutResource : IResource<IAboutResource, IAboutResourceEnum>
 {
 	string ChamberOfCommerce { get; }

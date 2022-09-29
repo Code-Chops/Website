@@ -1,9 +1,10 @@
 ﻿using CodeChops.ImplementationDiscovery.Attributes;
 using CodeChops.MagicEnums;
+using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Blog;
 
-[DiscoverImplementations(hasNewableImplementations: true)]
+[DiscoverImplementations]
 public partial interface IBlogResource : IResource<IBlogResource, IBlogResourceEnum>
 {
 	string Title { get; }

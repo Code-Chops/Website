@@ -1,9 +1,10 @@
 ﻿using CodeChops.ImplementationDiscovery.Attributes;
 using CodeChops.MagicEnums;
+using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Articles;
 
-[DiscoverImplementations(hasNewableImplementations: true)]
+[DiscoverImplementations]
 public partial interface IArticlesResource : IResource<IArticlesResource, IArticlesResourceEnum>
 {
 	string Title { get; }
