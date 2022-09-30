@@ -1,31 +1,42 @@
 ﻿@using CodeChops.Website.Client.Pages.Projects
+@using System.Text
+@using Microsoft.Extensions.Caching.Memory
 
-<a class="project" href="/projects/">
-	<div class="text">
-		<h4>@Title</h4>
-		<span class="small-screen-hide">@Text</span>
-	</div>
-	<span class="image-container border">
-		<img class="image noSelect " src="images/@(ImageName).png" alt="@ImageName"/>
-	</span>
-</a>
+@if (IsInitialized)
+{
+	<a class="project" href="/projects/">
+		<div class="text">
+			<h4>@Title</h4>
+			<span class="small-screen-hide">@Text</span>
+		</div>
+		<span class="image-container border show">
+			<img class="image noSelect" src=@ImageString alt=@Title />
+		</span>
+	</a>
+}
 
 @code {
 	[Parameter] public string Title { get; set; } = null!;
 	[Parameter] public MarkupString Text { get; set; }
-	[Parameter] public string ImageName { get; set; } = null!;
-
-	private bool IsInitialized { get; set; } = true;
+	[Parameter] public byte[]? Image { get; set; }
+	private string ImageString { get; set; }
 	
-	protected override void OnInitialized()
+	private MemoryCache MemoryCache { get; } = new(new MemoryCacheOptions());
+	private bool IsInitialized { get; set; }
+	
+	protected override async Task OnInitializedAsync()
     {
         LanguageSelector.ChangedEvent += StateHasChanged;
+
+		await Task.Run(LoadImageSource);
     }
 	
-	protected override void OnAfterRender(bool firstRender)
+	public void LoadImageSource()
 	{
-		if (!this.IsInitialized)
-			this.IsInitialized = true;
+		if (this.Image is null) return;
+		
+		this.ImageString = this.MemoryCache.GetOrCreate(this.Title, _ => $"data:image/png;base64,{Convert.ToBase64String(this.Image)}");
+		
+		this.IsInitialized = true;
 	}
-
 }
