@@ -1,9 +1,11 @@
-﻿<Splash>
-@*    <CascadingAuthenticationState>
+﻿@using CodeChops.Website.Client.Pages.About
+@using CodeChops.Website.Client.Resources
+<Splash>
+    @*    <CascadingAuthenticationState>
 *@        <Router AppAssembly="@typeof(App).Assembly">
-            <Found Context="routeData">
-                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-@*                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            @*                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                     <NotAuthorized>
                         @if (context.User.Identity?.IsAuthenticated != true)
                         {
@@ -16,13 +18,24 @@
                     </NotAuthorized>
                 </AuthorizeRouteView>
 *@              <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-            </Found>
-            <NotFound>
-                <PageTitle>Not found</PageTitle>
-                <LayoutView Layout="@typeof(MainLayout)">
-                    <p role="alert">Sorry, there's nothing at this address.</p>
-                </LayoutView>
-            </NotFound>
-        </Router>
-@*    </CascadingAuthenticationState>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <Content>
+                    <Box>
+                        <Title Value="@Resource.PageNotFound" AlternativeHeader="@Resource.PageNotFound" />
+                        <p>
+                            @Resource.PageNotFound
+                        </p>
+                    </Box>
+                </Content>
+            </LayoutView>
+        </NotFound>
+    </Router>
+    @*    </CascadingAuthenticationState>
 *@</Splash>
+
+@code {
+
+    public IGeneralResource Resource { get; set; } = IGeneralResource.Get();
+}

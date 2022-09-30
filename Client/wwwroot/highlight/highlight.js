@@ -2309,7 +2309,7 @@ var hljs = (function () {
         const text = node.textContent;
         const result = language ? highlight(text, { language, ignoreIllegals: true }) : highlightAuto(text);
 
-        element.innerHTML = result.value;
+        element.innerHTML = result;
         updateClassName(element, language, result.language);
         element.result = {
           language: result.language,

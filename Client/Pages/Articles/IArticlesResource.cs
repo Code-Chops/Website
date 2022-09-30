@@ -12,10 +12,10 @@ public partial interface IArticlesResource : IResource<IArticlesResource, IArtic
 
 public record ArticlesResourceEn : MagicStringEnum<ArticlesResourceEn>, IArticlesResource
 {
-	public string Title { get; } = CreateMember("Articles").Value;
+	public string Title { get; } = CreateMember("Articles");
 }
 
 public record ArticlesResourceNl : MagicStringEnum<ArticlesResourceNl>, IArticlesResource
 {
-	public string Title { get; } = CreateMember("Articles").Value;
+	public string Title { get; } = CreateMember("Articles");
 }

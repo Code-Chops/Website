@@ -12,10 +12,10 @@ public partial interface IBlogResource : IResource<IBlogResource, IBlogResourceE
 
 public record BlogResourceEN : MagicStringEnum<BlogResourceEN>, IBlogResource
 {
-	public string Title { get; } = CreateMember("Blog").Value;
+	public string Title { get; } = CreateMember("Blog");
 }
 
 public record BlogResourceNL : MagicStringEnum<BlogResourceNL>, IBlogResource
 {
-	public string Title { get; } = CreateMember("Blog").Value;
+	public string Title { get; } = CreateMember("Blog");
 }
