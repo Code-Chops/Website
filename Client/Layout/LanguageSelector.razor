@@ -4,7 +4,7 @@
 @if (FlagsByLanguageCode.Any())
 {
 	<span class="menu-setting small-screen-hide" @onkeydown="@ChangeLanguage">
-		<MenuButton OnClick=@ChangeLanguage>@CurrentLanguageFlag</MenuButton>
+		<MenuButton Data="@MenuButtonData">@CurrentLanguageFlag</MenuButton>
 	</span>
 }
 
@@ -24,9 +24,11 @@
 	public static ImmutableList<string> SupportedLanguages { get; } = FlagsByLanguageCode.Keys.ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
 	public static string CurrentLanguageCode { get; private set; } = FlagsByLanguageCode.First().Key;
-
+	private MenuButtonData MenuButtonData { get; set; }
+	
 	protected override void OnInitialized()
 	{
+		this.MenuButtonData = new() { OnClick = ChangeLanguage };
 		SetCurrentLanguageFlag();
 	}
 

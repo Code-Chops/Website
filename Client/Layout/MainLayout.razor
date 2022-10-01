@@ -2,6 +2,7 @@
 @using CodeChops.Website.Client.Pages.About
 @using CodeChops.Website.Client.Pages.Blog
 @using CodeChops.Website.Client.Pages.Home
+@using CodeChops.Website.RazorComponents;
 @using IProjectsResource = CodeChops.Website.Client.Pages.Projects.IProjectsResource
 @inherits LayoutComponentBase
 
@@ -18,18 +19,18 @@
             Height="80" 
             ShowLogo="false"
             Buttons="Buttons">
-        
+         
         <ColorModeSelector />
         <LanguageSelector />
     </MenuBar>
-
     <div class="border"></div>
-
-    <main>
-        @Body
-
-        <Footer></Footer>
-    </main>
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="200">
+        <main>
+            @Body
+    
+            <Footer></Footer>
+        </main>
+    </Crossfade>
 </div>
 
 <style>
@@ -56,14 +57,15 @@
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
     [Inject] LazyAssemblyLoader AssemblyLoader { get; set; } = null!;
     [Inject] RenderLocation RenderLocation { get; set; } = null!;
-    
+
     private MenuBar MenuBar { get; set; } = null!;
+    private Crossfade Crossfade { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
-    public static IHomeResource HomeResource { get; set; } = null!;
-    public static IBlogResource BlogResource { get; set;} = null!;
-    public static IProjectsResource ProjectsResource { get; set;} = null!;
-    public static IAboutResource AboutResource { get; set;} = null!;
+    private static IHomeResource HomeResource { get; set; } = null!;
+    private static IBlogResource BlogResource { get; set;} = null!;
+    private static IProjectsResource ProjectsResource { get; set;} = null!;
+    private static IAboutResource AboutResource { get; set;} = null!;
     
     protected override void OnInitialized()
     {
@@ -82,10 +84,10 @@
         
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text = HomeResource.Title },
+                new() { HRef="/",           Text = HomeResource.Title, OnClick = e => Crossfade.CreateCopy(e) },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
                 new() { HRef="/projects",   Text = ProjectsResource.Title },
-                new() { HRef="/about",      Text = AboutResource.Title },
+                new() { HRef="/about",      Text = AboutResource.Title, OnClick = e => Crossfade.CreateCopy(e)},
             };
         
         StateHasChanged();

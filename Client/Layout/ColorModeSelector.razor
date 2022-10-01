@@ -1,5 +1,5 @@
 ﻿<span class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
-	<MenuButton OnClick="@ChangeMode" Data="MenuButtonData"></MenuButton>
+	<MenuButton Data="MenuButtonData"></MenuButton>
 </span>
 
 @code {
@@ -19,7 +19,8 @@
 	{
 		MenuButtonData = new MenuButtonData()
 		{
-			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun"
+			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
+			OnClick = ChangeMode
 		};
 	}
 

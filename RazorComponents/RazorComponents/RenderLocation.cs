@@ -1,4 +1,4 @@
-﻿namespace CodeChops.Website.Client;
+﻿namespace CodeChops.Website.RazorComponents;
 
 public abstract record RenderLocation;
 public sealed record RenderedOnServer : RenderLocation;

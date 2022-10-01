@@ -1,0 +1,76 @@
+﻿@using Microsoft.JSInterop;
+@using Microsoft.Extensions;
+@using CodeChops.Website.RazorComponents.Navigation
+@using System.Runtime.Serialization
+@inherits LayoutComponentBase
+@* @implements IDisposable *@
+
+
+@if (ChildContent is not null)
+{
+	<span style="position: relative;width: 100%;height: 100%;">
+		<div id="SOURCE" style="position:absolute;width: 100%;height: 100%;z-index: @(IsInTransition ? 0 : 100);">
+			<span>
+				@ChildContent
+			</span>
+		</div>
+		<div id="COPY" style=";width: 100%; height: 100%;transition: @(AnimationDurationInMilliseconds)ms linear;opacity: @(IsInTransition ? 0 : 1);pointer-events: none; ">
+			@((MarkupString)Copy?.Value)
+		</div>
+	</span>
+}
+
+@code {
+	[Inject] public IJSRuntime JsRuntime { get; set; }
+	private IJSObjectReference JsObject { get; set; }
+	[Inject] NavigationManager NavigationManager { get; set; } = null!;
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public MarkupString? Copy { get; set; }
+	private bool IsInTransition { get; set; }
+	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
+	[Parameter] public Action<EventArgs> OnLocationChanged { get; set; }
+	[Parameter] public int AnimationDurationInMilliseconds { get; set; }
+	protected override void OnInitialized()
+	{
+		if (RenderLocation is RenderedOnClient)
+			JsObject = ((IJSInProcessRuntime)this.JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
+	}
+
+	public async Task CreateCopy(EventArgs e)
+	{
+		IsInTransition = true;
+		Copy= (MarkupString)((IJSInProcessRuntime)this.JsRuntime).Invoke<string>("copyElement", "SOURCE");
+		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
+		{
+			IsInTransition = false;
+			Copy = null;
+			StateHasChanged();
+		});
+
+	//this.Copy = (MarkupString);
+
+	}
+	//
+	// protected override async Task OnAfterRenderAsync(bool firstRender)
+	// {
+	// // JsObject = ((IJSInProcessRuntime)this.JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
+	// 	
+	// 	//NavigationManager.LocationChanged += OnLocationChanged; // when location is changed invoke alert js function
+	// }
+
+	// private void OnLocationChanged(object? o, LocationChangedEventArgs e)
+	// {
+	// 	CreateCopy();
+	// //((IJSInProcessRuntime)this.JsRuntime).InvokeVoid("screenshot");
+	// // ((IJSInProcessRuntime)this.JsRuntime).InvokeVoid("screenshot");
+	//
+	// //((IJSInProcessObjectReference)this.JsObject).InvokeVoid("intersect", "1", "2");
+	// }
+
+	//     
+	// void IDisposable.Dispose()
+	// {
+	// 	// Unsubscribe from the event when our component is disposed
+	// 	this.NavigationManager.LocationChanged -= OnLocationChanged;
+	// }
+}

@@ -1,4 +1,5 @@
 using CodeChops.Website.Client.Layout;
+using CodeChops.Website.RazorComponents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
