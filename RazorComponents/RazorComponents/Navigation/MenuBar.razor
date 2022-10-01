@@ -16,7 +16,7 @@
             <div class="navbar-buttons">
                 @foreach(var button in Buttons)
                 {
-                    <MenuButton Data=button></MenuButton>
+                    <MenuButton Data="@(button with { OnClick = e => OnClickButton(e, button) })"></MenuButton>
                 }
             </div>
             
@@ -32,7 +32,7 @@
         <div class="menu-item-container">
             @foreach(var button in Buttons)
             {
-                <MenuButton Data=button></MenuButton>
+                <MenuButton Data="@(button with { OnClick = e => OnClickButton(e, button) })"></MenuButton>
             }
         </div>
     </div>

@@ -9,7 +9,7 @@
 @if (ChildContent is not null)
 {
 	<span style="position: relative;width: 100%;height: 100%;">
-		<div id="SOURCE" style="position:absolute;width: 100%;height: 100%;z-index: @(IsInTransition ? 0 : 100);">
+		<div id="SOURCE" style="position:absolute;width: 100%;height: 100%;z-index: @(IsInTransition ? 0 : 1);">
 			<span>
 				@ChildContent
 			</span>
@@ -46,31 +46,5 @@
 			Copy = null;
 			StateHasChanged();
 		});
-
-	//this.Copy = (MarkupString);
-
 	}
-	//
-	// protected override async Task OnAfterRenderAsync(bool firstRender)
-	// {
-	// // JsObject = ((IJSInProcessRuntime)this.JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
-	// 	
-	// 	//NavigationManager.LocationChanged += OnLocationChanged; // when location is changed invoke alert js function
-	// }
-
-	// private void OnLocationChanged(object? o, LocationChangedEventArgs e)
-	// {
-	// 	CreateCopy();
-	// //((IJSInProcessRuntime)this.JsRuntime).InvokeVoid("screenshot");
-	// // ((IJSInProcessRuntime)this.JsRuntime).InvokeVoid("screenshot");
-	//
-	// //((IJSInProcessObjectReference)this.JsObject).InvokeVoid("intersect", "1", "2");
-	// }
-
-	//     
-	// void IDisposable.Dispose()
-	// {
-	// 	// Unsubscribe from the event when our component is disposed
-	// 	this.NavigationManager.LocationChanged -= OnLocationChanged;
-	// }
 }
