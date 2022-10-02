@@ -3,48 +3,60 @@
 @using CodeChops.Website.RazorComponents.Navigation
 @using System.Runtime.Serialization
 @inherits LayoutComponentBase
-@* @implements IDisposable *@
-
 
 @if (ChildContent is not null)
 {
-	<span style="position: relative;width: 100%;height: 100%;">
-		<div id="SOURCE" style="position:absolute;width: 100%;height: 100%;z-index: @(IsInTransition ? 0 : 1);">
-			<span>
+	<span id="crossfade-main">
+		<div id="crossfade-source" style="z-index: @(IsInTransition ? 0 : 1);">
+			<span id="crossfade-container">
 				@ChildContent
 			</span>
 		</div>
-		<div id="COPY" style=";width: 100%; height: 100%;transition: @(AnimationDurationInMilliseconds)ms linear;opacity: @(IsInTransition ? 0 : 1);pointer-events: none; ">
-			@((MarkupString)Copy?.Value)
+		<div id="crossfade-copy" style="transition: @(AnimationDurationInMilliseconds)ms linear;opacity: @(IsInTransition ? 0 : 1);">
+			@((MarkupString)(Copy?.Value ?? ""))
 		</div>
 	</span>
 }
 
 @code {
-	[Inject] public IJSRuntime JsRuntime { get; set; }
-	private IJSObjectReference JsObject { get; set; }
-	[Inject] NavigationManager NavigationManager { get; set; } = null!;
+	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+	private IJSObjectReference JsObject { get; set; } = null!;
 	[Parameter] public RenderFragment? ChildContent { get; set; }
 	[Parameter] public MarkupString? Copy { get; set; }
 	private bool IsInTransition { get; set; }
 	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
-	[Parameter] public Action<EventArgs> OnLocationChanged { get; set; }
 	[Parameter] public int AnimationDurationInMilliseconds { get; set; }
+	[Parameter] public bool PreloadCrossfade { get; set; }
+	
 	protected override void OnInitialized()
 	{
-		if (RenderLocation is RenderedOnClient)
-			JsObject = ((IJSInProcessRuntime)this.JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
+		if (this.RenderLocation is RenderedOnClient)
+			this.JsObject = ((IJSInProcessRuntime)this.JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
 	}
 
-	public async Task CreateCopy(EventArgs e)
+	public async Task ExecuteAsync(EventArgs? e)
 	{
-		IsInTransition = true;
-		Copy= (MarkupString)((IJSInProcessRuntime)this.JsRuntime).Invoke<string>("copyElement", "SOURCE");
+		this.IsInTransition = true;
+
+		if (!this.PreloadCrossfade) 
+			this.LoadCrossfadeState();
+		
 		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
-			IsInTransition = false;
-			Copy = null;
-			StateHasChanged();
+			this.IsInTransition = false;
+			this.Copy = null;
+			this.StateHasChanged();
 		});
+	}
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender && this.PreloadCrossfade) 
+			this.LoadCrossfadeState();
+	}
+
+	private void LoadCrossfadeState()
+	{
+		this.Copy = (MarkupString)((IJSInProcessRuntime)this.JsRuntime).Invoke<string>("copyElement", "crossfade-source");
 	}
 }

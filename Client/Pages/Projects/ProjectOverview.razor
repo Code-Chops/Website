@@ -1,14 +1,15 @@
-﻿@using CodeChops.Website.Client.Pages.Projects.Resources
-@implements IDisposable
+﻿@implements IDisposable
 @page "/Projects"
 
-<Content MaxWidth="@null">
+<Content >
 	<span class="title text-center">
 		<Title Value="@Resource.Title"></Title>
 	</span>
 	<div class="grid">
-		<ProjectThumbnail Image="@ProjectImages.VendingMachine"	Title="@Resource.VendingMachine_Title"	Text="new(Resource.VendingMachine_Text)" />
-		<ProjectThumbnail Image="@ProjectImages.MagicEnums"		Title="@Resource.MagicEnums_Title"		Text="new(Resource.MagicEnums_Text)" />
+		<ProjectThumbnail ImagePath="images/projects/VendingMachine.png"			Title="@Resource.VendingMachine_Title"			Text="new(Resource.VendingMachine_Text)" />
+		<ProjectThumbnail ImagePath="images/projects/MagicEnums.png"				Title="@Resource.MagicEnums_Title"				Text="new(Resource.MagicEnums_Text)" />
+		<ProjectThumbnail ImagePath="images/projects/Crossfade.png"					Title="@Resource.Crossfade_Title"				Text="new(Resource.Crossfade_Text)" />
+		<ProjectThumbnail ImagePath="images/projects/ImplementationDiscovery.png"	Title="@Resource.ImplementationDiscovery_Title"	Text="new(Resource.ImplementationDiscovery_Text)" />
 	</div>
 </Content>
 

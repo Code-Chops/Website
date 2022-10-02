@@ -1,0 +1,17 @@
+﻿#crossfade-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#crossfade-source {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#crossfade-copy {
+    pointer-events: none;
+    width: 100%; 
+    height: 100%
+}

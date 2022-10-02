@@ -5,10 +5,8 @@
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
-	internal static event Action? ChangedEvent;
-
 	internal static ColorMode ColorMode { get; private set; } = null!;
-	private MenuButtonData MenuButtonData { get; set; } = null!;
+	private MenuButtonData MenuButtonData { get; set; }
 
 	protected override void OnInitialized()
 	{
@@ -31,8 +29,6 @@
 		var mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
 		SetMode(mode);	
 		SetMenuButtonData();
-
-		ChangedEvent?.Invoke();
 
 		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
 		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode.Name);

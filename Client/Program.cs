@@ -37,7 +37,7 @@ public class Program
 		ColorModeSelector.SetMode(colorMode);
 
 		ConfigureSharedServices(builder.Services, defaultLanguageCode);
-
+		
 		await host.RunAsync();
 	}
 

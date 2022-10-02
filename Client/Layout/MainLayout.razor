@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components.WebAssembly.Services
-@using CodeChops.Website.Client.Pages.About
+﻿@using CodeChops.Website.Client.Pages.About
 @using CodeChops.Website.Client.Pages.Blog
 @using CodeChops.Website.Client.Pages.Home
 @using CodeChops.Website.RazorComponents;
@@ -16,7 +15,7 @@
             LogoPath="/favicon.ico" 
             Title="@Branding.Name" 
             ShowTitle="ShowTitle"
-            Height="80" 
+            Height="80"
             ShowLogo="false"
             Buttons="Buttons">
          
@@ -24,7 +23,7 @@
         <LanguageSelector />
     </MenuBar>
     <div class="border"></div>
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="300">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
         <main>
             @Body
     
@@ -55,10 +54,8 @@
 @code
 {
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
-    [Inject] LazyAssemblyLoader AssemblyLoader { get; set; } = null!;
-    [Inject] RenderLocation RenderLocation { get; set; } = null!;
 
-    private MenuBar MenuBar { get; set; } = null!;
+    private MenuBar? MenuBar { get; set; }
     private Crossfade Crossfade { get; set; } = null!;
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
@@ -72,11 +69,12 @@
         OnLanguageChanged();
         
         LanguageSelector.ChangedEvent += OnLanguageChanged;
-        ColorModeSelector.ChangedEvent += StateHasChanged;
     }
 
     private void OnLanguageChanged()
     {
+        if (Crossfade is not null) Crossfade.ExecuteAsync(e: null);
+        
         HomeResource = IHomeResource.Get();
         BlogResource = IBlogResource.Get();
         ProjectsResource = IProjectsResource.Get();
@@ -84,10 +82,10 @@
         
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text = HomeResource.Title, OnClick = e => Crossfade.CreateCopy(e) },
+                new() { HRef="/",           Text = HomeResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e) },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
-                new() { HRef="/projects",   Text = ProjectsResource.Title },
-                new() { HRef="/about",      Text = AboutResource.Title, OnClick = e => Crossfade.CreateCopy(e)},
+                new() { HRef="/projects",   Text = ProjectsResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e) },
+                new() { HRef="/about",      Text = AboutResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e)},
             };
         
         StateHasChanged();

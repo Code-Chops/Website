@@ -14,8 +14,8 @@
     </ItemGroup>
     
     <PropertyGroup Label="Package">
-        <Version>0.5.1</Version>
-        <PackageReleaseNotes>Fixed Crossfade with menu.</PackageReleaseNotes>
+        <Version>0.8.4</Version>
+        <PackageReleaseNotes>Minor tweaks.</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>CodeChops.Website.RazorComponents</Title>
         <Description>Razor components for website.</Description>

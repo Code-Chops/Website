@@ -133,12 +133,12 @@
 }
 
 #title {
-    animation: titleFadeIn 1s;
+    animation: titleSlide 1s;
     animation-fill-mode: both;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in;
 }
 
-@keyframes titleFadeIn {
+@keyframes titleSlide {
     from {
         margin-left: -280px;
         opacity: 0;

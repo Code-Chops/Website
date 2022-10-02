@@ -52,7 +52,7 @@
     animation-fill-mode: forwards;
     margin-left: 10px;
     margin-top: 15px;
-    animation-timing-function: cubic-bezier(.69,.07,.25,.33);
+    animation-timing-function: ease-in;
 }
 
     .attachedLogo:hover {
@@ -69,10 +69,7 @@
     to {
         top: 0;
         left: 0;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        margin-left: 0px;
-        margin-right: 0;
+        margin: 0;
         width: 50px;
         height: 50px;
         transform: rotate(360deg) scale(.5, .5);
