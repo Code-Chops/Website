@@ -63,6 +63,7 @@
     private static IBlogResource BlogResource { get; set;} = null!;
     private static IProjectsResource ProjectsResource { get; set;} = null!;
     private static IAboutResource AboutResource { get; set;} = null!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
     
     protected override void OnInitialized()
     {
@@ -93,6 +94,7 @@
 
     private void OnButtonClick(EventArgs e, MenuButtonData button)
     {
-        if (button.HRef is not null) this.Crossfade.ExecuteAsync(e);
+        if (button.HRef is not null && button.HRef.Trim('/') != this.NavigationManager.ToBaseRelativePath(this.NavigationManager.Uri)) 
+            this.Crossfade.ExecuteAsync(e);
     }
 }
