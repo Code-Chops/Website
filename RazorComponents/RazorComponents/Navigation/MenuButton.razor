@@ -1,5 +1,5 @@
 ﻿<div class="nav-item">
-    <a class="nav-link pointerCursor noSelect" href="@(Data.HRef ?? NavigationManager.Uri)" @onclick="@Data.OnClick">
+    <a class="nav-link pointerCursor noSelect" href="@(Data.HRef ?? NavigationManager.Uri)" @onclick="@(e => Data.OnClick(e, this.Data))">
         <span class="@If(Data.FontAwesomeIcon is not null, $"fa {Data.FontAwesomeIcon}")"></span> @Data.Text @ChildContent
     </a>
 </div>

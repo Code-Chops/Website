@@ -28,7 +28,7 @@
 	
 	protected override void OnInitialized()
 	{
-		this.MenuButtonData = new() { OnClick = ChangeLanguage };
+		this.MenuButtonData = new() { OnClick = (e, _) => ChangeLanguage(e) };
 		SetCurrentLanguageFlag();
 	}
 

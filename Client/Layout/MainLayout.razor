@@ -82,12 +82,17 @@
         
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text = HomeResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e) },
+                new() { HRef="/",           Text = HomeResource.Title, OnClick = OnButtonClick },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
-                new() { HRef="/projects",   Text = ProjectsResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e) },
-                new() { HRef="/about",      Text = AboutResource.Title, OnClick = e => Crossfade!.ExecuteAsync(e)},
+                new() { HRef="/projects",   Text = ProjectsResource.Title, OnClick = OnButtonClick },
+                new() { HRef="/about",      Text = AboutResource.Title, OnClick = OnButtonClick},
             };
         
         StateHasChanged();
+    }
+
+    private void OnButtonClick(EventArgs e, MenuButtonData button)
+    {
+        if (button.HRef is not null) this.Crossfade.ExecuteAsync(e);
     }
 }

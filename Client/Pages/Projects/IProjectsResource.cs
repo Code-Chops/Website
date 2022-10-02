@@ -50,8 +50,8 @@ Blazor component voor een<br/>
 crossfade tussen webpagina's");
 	public string Crossfade_Title { get; }					= CreateMember("Crossfade");
 	public string ImplementationDiscovery_Text { get; }		= CreateMember(@"
-Ontdek object-implementaties<br/>
-, using source generators
+Ontdek objectimplementaties<br/>
+terwijl je programmeert
 ");
 	public string ImplementationDiscovery_Title { get; }	= CreateMember("Implementation discovery");
 	public string MagicEnums_Text { get; }					= CreateMember(@"

@@ -14,8 +14,8 @@
     </ItemGroup>
     
     <PropertyGroup Label="Package">
-        <Version>0.8.4</Version>
-        <PackageReleaseNotes>Minor tweaks.</PackageReleaseNotes>
+        <Version>0.8.5</Version>
+        <PackageReleaseNotes>Don't refresh when clicking same href button twice.</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>CodeChops.Website.RazorComponents</Title>
         <Description>Razor components for website.</Description>

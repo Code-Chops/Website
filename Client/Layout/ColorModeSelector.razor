@@ -18,7 +18,7 @@
 		MenuButtonData = new MenuButtonData()
 		{
 			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
-			OnClick = ChangeMode
+			OnClick = (e, _) => ChangeMode(e)
 		};
 	}
 
