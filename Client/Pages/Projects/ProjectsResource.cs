@@ -20,16 +20,6 @@ public interface IProjectsResource
 [DiscoverImplementations]
 public partial interface IProjectsTitleResource : IResourceManager<IProjectsTitleResource, IProjectsTitleResourceEnum>, IProjectsResource
 {
-	string Baxo { get; }
-	string Contracts { get; }
-	string Crossfade { get; }
-	string DomainModeling { get; }
-	string GenericMath { get; }
-	string Geometry { get; }
-	string ImplementationDiscovery { get; }
-	string Junctions { get; }
-	string MagicEnums { get; }
-	string VendingMachine { get; }
 }
 
 public record ProjectsTitleResource : Resource<ProjectsTitleResource>

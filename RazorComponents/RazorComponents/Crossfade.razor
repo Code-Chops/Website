@@ -9,77 +9,67 @@
 			</span>
 		</div>
 		<div id="crossfade-copy">
-			@((MarkupString)(Copy?.Value ?? ""))
+			@ElementCopy
 		</div>
 	</span>
 }
 	
 <style>
-#crossfade-copy {
-	transition: opacity @(AnimationDurationInMilliseconds)ms linear;
-	opacity: @(IsInTransition ? 0 : 1);
-	z-index: @(IsInTransition ? 101 : 0);
-	visibility: @(IsInTransition ? "visible" : "hidden")
-}	
+	#crossfade-copy {
+		transition: opacity @(AnimationDurationInMilliseconds)ms linear;
+		opacity: @(IsInTransition ? 0 : 1);
+		z-index: @(IsInTransition ? 101 : 0);
+		visibility: @(IsInTransition ? "visible" : "hidden")
+	}	
 </style>
 
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 	private IJSObjectReference JsObject { get; set; } = null!;
 	[Parameter] public RenderFragment? ChildContent { get; set; }
-	[Parameter] public MarkupString? Copy { get; set; }
+	[Parameter] public MarkupString ElementCopy { get; set; }
 	private bool IsInTransition { get; set; }
-	//	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
 	[Parameter] public int AnimationDurationInMilliseconds { get; set; } = 350;
-	[Parameter] public bool PreloadCrossfade { get; set; }
+	[Parameter] public bool Prerender { get; set; }
 	[Inject] public NavigationManager NavigationManager { get; set; } = null!;
-	private static string? PreviousRelativeUrl { get; set; }
 	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
 
 	protected override void OnInitialized()
 	{
 		if (RenderLocation is RenderedOnClient)
 			JsObject = ((IJSInProcessRuntime)JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
-
-		PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-		NavigationManager.LocationChanged += async (_,_) =>
-		{
-			if (NavigationManager.ToBaseRelativePath(NavigationManager.Uri) != PreviousRelativeUrl)
-				await ExecuteAsync();
-		};
 	}
 
 	public async Task ExecuteAsync()
 	{
 		IsInTransition = true;
 
-		//throw new Exception("GHLALGASEIOJ"); // TODO
+		if (!Prerender)
+		{
+			await LoadCrossfadeStateAsync();
+			StateHasChanged();
+		}
 		
 		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
 			IsInTransition = false;
-			Copy = null;
+			ElementCopy = new(null!);
 			StateHasChanged();
-			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 		});
-		
-		if (!PreloadCrossfade)
-			LoadCrossfadeState();
-		
-		StateHasChanged();
 	}
 	
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		if (PreloadCrossfade)
-			await Task.Delay(500).ContinueWith(_ => LoadCrossfadeState());
-	} // TODO
+		if (Prerender) 
+			await Task.Delay(500).ContinueWith(_ => LoadCrossfadeStateAsync());
+	}
 	
-	private void LoadCrossfadeState()
+	private async Task LoadCrossfadeStateAsync()
 	{
-		if (Copy is not null) return;
-		Copy = (MarkupString)((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PreloadCrossfade);
-		Console.WriteLine("LOADCROSSFADE");
+		if (ElementCopy.Value is not null) return;
+		
+		ElementCopy = (MarkupString)await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<string>("copyElement", "crossfade-source", "crossfade-copy", Prerender);
+
 		StateHasChanged();
 	}
 }

@@ -3,21 +3,22 @@
     const sourceElement = document.getElementById(sourceId);
     if (sourceElement == null) return;
     
-    const sourceHtml = sourceElement?.firstChild?.outerHTML;
+    const node = sourceElement?.firstChild;
+    const sourceHtml = node?.outerHTML;
     if (sourceHtml == null) return;
 
     if (preloadCrossfade) {
         for (let element of getDescendantNodes(sourceElement)) {
             if (element.id === "") continue;
-            
+        
             element.removeEventListener(
                 "scroll",
-                e => onScroll(e, copyId, element.id),
+                e => scroll(e.currentTarget, copyId, element.id),
                 { passive: true }
             );
             element.addEventListener(
                 "scroll",
-                e => onScroll(e, copyId, element.id),
+                e => scroll(e.currentTarget, copyId, element.id),
                 { passive: true }
             );
         }
@@ -33,19 +34,29 @@ const getDescendantNodes = (node, all = []) => {
     return all;
 }
 
-const onScroll = (e, copyId, scrollElementId) => {
-    if (e.currentTarget == null || e.currentTarget.scrollTop === 0) {
+// window.scrollElements = (sourceId, copyId) => {
+//     const sourceElement = document.getElementById(sourceId);
+//    
+//     if (sourceElement == null) return;
+//    
+//     for (let element of getDescendantNodes(sourceElement)) {
+//         if (element.id === "") continue;
+//
+//         scroll(element, copyId, element.id);
+//     }
+// }
+
+const scroll = (element, copyId, scrollElementId) => {
+    if (element == null || element.scrollTop === 0)
         return;
-    }
-    
+
     const copyElement = document.getElementById(copyId);
 
-    if (copyElement == null) {
+    if (copyElement == null)
         return;
-    }
 
     const scrollElement = copyElement.querySelector('#'+ scrollElementId);
  
-    scrollElement.scrollTop = e.currentTarget.scrollTop;
-    scrollElement.scrollLeft = e.currentTarget.scrollLeft;
+    scrollElement.scrollTop = element.scrollTop;
+    scrollElement.scrollLeft = element.scrollLeft;
 }

@@ -1,6 +1,7 @@
-﻿#crossfade-main {
-    /*width: 100%;*/
-    /*height: 100%;*/
+﻿#crossfade-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 #crossfade-source {
@@ -10,15 +11,10 @@
 }
 
 #crossfade-copy {
+    position: inherit;
     z-index: 100;
     pointer-events: none;
     width: 100%; 
     height: 100%;
     overflow: hidden;
-}
-
-#crossfade-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
 }
