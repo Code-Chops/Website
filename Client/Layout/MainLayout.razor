@@ -6,22 +6,24 @@
 
 <div class="page">
     <MenuBar @ref="MenuBar"
-            BackgroundColor="@(IsDarkMode ? new(hexColor: "#141313") : new(hexColor: "#f9f4f6"))"
-            AccentColor="@Branding.Colors.Accent"
-            TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -40)"
-            HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : 0)"
-            FontFamily="@Branding.FontFamily" 
-            LogoPath="/favicon.ico" 
-            Title="@Branding.Name" 
-            ShowTitle="ShowTitle"
-            Height="80"
-            ShowLogo="false"
-            Buttons="Buttons">
+             BackgroundColor="@(IsDarkMode ? new(hexColor: "#141313") : new(hexColor: "#f9f4f6"))"
+             AccentColor="@Branding.Colors.Accent"
+             TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -40)"
+             HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : 0)"
+             FontFamily="@Branding.FontFamily" 
+             LogoPath="/favicon.ico" 
+             Title="@Branding.Name" 
+             ShowTitle="ShowTitle"
+             Height="80"
+             ShowLogo="false"
+             Buttons="Buttons">
          
         <ColorModeSelector />
         <LanguageSelector />
     </MenuBar>
+    
     <div class="border"></div>
+    
     <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" Prerender="false">
         <main id="main">
             @Body
@@ -66,17 +68,18 @@
     
     protected override async Task OnInitializedAsync()
     {
-        HomeResource = IResourceManager<IHomeResource, IHomeResourceEnum>.GetResource();
-        BlogResource = IResourceManager<IBlogResource, IBlogResourceEnum>.GetResource();
-        ProjectResource = IResourceManager<IProjectResource, IProjectResourceEnum>.GetResource();
-        AboutResource = IResourceManager<IAboutResource, IAboutResourceEnum>.GetResource();
-        
         await OnLanguageChangedAsync();
+        
         LanguageSelector.ChangedEvent += async () => await OnLanguageChangedAsync();
     }
 
     private async Task OnLanguageChangedAsync()
     {
+        HomeResource = IResourceManager<IHomeResource, IHomeResourceEnum>.GetResource();
+        BlogResource = IResourceManager<IBlogResource, IBlogResourceEnum>.GetResource();
+        ProjectResource = IResourceManager<IProjectResource, IProjectResourceEnum>.GetResource();
+        AboutResource = IResourceManager<IAboutResource, IAboutResourceEnum>.GetResource();
+        
         if (Crossfade is not null) 
             await Crossfade.ExecuteAsync();
 
