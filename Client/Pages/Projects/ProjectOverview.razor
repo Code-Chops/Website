@@ -1,4 +1,4 @@
-﻿@implements IDisposable
+﻿@inherits ResourcedComponent<IProjectResource, IProjectResourceEnum>
 @page "/Projects"
 
 <Content >
@@ -6,29 +6,35 @@
 		<Title Value="@Resource.Title"></Title>
 	</span>
 	<div class="grid">
-		<ProjectThumbnail ImagePath="images/projects/VendingMachine.png"			Title="@Resource.VendingMachine_Title"			Text="new(Resource.VendingMachine_Text)" />
-		<ProjectThumbnail ImagePath="images/projects/MagicEnums.png"				Title="@Resource.MagicEnums_Title"				Text="new(Resource.MagicEnums_Text)" />
-		<ProjectThumbnail ImagePath="images/projects/Crossfade.png"					Title="@Resource.Crossfade_Title"				Text="new(Resource.Crossfade_Text)" />
-		<ProjectThumbnail ImagePath="images/projects/ImplementationDiscovery.png"	Title="@Resource.ImplementationDiscovery_Title"	Text="new(Resource.ImplementationDiscovery_Text)" />
+		@foreach (var group in ParameterGroups)
+		{
+			<DynamicComponent Type="@typeof(ProjectThumbnail)" Parameters="@group.Value"/>
+		}
 	</div>
 </Content>
 
 @code {
-	public IProjectsResource Resource { get; set; } = IProjectsResource.Get();
+	private static ImmutableList<ProjectsTitleResource> ProjectTitles { get; }
+	private static Dictionary<int, Dictionary<string, object>> ParameterGroups { get; } = new();
 	
-	protected override void OnInitialized()
+	static ProjectOverview()
 	{
-		LanguageSelector.ChangedEvent += OnLanguageChanged;
+		var random = new Random();
+		ProjectTitles = ProjectsTitleResource.GetMembers().OrderBy(_ => random.Next()).ToImmutableList();
+		
+		for (var i = 0; i < ProjectTitles.Count; i++)
+			ParameterGroups.Add(i, GetThumbnailParameters(i));	
 	}
 
-	private void OnLanguageChanged()
+	private static Dictionary<string, object> GetThumbnailParameters(int index)
 	{
-		Resource = IProjectsResource.Get();
-		StateHasChanged();
-	}
-	
-	public void Dispose()
-	{
-		LanguageSelector.ChangedEvent -= OnLanguageChanged;
+		var titleResource = ProjectTitles[index];
+		
+		return new()
+		{
+			["ImagePath"]	= $"images/projects/{titleResource.Name}.png",
+			["Title"]		= titleResource.Value,
+			["Text"]		= (MarkupString)ProjectsTitleResource.GetSingleMember(titleResource.Name).Value,
+		};
 	}
 }

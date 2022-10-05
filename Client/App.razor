@@ -1,5 +1,4 @@
-﻿@using CodeChops.Website.Client.Resources
-<Splash>
+﻿<Splash>
     @*    <CascadingAuthenticationState>
 *@        <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
@@ -22,7 +21,7 @@
             <LayoutView Layout="@typeof(MainLayout)">
                 <Content>
                     <Box>
-                        <Title Value="@Resource.PageNotFound" AlternativeHeader="@Resource.PageNotFound"></Title>
+                        <Title Value="@(Resource.PageNotFound)" AlternativeHeader="@Resource.PageNotFound"></Title>
                         <p>
                             @Resource.PageNotFound
                         </p>
@@ -34,7 +33,7 @@
     @*    </CascadingAuthenticationState>
 *@</Splash>
 
-@code {
 
-    public IGeneralResource Resource { get; set; } = IGeneralResource.Get();
+@code {
+    private IGeneralResource Resource { get; } = IResourceManager<IGeneralResource, IGeneralResourceEnum>.GetResource();
 }

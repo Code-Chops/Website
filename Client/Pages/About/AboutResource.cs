@@ -1,22 +1,23 @@
-﻿using CodeChops.ImplementationDiscovery.Attributes;
-using CodeChops.MagicEnums;
+﻿using CodeChops.ImplementationDiscovery;
 using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.About;
 
 [DiscoverImplementations]
-public partial interface IAboutResource : IResource<IAboutResource, IAboutResourceEnum>
+public partial interface IAboutResource : IResourceManager<IAboutResource, IAboutResourceEnum>
 {
-	string ChamberOfCommerce { get; }
-	string Paragraph1 { get; }
-	string Paragraph2 { get; }
-	string Paragraph3 { get; }
-	string Title { get; }
+	 string ChamberOfCommerce { get; }
+	 string Paragraph1 { get; }
+	 string Paragraph2 { get; }
+	 string Paragraph3 { get; }
+	 string Title { get; }
 }
 
-public record AboutResourceEN : MagicStringEnum<AboutResourceEN>, IAboutResource
+public record AboutResourceEN : Resource<AboutResourceEN>, IAboutResource
 {
-	public string ChamberOfCommerce { get; }	= CreateMember(@"COC number: 86790390 - VAT number: NL004317143B09");
+	public string ChamberOfCommerce { get; }	= CreateMember(@"
+COC number: 86790390 - VAT number: NL004317143B09
+");
 	
 	public string Paragraph1 { get; }			= CreateMember(@"
 I am Max Bergman, a full-stack senior software engineer.
@@ -33,12 +34,16 @@ Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, an
 Feel free to contact me if you have any questions, remarks or comments. It'll be greatly appreciated!
 ");
 
-	public string Title { get; }				= CreateMember(@"About");
+	public string Title { get; }				= CreateMember(@"
+About
+");
 }
 
-public record AboutResourceNL : MagicStringEnum<AboutResourceNL>, IAboutResource
+public record AboutResourceNL : Resource<AboutResourceNL>, IAboutResource
 {
-	public string ChamberOfCommerce { get; }	= CreateMember(@"KvK-nummer: 86790390 - btw-nummer: NL004317143B09");
+	public string ChamberOfCommerce { get; }	= CreateMember(@"
+KvK-nummer: 86790390 - btw-nummer: NL004317143B09
+");
 	
 	public string Paragraph1 { get; }			= CreateMember(@"
 Ik ben Max Bergman, een full-stack senior software ontwikkelaar. 
@@ -55,5 +60,7 @@ Momenteel gebruik ik voornamelijk: C#, .NET, Blazor, HTML, TypeScript, JavaScrip
 Voel je vrij om contact met me op te nemen bij vragen of opmerkingen. Dit wordt erg gewaardeerd!
 ");
 
-	public string Title { get; }				= CreateMember(@"Over");
+	public string Title { get; }				= CreateMember(@"
+Over
+");
 }

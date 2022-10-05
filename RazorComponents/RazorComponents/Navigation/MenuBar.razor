@@ -16,7 +16,7 @@
             <div class="navbar-buttons">
                 @foreach(var button in Buttons)
                 {
-                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
+                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButtonAsync(e, button) })"></MenuButton>
                 }
             </div>
             
@@ -32,7 +32,7 @@
         <div class="menu-item-container">
             @foreach(var button in Buttons)
             {
-                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
+                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButtonAsync(e, button) })"></MenuButton>
             }
         </div>
     </div>
@@ -68,10 +68,10 @@
         if (!IsCollapsed) Toggle();
     }
 
-    public void OnClickButton(EventArgs e, MenuButtonData button)
+    public async Task OnClickButtonAsync(EventArgs e, MenuButtonData button)
     {
         Collapse();
-        button.OnClick(e, button);
+        await button.OnClick(e, button);
     }
 
     public void Refresh()

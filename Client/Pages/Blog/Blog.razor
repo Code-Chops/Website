@@ -1,10 +1,10 @@
-﻿@implements IDisposable
+﻿@inherits ResourcedComponent<IBlogResource, IBlogResourceEnum>
 @page "/blog"
 
 <Content>
 	<Box>
 		<Title Value="@Resource.Title" AlternativeHeader="@Resource.Title"></Title>
-	@*	<p>
+		@*	<p>
 			(websites, applications, games)
 			(<a href="projects/website">Website</a>, <a href="projects/game">single player browser games</a>) to back-end (<a href="projects/magicenum">MagicEnums</a>, <a href="projects/maths">Maths</a>)
 			back-end (<a href="projects/junctions">Junctions</a>)
@@ -13,22 +13,7 @@
 
 </Content>
 
-@code {
-	public IBlogResource Resource { get; set; } = IBlogResource.Get();
-	
-	protected override void OnInitialized()
-	{
-		LanguageSelector.ChangedEvent += OnLanguageChanged;
-	}
 
-	private void OnLanguageChanged()
-	{
-		Resource = IBlogResource.Get();
-		StateHasChanged();
-	}
-	
-	public void Dispose()
-	{
-		LanguageSelector.ChangedEvent -= OnLanguageChanged;
-	}
+@code {
+	private IBlogResource Resource { get; } = IResourceManager<IBlogResource, IBlogResourceEnum>.GetResource();
 }

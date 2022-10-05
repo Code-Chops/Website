@@ -1,14 +1,10 @@
-﻿@using CodeChops.Website.Client.Pages.Projects
-@using System.Text
-@using Microsoft.Extensions.Caching.Memory
-
-<a class="project" href="/projects/" style="visibility: @(IsInitialized ? "visible" : "hidden")">
+﻿<a class="project" href="/projects/" id="@ThumbnailId">
 	<div class="text">
 		<h4>@Title</h4>
 		<span class="small-screen-hide">@Text</span>
 	</div>
 	<span class="image-container border show">
-		<img class="image noSelect" src=@ImagePath alt=@Title />
+		<img class="image noSelect" src="@ImagePath" alt="@Title" loading="lazy" id="@ImageId" />
 	</span>
 </a>
 
@@ -16,11 +12,22 @@
 	[Parameter] public string Title { get; set; } = null!;
 	[Parameter] public MarkupString Text { get; set; }
 	[Parameter] public string? ImagePath { get; set; }
+	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
-	private bool IsInitialized { get; set; } = true;
-	
+	private string ImageId { get; set; } = null!;
+	private string ThumbnailId { get; set; } = null!;
+
 	protected override void OnInitialized()
-    {
+	{
+		var id = Title.Replace(' ', '_');
+		ImageId = $"Image{id}";
+		ThumbnailId = $"Thumbnail{id}";
+		
         LanguageSelector.ChangedEvent += StateHasChanged;
-}
+	}
+
+	protected override async Task OnAfterRenderAsync(bool isFirstRender)
+	{
+		if (isFirstRender) await JsRuntime.InvokeVoidAsync("loadImageAndShow", ImageId, ThumbnailId);
+	}
 }

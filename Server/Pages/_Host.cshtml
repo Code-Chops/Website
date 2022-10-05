@@ -5,7 +5,7 @@
 <!-- @Html.Raw(Branding.BannerText) -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -39,30 +39,19 @@
         <div id="overlay"></div>
         <a id="clickableLogo">
             <div id="logo" class="splashLogo" >
- 		        <div id="logoBackground"></div>
-		        <div id="logoM"></div>
-		        <div id="logoA"></div>
-		        <div id="logoX"></div> 
-		        <div id="logoB"></div>
+                <div id="logoBackground"></div>
+                <div id="logoM"></div>
+                <div id="logoA"></div>
+                <div id="logoX"></div> 
+                <div id="logoB"></div>
             </div>
         </a>
-
-        @* Do not use prerendered pages when authentication is involved *@
-@*        @if (HttpContext.Request.Path.StartsWithSegments("/authentication"))
-        {
-            <text>Loading...</text>
-        }
-        else
-        {
-*@
-<component type="typeof(App)" render-mode="WebAssemblyPrerendered" />
-@*        }
-*@
+    
+        <component type="typeof(App)" render-mode="WebAssemblyPrerendered" />
         <div id="blazor-error-ui">
-            An unhandled error has occurred.
-            <a href="" class="reload">Reload</a>
+            @Html.Raw(CodeChops.Website.Client.Resources.IResourceManager<IGeneralResource, IGeneralResourceEnum>.GetResource().Error)
             <a class="dismiss">🗙</a>
-        </div>
+            </div>
         <script src="_framework/blazor.webassembly.js"></script>
     </body>
 </html>

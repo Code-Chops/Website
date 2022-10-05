@@ -1,4 +1,4 @@
-﻿@implements IDisposable
+﻿@inherits ResourcedComponent<IArticlesResource, IArticlesResourceEnum>
 @page "/Articles"
 
 <Content>
@@ -12,23 +12,3 @@
 		</Box>
 	</Box>
 </Content>
-
-@code {
-	public IArticlesResource Resource { get; set; } = IArticlesResource.Get();
-	
-	protected override void OnInitialized()
-	{
-		LanguageSelector.ChangedEvent += OnLanguageChanged;
-	}
-
-	private void OnLanguageChanged()
-	{
-		Resource = IArticlesResource.Get();
-		StateHasChanged();
-	}
-	
-	public void Dispose()
-	{
-		LanguageSelector.ChangedEvent -= OnLanguageChanged;
-	}
-}

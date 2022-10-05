@@ -34,3 +34,12 @@ window.blazorColorMode = {
 }
 
 document.documentElement.style.setProperty("--overlay-background-color", window.blazorColorMode.get() === "DarkMode" ? "#1e1e1e" : "white");
+
+window.loadImageAndShow = (imageId, elementToShowId) => {
+    const element = document.getElementById(imageId);
+    element.onload = () => {
+        const elementToShow = document.getElementById(elementToShowId);
+        elementToShow.classList.add("animation");
+        elementToShow.style.visibility = "visible";
+    };
+}

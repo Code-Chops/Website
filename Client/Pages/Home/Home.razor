@@ -1,4 +1,4 @@
-﻿@implements IDisposable
+﻿@inherits ResourcedComponent<IHomeResource, IHomeResourceEnum>
 @page "/"
 
 <Content>
@@ -17,27 +17,12 @@
 		</p>*@
 		
 		<div id="author">
-        	@Resource.Author
-        </div>
+			@Resource.Author
+		</div>
 	</Box>
 </Content>
 
-@code {
-	public IHomeResource Resource { get; set; } = IHomeResource.Get();
-	
-	protected override void OnInitialized()
-	{
-		LanguageSelector.ChangedEvent += OnLanguageChanged;
-	}
 
-	private void OnLanguageChanged()
-	{
-		Resource = IHomeResource.Get();
-		StateHasChanged();
-	}
-	
-	public void Dispose()
-	{
-		LanguageSelector.ChangedEvent -= OnLanguageChanged;
-	}
+@code {
+	private IHomeResource Resource { get; } = IResourceManager<IHomeResource, IHomeResourceEnum>.GetResource();
 }

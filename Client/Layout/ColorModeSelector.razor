@@ -1,4 +1,4 @@
-﻿<span class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
+﻿<span class="menu-setting small-screen-hide" @onkeydown="@ChangeModeAsync">
 	<MenuButton Data="MenuButtonData"></MenuButton>
 </span>
 
@@ -18,20 +18,21 @@
 		MenuButtonData = new MenuButtonData()
 		{
 			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
-			OnClick = (e, _) => ChangeMode(e)
+			OnClick = (e, _) => ChangeModeAsync(e)
 		};
 	}
 
-	private void ChangeMode(EventArgs? e)
+	private async Task ChangeModeAsync(EventArgs? e)
 	{
 		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
 
 		var mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
 		SetMode(mode);	
 		SetMenuButtonData();
+		StateHasChanged();
 
 		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-		inProcessRuntime.InvokeVoid("blazorColorMode.set", ColorMode.Name);
+		await inProcessRuntime.InvokeVoidAsync("blazorColorMode.set", ColorMode.Name);
 	}
 
 	internal static void SetMode(ColorMode mode)

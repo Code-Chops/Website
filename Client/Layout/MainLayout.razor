@@ -1,8 +1,7 @@
-﻿@using CodeChops.Website.Client.Pages.About
+﻿@using CodeChops.Website.Client.Pages.Projects
+@using CodeChops.Website.Client.Pages.About
 @using CodeChops.Website.Client.Pages.Blog
 @using CodeChops.Website.Client.Pages.Home
-@using CodeChops.Website.RazorComponents;
-@using IProjectsResource = CodeChops.Website.Client.Pages.Projects.IProjectsResource
 @inherits LayoutComponentBase
 
 <div class="page">
@@ -23,8 +22,8 @@
         <LanguageSelector />
     </MenuBar>
     <div class="border"></div>
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
-        <main>
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PreloadCrossfade="false">
+        <main id="main">
             @Body
     
             <Footer></Footer>
@@ -56,45 +55,49 @@
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
 
     private MenuBar? MenuBar { get; set; }
-    private Crossfade Crossfade { get; set; } = null!;
+    private Crossfade? Crossfade { get; set; }
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
+    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
     private static IHomeResource HomeResource { get; set; } = null!;
     private static IBlogResource BlogResource { get; set;} = null!;
-    private static IProjectsResource ProjectsResource { get; set;} = null!;
+    private static IProjectResource ProjectResource { get; set;} = null!;
     private static IAboutResource AboutResource { get; set;} = null!;
-    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
     
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        OnLanguageChanged();
+        HomeResource = IResourceManager<IHomeResource, IHomeResourceEnum>.GetResource();
+        BlogResource = IResourceManager<IBlogResource, IBlogResourceEnum>.GetResource();
+        ProjectResource = IResourceManager<IProjectResource, IProjectResourceEnum>.GetResource();
+        AboutResource = IResourceManager<IAboutResource, IAboutResourceEnum>.GetResource();
         
-        LanguageSelector.ChangedEvent += OnLanguageChanged;
+        await OnLanguageChangedAsync();
+        LanguageSelector.ChangedEvent += async () => await OnLanguageChangedAsync();
     }
 
-    private void OnLanguageChanged()
+    private async Task OnLanguageChangedAsync()
     {
-        if (Crossfade is not null) Crossfade.ExecuteAsync(e: null);
-        
-        HomeResource = IHomeResource.Get();
-        BlogResource = IBlogResource.Get();
-        ProjectsResource = IProjectsResource.Get();
-        AboutResource = IAboutResource.Get();
-        
+        if (Crossfade is not null) 
+            await Crossfade.ExecuteAsync();
+
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text = HomeResource.Title, OnClick = OnButtonClick },
+                new() { HRef="/",           Text = HomeResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b) },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
-                new() { HRef="/projects",   Text = ProjectsResource.Title, OnClick = OnButtonClick },
-                new() { HRef="/about",      Text = AboutResource.Title, OnClick = OnButtonClick},
+                new() { HRef="/projects",   Text = ProjectResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b) },
+                new() { HRef="/about",      Text = AboutResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b)},
             };
         
         StateHasChanged();
     }
 
-    private void OnButtonClick(EventArgs e, MenuButtonData button)
+    private async Task OnButtonClickAsync(MenuButtonData button)
     {
-        if (button.HRef is not null && button.HRef.Trim('/') != this.NavigationManager.ToBaseRelativePath(this.NavigationManager.Uri)) 
-            this.Crossfade.ExecuteAsync(e);
+        if (button.HRef is not null 
+            && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri) 
+            && Crossfade is not null) 
+        {
+            await Crossfade.ExecuteAsync();
+        }
     }
 }
