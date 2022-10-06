@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 //builder.Services.AddScoped<AuthenticationStateProvider,ServerAuthenticationStateProvider>();
 //builder.Services.AddScoped<SignOutSessionStateManager>();
-builder.Services.AddSingleton<RenderLocation, RenderedOnServer>();
+builder.Services.AddCrossfade(inServerContext: true);
 builder.Services.AddLocalization();
 builder.Services.AddScoped<LazyAssemblyLoader>();
 CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);

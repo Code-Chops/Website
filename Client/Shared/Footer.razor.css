@@ -1,10 +1,11 @@
 ﻿footer {
+	position: relative;
 	display: flex;
 	opacity: .8;
 	align-items: center;
 	flex-direction: column;
-	padding-top: 35px;
-	padding-bottom: 5px;
+	margin-bottom: 85px;
+	margin-top: 50px;
 }
 
 	footer h4 {
@@ -19,4 +20,4 @@
 
 		footer a:hover {
 			color: var(--branding-color-accent);
-		}
+		}	

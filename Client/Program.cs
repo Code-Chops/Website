@@ -19,7 +19,7 @@ public class Program
 
 		// Supply HttpClient instances that include access tokens when making requests to the server project
 		builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CodeChops.Website.ServerAPI"));
-		builder.Services.AddSingleton<RenderLocation, RenderedOnClient>();
+		builder.Services.AddCrossfade(inServerContext: false);
 
 		//builder.Services.AddApiAuthorization();
 

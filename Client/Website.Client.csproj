@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.8.11</Version>
+        <Version>0.8.12</Version>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>

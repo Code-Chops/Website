@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 
 @if (ChildContent is not null)
 {
@@ -9,67 +10,92 @@
 			</span>
 		</div>
 		<div id="crossfade-copy">
-			@ElementCopy
+			@CopiedElement
 		</div>
 	</span>
 }
 	
 <style>
-	#crossfade-copy {
-		transition: opacity @(AnimationDurationInMilliseconds)ms linear;
-		opacity: @(IsInTransition ? 0 : 1);
-		z-index: @(IsInTransition ? 101 : 0);
-		visibility: @(IsInTransition ? "visible" : "hidden")
-	}	
+#crossfade-copy {
+	transition: opacity @(AnimationDurationInMilliseconds)ms linear;
+	opacity: @(IsInTransition ? 0 : 1);
+	z-index: @(IsInTransition ? 101 : -1);
+	visibility: @(IsInTransition ? "visible" : "hidden")
+}	
 </style>
 
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-	private IJSObjectReference JsObject { get; set; } = null!;
 	[Parameter] public RenderFragment? ChildContent { get; set; }
-	[Parameter] public MarkupString ElementCopy { get; set; }
-	private bool IsInTransition { get; set; }
+	[Parameter] public MarkupString CopiedElement { get; set; }
 	[Parameter] public int AnimationDurationInMilliseconds { get; set; } = 350;
-	[Parameter] public bool Prerender { get; set; }
+	[Parameter] public bool PrerenderState { get; set; }
 	[Inject] public NavigationManager NavigationManager { get; set; } = null!;
 	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
+	[Parameter] public bool RegisterOnNavigationChanged { get; set; } = true;
+	private bool IsInTransition { get; set; }
+	private IJSObjectReference? JsObject { get; set; }
+	private static string? PreviousRelativeUrl { get; set; }
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
 		if (RenderLocation is RenderedOnClient)
-			JsObject = ((IJSInProcessRuntime)JsRuntime).Invoke<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
+			JsObject = await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
+
+		if (RegisterOnNavigationChanged)
+		{
+			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+			NavigationManager.LocationChanged += OnNavigationChanged;
+		}
 	}
 
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (PrerenderState && !firstRender && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
+			LoadCrossfadeState();
+	}
+
+	private async void OnNavigationChanged(object? o, LocationChangedEventArgs e)
+	{
+		if (NavigationManager.ToBaseRelativePath(NavigationManager.Uri) == PreviousRelativeUrl)
+			return;
+
+		await ExecuteAsync();
+	}
+	
 	public async Task ExecuteAsync()
 	{
+		if (!PrerenderState)
+			LoadCrossfadeState();
+		
 		IsInTransition = true;
 
-		if (!Prerender)
-		{
-			await LoadCrossfadeStateAsync();
-			StateHasChanged();
-		}
+		StateHasChanged();
 		
 		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
 			IsInTransition = false;
-			ElementCopy = new(null!);
+			CopiedElement = (MarkupString)null!;
+			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 			StateHasChanged();
 		});
 	}
-	
-	protected override async Task OnAfterRenderAsync(bool firstRender)
+
+	private void LoadCrossfadeState()
 	{
-		if (Prerender) 
-			await Task.Delay(500).ContinueWith(_ => LoadCrossfadeStateAsync());
-	}
-	
-	private async Task LoadCrossfadeStateAsync()
-	{
-		if (ElementCopy.Value is not null) return;
+		if (CopiedElement.Value is not null)
+			return;
+
+		if (JsObject is null) return;
 		
-		ElementCopy = (MarkupString)await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<string>("copyElement", "crossfade-source", "crossfade-copy", Prerender);
+		CopiedElement = (MarkupString)((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
 
 		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		if (RegisterOnNavigationChanged)
+			NavigationManager.LocationChanged -= OnNavigationChanged;
 	}
 }

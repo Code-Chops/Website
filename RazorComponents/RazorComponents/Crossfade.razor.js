@@ -1,11 +1,13 @@
 ﻿window.copyElement = (sourceId, copyId, preloadCrossfade) =>
 {
     const sourceElement = document.getElementById(sourceId);
-    if (sourceElement == null) return;
+    if (sourceElement == null)
+        return;
     
     const node = sourceElement?.firstChild;
     const sourceHtml = node?.outerHTML;
-    if (sourceHtml == null) return;
+    if (sourceHtml == null)
+        return;
 
     if (preloadCrossfade) {
         for (let element of getDescendantNodes(sourceElement)) {
@@ -34,18 +36,6 @@ const getDescendantNodes = (node, all = []) => {
     return all;
 }
 
-// window.scrollElements = (sourceId, copyId) => {
-//     const sourceElement = document.getElementById(sourceId);
-//    
-//     if (sourceElement == null) return;
-//    
-//     for (let element of getDescendantNodes(sourceElement)) {
-//         if (element.id === "") continue;
-//
-//         scroll(element, copyId, element.id);
-//     }
-// }
-
 const scroll = (element, copyId, scrollElementId) => {
     if (element == null || element.scrollTop === 0)
         return;
@@ -56,7 +46,10 @@ const scroll = (element, copyId, scrollElementId) => {
         return;
 
     const scrollElement = copyElement.querySelector('#'+ scrollElementId);
- 
+    
+    if (scrollElement == null)
+        return;
+    
     scrollElement.scrollTop = element.scrollTop;
     scrollElement.scrollLeft = element.scrollLeft;
 }
