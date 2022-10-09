@@ -18,9 +18,4 @@
 @code {
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 	[Parameter] public string? MaxWidth { get; set; } = "900px";
-
-	protected override void OnInitialized()
-    {
-        LanguageSelector.ChangedEvent += StateHasChanged;
-    }
 }

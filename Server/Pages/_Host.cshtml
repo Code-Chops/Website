@@ -49,7 +49,7 @@
     
         <component type="typeof(App)" render-mode="WebAssemblyPrerendered" />
         <div id="blazor-error-ui">
-            @Html.Raw(CodeChops.Website.Client.Resources.IResourceManager<IGeneralResource, IGeneralResourceEnum>.GetResource().Error)
+            @Html.Raw(GeneralResource.Error)
             <a class="dismiss">🗙</a>
             </div>
         <script src="_framework/blazor.webassembly.js"></script>

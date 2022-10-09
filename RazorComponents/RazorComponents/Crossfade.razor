@@ -17,10 +17,9 @@
 	
 <style>
 #crossfade-copy {
-	transition: opacity @(AnimationDurationInMilliseconds)ms linear;
-	opacity: @(IsInTransition ? 0 : 1);
-	z-index: @(IsInTransition ? 101 : -1);
-	visibility: @(IsInTransition ? "visible" : "hidden")
+	transition: opacity @(AnimationDurationInMilliseconds)ms linear !important;
+	opacity: @(IsInTransition ? 0 : 1) !important;
+	z-index: @(IsInTransition ? 101 : -1) !important;
 }	
 </style>
 
@@ -49,10 +48,10 @@
 		}
 	}
 
-	protected override void OnAfterRender(bool firstRender)
+	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		if (PrerenderState && !firstRender && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
-			LoadCrossfadeState();
+		if (PrerenderState && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
+			await LoadCrossfadeStateAsync();
 	}
 
 	private async void OnNavigationChanged(object? o, LocationChangedEventArgs e)
@@ -66,7 +65,7 @@
 	public async Task ExecuteAsync()
 	{
 		if (!PrerenderState)
-			LoadCrossfadeState();
+			await LoadCrossfadeStateAsync();
 		
 		IsInTransition = true;
 
@@ -81,14 +80,14 @@
 		});
 	}
 
-	private void LoadCrossfadeState()
+	private async Task LoadCrossfadeStateAsync()
 	{
 		if (CopiedElement.Value is not null)
 			return;
 
 		if (JsObject is null) return;
 		
-		CopiedElement = (MarkupString)((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
+		CopiedElement = (MarkupString)await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
 
 		StateHasChanged();
 	}

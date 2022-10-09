@@ -1,6 +1,5 @@
 ﻿@using CodeChops.Website.Client.Pages.Projects
 @using CodeChops.Website.Client.Pages.About
-@using CodeChops.Website.Client.Pages.Blog
 @using CodeChops.Website.Client.Pages.Home
 @inherits LayoutComponentBase
 
@@ -19,12 +18,12 @@
              Buttons="Buttons">
          
         <ColorModeSelector />
-        <LanguageSelector />
+        <LanguageSelector TLanguageCache="LanguageCache" />
     </MenuBar>
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="false">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="true">
         <main id="main">
             @Body
             <Footer></Footer>
@@ -60,25 +59,15 @@
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    private static IHomeResource HomeResource { get; set; } = null!;
-    private static IBlogResource BlogResource { get; set;} = null!;
-    private static IProjectResource ProjectResource { get; set;} = null!;
-    private static IAboutResource AboutResource { get; set;} = null!;
-    
+
     protected override async Task OnInitializedAsync()
     {
         await OnLanguageChangedAsync();
-        
-        LanguageSelector.ChangedEvent += async () => await OnLanguageChangedAsync();
+        NavigationManager.LocationChanged += async (e, o) => await OnLanguageChangedAsync();
     }
 
     private async Task OnLanguageChangedAsync()
     {
-        HomeResource = IResourceManager<IHomeResource, IHomeResourceEnum>.GetResource();
-        BlogResource = IResourceManager<IBlogResource, IBlogResourceEnum>.GetResource();
-        ProjectResource = IResourceManager<IProjectResource, IProjectResourceEnum>.GetResource();
-        AboutResource = IResourceManager<IAboutResource, IAboutResourceEnum>.GetResource();
-        
         if (Crossfade is not null) 
             await Crossfade.ExecuteAsync();
 

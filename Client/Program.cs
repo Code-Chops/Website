@@ -1,4 +1,5 @@
 using CodeChops.Website.Client.Layout;
+using CodeChops.Website.Client.Resources;
 using CodeChops.Website.RazorComponents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
@@ -27,7 +28,7 @@ public class Program
 
 		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
 		var defaultLanguageCode = await jsRuntime.InvokeAsync<string>("blazorCulture.get");
-		LanguageSelector.SetNewCulture(defaultLanguageCode);
+		LanguageCache.SetNewLanguage(defaultLanguageCode);
 
 		var value = await jsRuntime.InvokeAsync<string>("blazorColorMode.get");
 		var colorMode = value == nameof(ColorMode.DarkMode)
@@ -43,12 +44,12 @@ public class Program
 
 	public static void ConfigureSharedServices(IServiceCollection services, string? defaultLanguageCode = null)
 	{
-		var culture = defaultLanguageCode ?? LanguageSelector.SupportedLanguages.First();
+		var culture = defaultLanguageCode ?? LanguageSelector<LanguageCache>.SupportedLanguages.First();
 
 		services.Configure<RequestLocalizationOptions>(options =>
 		{
 			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(culture);
-			options.SupportedUICultures = LanguageSelector.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
+			options.SupportedUICultures = LanguageSelector<LanguageCache>.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
 		});
 	}
 }

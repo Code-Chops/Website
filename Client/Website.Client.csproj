@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.8.12</Version>
+        <Version>0.8.13</Version>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
@@ -22,7 +22,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.26.3" />
+        <PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.27.1" />
         <PackageReference Include="CodeChops.MagicEnums" Version="3.0.2" />
         <PackageReference Include="ColorHelper" Version="1.8.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />

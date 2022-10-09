@@ -1,19 +1,20 @@
-﻿@inherits ResourcedComponent<IAboutResource, IAboutResourceEnum>
-@page "/about"
+﻿@page "/about"
+@inherits ResourcedComponent<LanguageCache>
 
 <Content>
 	<Box>
-		<Title Value="@Resource.Title"></Title>
+		<Title Value="@AboutResource.Title"></Title>
+
 		<p>
-			@Resource.Paragraph1
+			@AboutResource.Paragraph1
 		</p>
 
 		<p>
-			@Resource.Paragraph2
+			@AboutResource.Paragraph2
 		</p>
 
 		<p>
-			@Resource.Paragraph3
+			@AboutResource.Paragraph3
 		</p>
 		
 		<p>
@@ -56,7 +57,7 @@
 		</p>
 		
 		<div id="chamber-of-commerce">
-			@Resource.ChamberOfCommerce
+			@AboutResource.ChamberOfCommerce
 		</div>
 	</Box>
 </Content>

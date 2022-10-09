@@ -1,14 +1,15 @@
-﻿@inherits ResourcedComponent<IHomeResource, IHomeResourceEnum>
-@page "/"
+﻿@page "/"
+@inherits ResourcedComponent<LanguageCache>
 
 <Content>
 	<Box>
-		<Title Value="@Resource.Title" AlternativeHeader="@Resource.FullTitle" />
+		<Title Value="@HomeResource.Title" AlternativeHeader="@HomeResource.FullTitle" />
+
 		<p>
-			@Resource.Paragraph1
+			@HomeResource.Paragraph1
 		</p>
 		<p>
-			@((MarkupString)Resource.Paragraph2)
+			@((MarkupString)HomeResource.Paragraph2)
 		</p>
 		@*	<p>
 			(websites, applications, games)
@@ -17,7 +18,7 @@
 		</p>*@
 		
 		<div id="author">
-			@Resource.Author
+			@HomeResource.Author
 		</div>
 	</Box>
 </Content>

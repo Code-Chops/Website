@@ -1,20 +1,13 @@
-﻿using CodeChops.ImplementationDiscovery;
-using CodeChops.Website.Client.Resources;
+﻿using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Projects;
 
-[DiscoverImplementations]
-public partial interface IProjectResource : IResourceManager<IProjectResource, IProjectResourceEnum>
+public record ProjectResource : Resource<ProjectResource>
 {
-	string Title { get; }
+	public static string Title => CreateMember("Projects");
 }
 
-public record ProjectResourceEN : Resource<ProjectResourceEN>, IProjectResource
+public record ProjectResourceNL : Resource<ProjectResourceNL>
 {
-	public string Title { get; }	= CreateMember("Projects");
-}
-
-public record ProjectResourceNL : Resource<ProjectResourceNL>, IProjectResource
-{
-	public string Title { get; }	= CreateMember("Projecten");
+	public static string Title { get; }	= CreateMember("Projecten");
 }

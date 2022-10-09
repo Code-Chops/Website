@@ -1,20 +1,13 @@
-﻿using CodeChops.ImplementationDiscovery;
-using CodeChops.Website.Client.Resources;
+﻿using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Blog;
 
-[DiscoverImplementations]
-public partial interface IBlogResource : IResourceManager<IBlogResource, IBlogResourceEnum>
+public record BlogResource : Resource<BlogResource>
 {
-	string Title { get; }
+	public static string Title => CreateMember("Blog");
 }
 
-public record BlogResourceEN : Resource<BlogResourceEN>, IBlogResource
+public record BlogResourceNL : Resource<BlogResourceNL>
 {
-	public string Title { get; } = CreateMember("Blog");
-}
-
-public record BlogResourceNL : Resource<BlogResourceNL>, IBlogResource
-{
-	public string Title { get; } = CreateMember("Blog");
+	public static string Title { get; } = CreateMember("Blog");
 }

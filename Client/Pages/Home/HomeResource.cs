@@ -1,64 +1,53 @@
-﻿using CodeChops.ImplementationDiscovery;
-using CodeChops.Website.Client.Resources;
+﻿using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client.Pages.Home;
 
-[DiscoverImplementations]
-public partial interface IHomeResource : IResourceManager<IHomeResource, IHomeResourceEnum>
+public record HomeResource : Resource<HomeResource>
 {
-	string Author { get; }
-	string FullTitle	{ get; }
-	string Paragraph1 { get; }
-	string Paragraph2 { get; }
-	string Title	{ get; }
-}
-
-public record HomeResourceEN : Resource<HomeResourceEN>, IHomeResource
-{
-	public string FullTitle { get; }	= CreateMember(@"
+	public static string FullTitle => CreateMember(@"
 Welcome to CodeChops
 ");
 	
-	public string Author { get; }		= CreateMember(@"
+	public static string Author => CreateMember(@"
 Logo, design and website by CodeChops
 ");
 	
-	public string Paragraph1 { get; }	= CreateMember(@"
+	public static string Paragraph1 => CreateMember(@"
 CodeChops delivers top-notch software tailor-made to meet your specific needs. 
 Solutions are built through careful consideration of your company's unique situation during the development process
 ");
 	
-	public string Paragraph2 { get; }	= CreateMember(@"
+	public static string Paragraph2 => CreateMember(@"
 The current portfolio varies from front-end to back-end (see <a href=""projects"">projects</a>). 
 CodeChops preferably delivers full-stack solutions in order to provide a seamless integrated experience.
 	");
 	
-	public string Title { get; }		= CreateMember(@"
+	public static string Title => CreateMember(@"
 Welcome
 ");
 }
 
-public record HomeResourceNL : Resource<HomeResourceNL>, IHomeResource
+public record HomeResourceNL : Resource<HomeResourceNL>
 {
-	public string FullTitle { get; }	= CreateMember(@"
+	public static string FullTitle { get; }		= CreateMember(@"
 Welkom bij CodeChops
 ");
 	
-	public string Author { get; }		= CreateMember(@"
+	public static string Author { get; }		= CreateMember(@"
 Logo, design en website door CodeChops
 ");
 	
-	public string Paragraph1 { get; }	= CreateMember(@"
+	public static string Paragraph1 { get; }	= CreateMember(@"
 CodeChops focust zich op het maken van high-end software die precies op jouw wensen aansluit.
 Tijdens het ontwikkelproces wordt er zorgvuldig rekening gehouden met de unieke situatie van jouw bedrijf.
 ");
 	
-	public string Paragraph2 { get; }	= CreateMember(@"
+	public static string Paragraph2 { get; }	= CreateMember(@"
 De huidige portfolio varieert van front-end tot back-end (zie <a href=""projects"">projecten</a>).
 CodeChops levert hierbij graag full-stack oplossingen om zo een naadloze geïntegreerde ervaring te bieden.
 ");
 	
-	public string Title { get; }		= CreateMember(@"
+	public static string Title { get; }			= CreateMember(@"
 Welkom
 ");
 }

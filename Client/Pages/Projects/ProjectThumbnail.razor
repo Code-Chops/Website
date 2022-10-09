@@ -22,8 +22,6 @@
 		var id = Title.Replace(' ', '_');
 		ImageId = $"Image{id}";
 		ThumbnailId = $"Thumbnail{id}";
-		
-        LanguageSelector.ChangedEvent += StateHasChanged;
 	}
 
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)

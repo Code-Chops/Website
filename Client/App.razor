@@ -21,9 +21,9 @@
             <LayoutView Layout="@typeof(MainLayout)">
                 <Content>
                     <Box>
-                        <Title Value="@(Resource.PageNotFound)" AlternativeHeader="@Resource.PageNotFound"></Title>
+                        <Title Value="@(GeneralResource.PageNotFound)" AlternativeHeader="@GeneralResource.PageNotFound"></Title>
                         <p>
-                            @Resource.PageNotFound
+                            @((MarkupString)GeneralResource.PageNotFound)
                         </p>
                     </Box>
                 </Content>
@@ -32,8 +32,3 @@
     </Router>
     @*    </CascadingAuthenticationState>
 *@</Splash>
-
-
-@code {
-    private IGeneralResource Resource { get; } = IResourceManager<IGeneralResource, IGeneralResourceEnum>.GetResource();
-}

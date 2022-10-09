@@ -1,4 +1,6 @@
-﻿@using System.Globalization
+﻿@typeparam TLanguageCache where TLanguageCache : ILanguageCache
+@inherits ResourcedComponent<TLanguageCache>
+@using System.Globalization
 @using System.Collections.Immutable;
 
 @if (FlagsByLanguageCode.Any())
@@ -12,50 +14,43 @@
 	[Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 	[Inject] private NavigationManager UriHelper { get; set; } = null!;
 	
-	internal static event Action? ChangedEvent;
-
 	/// <summary>
 	/// The first culture is the default culture.
 	/// </summary>
 	public static IReadOnlyDictionary<string, string> FlagsByLanguageCode { get; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) 
 	{ 
-		["en"] = "🇬🇧", ["nl"] = "🇳🇱"
+		["EN"] = "🇬🇧", ["NL"] = "🇳🇱"
 	};
 	public static ImmutableList<string> SupportedLanguages { get; } = FlagsByLanguageCode.Keys.ToImmutableList();
 	public string CurrentLanguageFlag { get; set; } = null!;
-	public static string CurrentLanguageCode { get; private set; } = FlagsByLanguageCode.First().Key;
+
 	private MenuButtonData MenuButtonData { get; set; }
 	
 	protected override void OnInitialized()
 	{
-		this.MenuButtonData = new() { OnClick = (e, _) => ChangeLanguageAsync(e) };
-		SetCurrentLanguageFlag();
+		MenuButtonData = new() { OnClick = (e, _) => ChangeLanguageAsync(e) };
+		SetLanguageFlag();
 	}
 
 	private async Task ChangeLanguageAsync(EventArgs? e)
 	{
 		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
 
-		var index = SupportedLanguages.IndexOf(CurrentLanguageCode);
+		var index = SupportedLanguages.IndexOf(TLanguageCache.CurrentLanguageCode);
 		var newIndex = (index + 1) % SupportedLanguages.Count;
-		var newLanguage = SupportedLanguages[newIndex];
+		var newLanguageCode = SupportedLanguages[newIndex];
 
-		SetNewCulture(newLanguage);
-		SetCurrentLanguageFlag();
+		TLanguageCache.SetNewLanguage(newLanguageCode);
+		SetLanguageFlag();
 
-		ChangedEvent?.Invoke();
+		TriggerLanguageChangedEvent(newLanguageCode);
 		
-		await JsRuntime.InvokeVoidAsync("blazorCulture.set", newLanguage);
+		await JsRuntime.InvokeVoidAsync("blazorCulture.set", newLanguageCode);
 	}
 
-	public static void SetNewCulture(string languageCode)
+	private void SetLanguageFlag()
 	{
-		CurrentLanguageCode = languageCode;
-	}
-
-	private void SetCurrentLanguageFlag()
-	{
-		if (!FlagsByLanguageCode.TryGetValue(CurrentLanguageCode, out var flag)) return;
+		if (!FlagsByLanguageCode.TryGetValue(TLanguageCache.CurrentLanguageCode, out var flag)) return;
 
 		CurrentLanguageFlag = flag;
 		StateHasChanged();

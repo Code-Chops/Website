@@ -1,22 +1,14 @@
-using CodeChops.ImplementationDiscovery;
 using CodeChops.Website.Client.Resources;
 
 namespace CodeChops.Website.Client;
 
-[DiscoverImplementations]
-public partial interface IGeneralResource : IResourceManager<IGeneralResource, IGeneralResourceEnum>
+public record GeneralResource : Resource<GeneralResource>
 {
-	string PageNotFound { get; }
-	string Error { get; }
-}
-
-public record GeneralResourceEN : Resource<GeneralResourceEN>, IGeneralResource
-{
-	public string PageNotFound { get; } = CreateMember(@"
+	public static string PageNotFound	=> CreateMember(@"
 Sorry, this page doest not exist.
 ");
 	
-	public string Error { get; }		= CreateMember(@"
+	public static string Error			=> CreateMember(@"
 An unhandled error has occurred. Please send an angry e-mail to 
             <a href=""mailto: hello@codechops.nl"">hello@codechops.nl</a>
             or 
@@ -25,13 +17,13 @@ An unhandled error has occurred. Please send an angry e-mail to
 ");
 }
 
-public record GeneralResourceNL : Resource<GeneralResourceNL>, IGeneralResource
+public record GeneralResourceNL : Resource<GeneralResourceNL>
 {
-	public string PageNotFound { get; } = CreateMember(@"
+	public static string PageNotFound { get; }	= CreateMember(@"
 Sorry, deze pagina bestaat niet.
 ");
 	
-	public string Error { get; }		= CreateMember(@"
+	public static string Error { get; }			= CreateMember(@"
 Er is een fout opgetreden. Stuur een boze e-mail naar 
             <a href=""mailto: hello@codechops.nl"">hello@codechops.nl</a>
             of 

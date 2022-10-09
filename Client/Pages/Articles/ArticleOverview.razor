@@ -1,9 +1,9 @@
-﻿@inherits ResourcedComponent<IArticlesResource, IArticlesResourceEnum>
-@page "/Articles"
+﻿@page "/Articles"
+@inherits ResourcedComponent<LanguageCache>
 
 <Content>
 	<Box>
-		<Title Value="@Resource.Title"></Title>
+		<Title Value="@ArticlesResource.Title"></Title>
 		<Box>
 			<Article_ImplicitUsings/>
 		</Box>

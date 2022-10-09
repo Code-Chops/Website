@@ -1,30 +1,30 @@
-﻿using CodeChops.ImplementationDiscovery;
-using CodeChops.MagicEnums.Core;
-using CodeChops.Website.Client.Layout;
-using CodeChops.Website.Client.Pages.About;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace CodeChops.Website.Client.Resources;
 
-public abstract class ResourcedComponent<TBase, TImplementationEnum> : ComponentBase, IDisposable
-	where TBase : IResourceManager<TBase, TImplementationEnum> 
-	where TImplementationEnum : ImplementationsEnum<TImplementationEnum, TBase>, IMagicEnumCore<TImplementationEnum, DiscoveredObject<TBase>>, new() 
+public abstract class ResourcedComponent<TLanguageCache> : ComponentBase, IDisposable
+	where TLanguageCache : ILanguageCache
 {
-	protected TBase Resource { get; set; } = IResourceManager<TBase, TImplementationEnum>.GetResource();
+	internal static event Action<string>? LanguageChangedEvent;
 	
 	protected override void OnInitialized()
 	{
-		LanguageSelector.ChangedEvent += this.OnLanguageChanged;
-	}
-	
-	private void OnLanguageChanged()
-	{
-		this.Resource = IResourceManager<TBase, TImplementationEnum>.GetResource();
-		this.StateHasChanged();
+		LanguageChangedEvent += this.OnLanguageChanged;
 	}
 
+	protected void TriggerLanguageChangedEvent(string newLanguage)
+	{
+		LanguageChangedEvent?.Invoke(newLanguage);
+	}
+	
+	private void OnLanguageChanged(string newLanguage)
+	{
+		TLanguageCache.SetNewLanguage(newLanguage);
+		this.StateHasChanged();
+	}
+	
 	public void Dispose()
 	{
-		LanguageSelector.ChangedEvent -= this.OnLanguageChanged;
+		LanguageChangedEvent -= this.OnLanguageChanged;
 	}
 }
