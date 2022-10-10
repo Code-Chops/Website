@@ -54,6 +54,7 @@
     [Parameter] public ICollection<MenuButtonData> Buttons { get; set; } = new List<MenuButtonData>();
     [Parameter] public int CollapseWidth { get; set; } = 720;
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public bool FadeOut { get; set; } = true;
 
     private bool IsCollapsed { get; set; } = true;
 
@@ -103,6 +104,15 @@
 
     .menu-bar {
         height: @(Height)px;
+    }
+    
+    @if (FadeOut) 
+    {
+        <text>
+        .top-bar-shadow.hide {
+            transition: all .25s ease-in;
+        }
+        </text>
     }
 
     @@media (min-width: @(CollapseWidth)px) {
