@@ -80,17 +80,14 @@
                 new() { HRef="/projects",   Text = ProjectResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b) },
                 new() { HRef="/about",      Text = AboutResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b)},
             };
-        
-        StateHasChanged();
     }
 
-    private async Task OnButtonClickAsync(MenuButtonData button)
+    private async Task OnButtonClickAsync(MenuButtonData button, bool forceCrossfade = false)
     {
-        if (button.HRef is not null 
-            && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri) 
-            && Crossfade is not null) 
+        if (forceCrossfade || (button.HRef is not null && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri)))
         {
-            await Crossfade.ExecuteAsync();
+            if (Crossfade is not null) 
+                await Crossfade.ExecuteAsync();
         }
     }
 }

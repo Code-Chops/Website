@@ -263,3 +263,24 @@ p {
     line-height: 3 !important;
     margin-top: -10px !important;
 }
+
+#bmc-wbtn {
+    background: rgba(var(--accentcolor-rgb), .6) !important;
+    z-index: 102 !important;
+    right: unset !important;
+    left: 18px !important;
+}
+
+#bmc-wbtn img {
+    height: 25px !important;
+    width: 25px !important;
+}
+
+iframe {
+    opacity: 0.9 !important;
+    right: unset !important;
+    left: 18px !important;
+    filter: hue-rotate(321deg) grayscale(0.5) !important;
+    z-index: 102 !important;
+    max-height: 555px !important;
+}

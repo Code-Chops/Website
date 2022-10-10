@@ -19,8 +19,7 @@
 
 	static ProjectOverview()
 	{
-		var random = new Random();
-		ProjectTitles = ProjectOverviewTitleResource.GetMembers().OrderBy(_ => random.Next()).ToList();
+		ProjectTitles = ProjectOverviewTitleResource.GetMembers().OrderBy(_ => Random.Shared.Next()).ToList();
 	}
 	
 	protected override void OnComponentInitialized()
