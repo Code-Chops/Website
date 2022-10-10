@@ -267,8 +267,6 @@ p {
 #bmc-wbtn {
     background: rgba(var(--accentcolor-rgb), .6) !important;
     z-index: 102 !important;
-    right: unset !important;
-    left: 18px !important;
 }
 
 #bmc-wbtn img {
@@ -278,9 +276,9 @@ p {
 
 iframe {
     opacity: 0.9 !important;
-    right: unset !important;
-    left: 18px !important;
     filter: hue-rotate(321deg) grayscale(0.5) !important;
     z-index: 102 !important;
     max-height: 555px !important;
+    transform: scale(0.85) !important;
+    bottom: 50px !important;
 }
