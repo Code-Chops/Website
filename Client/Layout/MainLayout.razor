@@ -18,7 +18,7 @@
              Buttons="Buttons">
          
         <ColorModeSelector />
-        <LanguageSelector TLanguageCache="LanguageCache" />
+        <LanguageSelector />
     </MenuBar>
     
     <div class="border"></div>
@@ -35,6 +35,7 @@
     :root {
         --branding-text-weight:             @Branding.FontWeight;
         --branding-text-shadow:             @Branding.TextShadow;
+        --branding-text-spacing:            @Branding.TextSpacing;
         
         --branding-color-main:              @Branding.Colors.Main;
         --branding-color-accent:            @Branding.Colors.Accent;
@@ -63,7 +64,7 @@
     protected override async Task OnInitializedAsync()
     {
         await OnLanguageChangedAsync();
-        NavigationManager.LocationChanged += async (e, o) => await OnLanguageChangedAsync();
+        NavigationManager.LocationChanged += async (_,_) => await OnLanguageChangedAsync();
     }
 
     private async Task OnLanguageChangedAsync()

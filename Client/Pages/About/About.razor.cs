@@ -1,14 +1,15 @@
 ﻿using CodeChops.Website.Client.Resources;
+// ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.About;
 
 public interface IAboutResource
 {
-	public static abstract AboutResource ChamberOfCommerce { get; }
-	public static abstract AboutResource Paragraph1 { get; }
-	public static abstract AboutResource Paragraph2 { get; }
-	public static abstract AboutResource Paragraph3 { get; }
-	public static abstract AboutResource Title { get; }
+	public static abstract string ChamberOfCommerce { get; }
+	public static abstract string Paragraph1 { get; }
+	public static abstract string Paragraph2 { get; }
+	public static abstract string Paragraph3 { get; }
+	public static abstract string Title { get; }
 }
 
 public record AboutResource : Resource<AboutResource>
@@ -36,7 +37,7 @@ Feel free to contact me if you have any questions, remarks or comments. It'll be
 About");
 }
 
-public record AboutResourceNL : Resource<AboutResourceNL>
+public record AboutResourceNL : Resource<AboutResourceNL>, IAboutResource
 {
 	public static string ChamberOfCommerce { get; }	= CreateMember(@"
 KvK-nummer: 86790390 - btw-nummer: NL004317143B09

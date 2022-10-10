@@ -29,6 +29,7 @@ html {
     transition: all .25s ease-in;
     tab-size: 4;
     font-variation-settings: 'wght' var(--branding-text-weight);
+    letter-spacing: var(--branding-text-spacing);
 }
 
 html, body {

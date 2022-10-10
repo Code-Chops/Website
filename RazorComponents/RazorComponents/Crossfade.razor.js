@@ -15,13 +15,12 @@
         
             element.removeEventListener(
                 "scroll",
-                e => scroll(e.currentTarget, copyId, element.id),
-                { passive: true }
+                e => scroll(e.currentTarget, copyId, element.id)
+                
             );
             element.addEventListener(
                 "scroll",
-                e => scroll(e.currentTarget, copyId, element.id),
-                { passive: true }
+                e => scroll(e.currentTarget, copyId, element.id)
             );
         }
     }

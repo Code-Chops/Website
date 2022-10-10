@@ -1,6 +1,17 @@
 ﻿using CodeChops.Website.Client.Resources;
+// ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.Projects;
+
+public record ProjectResource : Resource<ProjectResource>
+{
+	public static string Title => CreateMember("Projects");
+}
+
+public record ProjectResourceNL : Resource<ProjectResourceNL>
+{
+	public static string Title { get; }	= CreateMember("Projecten");
+}
 
 public interface IProjectOverviewResource
 {
@@ -32,6 +43,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 
 public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource>, IProjectOverviewResource
 {
+
 	public static string Baxo						=> CreateMember(@"
 Baxo
 ");

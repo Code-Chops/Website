@@ -1,5 +1,5 @@
-﻿@page "/Projects"
-@inherits ResourcedComponent<LanguageCache>
+﻿@page "/projects"
+@inherits ResourcedComponent
 
 <Content >
 	<span class="title text-center">
@@ -8,44 +8,36 @@
 	<div class="grid">
 		@foreach (var group in ParameterGroups)
 		{
-			<DynamicComponent Type="@typeof(ProjectThumbnail)" Parameters="@group.Value"/>
+			<DynamicComponent Type="@typeof(ProjectThumbnail)" Parameters="@group"/>
 		}
 	</div>
 </Content>
 
 @code {
-	private ImmutableList<ProjectOverviewTitleResource> ProjectTitles { get; set; } = null!;
-	private Dictionary<int, Dictionary<string, object>> ParameterGroups { get; } = new();
+	private static List<ProjectOverviewTitleResource> ProjectTitles { get; }
+	private List<Dictionary<string, object>> ParameterGroups { get; set; } = null!;
 
-	protected override void OnInitialized()
+	static ProjectOverview()
+	{
+		var random = new Random();
+		ProjectTitles = ProjectOverviewTitleResource.GetMembers().OrderBy(_ => random.Next()).ToList();
+	}
+	
+	protected override void OnComponentInitialized()
 	{
 		CreateView();
-	}
-
-	protected override void OnAfterRender(bool firstRender)
-	{
-		if (ProjectTitles.Count == 0)
-			CreateView();
+		LanguageChangedEvent += CreateView;
 	}
 
 	private void CreateView()
 	{
-		var random = new Random();
-		ProjectTitles = ProjectOverviewTitleResource.GetMembers().OrderBy(_ => random.Next()).ToImmutableList();
-		
-		for (var i = 0; i < ProjectTitles.Count; i++)
-			ParameterGroups.Add(i, GetThumbnailParameters(i));	
-	}
-	
-	private Dictionary<string, object> GetThumbnailParameters(int index)
-	{
-		var titleResource = ProjectTitles[index];
-		
-		return new()
-		{
-			["ImagePath"]	= $"images/projects/{titleResource.Name}.png",
-			["Title"]		= titleResource.Value,
-			["Text"]		= (MarkupString)ProjectOverviewTextResource.GetSingleMember(titleResource.Name),
-		};
+		ParameterGroups = ProjectTitles
+			.Select(member => new Dictionary<string, object>()
+				{
+					["ImagePath"] = $"images/projects/{member.Name}.png",
+					["Title"] = member.Value,
+					["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
+				})
+			.ToList();
 	}
 }

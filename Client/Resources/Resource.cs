@@ -1,12 +1,13 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using CodeChops.ImplementationDiscovery;
 using CodeChops.MagicEnums;
 
 namespace CodeChops.Website.Client.Resources;
 
-
 public abstract record Resource<TSelf> : MagicStringEnum<TSelf>, IResource
-	where TSelf : Resource<TSelf>, new()
+	where TSelf : Resource<TSelf>
 {
 	private static string DefaultResourceName { get; }
 	private static string ThisResourceName { get; }
@@ -15,7 +16,7 @@ public abstract record Resource<TSelf> : MagicStringEnum<TSelf>, IResource
 	static Resource()
 	{
 		ThisResourceName = typeof(TSelf).Name;
-		
+
 		var languageCode = ThisResourceName[^2..];
 		if (Char.IsUpper(languageCode[0]) && Char.IsUpper(languageCode[1]))
 		{
@@ -27,46 +28,68 @@ public abstract record Resource<TSelf> : MagicStringEnum<TSelf>, IResource
 			ThisLanguageCode = LanguageCache.DefaultLanguageCode;
 			DefaultResourceName = ThisResourceName;
 		}
+		
+		foreach (var property in typeof(TSelf).GetProperties(BindingFlags.Public | BindingFlags.Static))
+			property.GetGetMethod()!.Invoke(obj: null, parameters: null);
 	}
 
 	protected new static string CreateMember(string? value = null, Func<TSelf>? memberCreator = null, [CallerMemberName] string? name = null)
 		=> GetOrCreateMember(name: name, value: value, memberCreator);
-	
+
 	protected new static string CreateMember<TMember>(Func<TMember>? memberCreator = null, string? value = null, [CallerMemberName] string? name = null)
 		where TMember : TSelf
 		=> GetOrCreateMember<TMember>(name: name!, value: value, memberCreator);
-	
-	protected new static string GetOrCreateMember(string name) 
-		=> GetOrCreateMember<TSelf>(name: name, value: name);
 
+	protected new static string GetOrCreateMember(string name)
+		=> GetOrCreateMember(name: name, value: name);
+
+	// ReSharper disable once MethodOverloadWithOptionalParameter
 	protected new static string GetOrCreateMember([CallerMemberName] string? name = null, string? value = null, Func<TSelf>? memberCreator = null)
 	{
-		if (name is null) 
+		if (name is null)
 			throw new InvalidOperationException($"Empty name: Unable to retrieve resource {ThisResourceName} for language {LanguageCache.CurrentLanguageCode}.");
 
-		if (ThisResourceName != DefaultResourceName || ThisLanguageCode == LanguageCache.CurrentLanguageCode)
-			return GetOrCreateMember<TSelf>(name, valueCreator: () => value ?? throw new InvalidOperationException($"Value unknown for resource {ThisResourceName}.{name}."));
+		if (ThisResourceName != DefaultResourceName || ThisLanguageCode == LanguageCache.CurrentLanguageCode || !ResourceEnum.IsInitialized)
+			return GetOrCreateMember(
+				name: name,
+				valueCreator: () => value ?? throw new InvalidOperationException($"Value unknown for resource {ThisResourceName}.{name}."),
+				memberCreator: memberCreator).Value;
 
+		return GetSingleMember(name);
+	}
+
+	public new static string GetSingleMember(string name)
+	{
+		return TryGetSingleMember(name, out var resource)
+			? resource.Value
+			: throw new InvalidOperationException($"Unable to retrieve resource {name}.");
+	}
+
+	public new static bool TryGetSingleMember(string name, [NotNullWhen(true)] out IMagicEnum<string>? member)
+	{
 		var newResourceName = DefaultResourceName + LanguageCache.CurrentLanguageCode;
 
-		if (!IResourceEnum.TryGetSingleMember(newResourceName, out var specificResource))
-		{
-			if (!IResourceEnum.TryGetSingleMember(DefaultResourceName, out specificResource))
-				return null!; //throw new InvalidOperationException($"Unable to retrieve resource {newResourceName} or {DefaultResourceName}.");
-		}
+		if (!ResourceEnum.TryGetSingleMember(newResourceName, out var specificResource))
+			if (!ResourceEnum.TryGetSingleMember(DefaultResourceName, out specificResource))
+				throw new InvalidOperationException($"Unable to retrieve resource {newResourceName} or {DefaultResourceName}.");
 
 		var foreignResource = (IMagicEnum<string>)specificResource.Value.UninitializedInstance;
-		
-		return foreignResource.TryGetSingleMember(name, out var resource)
-			? resource.Value
-			: throw new InvalidOperationException($"Unable to retrieve resource {specificResource}.{name}.");
+
+		return foreignResource.TryGetSingleMember(name, out member);
 	}
-	
-	public new static string GetSingleMember(string memberName)
-		=> GetOrCreateMember(memberName);
 }
 
-[DiscoverImplementations]
+[DiscoverImplementations(enumName: "ResourceEnum")]
 public partial interface IResource
 {
+}
+
+public partial record ResourceEnum : ImplementationsEnum<ResourceEnum, IResource>
+{
+	public static bool IsInitialized { get; }
+
+	static ResourceEnum()
+	{
+		IsInitialized = true;
+	}
 }

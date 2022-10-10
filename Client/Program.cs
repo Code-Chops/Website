@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using CodeChops.Website.Client.Layout;
 using CodeChops.Website.Client.Resources;
 using CodeChops.Website.RazorComponents;
@@ -15,14 +16,9 @@ public class Program
 		var builder = WebAssemblyHostBuilder.CreateDefault(args);
 		builder.RootComponents.Add<HeadOutlet>("head::after");
 
-		//builder.Services.AddHttpClient("CodeChops.Website.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-		//	.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-		// Supply HttpClient instances that include access tokens when making requests to the server project
 		builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CodeChops.Website.ServerAPI"));
 		builder.Services.AddCrossfade(inServerContext: false);
 
-		//builder.Services.AddApiAuthorization();
 
 		var host = builder.Build();
 
@@ -38,18 +34,20 @@ public class Program
 		ColorModeSelector.SetMode(colorMode);
 
 		ConfigureSharedServices(builder.Services, defaultLanguageCode);
-		
+
+		RuntimeHelpers.RunClassConstructor(typeof(ResourceEnum).TypeHandle);
+
 		await host.RunAsync();
 	}
 
 	public static void ConfigureSharedServices(IServiceCollection services, string? defaultLanguageCode = null)
 	{
-		var culture = defaultLanguageCode ?? LanguageSelector<LanguageCache>.SupportedLanguages.First();
+		var culture = defaultLanguageCode ?? LanguageSelector.SupportedLanguages.First();
 
 		services.Configure<RequestLocalizationOptions>(options =>
 		{
 			options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(culture);
-			options.SupportedUICultures = LanguageSelector<LanguageCache>.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
+			options.SupportedUICultures = LanguageSelector.SupportedLanguages.Select(language => new CultureInfo(language)).ToList();
 		});
 	}
 }

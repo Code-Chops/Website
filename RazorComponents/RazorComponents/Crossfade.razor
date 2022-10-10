@@ -14,13 +14,14 @@
 		</div>
 	</span>
 }
-	
+
 <style>
-#crossfade-copy {
-	transition: opacity @(AnimationDurationInMilliseconds)ms linear !important;
-	opacity: @(IsInTransition ? 0 : 1) !important;
-	z-index: @(IsInTransition ? 101 : -1) !important;
-}	
+	#crossfade-copy {
+		transition: opacity @(AnimationDurationInMilliseconds)ms linear;
+		opacity: @(IsInTransition ? 0 : 1);
+		z-index: @(IsInTransition ? 101 : -1);
+		visibility: @(IsInTransition ? "visible" : "hidden")
+	}
 </style>
 
 @code {
@@ -48,10 +49,11 @@
 		}
 	}
 
-	protected override async Task OnAfterRenderAsync(bool firstRender)
+	protected override void OnAfterRender(bool firstRender)
 	{
-		if (PrerenderState && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
-			await LoadCrossfadeStateAsync();
+		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+		if (PrerenderState && !firstRender && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
+			LoadCrossfadeState();
 	}
 
 	private async void OnNavigationChanged(object? o, LocationChangedEventArgs e)
@@ -61,16 +63,16 @@
 
 		await ExecuteAsync();
 	}
-	
+
 	public async Task ExecuteAsync()
 	{
 		if (!PrerenderState)
-			await LoadCrossfadeStateAsync();
-		
+			LoadCrossfadeState();
+
 		IsInTransition = true;
 
 		StateHasChanged();
-		
+
 		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
 			IsInTransition = false;
@@ -80,14 +82,15 @@
 		});
 	}
 
-	private async Task LoadCrossfadeStateAsync()
+	private void LoadCrossfadeState()
 	{
+		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 		if (CopiedElement.Value is not null)
 			return;
 
 		if (JsObject is null) return;
-		
-		CopiedElement = (MarkupString)await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
+
+		CopiedElement = (MarkupString)((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
 
 		StateHasChanged();
 	}

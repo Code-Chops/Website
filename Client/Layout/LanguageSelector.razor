@@ -1,5 +1,4 @@
-﻿@typeparam TLanguageCache where TLanguageCache : ILanguageCache
-@inherits ResourcedComponent<TLanguageCache>
+﻿@inherits ResourcedComponent
 @using System.Globalization
 @using System.Collections.Immutable;
 
@@ -26,7 +25,7 @@
 
 	private MenuButtonData MenuButtonData { get; set; }
 	
-	protected override void OnInitialized()
+	protected override void OnComponentInitialized()
 	{
 		MenuButtonData = new() { OnClick = (e, _) => ChangeLanguageAsync(e) };
 		SetLanguageFlag();
@@ -36,21 +35,21 @@
 	{
 		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
 
-		var index = SupportedLanguages.IndexOf(TLanguageCache.CurrentLanguageCode);
+		var index = SupportedLanguages.IndexOf(LanguageCache.CurrentLanguageCode);
 		var newIndex = (index + 1) % SupportedLanguages.Count;
 		var newLanguageCode = SupportedLanguages[newIndex];
 
-		TLanguageCache.SetNewLanguage(newLanguageCode);
+		LanguageCache.SetNewLanguage(newLanguageCode);
 		SetLanguageFlag();
 
-		TriggerLanguageChangedEvent(newLanguageCode);
+		TriggerLanguageChangedEvent();
 		
 		await JsRuntime.InvokeVoidAsync("blazorCulture.set", newLanguageCode);
 	}
 
 	private void SetLanguageFlag()
 	{
-		if (!FlagsByLanguageCode.TryGetValue(TLanguageCache.CurrentLanguageCode, out var flag)) return;
+		if (!FlagsByLanguageCode.TryGetValue(LanguageCache.CurrentLanguageCode, out var flag)) return;
 
 		CurrentLanguageFlag = flag;
 		StateHasChanged();

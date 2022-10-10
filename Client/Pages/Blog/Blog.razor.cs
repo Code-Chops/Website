@@ -1,4 +1,5 @@
 ﻿using CodeChops.Website.Client.Resources;
+// ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.Blog;
 

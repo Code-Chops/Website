@@ -27,4 +27,8 @@
     <!--<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.1" />-->
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+
 </Project>

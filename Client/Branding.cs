@@ -10,6 +10,7 @@ public static class Branding
 	
 	public static int FontWeight => ColorModeSelector.ColorMode == ColorMode.DarkMode ? 100 : 150;
 	public static string TextShadow => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "-1px" : "1px";
+	public static string TextSpacing => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "0.04px" : "normal";
 
 	public static class Colors
 	{

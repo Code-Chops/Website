@@ -2,24 +2,27 @@
 
 namespace CodeChops.Website.Client.Resources;
 
-public abstract class ResourcedComponent<TLanguageCache> : ComponentBase, IDisposable
-	where TLanguageCache : ILanguageCache
+public abstract class ResourcedComponent : ComponentBase, IDisposable
 {
-	internal static event Action<string>? LanguageChangedEvent;
+	internal static event Action? LanguageChangedEvent;
 	
-	protected override void OnInitialized()
+	protected sealed override void OnInitialized()
 	{
+		this.OnComponentInitialized();
 		LanguageChangedEvent += this.OnLanguageChanged;
 	}
 
-	protected void TriggerLanguageChangedEvent(string newLanguage)
+	protected virtual void OnComponentInitialized()
 	{
-		LanguageChangedEvent?.Invoke(newLanguage);
+	}
+
+	protected void TriggerLanguageChangedEvent()
+	{
+		LanguageChangedEvent?.Invoke();
 	}
 	
-	private void OnLanguageChanged(string newLanguage)
+	private void OnLanguageChanged()
 	{
-		TLanguageCache.SetNewLanguage(newLanguage);
 		this.StateHasChanged();
 	}
 	
