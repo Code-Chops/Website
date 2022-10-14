@@ -272,6 +272,7 @@ p {
 #bmc-wbtn img {
     height: 25px !important;
     width: 25px !important;
+    right: 30px !important;
 }
 
 iframe {

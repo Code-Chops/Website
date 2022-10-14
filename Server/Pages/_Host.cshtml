@@ -49,7 +49,7 @@
             </div>
         </a>
     
-        <component type="typeof(App)" render-mode="WebAssemblyPrerendered" />
+        @(await Html.RenderComponentAsync<App>(RenderMode.WebAssemblyPrerendered))
         <div id="blazor-error-ui">
             @Html.Raw(GeneralResource.Error)
             <a class="dismiss">🗙</a>

@@ -3,18 +3,32 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.9.3.1</Version>
+        <Version>0.9.4.0</Version>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    </PropertyGroup>
+    
+    <PropertyGroup Label="Blazor">
         <BlazorWebAssemblyLoadAllGlobalizationData>false</BlazorWebAssemblyLoadAllGlobalizationData>
         <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
-		<BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+        <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
         <PublishTrimmed>true</PublishTrimmed>
-        <EnablePreviewFeatures>true</EnablePreviewFeatures>
-	    <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
+        <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
+        <BlazorWebAssemblyI18NAssemblies>none</BlazorWebAssemblyI18NAssemblies>
+        <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+        <DebuggerSupport>false</DebuggerSupport>
+        <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+        <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+        <EventSourceSupport>false</EventSourceSupport>
+        <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+        <UseNativeHttpHandler>true</UseNativeHttpHandler>
+        <UseSystemResourceKeys>true</UseSystemResourceKeys>
     </PropertyGroup>
     
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -22,12 +36,12 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.27.1" />
+        <PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.29.6" />
         <PackageReference Include="CodeChops.MagicEnums" Version="3.0.2" />
         <PackageReference Include="ColorHelper" Version="1.8.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.9" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />

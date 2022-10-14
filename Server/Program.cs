@@ -1,5 +1,4 @@
 using CodeChops.Website.RazorComponents;
-using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +7,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddCrossfade(inServerContext: true);
-builder.Services.AddLocalization();
-builder.Services.AddScoped<LazyAssemblyLoader>();
+
 CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
 
 var app = builder.Build();

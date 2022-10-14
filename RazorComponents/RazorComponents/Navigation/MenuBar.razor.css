@@ -42,7 +42,6 @@
     text-shadow: 0 0 .05rem var(--accentcolor);
     font-variation-settings: 'wght' 100;
     margin: unset;
-    font-size: 40px;
     cursor: default;
     padding-top: 4px;
     padding-left: 5px;
@@ -135,7 +134,7 @@
 #title {
     animation: titleSlide 1s;
     animation-fill-mode: both;
-    animation-timing-function: ease-in;
+    animation-timing-function: ease-out;
 }
 
 @keyframes titleSlide {
