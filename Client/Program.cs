@@ -18,8 +18,7 @@ public class Program
 
 		builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CodeChops.Website.ServerAPI"));
 		builder.Services.AddCrossfade(inServerContext: false);
-
-
+		
 		var host = builder.Build();
 
 		var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();

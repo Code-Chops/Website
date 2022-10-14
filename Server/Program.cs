@@ -2,8 +2,6 @@ using CodeChops.Website.RazorComponents;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddCrossfade(inServerContext: true);
@@ -15,7 +13,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseMigrationsEndPoint();
 	app.UseWebAssemblyDebugging();
 }
 else
