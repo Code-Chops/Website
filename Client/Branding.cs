@@ -14,10 +14,11 @@ public static class Branding
 
 	public static class Colors
 	{
-		public static readonly Color Main		= new("#730030");
-		public static readonly Color Accent		= new("#9f607a");
-		public static readonly Color DarkGray	= new("#1e1e1e");
-		public static Color Background => ColorModeSelector.ColorMode == ColorMode.DarkMode ? DarkGray : Color.White;
+		public static readonly FlexColor Main		= new("#730030");
+		public static readonly FlexColor Accent		= new("#9f607a");
+		public static readonly FlexColor DarkGray	= new("#1e1e1e");
+		
+		public static FlexColor Background => ColorModeSelector.ColorMode == ColorMode.DarkMode ? DarkGray : FlexColor.White;
 	}
 
 	public static readonly string BannerText = $@"

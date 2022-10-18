@@ -14,8 +14,8 @@
     </ItemGroup>
     
     <PropertyGroup Label="Package">
-        <Version>0.9.1</Version>
-        <PackageReleaseNotes>Added optional FadeOut to menu.</PackageReleaseNotes>
+        <Version>0.10.0</Version>
+        <PackageReleaseNotes>Added admin portal tools.</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>CodeChops.Website.RazorComponents</Title>
         <Description>Razor components for website.</Description>
@@ -52,21 +52,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+        <PackageReference Include="MudBlazor" Version="5.0.10" />
     </ItemGroup>
     
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\bundle.js.bak" />
-      <_ContentIncludedByDefault Remove="wwwroot\eigenbundle.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\eigenbundle.js.bak" />
-      <_ContentIncludedByDefault Remove="wwwroot\npm-libs\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\npm-libs\index.js.bak" />
-      <_ContentIncludedByDefault Remove="wwwroot\npm-libs\package-lock.json" />
-      <_ContentIncludedByDefault Remove="wwwroot\npm-libs\package.json" />
-      <_ContentIncludedByDefault Remove="wwwroot\npm-libs\package.json.bak" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Content Include="Crossfade.razor.js" />
+      <Folder Include="Navigation\Extensions" />
     </ItemGroup>
     
 </Project>

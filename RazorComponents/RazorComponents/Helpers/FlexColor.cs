@@ -2,14 +2,14 @@
 
 namespace CodeChops.Website.RazorComponents.Helpers;
 
-public readonly record struct Color
+public readonly record struct FlexColor
 {
 	/// <summary>
 	/// HEX representation.
 	/// </summary>
 	public override string ToString() => this.Hex;
 
-	public static Color White { get; } = new(255, 255, 255);
+	public static FlexColor White { get; } = new(255, 255, 255);
 
 	public string Hex { get; }
 	
@@ -20,44 +20,44 @@ public readonly record struct Color
 
 	private RGB Value { get; }
 
-	public Color(byte r, byte g, byte b)
+	public FlexColor(byte r, byte g, byte b)
 		: this(new RGB(r, g, b))
 	{
 	}
 
-	public Color(RGB rgbColor)
+	public FlexColor(RGB rgbColor)
 		: this(ColorConverter.RgbToHex(rgbColor), rgbColor)
 	{
 	}
 
-	public Color(string hexColor)
+	public FlexColor(string hexColor)
 		: this(new HEX(hexColor))
 	{
 	}
 
-	public Color(HEX hexColor) 
+	public FlexColor(HEX hexColor) 
 		: this(hexColor, ColorConverter.HexToRgb(hexColor))
 	{
 	}
 
-	public Color(ColorName colorName)
+	public FlexColor(ColorName colorName)
 		: this(colorName.ToHex(), colorName.ToRgb())
 	{
 	}
 
-	private Color(HEX hexColor, RGB rgbColor)
+	private FlexColor(HEX hexColor, RGB rgbColor)
 	{
 		this.Hex = $"#{hexColor}";
 		this.Rgb = $"{rgbColor.R}, {rgbColor.G}, {rgbColor.B}";
 		this.Value = rgbColor;
 	}
 
-	public readonly Color ChangeBrightness(int delta = 40)
+	public readonly FlexColor ChangeBrightness(int delta = 40)
 	{
 		var r = ChangeBrightnessOfPrimaryColor(this.Value.R);
 		var g = ChangeBrightnessOfPrimaryColor(this.Value.G);
 		var b = ChangeBrightnessOfPrimaryColor(this.Value.B);
-		var color = new Color(r, g, b);
+		var color = new FlexColor(r, g, b);
 
 		return color;
 

@@ -73,7 +73,7 @@ public abstract record Resource<TSelf> : MagicStringEnum<TSelf>, IResource
 			if (!ResourceEnum.TryGetSingleMember(DefaultResourceName, out specificResource))
 				throw new InvalidOperationException($"Unable to retrieve resource {newResourceName} or {DefaultResourceName}.");
 
-		var foreignResource = (IMagicEnum<string>)specificResource.Value.UninitializedInstance;
+		var foreignResource = (IMagicEnum<string>)specificResource.UninitializedInstance;
 
 		return foreignResource.TryGetSingleMember(name, out member);
 	}

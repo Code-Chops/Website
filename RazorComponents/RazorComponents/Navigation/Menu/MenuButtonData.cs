@@ -1,4 +1,4 @@
-﻿namespace CodeChops.Website.RazorComponents.Navigation;
+﻿namespace CodeChops.Website.RazorComponents.Navigation.Menu;
 
 public record struct MenuButtonData
 {
