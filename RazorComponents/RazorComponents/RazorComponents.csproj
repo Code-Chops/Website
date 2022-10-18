@@ -14,8 +14,8 @@
     </ItemGroup>
     
     <PropertyGroup Label="Package">
-        <Version>0.10.0</Version>
-        <PackageReleaseNotes>Added admin portal tools.</PackageReleaseNotes>
+        <Version>0.11.0</Version>
+        <PackageReleaseNotes>Cleanup and added editorconfig.</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>CodeChops.Website.RazorComponents</Title>
         <Description>Razor components for website.</Description>

@@ -84,7 +84,7 @@ public partial interface IResource
 {
 }
 
-public partial record ResourceEnum : ImplementationsEnum<ResourceEnum, IResource>
+public partial record ResourceEnum
 {
 	public static bool IsInitialized { get; }
 

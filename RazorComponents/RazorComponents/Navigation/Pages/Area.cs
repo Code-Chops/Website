@@ -16,7 +16,7 @@ public class Area
 	/// <param name="pages">The area's pages exposed through the menu.</param>
 	public Area(string title, IReadOnlyList<PageReference> pages)
 	{
-		this.Pages = pages?.ToList() ?? throw new ArgumentNullException(nameof(pages));
+		this.Pages = pages.ToList() ?? throw new ArgumentNullException(nameof(pages));
 
 		if (this.Pages.Count == 0) throw new ArgumentException("An area must have at least one accessible page.");
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -110,22 +107,22 @@ public static class NavigationManagerExtensions
 	/// </summary>
 	/// <param name="queryParameters">The query parameters used to build the new query string. Parameters with null values are removed.</param>
 	/// <param name="retainFragment">If true, if a fragment (#subsection) is present, it is kept. Otherwise, it is discarded.</param>
-	public static void ReplaceQueryString(this NavigationManager navigationManager, IReadOnlyDictionary<string, string> queryParameters, bool retainFragment = true)
+	public static void ReplaceQueryString(this NavigationManager navigationManager, IReadOnlyDictionary<string, string?> queryParameters, bool retainFragment = true)
 	{
 		if (queryParameters is null) throw new ArgumentNullException(nameof(queryParameters));
 
 		var queryStringBuilder = new StringBuilder();
 
 		var i = 0;
-		foreach (var pair in queryParameters.Where(pair => pair.Value is not null))
+		foreach (var (key, value) in queryParameters.Where(pair => pair.Value is not null))
 		{
 			queryStringBuilder.Append(++i > 1 ? '&' : '?');
-			queryStringBuilder.Append(UrlEncoder.Default.Encode(pair.Key));
+			queryStringBuilder.Append(UrlEncoder.Default.Encode(key));
 
-			if (pair.Value != "")
+			if (value != "")
 			{
 				queryStringBuilder.Append('=');
-				queryStringBuilder.Append(UrlEncoder.Default.Encode(pair.Value));
+				queryStringBuilder.Append(UrlEncoder.Default.Encode(value!));
 			}
 		}
 
@@ -152,10 +149,10 @@ public static class NavigationManagerExtensions
 
 		var mergedParameters = navigationManager.GetQueryParameters();
 
-		foreach (var pair in queryParameters)
-			mergedParameters[pair.Key] = pair.Value;
+		foreach (var (key, value) in queryParameters)
+			mergedParameters[key] = value;
 
-		navigationManager.ReplaceQueryString(mergedParameters, retainFragment);
+		navigationManager.ReplaceQueryString(mergedParameters!, retainFragment);
 	}
 
 	/// <summary>
