@@ -1,4 +1,4 @@
-﻿namespace CodeChops.Website.Client.Resources;
+﻿namespace CodeChops.Website.RazorComponents.Resources;
 
 public interface ILanguageCache
 {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace CodeChops.Website.Client.Resources;
+namespace CodeChops.Website.RazorComponents.Resources;
 
 public abstract class ResourcedComponent : ComponentBase, IDisposable
 {
-	internal static event Action? LanguageChangedEvent;
+	public static event Action? LanguageChangedEvent;
 	
 	protected sealed override void OnInitialized()
 	{
@@ -16,7 +16,7 @@ public abstract class ResourcedComponent : ComponentBase, IDisposable
 	{
 	}
 
-	protected void TriggerLanguageChangedEvent()
+	protected static void TriggerLanguageChangedEvent()
 	{
 		LanguageChangedEvent?.Invoke();
 	}

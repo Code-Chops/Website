@@ -14,29 +14,20 @@
 </Content>
 
 @code {
-	private static List<ProjectOverviewTitleResource> ProjectTitles { get; }
-	private List<Dictionary<string, object>> ParameterGroups { get; set; } = null!;
+	private static List<Dictionary<string, object>> ParameterGroups { get; }
 
 	static ProjectOverview()
 	{
-		ProjectTitles = ProjectOverviewTitleResource.GetMembers().OrderBy(_ => Random.Shared.Next()).ToList();
-	}
-	
-	protected override void OnComponentInitialized()
-	{
-		CreateView();
-		LanguageChangedEvent += CreateView;
-	}
-
-	private void CreateView()
-	{
-		ParameterGroups = ProjectTitles
+		var _ = AllDiscoveredImplementationsEnum.IsInitialized;
+		ParameterGroups = ProjectOverviewTitleResource
+			.GetMembers()
+			.OrderBy(_ => Random.Shared.Next())
 			.Select(member => new Dictionary<string, object>()
-				{
-					["ImagePath"] = $"images/projects/{member.Name}.png",
-					["Title"] = member.Value,
-					["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
-				})
+			{
+				["ImagePath"] = $"images/projects/{member.Name}.png",
+				["Title"] = member.Value,
+				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
+			})
 			.ToList();
 	}
 }

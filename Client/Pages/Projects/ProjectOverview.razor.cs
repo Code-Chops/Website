@@ -1,14 +1,14 @@
-﻿using CodeChops.Website.Client.Resources;
+﻿
 // ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.Projects;
 
-public record ProjectResource : Resource<ProjectResource>
+public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
 {
 	public static string Title => CreateMember("Projects");
 }
 
-public record ProjectResourceNL : Resource<ProjectResourceNL>
+public record ProjectResourceNL : Resource<ProjectResourceNL, ResourceProxyEnum>
 {
 	public static string Title { get; }	= CreateMember("Projecten");
 }
@@ -27,7 +27,7 @@ public interface IProjectOverviewResource
 	public static abstract string VendingMachine { get; }
 }
 
-public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource>, IProjectOverviewResource
+public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
 {
 	public static string Baxo { get; }						= CreateMember("Baxo");
 	public static string Contracts { get; }					= CreateMember("DDD Contracts");
@@ -41,7 +41,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 	public static string VendingMachine { get; }			= CreateMember("FoodChops");
 }
 
-public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource>, IProjectOverviewResource
+public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource, ResourceProxyEnum>, IProjectOverviewResource
 {
 
 	public static string Baxo						=> CreateMember(@"
@@ -94,7 +94,7 @@ the vending machine change problem
 ");
 }
 
-public record ProjectOverviewTextResourceNL : Resource<ProjectOverviewTextResourceNL>, IProjectOverviewResource
+public record ProjectOverviewTextResourceNL : Resource<ProjectOverviewTextResourceNL, ResourceProxyEnum>, IProjectOverviewResource
 {
 	public static string Baxo { get; }						= CreateMember(@"
 Baxo

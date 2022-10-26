@@ -1,9 +1,8 @@
-using CodeChops.Website.Client.Resources;
 // ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client;
 
-public record GeneralResource : Resource<GeneralResource>
+public record GeneralResource : Resource<GeneralResource, ResourceProxyEnum>
 {
 	public static string PageNotFound	=> CreateMember(@"
 Sorry, this page doest not exist.
@@ -18,7 +17,7 @@ An unhandled error has occurred. Please send an angry e-mail to
 ");
 }
 
-public record GeneralResourceNL : Resource<GeneralResourceNL>
+public record GeneralResourceNL : Resource<GeneralResourceNL, ResourceProxyEnum>
 {
 	public static string PageNotFound { get; }	= CreateMember(@"
 Sorry, deze pagina bestaat niet.

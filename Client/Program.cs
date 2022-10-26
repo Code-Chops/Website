@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
 using CodeChops.Website.Client.Layout;
-using CodeChops.Website.Client.Resources;
 using CodeChops.Website.RazorComponents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
@@ -33,8 +31,6 @@ public class Program
 		ColorModeSelector.SetMode(colorMode);
 
 		ConfigureSharedServices(builder.Services, defaultLanguageCode);
-
-		RuntimeHelpers.RunClassConstructor(typeof(ResourceEnum).TypeHandle);
 
 		await host.RunAsync();
 	}

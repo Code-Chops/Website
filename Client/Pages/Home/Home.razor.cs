@@ -1,9 +1,9 @@
-﻿using CodeChops.Website.Client.Resources;
+﻿
 // ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.Home;
 
-public record HomeResource : Resource<HomeResource>
+public record HomeResource : Resource<HomeResource, ResourceProxyEnum>
 {
 	public static string FullTitle => CreateMember(@"
 Welcome to CodeChops
@@ -28,7 +28,7 @@ Welcome
 ");
 }
 
-public record HomeResourceNL : Resource<HomeResourceNL>
+public record HomeResourceNL : Resource<HomeResourceNL, ResourceProxyEnum>
 {
 	public static string FullTitle { get; }		= CreateMember(@"
 Welkom bij CodeChops

@@ -276,7 +276,7 @@ p {
 }
 
 iframe {
-    opacity: 0.9 !important;
+    opacity: 0.95 !important;
     filter: hue-rotate(321deg) grayscale(0.5) !important;
     z-index: 102 !important;
     max-height: 555px !important;
