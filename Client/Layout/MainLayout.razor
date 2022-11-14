@@ -6,12 +6,12 @@
 
 <div class="page">
     <MenuBar @ref="MenuBar"
-             BackgroundColor="@(IsDarkMode ? new(hexColor: "#141313") : new(hexColor: "#f9f4f6"))"
+             BackgroundColor="@(IsDarkMode ? new(hexColor: "#181616") : new(hexColor: "#f9f4f6"))"
              AccentColor="@Branding.Colors.Accent"
              TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -40)"
              HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 40 : 0)"
              FontFamily="@Branding.FontFamily" 
-             LogoPath="/favicon.ico" 
+             LogoPath="/favicon.png" 
              Title="@Branding.Name" 
              ShowTitle="ShowTitle"
              Height="80"
@@ -20,7 +20,7 @@
              FadeOut="false">
          
         <ColorModeSelector />
-        <LanguageSelector />
+        <CountrySelector />
     </MenuBar>
     
     <div class="border"></div>
@@ -65,11 +65,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await OnLanguageChangedAsync();
-        NavigationManager.LocationChanged += async (_,_) => await OnLanguageChangedAsync();
+        await OnCountryChangedAsync();
+        NavigationManager.LocationChanged += async (_,_) => await OnCountryChangedAsync();
+#if __MonoCS__
+    Console.WriteLine("TEST");
+#endif
     }
 
-    private async Task OnLanguageChangedAsync()
+    private async Task OnCountryChangedAsync()
     {
         if (Crossfade is not null) 
             await Crossfade.ExecuteAsync();

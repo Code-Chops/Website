@@ -1,0 +1,69 @@
+﻿@inherits ResourcedComponent
+@using System.Globalization
+@using System.Collections.Immutable;
+@using CodeChops.Website.RazorComponents.Navigation.Menu
+
+@if (CountryCodeCache.SupportedCountryCodes.Any())
+{
+	<span class="menu-setting small-screen-hide" @onkeydown="@(async e => await ChangeCountryAsync(e))">
+		<MenuButton Data="@MenuButtonData">@CurrentCountryFlag</MenuButton>
+	</span>
+}
+
+@code {
+	[Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+	[Inject] private NavigationManager UriHelper { get; set; } = null!;
+
+	public string CurrentCountryFlag { get; set; } = null!;
+
+	private MenuButtonData MenuButtonData { get; set; }
+	
+	//  The Unicode scalar offset between the ascii letter and the region code.
+	private static readonly int UnicodeScalarValueOffset; // 127397
+
+	static CountrySelector()
+	{
+		if (!Rune.TryGetRuneAt("🇦", 0, out var rune)) 
+			throw new InvalidOperationException($"Could not determine {nameof(UnicodeScalarValueOffset)}.");
+		
+		UnicodeScalarValueOffset = rune.Value - new Rune('A').Value;
+	}
+
+	protected override void OnComponentInitialized()
+	{
+		MenuButtonData = new() { OnClick = (e, _) => ChangeCountryAsync(e) };
+		SetCountryFlag();
+	}
+
+	private async Task ChangeCountryAsync(EventArgs? e)
+	{
+		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
+
+		var index = CountryCodeCache.SupportedCountryCodes.Value.IndexOf(CountryCodeCache.CurrentCountryCode);
+		var newIndex = (index + 1) % CountryCodeCache.SupportedCountryCodes.Count;
+		var newCountryCode = CountryCodeCache.SupportedCountryCodes[newIndex];
+
+		CountryCodeCache.SetCurrentCountryCode(newCountryCode);
+		SetCountryFlag();
+
+		TriggerCountryChangedEvent();
+		Console.WriteLine(newCountryCode);
+		await JsRuntime.InvokeVoidAsync("blazorCulture.set", newCountryCode.Value);
+	}
+
+	private void SetCountryFlag()
+	{
+		var flag = GetFlagFromCountryCode(CountryCodeCache.CurrentCountryCode);
+
+		CurrentCountryFlag = flag;
+		StateHasChanged();
+	}
+	
+	private static string GetFlagFromCountryCode(CountryCode countryCode)
+	{
+		return countryCode.Value
+			.EnumerateRunes()
+			.Aggregate(new StringBuilder(), (sb, rune) => sb.Append(new Rune(rune.Value + UnicodeScalarValueOffset)))
+			.ToString();
+	}
+}

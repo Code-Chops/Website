@@ -3,9 +3,9 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.12.0.0</Version>
-        <TargetFramework>net6.0</TargetFramework>
-        <LangVersion>10</LangVersion>
+        <Version>0.13.0.0</Version>
+        <TargetFramework>net7.0</TargetFramework>
+        <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
@@ -36,18 +36,18 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="CodeChops.MagicEnums" Version="3.0.4" />
+        <PackageReference Include="CodeChops.DomainDrivenDesign.DomainModeling" Version="1.4.3" />
+        <PackageReference Include="CodeChops.MagicEnums" Version="3.1.0" />
         <PackageReference Include="ColorHelper" Version="1.8.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.35.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\ImplementationDiscovery\ImplementationDiscovery\ImplementationDiscovery.csproj" />
         <ProjectReference Include="..\RazorComponents\RazorComponents\RazorComponents.csproj" />
-		<ProjectReference Include="..\..\ImplementationDiscovery\ImplementationDiscovery.SourceGeneration\ImplementationDiscovery.SourceGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
     <ItemGroup>

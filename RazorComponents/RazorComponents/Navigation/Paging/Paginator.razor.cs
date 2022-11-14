@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components;
 using MudBlazor.Utilities;
 
 namespace CodeChops.Website.RazorComponents.Navigation.Paging;
@@ -29,7 +30,7 @@ public partial class Paginator : MudComponentBase
     /// <summary>
     /// Define a list of available page size options for the user to choose from
     /// </summary>
-    [Parameter] public ushort[] PageSizeOptions { get; set; } = new ushort[] { 10, 25, 50, 100 };
+    [Parameter] public ushort[] PageSizeOptions { get; set; } = { 10, 25, 50, 100 };
 
     /// <summary>
     /// Format string for the display of the current page, which you can localize to your language. Available variables are:
@@ -59,6 +60,7 @@ public partial class Paginator : MudComponentBase
     /// This property is 1 based (no page 0). 
     /// </summary>
     [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
     public int PageNumber
     {
         get => this.CurrentPageIndex + 1;
@@ -69,7 +71,7 @@ public partial class Paginator : MudComponentBase
     /// Provides a zero based index representing the current page 
     /// </summary>
     public virtual int CurrentPageIndex { 
-        get => this.Table is null ? 0 : this.Table.CurrentPage;
+        get => this.Table?.CurrentPage ?? 0;
         set
         {
             // Sometimes this is called method before the table has been set through the cascading parameters.

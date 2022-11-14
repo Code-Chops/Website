@@ -4,30 +4,30 @@ namespace CodeChops.Website.RazorComponents.Resources;
 
 public abstract class ResourcedComponent : ComponentBase, IDisposable
 {
-	public static event Action? LanguageChangedEvent;
+	public static event Action? CountryChangedEvent;
 	
 	protected sealed override void OnInitialized()
 	{
 		this.OnComponentInitialized();
-		LanguageChangedEvent += this.OnLanguageChanged;
+		CountryChangedEvent += this.OnCountryChanged;
 	}
 
 	protected virtual void OnComponentInitialized()
 	{
 	}
 
-	protected static void TriggerLanguageChangedEvent()
+	protected static void TriggerCountryChangedEvent()
 	{
-		LanguageChangedEvent?.Invoke();
+		CountryChangedEvent?.Invoke();
 	}
 	
-	private void OnLanguageChanged()
+	private void OnCountryChanged()
 	{
 		this.StateHasChanged();
 	}
 	
 	public void Dispose()
 	{
-		LanguageChangedEvent -= this.OnLanguageChanged;
+		CountryChangedEvent -= this.OnCountryChanged;
 	}
 }

@@ -2,6 +2,11 @@
 
 @ChildContent
 
+@if (!IsRenderedOnClient)
+{
+    <div class="loading-progress-text"></div>
+}
+
 @code {
     [Inject] private RenderLocation RenderLocation { get; set; } = null!;
     [Inject] private IJSRuntime JsInterop { get; set; } = null!;

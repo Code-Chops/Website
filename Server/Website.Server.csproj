@@ -1,23 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-	  <AssemblyName>CodeChops.Website.Server</AssemblyName>
-	  <RootNamespace>CodeChops.Website.Server</RootNamespace>
-	  <TargetFramework>net6.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <AnalysisLevel>latest</AnalysisLevel>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <LangVersion>10</LangVersion>
-	  <UserSecretsId>Website.Server-131CB2AF-125D-42BE-9E2E-689FF20FC4E4</UserSecretsId>
-      <EnablePreviewFeatures>true</EnablePreviewFeatures>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyName>CodeChops.Website.Server</AssemblyName>
+		<RootNamespace>CodeChops.Website.Server</RootNamespace>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>11</LangVersion>
+		<UserSecretsId>Website.Server-131CB2AF-125D-42BE-9E2E-689FF20FC4E4</UserSecretsId>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.10" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0"/>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Client\Website.Client.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Client\Website.Client.csproj"/>
+	</ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿@* ReSharper disable Html.PathError *@
+
 @page "_Host"
 @using CodeChops.Website.Client
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -7,54 +8,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="description" content="@Branding.Name. Software by Max Bergman.">
-        <meta name="keywords" content="CodeChops, Max Bergman, Full-stack, developer, Websites, Applications, Apps, Front-end, Back-end, C#, SQL, HTML, TypeScript">
-        <meta name="author" content="Max Bergman">
-        <meta property="og:title" content="@Branding.Name" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="../favicon.ico" />
-        <meta property="og:url" content="https://www.codechops.nl" />
-        <title>@Branding.Name</title>
-        <base href="/" />
-        <link href="css/app.css" rel="stylesheet" />
-        <link href="css/CodeChopsSplash.css" rel="stylesheet" />
-        <link href="CodeChops.Website.Client.styles.css" rel="stylesheet" />
-        <link href="highlight/vs2015.min.css" rel="stylesheet" />
-        <link href="../fonts/Kaufmann/Kaufmann W01 Regular.woff2" as="font" type="font/woff2">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;475&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
-        <script src="highlight/highlight.js"></script>
-        <script src="highlight/csharp.min.js"></script>
-        <script src="scripts/CodeChops.js"></script>
-        <script>console.log("@Html.Raw(Branding.BannerText.Replace("\\", "\\\\").Replace("\r\n", "\\n"))");</script>
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="codechops" data-description="Support me on Buy me a coffee!" data-message="" data-color="@Branding.Colors.Accent" data-position="Left" data-x_margin="18" data-y_margin="18"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="@Branding.Name. Software by Max Bergman.">
+    <meta name="keywords" content="CodeChops, Max Bergman, Full-stack, developer, Websites, Applications, Apps, Front-end, Back-end, C#, SQL, HTML, TypeScript">
+    <meta name="author" content="Max Bergman">
+    <meta property="og:title" content="@Branding.Name" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="favicon.png" />
+    <meta property="og:url" content="https://www.codechops.nl" />
+    <title>@Branding.Name</title>
+    <base href="/" />
+    <link href="manifest.json" rel="manifest" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/CodeChopsSplash.css" rel="stylesheet" />
+    <link href="CodeChops.Website.Client.styles.css" rel="stylesheet" />
+    <link href="highlight/vs2015.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;475&display=swap" rel="stylesheet">
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+</head>
 
-    <body>
-        <persist-component-state />
-                
-        <div id="overlay"></div>
-        <a id="clickableLogo">
-            <div id="logo" class="splashLogo" >
-                <div id="logoBackground"></div>
-                <div id="logoM"></div>
-                <div id="logoA"></div>
-                <div id="logoX"></div> 
-                <div id="logoB"></div>
-            </div>
-        </a>
-    
-        @(await Html.RenderComponentAsync<App>(RenderMode.WebAssemblyPrerendered))
-        <div id="blazor-error-ui">
-            @Html.Raw(GeneralResource.Error)
-            <a class="dismiss">🗙</a>
-            </div>
-        <script src="_framework/blazor.webassembly.js"></script>
-    </body>
+<body>
+    @* Style not placed in CSS in order to be displayed immediately *@
+    <div id="overlay" style=" position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;"></div>
+
+    <a id="clickableLogo">
+        <div id="logo" class="splashLogo" >
+            <div id="logoBackground"></div>
+            <div id="logoM"></div>
+            <div id="logoA"></div>
+            <div id="logoX"></div> 
+            <div id="logoB"></div>
+        </div>
+    </a>
+
+    @(await Html.RenderComponentAsync<App>(RenderMode.WebAssemblyPrerendered))
+            
+    <div id="blazor-error-ui">
+        @Html.Raw(GeneralResource.Error)
+        <a class="dismiss">🗙</a>
+    </div>
+        
+    <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
+    <script src="highlight/highlight.js"></script>
+    <script src="highlight/csharp.min.js"></script>
+    <script src="scripts/CodeChops.js"></script>
+    <script>console.log("@Html.Raw(Branding.BannerText.Replace("\\", "\\\\").Replace("\r\n", "\\n"))");</script>
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="codechops" data-description="Support me on Buy me a coffee!" data-message="" data-color="@Branding.Colors.Accent" data-position="Left" data-x_margin="18" data-y_margin="18"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
 </html>
 @* ReSharper restore Html.PathError *@

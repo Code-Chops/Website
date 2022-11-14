@@ -3,20 +3,8 @@
 **********************************/
 
 @font-face {
-    font-family: Kaufmann;
-    src: url('../fonts/Kaufmann/Kaufmann W01 Regular.woff2') format('woff2'), url('../fonts/Kaufmann/Kaufmann W01 Regular.woff') format('woff'), url('../fonts/Kaufmann/Kaufmann W01 Regular.ttf') format('ttf');
-    font-display: block;
-}
-
-@font-face {
     font-family: TriakisFont;
     src: url('../fonts/TriakisFont-Regular.otf') format('otf');
-    font-display: block;
-}
-
-@font-face {
-    font-family: Avenue;
-    src: url('../fonts/Avenue Mono.ttf') format('ttf');
     font-display: block;
 }
 
@@ -267,6 +255,8 @@ p {
 #bmc-wbtn {
     background: rgba(var(--accentcolor-rgb), .6) !important;
     z-index: 102 !important;
+    right: 25px !important;
+    bottom: 25px !important;
 }
 
 #bmc-wbtn img {

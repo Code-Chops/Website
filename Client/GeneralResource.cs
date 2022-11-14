@@ -15,6 +15,11 @@ An unhandled error has occurred. Please send an angry e-mail to
             <a href="""" class=""reload"">reload</a>
             the page.
 ");
+	
+	public static string NotAuthorized	=> CreateMember(@"
+Access denied.
+");
+
 }
 
 public record GeneralResourceNL : Resource<GeneralResourceNL, ResourceProxyEnum>
@@ -29,5 +34,9 @@ Er is een fout opgetreden. Stuur een boze e-mail naar
             of 
             <a href="""" class=""reload"">ververs</a>
             de pagina.
+");
+
+	public static string NotAuthorized { get; } = CreateMember(@"
+Toegang geweigerd.
 ");
 }

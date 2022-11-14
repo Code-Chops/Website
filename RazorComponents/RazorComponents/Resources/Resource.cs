@@ -13,21 +13,21 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 {
 	private static string DefaultResourceName { get; }
 	private static string ThisResourceName { get; }
-	private static string ThisLanguageCode { get; }
+	private static string ThisCountryCode { get; }
 
 	static Resource()
 	{
 		ThisResourceName = typeof(TSelf).Name;
 
-		var languageCode = ThisResourceName[^2..];
-		if (Char.IsUpper(languageCode[0]) && Char.IsUpper(languageCode[1]))
+		var countryCode = ThisResourceName[^2..];
+		if (Char.IsUpper(countryCode[0]) && Char.IsUpper(countryCode[1]))
 		{
-			ThisLanguageCode = languageCode;
+			ThisCountryCode = countryCode;
 			DefaultResourceName = ThisResourceName[..^2];
 		}
 		else
 		{
-			ThisLanguageCode = LanguageCache.DefaultLanguageCode;
+			ThisCountryCode = CountryCodeCache.DefaultCountryCode;
 			DefaultResourceName = ThisResourceName;
 		}
 
@@ -49,9 +49,9 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 	protected static new string GetOrCreateMember([CallerMemberName] string? name = null, string? value = null, Func<TSelf>? memberCreator = null)
 	{
 		if (name is null)
-			throw new InvalidOperationException($"Empty name: Unable to retrieve resource {ThisResourceName} for language {LanguageCache.CurrentLanguageCode}.");
+			throw new InvalidOperationException($"Empty name: Unable to retrieve resource {ThisResourceName} for country code {CountryCodeCache.CurrentCountryCode}.");
 
-		if (ThisResourceName != DefaultResourceName || ThisLanguageCode == LanguageCache.CurrentLanguageCode || !TResourceEnum.IsInitialized)
+		if (ThisResourceName != DefaultResourceName || ThisCountryCode == CountryCodeCache.CurrentCountryCode || !TResourceEnum.IsInitialized)
 		{
 			return GetOrCreateMember(
 				name: name,
@@ -71,7 +71,7 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 	
 	public static new bool TryGetSingleMember(string name, [NotNullWhen(true)] out IMagicEnum<string>? member)
 	{
-		var newResourceName = DefaultResourceName + LanguageCache.CurrentLanguageCode;
+		var newResourceName = DefaultResourceName + CountryCodeCache.CurrentCountryCode;
 
 		if (!TResourceEnum.TryGetSingleMember(newResourceName, out var specificResource) && !TResourceEnum.TryGetSingleMember(DefaultResourceName, out specificResource))
 		{

@@ -51,7 +51,7 @@
 
 	protected override void OnAfterRender(bool firstRender)
 	{
-		// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 		if (PrerenderState && !firstRender && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
 			LoadCrossfadeState();
 	}
@@ -84,7 +84,7 @@
 
 	private void LoadCrossfadeState()
 	{
-		// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 		if (CopiedElement.Value is not null)
 			return;
 

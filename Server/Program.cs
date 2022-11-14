@@ -1,4 +1,6 @@
+using System.Globalization;
 using CodeChops.Website.RazorComponents;
+using CodeChops.Website.RazorComponents.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +8,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddCrossfade(inServerContext: true);
 
-CodeChops.Website.Client.Program.ConfigureSharedServices(builder.Services);
+var supportedCountryCodes = new CountryCode[] { new("GB"), new("NL") };
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCountryCodes.First());
+	options.SupportedUICultures = supportedCountryCodes.Select(country => new CultureInfo(country)).ToList();
+});
+
+builder.Services.AddCountryCache(supportedCountryCodes, supportedCountryCodes.First());
 
 var app = builder.Build();
 
