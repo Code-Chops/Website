@@ -257,6 +257,9 @@ p {
     z-index: 102 !important;
     right: 25px !important;
     bottom: 25px !important;
+    width: 50px !important;
+    height: 50px !important;
+    opacity: .6;
 }
 
 #bmc-wbtn img {

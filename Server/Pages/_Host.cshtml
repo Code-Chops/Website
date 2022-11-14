@@ -16,7 +16,7 @@
     <meta name="author" content="Max Bergman">
     <meta property="og:title" content="@Branding.Name" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="favicon.png" />
+    <meta property="og:image" content="/favicon.png" />
     <meta property="og:url" content="https://www.codechops.nl" />
     <title>@Branding.Name</title>
     <base href="/" />
@@ -25,6 +25,7 @@
     <link href="css/CodeChopsSplash.css" rel="stylesheet" />
     <link href="CodeChops.Website.Client.styles.css" rel="stylesheet" />
     <link href="highlight/vs2015.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;475&display=swap" rel="stylesheet">
@@ -35,7 +36,7 @@
 
 <body>
     @* Style not placed in CSS in order to be displayed immediately *@
-    <div id="overlay" style=" position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;"></div>
+    <div id="overlay" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;"></div>
 
     <a id="clickableLogo">
         <div id="logo" class="splashLogo" >
