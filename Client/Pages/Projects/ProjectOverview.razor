@@ -1,10 +1,17 @@
 ﻿@page "/projects"
 @inherits ResourcedComponent
 
-<Content >
+<Content>
 	<span class="title text-center">
 		<Title Value="@ProjectResource.Title"></Title>
 	</span>
+	
+	<div style="margin-bottom: 30px; font-size: medium; text-align: center;">
+		<Box>
+			@ProjectResource.Error
+		</Box>
+	</div>
+	
 	<div class="grid">
 		@foreach (var group in ParameterGroups)
 		{

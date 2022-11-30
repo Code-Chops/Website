@@ -6,11 +6,13 @@ namespace CodeChops.Website.Client.Pages.Projects;
 public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
 {
 	public static string Title => CreateMember("Projects");
+	public static string Error => CreateMember("Currently I am switching from hosting. Therefore projects cannot be opened. Sorry for the inconvenience.");
 }
 
 public record ProjectResourceNL : Resource<ProjectResourceNL, ResourceProxyEnum>
 {
 	public static string Title { get; }	= CreateMember("Projecten");
+	public static string Error => CreateMember("Momenteel wissel ik van hosting. Projecten kunnen daarom niet worden geopend. Excuses hiervoor.");
 }
 
 public interface IProjectOverviewResource
@@ -59,8 +61,8 @@ crossfades between webpages
 ");
 	
 	public static string DomainModeling				=> CreateMember(@"
-Domain modeling using Domain<br/>
-Driven Design principles
+Domain modeling using<br/>
+Domain Driven Design principles
 ");
 	
 	public static string GenericMath				=> CreateMember(@"
@@ -69,7 +71,7 @@ on generic types
 ");
 	
 	public static string Geometry					=> CreateMember(@"
-Helper for calculation of objects</br>
+Helper for calculation of objects<br/>
 in 2D space and time
 ");
 	
@@ -109,13 +111,13 @@ Blazor component voor een<br/>
 crossfade tussen webpagina's");
 	
 	public static string DomainModeling { get; }			= CreateMember(@"
-Domeinmodellering volgens de<br/>
+Domeinmodelvorming volgens de<br/>
 principes van Domain Driven Design
 ");
 	
 	public static string GenericMath { get; }				= CreateMember(@"
 Voer numerieke berekeningen uit<br/>
-op generieke types
+op generieke numerieke types
 ");
 	
 	public static string Geometry { get; }					= CreateMember(@"
@@ -134,7 +136,7 @@ waar creativiteit wordt beloond
 ");
 
 	public static string MagicEnums { get; }				= CreateMember(@"
-Betere enums in C# <br/>
+Betere enums in C#<br/>
 Flexibel, uitbreidbaar en aanpasbaar
 ");
 	
