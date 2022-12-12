@@ -1,0 +1,63 @@
+﻿@implements IDisposable
+@inherits CodeChops.Website.RazorComponents.Resources.ResourcedComponent
+
+@code {
+	
+	private IDisposable? Registration { get; set; }
+	
+	protected override async Task OnInitializedAsync()
+	{
+		if (RenderLocation is RenderedOnClient)
+		{
+			Registration = NavigationManager.RegisterLocationChangingHandler(OnLocationChanging);
+			
+			JsObject = await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Navigation/Anchors/AnchoredComponent.razor.js");
+		}
+
+		NavigationManager.LocationChanged += OnLocationChanged;
+	}
+
+	protected override async Task OnAfterRenderAsync(bool isFirstRender)
+	{
+		if (!isFirstRender) 
+			await ScrollToFragment(new Uri(NavigationManager.Uri));
+	}
+	
+	private async ValueTask OnLocationChanging(LocationChangingContext context)
+	{
+		if (await ScrollToFragment(new Uri(context.TargetLocation)))
+			context.PreventNavigation();
+	}
+	
+	private async void OnLocationChanged(object? _, LocationChangedEventArgs? __)
+	{
+		await ScrollToFragment(new Uri(NavigationManager.Uri));
+	}
+
+	public new void Dispose()
+	{
+		Registration?.Dispose();
+		base.Dispose();
+	}
+
+	private async ValueTask<bool> ScrollToFragment(Uri uri)
+	{
+		var fragment = uri.Fragment;
+		
+		if (!fragment.StartsWith('#'))
+			return false;
+
+		// Handle text fragment (https://example.org/#test:~:text=foo)
+		// https://github.com/WICG/scroll-to-text-fragment/
+		var elementId = fragment[1..];
+		var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
+		
+		if (index > 0)
+			elementId = elementId[..index];
+
+		if (!String.IsNullOrEmpty(elementId))
+			await JsRuntime.InvokeVoidAsync("BlazorScrollToId", elementId.ToLowerInvariant());
+
+		return true;
+	}
+}

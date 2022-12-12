@@ -1,0 +1,67 @@
+﻿@page "/projects/{project}/"
+@implements IDisposable
+@using Markdig
+@inherits CodeChops.Website.RazorComponents.Navigation.Anchors.AnchoredComponent
+
+<Content>
+	<Title Value="@Title" ShowTitle="@false"></Title>
+	
+	<div class="warning">
+		<Box>
+			<a href="@Branding.GitHubLink/@Project" target="_blank">
+				<span class="fa fa-github" aria-hidden="true"></span>
+				@GeneralResource.CheckItOutOn @GeneralResource.GitHub
+			</a>
+		</Box>
+	</div>
+	
+	@if (DocumentationText is not null)
+	{
+		<Box>
+			@((MarkupString)DocumentationText)
+		</Box>
+	}
+</Content>
+
+@code {
+	[Inject] private IJSRuntime JsInterop { get; set; } = null!;
+	[Inject] HttpClient HttpClient { get; set; } = null!;
+	[Parameter] public required string Project { get; set; } = null!;
+	
+	public string? Title { get; set; }	
+	public string? DocumentationText { get; set; }
+	private CancellationTokenSource CancellationTokenSource { get; } = new();
+	
+	static ProjectDetails()
+	{
+		var _ = AllDiscoveredImplementationsEnum.IsInitialized;
+	}
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		HttpClient.BaseAddress = new(NavigationManager.BaseUri);
+		Title = ProjectOverviewTitleResource.GetSingleMember(Project);
+		var pipeline = new MarkdownPipelineBuilder().UsePipeTables().UseGridTables()
+			.UseAdvancedExtensions().UseEmojiAndSmiley().Build();
+		var documentationFromServer = await HttpClient.GetStringAsync($"/projects/{Project}/documentation/", CancellationTokenSource.Token);
+		DocumentationText = Markdown.ToHtml(documentationFromServer, pipeline);
+
+		await base.OnInitializedAsync();
+	}
+	
+	protected override async Task OnAfterRenderAsync(bool isFirstRender)
+	{
+		if (!isFirstRender)
+			await JsInterop.InvokeVoidAsync("highlightCode");
+
+		await base.OnAfterRenderAsync(isFirstRender);
+	}
+	
+	public new void Dispose()
+	{
+		CancellationTokenSource.Cancel();
+		CancellationTokenSource.Dispose();
+		base.Dispose();
+	}
+}

@@ -11,7 +11,7 @@
 		}
 	}
 	article {
-		max-width: @(MaxWidth ?? "none");
+		max-width: @(MaxWidth is null ? "none" : $"min(100%, {MaxWidth})");
 	}
 </style>
 

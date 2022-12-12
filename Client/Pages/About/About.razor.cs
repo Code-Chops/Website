@@ -12,7 +12,7 @@ public interface IAboutResource
 	public static abstract string Title { get; }
 }
 
-public record AboutResource : Resource<AboutResource, ResourceProxyEnum>
+public record AboutResource : Resource<AboutResource, ResourceProxyEnum>, IAboutResource
 {
 	public static string ChamberOfCommerce	=> CreateMember(@"
 COC number: 86790390 - VAT number: NL004317143B09

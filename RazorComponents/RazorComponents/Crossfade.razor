@@ -35,7 +35,7 @@
 	[Parameter] public bool RegisterOnNavigationChanged { get; set; } = true;
 	private bool IsInTransition { get; set; }
 	private IJSObjectReference? JsObject { get; set; }
-	private static string? PreviousRelativeUrl { get; set; }
+	private string? PreviousRelativeUrl { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{

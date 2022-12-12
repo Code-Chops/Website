@@ -2,12 +2,6 @@
 | By CodeChops - www.CodeChops.nl |
 **********************************/
 
-@font-face {
-    font-family: TriakisFont;
-    src: url('../fonts/TriakisFont-Regular.otf') format('otf');
-    font-display: block;
-}
-
 html {
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
@@ -47,30 +41,6 @@ button, input, optgroup, select, textarea {
 
 *, ::after, ::before {
     box-sizing: border-box;
-}
-
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin-top: 0.4rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    font-weight: 100;
-}
-
-.h2, h2 {
-    font-size: calc(1.325rem + .9vw);
-    padding-top: 15px;
-    padding-bottom: 20px;
-}
-
-.h4, h4 {
-    font-size: calc(1.275rem + .3vw);
-    line-height: 2;
-}
-
-@media (min-width: 1200px) {
-    .h2, h2 {
-        font-size: 2rem;
-    }
 }
 
 h1:focus {
@@ -144,11 +114,6 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
-pre .code {
-    margin: 0 !important;
-    tab-size: 4;
-}
 
 html {
     scrollbar-color: #666 #201c29;
@@ -275,4 +240,19 @@ iframe {
     max-height: 555px !important;
     transform: scale(0.85) !important;
     bottom: 50px !important;
+}
+
+.warning {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+pre {
+    overflow: scroll;
+    border: 1px dashed rgba(var(--accentcolor-rgb), .3);
+    tab-size: 4;
+}
+
+article {
+    overflow-wrap: anywhere;
 }

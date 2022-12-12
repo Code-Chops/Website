@@ -6,7 +6,7 @@
 		<Title Value="@ProjectResource.Title"></Title>
 	</span>
 	
-	<div style="margin-bottom: 30px; font-size: medium; text-align: center;">
+	<div class="warning">
 		<Box>
 			@ProjectResource.Error
 		</Box>
@@ -22,18 +22,27 @@
 
 @code {
 	private static List<Dictionary<string, object>> ParameterGroups { get; }
-
+	private static string[] ImplementedProjects { get; } =
+	{
+		nameof(ProjectOverviewTitleResource.GenericMath),
+		nameof(ProjectOverviewTitleResource.DomainModeling),
+	};
+		
 	static ProjectOverview()
 	{
 		var _ = AllDiscoveredImplementationsEnum.IsInitialized;
+		
 		ParameterGroups = ProjectOverviewTitleResource
 			.GetMembers()
 			.OrderBy(_ => Random.Shared.Next())
 			.Select(member => new Dictionary<string, object>()
 			{
-				["ImagePath"] = $"images/projects/{member.Name}.png",
 				["Title"] = member.Value,
 				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
+				["ImagePath"] = $"images/projects/{member.Name}.png",
+				["RelativePath"] = ImplementedProjects.Contains(member.Name) 
+						? member.Name 
+						: null!,
 			})
 			.ToList();
 	}

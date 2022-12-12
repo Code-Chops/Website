@@ -1,48 +1,51 @@
-using System.Collections.Immutable;
 using CodeChops.Website.Client.Layout;
 using CodeChops.Website.RazorComponents;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CodeChops.Website.Client"));
+builder.Services.AddHttpClient();
 
 builder.Services.AddCrossfade(inServerContext: false);
+
+builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddSingleton<RenderLocation>(new RenderedOnClient());
 
 var host = builder.Build();
 
 var jsRuntime = (IJSInProcessRuntime)host.Services.GetRequiredService<IJSRuntime>();
 
-var supportedCountryCodes = new SupportedCountryCodes(new CountryCode[] { new("GB"), new("NL") }.ToImmutableList());
-var defaultCountryCode = supportedCountryCodes[0];
-builder.Services.AddCountryCache(supportedCountryCodes, defaultCountryCode);
-
-var currentCountryCode = GetCurrentCountryCode(jsRuntime, supportedCountryCodes, defaultCountryCode);
-
-CountryCodeCache.SetCurrentCountryCode(currentCountryCode);
+builder.Services.AddLanguageCodeCache(new [] { "en-GB", "nl-NL" });
 
 var currentColorMode = GetCurrentColorMode(jsRuntime);
-
 ColorModeSelector.SetMode(currentColorMode);
+
+var currentLanguageCode = GetCurrentLanguageCode(jsRuntime);
+
+LanguageCodeCache.SetCurrentLanguageCode(currentLanguageCode);
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(currentCountryCode);
-	options.SupportedUICultures = supportedCountryCodes.Select(country => new CultureInfo(country)).ToList();
+	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(currentLanguageCode);
+	options.SupportedUICultures = SupportedLanguageCodes.GetValues().Select(languageCode => new CultureInfo(languageCode)).ToList();
 });
 
 await host.RunAsync();
 
 
-static CountryCode GetCurrentCountryCode(IJSInProcessRuntime jsRuntime, SupportedCountryCodes supportedCountryCodes, CountryCode defaultCountryCode)
+static LanguageCode GetCurrentLanguageCode(IJSInProcessRuntime jsRuntime)
 {
-	var countryCode = jsRuntime.Invoke<string>("blazorCulture.get");
+	var languageCode = jsRuntime.Invoke<string>("blazorCulture.get");
 
-	return CountryCode.TryCreate(countryCode, out var currentCountryCode) && supportedCountryCodes.Value.Contains(currentCountryCode) 
-		? currentCountryCode 
-		: defaultCountryCode;
+	// LanguageCode.TryCreate(languageCode, out var currentLanguageCode) &&
+	var currentLanguageCode = new LanguageCode(languageCode);
+	return SupportedLanguageCodes.TryGetMembers(currentLanguageCode, out _) 
+		? currentLanguageCode 
+		: SupportedLanguageCodes.GetMembers().First();
 }
 
 static ColorMode GetCurrentColorMode(IJSInProcessRuntime jsRuntime)

@@ -5,8 +5,14 @@ namespace CodeChops.Website.Client;
 
 public static class Branding
 {
-	public const string Name		= "CodeChops";
-	public const string FontFamily	= "Montserrat";
+	public const string Name			= "CodeChops";
+	public const string EmailAddress	= "hello@codechops.nl";
+	public const string PhoneNumber		= "+31 (0)6 2093 7730";
+	public const string Address			= "Oudenoord 330 Utrecht";
+	public const string AddressLink		= "https://goo.gl/maps/RYXDfLQx4sBVmRTN6";
+	public const string GitHubLink		= "https://github.com/Code-Chops";
+	
+	public const string FontFamily		= "Montserrat";
 	
 	public static int FontWeight => ColorModeSelector.ColorMode == ColorMode.DarkMode ? 100 : 150;
 	public static string TextShadow => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "-1px" : "1px";

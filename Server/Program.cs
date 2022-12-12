@@ -8,15 +8,17 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddCrossfade(inServerContext: true);
 
-var supportedCountryCodes = new CountryCode[] { new("GB"), new("NL") };
+builder.Services.AddScoped<HttpClient>();
+
+builder.Services.AddLanguageCodeCache(new [] { "en-GB", "nl-NL" });
+
+builder.Services.AddSingleton<RenderLocation>(new RenderedOnServer());
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCountryCodes.First());
-	options.SupportedUICultures = supportedCountryCodes.Select(country => new CultureInfo(country)).ToList();
+	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(LanguageCodeCache.CurrentLanguageCode);
+	options.SupportedUICultures = SupportedLanguageCodes.GetValues().Select(languageCode => new CultureInfo(languageCode)).ToList();
 });
-
-builder.Services.AddCountryCache(supportedCountryCodes, supportedCountryCodes.First());
 
 var app = builder.Build();
 
@@ -35,6 +37,8 @@ else
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
+
+// Set up custom content types - associating file extension to MIME type
 app.UseStaticFiles();
 
 app.UseRouting();

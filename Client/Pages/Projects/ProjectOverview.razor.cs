@@ -5,14 +5,14 @@ namespace CodeChops.Website.Client.Pages.Projects;
 
 public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
 {
-	public static string Title => CreateMember("Projects");
-	public static string Error => CreateMember("Currently I am switching from hosting. Therefore projects cannot be opened. Sorry for the inconvenience.");
+	public static string Title 				=> CreateMember("Projects");
+	public static string Error 				=> CreateMember("Currently I am switching from hosting. Therefore some projects cannot be opened yet.");
 }
 
 public record ProjectResourceNL : Resource<ProjectResourceNL, ResourceProxyEnum>
 {
-	public static string Title { get; }	= CreateMember("Projecten");
-	public static string Error => CreateMember("Momenteel wissel ik van hosting. Projecten kunnen daarom niet worden geopend. Excuses hiervoor.");
+	public static string Title { get; }					= CreateMember("Projecten");
+	public static string Error { get; } 				= CreateMember("Momenteel ben ik van hosting aan het wisselen. Sommige projecten kunnen daarom nog niet worden geopend.");
 }
 
 public interface IProjectOverviewResource
@@ -32,20 +32,19 @@ public interface IProjectOverviewResource
 public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
 {
 	public static string Baxo { get; }						= CreateMember("Baxo");
-	public static string Contracts { get; }					= CreateMember("DDD Contracts");
+	public static string Contracts { get; }					= CreateMember("DDD contracts");
 	public static string Crossfade { get; }					= CreateMember("Crossfade");
-	public static string DomainModeling { get; }			= CreateMember("DDD Domain modeling");
-	public static string GenericMath { get; }				= CreateMember("GenericMath");
+	public static string DomainModeling { get; }			= CreateMember("DDD domain modeling");
+	public static string GenericMath { get; }				= CreateMember("Generic math");
 	public static string Geometry { get; }					= CreateMember("Geometry");
 	public static string ImplementationDiscovery { get; }	= CreateMember("Implementation discovery");
 	public static string Junctions { get; }					= CreateMember("Junctions");
-	public static string MagicEnums { get; }				= CreateMember("MagicEnums");
+	public static string MagicEnums { get; }				= CreateMember("Magic enums");
 	public static string VendingMachine { get; }			= CreateMember("FoodChops");
 }
 
 public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource, ResourceProxyEnum>, IProjectOverviewResource
 {
-
 	public static string Baxo						=> CreateMember(@"
 Baxo
 ");

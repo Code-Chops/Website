@@ -1,4 +1,5 @@
-﻿<a class="project" id="@ThumbnailId">
+﻿@using CodeChops.DomainDrivenDesign.DomainModeling.Serialization
+<a class="project" href="@RelativePath?.Write($"/projects/{RelativePath}/")" id="@ThumbnailId">
 	<div class="text">
 		<h4>@Title</h4>
 		<span class="small-screen-hide">@Text</span>
@@ -9,9 +10,10 @@
 </a>
 
 @code {
-	[Parameter] public string Title { get; set; } = null!;
-	[Parameter] public MarkupString Text { get; set; }
-	[Parameter] public string? ImagePath { get; set; }
+	[Parameter] public required string Title { get; set; } = null!;
+	[Parameter] public required MarkupString Text { get; set; }
+	[Parameter] public required string ImagePath { get; set; } = null!;
+	[Parameter] public string? RelativePath { get; set; }
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
 	private string ImageId { get; set; } = null!;

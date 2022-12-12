@@ -1,9 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
-@if (IsCode)
+@if (CodeLanguage is not null)
 {
 	<div class="box box-code border background">
-		<Code>@ChildContent</Code>
+		<Code Language="@CodeLanguage">@ChildContent</Code>
 	</div>
 }
 else
@@ -15,5 +15,5 @@ else
 
 @code {
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
-	[Parameter] public bool IsCode { get; set; }
+	[Parameter] public string? CodeLanguage { get; set; }
 }

@@ -5,9 +5,10 @@ namespace CodeChops.Website.RazorComponents;
 
 public static class ResourceRegistrationExtensions
 {
-	public static IServiceCollection AddCountryCache(this IServiceCollection services, IEnumerable<CountryCode> supportedLanguageCodes, CountryCode defaultCountry)
+	public static IServiceCollection AddLanguageCodeCache(this IServiceCollection services, IEnumerable<string> supportedLanguageCodes)
 	{
-		CountryCodeCache.SetCountries(supportedLanguageCodes, defaultCountry);
+		foreach (var code in supportedLanguageCodes)
+			LanguageCodeCache.AddLanguageCode(new (code));
 
 		return services;
 	}

@@ -1,10 +1,11 @@
 ﻿<PageTitle>@Branding.Name @If(Value, $"- {Value}")</PageTitle>
-@if(Value is not null || AlternativeHeader is not null)
+
+@if (Value is not null && ShowTitle)
 {
-	<h4>@(AlternativeHeader ?? Value)</h4>					
+	<h3>@Value</h3>					
 }
 
 @code {
 	[Parameter] public string? Value { get; set; }
-	[Parameter] public string? AlternativeHeader { get; set; }
+	[Parameter] public bool ShowTitle { get; set; } = true;
 }

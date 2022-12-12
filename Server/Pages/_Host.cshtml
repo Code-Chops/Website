@@ -50,13 +50,31 @@
 
     @(await Html.RenderComponentAsync<App>(RenderMode.WebAssemblyPrerendered))
             
+    @* <div class="giscus"></div> *@
+
     <div id="blazor-error-ui">
         @Html.Raw(GeneralResource.Error)
         <a class="dismiss">🗙</a>
     </div>
         
+    @* <script src="https://giscus.app/client.js" *@
+    @*         data-repo="Code-Chops/Giscus" *@
+    @*         data-repo-id="R_kgDOIj6tdg" *@
+    @*         data-category="General" *@
+    @*         data-category-id="DIC_kwDOIj6tds4CS69h" *@
+    @*         data-mapping="pathname" *@
+    @*         data-strict="0" *@
+    @*         data-reactions-enabled="1" *@
+    @*         data-emit-metadata="0" *@
+    @*         data-input-position="top" *@
+    @*         data-theme="dark_tritanopia" *@
+    @*         data-lang="en" *@
+    @*         data-loading="lazy" *@
+    @*         crossorigin="anonymous" *@
+    @*         async> *@
+    @* </script> *@
     <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
-    <script src="highlight/highlight.js"></script>
+    <script src="highlight/highlight.min.js"></script>
     <script src="highlight/csharp.min.js"></script>
     <script src="scripts/CodeChops.js"></script>
     <script>console.log("@Html.Raw(Branding.BannerText.Replace("\\", "\\\\").Replace("\r\n", "\\n"))");</script>

@@ -20,12 +20,12 @@
              FadeOut="false">
          
         <ColorModeSelector />
-        <CountrySelector />
+        <LanguageSelector />
     </MenuBar>
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="true">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="false">
         <main id="main">
             @Body
             <Footer></Footer>
@@ -65,14 +65,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await OnCountryChangedAsync();
-        NavigationManager.LocationChanged += async (_,_) => await OnCountryChangedAsync();
-#if __MonoCS__
-    Console.WriteLine("TEST");
-#endif
+        await OnLanguageChangedAsync();
+        NavigationManager.LocationChanged += async (_,_) => await OnLanguageChangedAsync();
     }
 
-    private async Task OnCountryChangedAsync()
+    private async Task OnLanguageChangedAsync()
     {
         if (Crossfade is not null) 
             await Crossfade.ExecuteAsync();
