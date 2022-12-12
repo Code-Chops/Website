@@ -1,4 +1,4 @@
-﻿/**********************************
+/**********************************
 | By CodeChops - www.CodeChops.nl |
 **********************************/
 
@@ -248,7 +248,6 @@ iframe {
 }
 
 pre {
-    overflow: scroll;
     border: 1px dashed rgba(var(--accentcolor-rgb), .3);
     tab-size: 4;
 }

@@ -49,7 +49,7 @@
     }
 
     ::selection {
-        background: @(ColorModeSelector.ColorMode == ColorMode.LightMode ? Branding.Colors.Accent.ChangeBrightness(140) : "var(--branding-color-accent)");
+        background: @(ColorModeSelector.Value == ColorMode.LightMode ? Branding.Colors.Accent.ChangeBrightness(140) : "var(--branding-color-accent)");
     }
 </style>
 
@@ -60,7 +60,7 @@
     private MenuBar? MenuBar { get; set; }
     private Crossfade? Crossfade { get; set; }
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
-    private static bool IsDarkMode => ColorModeSelector.ColorMode == ColorMode.DarkMode;
+    private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()

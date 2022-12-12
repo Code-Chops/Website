@@ -7,7 +7,7 @@
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
-	internal static ColorMode ColorMode { get; private set; } = null!;
+	internal static ColorMode Value { get; private set; } = null!;
 	private MenuButtonData MenuButtonData { get; set; }
 
 	protected override void OnInitialized()
@@ -19,26 +19,32 @@
 	{
 		MenuButtonData = new MenuButtonData()
 		{
-			FontAwesomeIcon = ColorMode == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
+			FontAwesomeIcon = Value == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
 			OnClick = (e, _) => ChangeModeAsync(e)
 		};
 	}
 
 	private async Task ChangeModeAsync(EventArgs? e)
 	{
-		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
+		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) 
+			return;
 
-		var mode = ColorMode == ColorMode.DarkMode ? ColorMode.LightMode : ColorMode.DarkMode;
+		var mode = Value == ColorMode.DarkMode 
+			? ColorMode.LightMode 
+			: ColorMode.DarkMode;
+		
 		SetMode(mode);	
 		SetMenuButtonData();
 		StateHasChanged();
 
-		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) return;
-		await inProcessRuntime.InvokeVoidAsync("blazorColorMode.set", ColorMode.Name);
+		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) 
+			return;
+		
+		await inProcessRuntime.InvokeVoidAsync("blazorColorMode.set", Value.Name);
 	}
 
 	internal static void SetMode(ColorMode mode)
 	{
-		ColorMode = mode;
+		Value = mode;
 	}
 }

@@ -11,8 +11,8 @@ namespace CodeChops.Website.RazorComponents.Resources;
  //    propertyIsPublic: true, useRegex: false, useValidationExceptions: false)]
 public partial record struct LanguageCode
 {
-	public string GetCountryCode() => this.Value.Split('-').Last();
-	public string GetSimpleLanguageCode() => this.Value.Split('-').First();
+	public string GetCountryCode()			=> this.Value.Split('-').Last();
+	public string GetSimpleLanguageCode()	=> this.Value.Split('-').First();
 }
 
 /// <summary>

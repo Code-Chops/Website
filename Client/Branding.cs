@@ -14,9 +14,9 @@ public static class Branding
 	
 	public const string FontFamily		= "Montserrat";
 	
-	public static int FontWeight => ColorModeSelector.ColorMode == ColorMode.DarkMode ? 100 : 150;
-	public static string TextShadow => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "-1px" : "1px";
-	public static string TextSpacing => ColorModeSelector.ColorMode == ColorMode.DarkMode ? "0.04px" : "normal";
+	public static int FontWeight		=> ColorModeSelector.Value == ColorMode.DarkMode ? 100 : 150;
+	public static string TextShadow		=> ColorModeSelector.Value == ColorMode.DarkMode ? "-1px" : "1px";
+	public static string TextSpacing	=> ColorModeSelector.Value == ColorMode.DarkMode ? "0.04px" : "normal";
 
 	public static class Colors
 	{
@@ -24,7 +24,7 @@ public static class Branding
 		public static readonly FlexColor Accent		= new("#9f607a");
 		public static readonly FlexColor DarkGray	= new("#1e1e1e");
 		
-		public static FlexColor Background => ColorModeSelector.ColorMode == ColorMode.DarkMode ? DarkGray : FlexColor.White;
+		public static FlexColor Background => ColorModeSelector.Value == ColorMode.DarkMode ? DarkGray : FlexColor.White;
 	}
 
 	public static readonly string BannerText = $@"
