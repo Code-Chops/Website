@@ -28,6 +28,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)
 	{
-		if (isFirstRender) await JsRuntime.InvokeVoidAsync("loadImageAndShow", ImageId, ThumbnailId);
+		if (isFirstRender) 
+			await JsRuntime.InvokeVoidAsync("loadImageAndShow", ImageId, ThumbnailId);
 	}
 }

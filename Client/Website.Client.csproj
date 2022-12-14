@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.15.3</Version>
+        <Version>0.15.5</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
@@ -48,13 +48,7 @@
 		<Content Update="wwwroot\scripts\CodeChops.js">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-
-		<DocumentationFiles Include="..\..\*\README.md" />
 	</ItemGroup>
-
-	<Target Name="CopyDocumentationFiles" AfterTargets="AfterBuild">
-		<Copy SourceFiles="@(DocumentationFiles)" DestinationFolder="wwwroot\projects\%(RecursiveDir)" SkipUnchangedFiles="true" />
-	</Target>
 	
 	<ItemGroup Label="PackageAssets">
 		<None Include="Properties\LICENSE" Pack="true" PackagePath="" />
@@ -84,9 +78,5 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\GenericMath\README.md" />
       <_ContentIncludedByDefault Remove="wwwroot\projects\GenericMath\README.md" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\projects" />
     </ItemGroup>
 </Project>

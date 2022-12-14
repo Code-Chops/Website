@@ -1,5 +1,11 @@
 ﻿#content {
 	margin: 30px 10px 15px 10px;
-	font-size: larger;
+	font-size: large;
 	display: flex;
+}
+
+@media (max-width: 500px) {
+	#content {
+		font-size: medium !important;
+	}
 }

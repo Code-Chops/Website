@@ -55,7 +55,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
-		<PackageReference Include="MudBlazor" Version="6.1.2" />
+		<PackageReference Include="MudBlazor" Version="6.1.5" />
     </ItemGroup>
     
     <ItemGroup>
