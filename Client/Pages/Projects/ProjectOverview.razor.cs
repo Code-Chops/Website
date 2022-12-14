@@ -32,9 +32,9 @@ public interface IProjectOverviewResource
 public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
 {
 	public static string Baxo { get; }						= CreateMember("Baxo");
-	public static string Contracts { get; }					= CreateMember("DDD contracts");
+	public static string Contracts { get; }					= CreateMember("Contracts (DDD)");
 	public static string Crossfade { get; }					= CreateMember("Crossfade");
-	public static string DomainModeling { get; }			= CreateMember("DDD domain modeling");
+	public static string DomainModeling { get; }			= CreateMember("Domain modeling (DDD)");
 	public static string GenericMath { get; }				= CreateMember("Generic math");
 	public static string Geometry { get; }					= CreateMember("Geometry");
 	public static string ImplementationDiscovery { get; }	= CreateMember("Implementation discovery");
