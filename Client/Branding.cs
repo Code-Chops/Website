@@ -1,4 +1,4 @@
-﻿using CodeChops.Website.Client.Layout;
+using CodeChops.Website.Client.Layout;
 using CodeChops.Website.RazorComponents.Helpers;
 
 namespace CodeChops.Website.Client;
@@ -37,9 +37,3 @@ public static class Branding
                                ©{DateTime.Now.Year} by Max Bergman
 ";
 }
-
-// Mosque: #9DB6BD
-// Grijsblauw: #8699A7
-// Blauw: #79a5c5
-// Frisblauw: #b0d1e9
-// Dark background: #1D1D1D #13161a

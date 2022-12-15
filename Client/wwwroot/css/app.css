@@ -255,3 +255,13 @@ pre {
 article {
     overflow-wrap: anywhere;
 }
+
+blockquote {
+    padding-left: 10px;
+    border-left: white 1px solid;
+    margin-left: 10px;
+}
+
+img {
+    width: 100%;
+}

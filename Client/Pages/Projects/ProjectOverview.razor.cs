@@ -5,14 +5,13 @@ namespace CodeChops.Website.Client.Pages.Projects;
 
 public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
 {
-	public static string Title 				=> CreateMember("Projects");
-	public static string Error 				=> CreateMember("Currently I am switching from hosting. Therefore some projects cannot be opened yet.");
-}
-
+	public static string Title 			=> CreateMember("Projects");
+	public static string Error 			=> CreateMember("Currently I am switching from hosting. Therefore some projects cannot be opened yet.");
+	}
 public record ProjectResourceNL : Resource<ProjectResourceNL, ResourceProxyEnum>
 {
-	public static string Title { get; }					= CreateMember("Projecten");
-	public static string Error { get; } 				= CreateMember("Momenteel ben ik van hosting aan het wisselen. Sommige projecten kunnen daarom nog niet worden geopend.");
+	public static string Title { get; }	= CreateMember("Projecten");
+	public static string Error { get; } = CreateMember("Momenteel ben ik van hosting aan het wisselen. Sommige projecten kunnen daarom nog niet worden geopend.");
 }
 
 public interface IProjectOverviewResource
