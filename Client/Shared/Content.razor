@@ -1,4 +1,4 @@
-﻿<div id="content">
+﻿<div id="content" class="@(IsDocumentation ? "documentation" : null)">
 	<article>
 		@ChildContent	
 	</article>
@@ -18,4 +18,5 @@
 @code {
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 	[Parameter] public string? MaxWidth { get; set; } = "900px";
+	[Parameter] public bool IsDocumentation { get; set; }
 }

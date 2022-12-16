@@ -9,3 +9,8 @@
 		font-size: medium !important;
 	}
 }
+
+.documentation {
+	font-size: 17px !important;
+	font-variation-settings: 'wght' 250 !important;
+}

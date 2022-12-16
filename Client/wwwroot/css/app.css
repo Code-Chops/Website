@@ -267,10 +267,14 @@ img {
 }
 
 code {
-    font-size: larger;
+    font-size: 14px;
+    background-color: rgba(var(--textcolor-rgb), 0.15);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-variation-settings: 'wght' 50;
 }
 
 strong {
-    font-variation-settings: 'wght' 300;
-    font-weight: 100;
+    font-size: initial;
 }
