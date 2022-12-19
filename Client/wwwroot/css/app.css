@@ -276,3 +276,21 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
     margin-top: 15px;
 }
+
+strong {
+    font-weight: 100;
+    font-variation-settings: 'wght' 425;
+}
+
+@media (max-width: 500px) {
+    strong {
+        font-size: 14px !important;
+    }
+}
+
+@media (min-width: 500px) {
+    strong {
+        font-size: 16px !important;
+    }
+}
+

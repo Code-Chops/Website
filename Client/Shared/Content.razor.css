@@ -6,11 +6,6 @@
 	#content {
 		font-size: 15px !important;
 	}
-
-	#content strong {
-		font-size: 14px !important;
-		font-weight: 100 !important;
-	}
 }
 
 @media (min-width: 500px) {
@@ -18,9 +13,5 @@
 		font-size: 17px !important;
 		margin: 30px 10px 15px 10px;
 	}
-
-	#content strong {
-		font-size: 16px !important;
-		font-weight: 100 !important;
-	}
 }
+
