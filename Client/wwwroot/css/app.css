@@ -48,7 +48,7 @@ h1:focus {
 }
 
 a, .btn-link {
-    font-variation-settings: 'wght' 300;
+    font-variation-settings: 'wght' 400;
     color: var(--hrefcolor) !important;
     text-decoration: unset;
 }

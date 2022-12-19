@@ -8,11 +8,9 @@
 	
 	<div class="warning">
 		<Box>
-			@GeneralResource.CheckItOutOn
+			@GeneralResource.DocumentationLink
 			
-			<a href="@Branding.GitHubLink/@Project" target="_blank">
-				@GeneralResource.GitHub
-			</a>
+			<a href="@Branding.GitHubLink/@Project" target="_blank">@LinkName</a>@((MarkupString)GeneralResource.OnlyInEnglish)
 		</Box>
 	</div>
 	
@@ -31,6 +29,8 @@
 	
 	public string? Title { get; set; }	
 	public string? DocumentationText { get; set; }
+	public string LinkName => $"{Branding.Name} - {Project} ({GeneralResource.GitHub})";
+	
 	private CancellationTokenSource CancellationTokenSource { get; } = new();
 	
 	static ProjectDetails()
