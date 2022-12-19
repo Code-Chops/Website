@@ -1,4 +1,4 @@
-﻿.project::before {
+.project::before {
     padding: 10px 10px 10px 10px;
 }
 
@@ -52,7 +52,7 @@
     }
 
     .text {
-        font-size: small;
+        font-size: medium;
     }
 }
 

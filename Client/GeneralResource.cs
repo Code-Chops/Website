@@ -16,7 +16,7 @@ the page.
 	
 	public static string NotAuthorized	=> CreateMember(@"Access denied.");
 	
-	public static string CheckItOutOn	=> CreateMember("Check it out on");
+	public static string CheckItOutOn	=> CreateMember("This text is synchronized from");
 	
 	public static string GitHub			=> CreateMember("GitHub");
 	public static string LinkedIn		=> CreateMember("LinkedIn");
@@ -36,5 +36,5 @@ de pagina.
 
 	public static string NotAuthorized { get; } = CreateMember(@"Toegang geweigerd.");
 
-	public static string CheckItOutOn { get; }	= CreateMember("Bekijk het op");
+	public static string CheckItOutOn { get; }	= CreateMember("Deze tekst is alleen in het Engels beschikbaar en is afkomstig van");
 }

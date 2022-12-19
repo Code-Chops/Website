@@ -22,7 +22,12 @@
 			color: var(--branding-color-accent);
 		}	
 		
+.footer-icons {
+	font-size: 1.3em;
+	margin-block-end: 0.4rem;
+}
+
 .footer-text {
-	font-size: 1.5em;
-	margin-block-end: 0.6rem;
+	font-size: smaller;
+	opacity: 0.8;
 }

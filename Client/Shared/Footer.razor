@@ -1,5 +1,5 @@
 ﻿<footer>
-    <div class="footer-text">
+    <div class="footer-icons">
         <a href="https://github.com/Code-Chops" target="_blank">
             <span class="fa fa-github" aria-hidden="true"></span>
         </a>
@@ -7,7 +7,7 @@
             <span class="fa fa-linkedin" aria-hidden="true"></span>
         </a>
     </div>
-    <span title='@(Version is not null ? $"Version {Version}" : null)'> ©️ @DateTime.Now.Year @Branding.Name</span>
+    <span title="@(Version is not null ? $"Version {Version}" : null)" class="footer-text"> ©️ @DateTime.Now.Year @Branding.Name</span>
 </footer>
 
 @code {
