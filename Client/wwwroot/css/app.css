@@ -48,9 +48,7 @@ h1:focus {
 }
 
 a, .btn-link {
-    font-variation-settings: 'wght' 400;
     color: var(--hrefcolor) !important;
-    text-decoration: unset;
 }
 
     a:hover {
@@ -258,7 +256,7 @@ article {
 
 blockquote {
     padding-left: 10px;
-    border-left: white 1px solid;
+    border-left: var(--textcolor) 1px solid;
     margin-left: 10px;
 }
 
@@ -272,14 +270,14 @@ code {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-variation-settings: 'wght' 250;
+    font-variation-settings: 'wght' 200;
     font-weight: 100;
     margin-top: 15px;
 }
 
 strong {
     font-weight: 100;
-    font-variation-settings: 'wght' 425;
+    font-variation-settings: 'wght' 350;
 }
 
 @media (max-width: 500px) {

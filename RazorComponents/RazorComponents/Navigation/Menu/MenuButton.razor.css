@@ -22,6 +22,7 @@
     text-decoration: none;
     transition: color .25s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
     justify-content: space-around;
+    font-variation-settings: 'wght' 400;
 }
 
     .nav-link:focus {

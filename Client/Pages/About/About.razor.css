@@ -1,6 +1,6 @@
 ﻿#chamber-of-commerce {
 	color: var(--textcolor);
-	opacity: .4;
+	opacity: .6;
 	font-size: small;
 	text-align: right;
 	font-variation-settings: 'wght' 300;
@@ -8,4 +8,12 @@
 
 #contact span {
 	width: 30px;
+}
+
+.no-text-decoration:not(:hover) {
+	text-decoration: unset;
+}
+
+.no-text-decoration:hover {
+	text-decoration: revert;
 }
