@@ -18,10 +18,18 @@ public class ProjectsController : Controller
 	{
 		return this.Ok(await MemoryCache.GetOrCreateAsync(project, async entry =>
 		{
-			entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
-			var documentation = await this.HttpClient.GetStringAsync($"https://raw.githubusercontent.com/Code-Chops/{project}/master/README.md");
 
-			return documentation;
+			try
+			{
+				var documentation = await this.HttpClient.GetStringAsync($"https://raw.githubusercontent.com/Code-Chops/{project}/master/README.md");
+				entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
+				return documentation;
+			}
+			catch (Exception e) when (e is HttpRequestException)
+			{
+				entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+				return $"Public documentation for project {project} not found on GitHub.";
+			}
 		}));
 	}
 }

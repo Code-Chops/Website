@@ -16,8 +16,8 @@ the page.
 	
 	public static string NotAuthorized		=> CreateMember("Access denied.");
 	
-	public static string DocumentationLink	=> CreateMember("This text is synchronized with");
-	public static string OnlyInEnglish		=> CreateMember(".");
+	public static string DocumentationLink	=> CreateMember("This text originates from");
+	public static string OnlyInEnglish		=> CreateMember("");
 	
 	public static string GitHub				=> CreateMember("GitHub");
 	public static string LinkedIn			=> CreateMember("LinkedIn");
@@ -37,6 +37,6 @@ de pagina.
 
 	public static string NotAuthorized { get; }		= CreateMember("Toegang geweigerd.");
 
-	public static string DocumentationLink { get; }	= CreateMember("Deze tekst is gesynchroniseerd met");
-	public static string OnlyInEnglish { get; }		= CreateMember("<br/>en is daarom alleen in het Engels beschikbaar.");
+	public static string DocumentationLink { get; }	= CreateMember("Deze tekst is afkomstig van");
+	public static string OnlyInEnglish { get; }		= CreateMember("en is daarom alleen in het Engels beschikbaar");
 }

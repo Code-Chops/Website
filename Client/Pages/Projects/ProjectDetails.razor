@@ -10,7 +10,7 @@
 		<Box>
 			@GeneralResource.DocumentationLink
 			
-			<a href="@Branding.GitHubLink/@Project" target="_blank">@LinkName</a>@((MarkupString)GeneralResource.OnlyInEnglish)
+			<a href="@Branding.GitHubLink/@Project" target="_blank">@LinkName</a>@(OnlyEnglishText).
 		</Box>
 	</div>
 	
@@ -29,7 +29,11 @@
 	
 	public string? Title { get; set; }	
 	public string? DocumentationText { get; set; }
-	public string LinkName => $"{Branding.Name} - {Project} ({GeneralResource.GitHub})";
+	public string LinkName => $"{GeneralResource.GitHub} - {Project}";
+	public static string? OnlyEnglishText 
+		=> GeneralResource.OnlyInEnglish.ContainsText() 
+			? $" {GeneralResource.OnlyInEnglish}" 
+			: null;
 	
 	private CancellationTokenSource CancellationTokenSource { get; } = new();
 	
