@@ -13,13 +13,12 @@
 	}
 
 	footer a {
-		color: var(--branding-color-text);
 		padding-left: 10px;
 		padding-right: 10px;
 	}
 
-		footer a:hover {
-			color: var(--branding-color-accent);
+		footer span:hover {
+			color: var(--textcolor) !important;
 		}	
 		
 .footer-icons {
@@ -29,4 +28,5 @@
 
 .footer-text {
 	font-size: smaller;
+	filter: grayscale(100);
 }
