@@ -37,12 +37,6 @@
 	
 	private CancellationTokenSource CancellationTokenSource { get; } = new();
 	
-	static ProjectDetails()
-	{
-		var _ = AllDiscoveredImplementationsEnum.IsInitialized;
-	}
-
-
 	protected override async Task OnInitializedAsync()
 	{
 		HttpClient.BaseAddress = new(NavigationManager.BaseUri);

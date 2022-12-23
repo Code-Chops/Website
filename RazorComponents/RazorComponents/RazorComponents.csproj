@@ -49,13 +49,13 @@
     </ItemGroup>
     
     <ItemGroup Label="PackageReferences">
-		<PackageReference Include="CodeChops.DomainDrivenDesign.DomainModeling" Version="1.4.3" />
-		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.35.1" />
+		<PackageReference Include="CodeChops.DomainDrivenDesign.DomainModeling" Version="1.6.8" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="0.38.1" />
 		<PackageReference Include="ColorHelper" Version="1.8.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
-		<PackageReference Include="MudBlazor" Version="6.1.5" />
+		<PackageReference Include="MudBlazor" Version="6.1.6" />
     </ItemGroup>
     
     <ItemGroup>

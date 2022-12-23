@@ -9,7 +9,7 @@ namespace CodeChops.Website.RazorComponents.Resources;
 
 public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, IResource
 	where TSelf : Resource<TSelf, TResourceEnum>
-	where TResourceEnum : MagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IMagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IImplementationsEnum<IResource>, IDiscoverable
+	where TResourceEnum : MagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IMagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IImplementationsEnum<IResource>, IInitializable
 {
 	private static string DefaultResourceName { get; }
 	private static string ThisResourceName { get; }
@@ -58,7 +58,7 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 		// If this is the default resource (e.g. GeneralResource.Warning), the resource in the currently configured country code should be used.
 		// Therefore, check if the the current configured country code differs from the default country code.
 		// It is possible that the ResourceEnum is not initialized completely (because of static build-up).
-		if (ThisResourceName == DefaultResourceName && ThisLanguageCode != LanguageCodeCache.CurrentSimpleLanguageCode  && TResourceEnum.IsInitialized)
+		if (ThisResourceName == DefaultResourceName && ThisLanguageCode != LanguageCodeCache.CurrentSimpleLanguageCode && TResourceEnum.IsInitialized)
 		{
 			// It is possible that the non-default resource does not contain a member with that name, if so, don't look it up.
 			// The resource in the default language will be picked up at the end of this method.
@@ -97,13 +97,13 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 			return false;
 		}
 
-		var foreignResource = (IMagicEnum<string>)specificResource.UninitializedInstance;
+		var foreignResource = (IMagicEnum<string>)specificResource.Instance;
 		
 		return foreignResource.TryGetSingleMember(name, out member);
 	}
 }
 
-[DiscoverImplementations]
+[DiscoverImplementations(generateProxies: true)]
 public partial interface IResource
 {
 }

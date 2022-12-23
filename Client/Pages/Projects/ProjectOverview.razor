@@ -32,8 +32,6 @@
 		
 	static ProjectOverview()
 	{
-		var _ = AllDiscoveredImplementationsEnum.IsInitialized;
-		
 		ParameterGroups = ProjectOverviewTitleResource
 			.GetMembers()
 			.OrderBy(_ => Random.Shared.Next())
