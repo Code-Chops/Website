@@ -188,7 +188,7 @@ p {
     background-color: var(--backgroundcolor);
     border: 0;
     margin-right: 2px;
-    opacity: .75;
+    opacity: .6;
 }
 
 .menu-setting > .fa:hover {

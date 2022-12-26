@@ -9,7 +9,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>11</LangVersion>
 		<UserSecretsId>Website.Server-131CB2AF-125D-42BE-9E2E-689FF20FC4E4</UserSecretsId>
-		<EnablePreviewFeatures>true</EnablePreviewFeatures>
 	</PropertyGroup>
 
 	<ItemGroup Label="PackageReferences">
