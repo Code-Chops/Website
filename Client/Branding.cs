@@ -14,9 +14,8 @@ public static class Branding
 	
 	public const string FontFamily		= "Montserrat";
 	
-	public static int FontWeight		=> ColorModeSelector.Value == ColorMode.DarkMode ? 170 : 210;
-	public static string TextShadow		=> ColorModeSelector.Value == ColorMode.DarkMode ? "-1px" : "1px";
-	public static string TextSpacing	=> "normal";
+	public static int FontWeight		=> ColorModeSelector.Value == ColorMode.DarkMode ? 170 : 325;
+	public static string TextSpacing	=> ColorModeSelector.Value == ColorMode.DarkMode ? "0.135px" : "normal";
 
 	public static class Colors
 	{

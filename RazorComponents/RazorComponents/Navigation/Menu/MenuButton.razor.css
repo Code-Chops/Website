@@ -1,4 +1,4 @@
-﻿.nav-item {
+.nav-item {
     position: relative;
     z-index: 1;
     flex-basis: content;
@@ -8,7 +8,6 @@
         align-items: center;
         line-height: 3rem;
         color: var(--textcolor) !important;
-        display: ruby;
     }
 
         .nav-item a:hover {
@@ -22,7 +21,6 @@
     text-decoration: none;
     transition: color .25s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
     justify-content: space-around;
-    font-variation-settings: 'wght' 275;
 }
 
     .nav-link:focus {
