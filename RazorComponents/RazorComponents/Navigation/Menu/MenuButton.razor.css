@@ -1,7 +1,8 @@
-.nav-item {
+﻿.nav-item {
     position: relative;
     z-index: 1;
     flex-basis: content;
+    display: ruby;
 }
 
     .nav-item a {
