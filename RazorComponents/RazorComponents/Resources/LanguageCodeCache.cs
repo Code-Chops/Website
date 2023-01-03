@@ -16,7 +16,7 @@ public static class LanguageCodeCache
 	/// <summary>
 	/// Takes the first 2 letters of <see cref="CurrentLanguageCode"/> and converts it to upper invariant.
 	/// </summary>
-	public static string CurrentSimpleLanguageCode { get; private set; }
+	public static string? CurrentSimpleLanguageCode { get; private set; }
 
 	internal static void AddLanguageCode(LanguageCode languageCode)
 	{

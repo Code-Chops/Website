@@ -1,5 +1,4 @@
 ﻿using CodeChops.MagicEnums;
-// ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.RazorComponents.Resources;
 
