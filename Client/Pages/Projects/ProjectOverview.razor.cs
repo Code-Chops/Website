@@ -26,6 +26,7 @@ public interface IProjectOverviewResource
 	public static abstract string Junctions { get; }
 	public static abstract string MagicEnums { get; }
 	public static abstract string VendingMachine { get; }
+	public static abstract string SourceGenerationUtilities { get; }
 }
 
 public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
@@ -40,6 +41,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 	public static string Junctions { get; }					= CreateMember("Junctions");
 	public static string MagicEnums { get; }				= CreateMember("Magic enums");
 	public static string VendingMachine { get; }			= CreateMember("FoodChops");
+	public static string SourceGenerationUtilities { get; }	= CreateMember("Source generation utilities");
 }
 
 public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource, ResourceProxyEnum>, IProjectOverviewResource
@@ -92,6 +94,11 @@ Flexible, extendable, and customizable
 Demo of a solution to<br/>
 the vending machine change problem
 ");
+	
+	public static string SourceGenerationUtilities	=> CreateMember(@"
+Utilities to make it easier<br/>
+to implement source generators
+");
 }
 
 public record ProjectOverviewTextResourceNL : Resource<ProjectOverviewTextResourceNL, ResourceProxyEnum>, IProjectOverviewResource
@@ -141,5 +148,10 @@ Flexibel, uitbreidbaar en aanpasbaar
 	public static string VendingMachine { get; }			= CreateMember(@"
 Demo van een oplossing voor<br/>
 het wisselgeldprobleem
+");
+	
+	public static string SourceGenerationUtilities { get; }	= CreateMember(@"
+Tools om codegenerators<br/>
+makkelijker te implementeren
 ");
 }

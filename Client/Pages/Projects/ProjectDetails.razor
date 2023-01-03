@@ -41,8 +41,14 @@
 	{
 		HttpClient.BaseAddress = new(NavigationManager.BaseUri);
 		Title = ProjectOverviewTitleResource.GetSingleMember(Project);
-		var pipeline = new MarkdownPipelineBuilder().UsePipeTables().UseGridTables()
-			.UseAdvancedExtensions().UseEmojiAndSmiley().Build();
+		
+		var pipeline = new MarkdownPipelineBuilder()
+			.UsePipeTables()
+			.UseGridTables()
+			.UseAdvancedExtensions()
+			.UseEmojiAndSmiley()
+			.Build();
+		
 		var documentationFromServer = await HttpClient.GetStringAsync($"/projects/{Project}/documentation/", CancellationTokenSource.Token);
 		DocumentationText = Markdown.ToHtml(documentationFromServer, pipeline);
 

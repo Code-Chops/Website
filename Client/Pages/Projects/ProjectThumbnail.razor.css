@@ -29,7 +29,7 @@
     }
 
     .project:hover .image {
-        filter: brightness(0.4);
+        filter: brightness(0.2);
     }
     
     .hide {
