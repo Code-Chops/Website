@@ -1,31 +1,43 @@
-﻿window.copyElement = (sourceId, copyId, preloadCrossfade) =>
+﻿window.copyElement = (sourceId, copyId) =>
 {
     const sourceElement = document.getElementById(sourceId);
     if (sourceElement == null)
         return;
     
     const node = sourceElement?.firstChild;
-    const sourceHtml = node?.outerHTML;
-    if (sourceHtml == null)
+    const sourceNode = node.cloneNode(true);
+    if (sourceNode == null)
+        return;
+    
+    const elem = document.getElementById(copyId+"-inner");
+
+    elem.after(sourceNode);
+
+    for (let childElement of getDescendantNodes(sourceElement)) {
+        if (childElement.id === "") continue;
+
+        scroll(childElement, copyId);
+    }
+}
+
+window.scrollUp = (sourceId) => {
+    const sourceElement = document.getElementById(sourceId);
+    if (sourceElement == null)
         return;
 
-    if (preloadCrossfade) {
-        for (let element of getDescendantNodes(sourceElement)) {
-            if (element.id === "") continue;
-        
-            element.removeEventListener(
-                "scroll",
-                e => scroll(e.currentTarget, copyId, element.id)
-                
-            );
-            element.addEventListener(
-                "scroll",
-                e => scroll(e.currentTarget, copyId, element.id)
-            );
+    for (let element of getDescendantNodes(sourceElement)) {
+        if (element.id === "") continue;
+
+        if (typeof element.scroll === "function") {
+            element.scroll({ top: 0 } );
         }
     }
-    
-    return sourceHtml;
+}
+
+window.removeElement = (copyId) => {
+    const sourceElement = document.getElementById(copyId);
+    for (const node of sourceElement.childNodes)
+        if (node.id !== copyId+"-inner") node.remove();
 }
 
 const getDescendantNodes = (node, all = []) => {
@@ -35,8 +47,8 @@ const getDescendantNodes = (node, all = []) => {
     return all;
 }
 
-const scroll = (element, copyId, scrollElementId) => {
-    if (element == null || element.scrollTop === 0)
+const scroll = (childElement, copyId) => {
+    if (childElement == null || childElement.scrollTop === 0)
         return;
 
     const copyElement = document.getElementById(copyId);
@@ -44,11 +56,21 @@ const scroll = (element, copyId, scrollElementId) => {
     if (copyElement == null)
         return;
 
-    const scrollElement = copyElement.querySelector('#'+ scrollElementId);
-    
+    const scrollElement = copyElement.querySelector('#'+ childElement.id);
+
     if (scrollElement == null)
         return;
-    
-    scrollElement.scrollTop = element.scrollTop;
-    scrollElement.scrollLeft = element.scrollLeft;
+
+    console.log("scroll" + childElement.id);
+
+    scrollElement.scrollTop = childElement.scrollTop;
+    scrollElement.scrollLeft = childElement.scrollLeft;
 }
+
+const origScrollTo = window.scrollTo;
+window.scrollTo = (x, y) => {
+    const shouldSkip = true;
+    if (x === 0 && y === 0 && shouldSkip)
+        return;
+    return origScrollTo.apply(this, arguments);
+};

@@ -45,7 +45,7 @@
 		var newIndex = (index + 1) % LanguageCodeList.Count;
 		var newLanguageCode = LanguageCodeList[newIndex];
 
-		LanguageCodeCache.SetCurrentLanguageCode(newLanguageCode);
+		LanguageCodeCache.SetLanguageCode(newLanguageCode);
 		SetCountryFlag();
 
 		TriggerLanguageChangedEvent();

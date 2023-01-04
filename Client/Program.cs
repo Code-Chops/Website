@@ -25,8 +25,7 @@ var currentColorMode = GetCurrentColorMode(jsRuntime);
 ColorModeSelector.SetMode(currentColorMode);
 
 var currentLanguageCode = GetCurrentLanguageCode(jsRuntime);
-
-LanguageCodeCache.SetCurrentLanguageCode(currentLanguageCode);
+LanguageCodeCache.SetLanguageCode(currentLanguageCode);
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {

@@ -8,8 +8,8 @@
     <MenuBar @ref="MenuBar"
              BackgroundColor="@(IsDarkMode ? new(hexColor: "#181616") : new(hexColor: "#f9f4f6"))"
              AccentColor="@Branding.Colors.Accent"
-             TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -50)"
-             HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 80 : -50)"
+             TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -20)"
+             HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 80 : -20)"
              FontFamily="@Branding.FontFamily" 
              LogoPath="/favicon.png"
              Title="@Branding.Name" 
@@ -25,7 +25,7 @@
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="false">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
         <main id="main">
             @Body
             <Footer></Footer>

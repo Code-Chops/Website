@@ -25,11 +25,11 @@ public static class LanguageCodeCache
 		if (_defaultLanguageCode is null)
 		{
 			_defaultLanguageCode = languageCode;
-			SetCurrentLanguageCode(languageCode);
+			SetLanguageCode(languageCode);
 		}
 	}
 	
-	public static void SetCurrentLanguageCode(LanguageCode languageCode)
+	public static void SetLanguageCode(LanguageCode languageCode)
 	{
 		if (SupportedLanguageCodes.GetMemberCount() == 0)
 			throw new InvalidOperationException("Can't set new language code: no supported language codes have been added.");

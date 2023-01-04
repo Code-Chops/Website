@@ -10,14 +10,14 @@
 			</span>
 		</div>
 		<div id="crossfade-copy">
-			@CopiedElement
+			<span id="crossfade-copy-inner"></span>
 		</div>
 	</span>
 }
 
 <style>
 	#crossfade-copy {
-		transition: opacity @(AnimationDurationInMilliseconds)ms linear;
+		transition: opacity @(AnimationDurationInMilliseconds)ms ease-in;
 		opacity: @(IsInTransition ? 0 : 1);
 		z-index: @(IsInTransition ? 101 : -1);
 		visibility: @(IsInTransition ? "visible" : "hidden")
@@ -27,36 +27,36 @@
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 	[Parameter] public RenderFragment? ChildContent { get; set; }
-	[Parameter] public MarkupString CopiedElement { get; set; }
 	[Parameter] public int AnimationDurationInMilliseconds { get; set; } = 350;
-	[Parameter] public bool PrerenderState { get; set; }
 	[Inject] public NavigationManager NavigationManager { get; set; } = null!;
 	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
-	[Parameter] public bool RegisterOnNavigationChanged { get; set; } = true;
+	[Parameter] public bool RegisterOnNavigationChanging { get; set; } = true;
 	private bool IsInTransition { get; set; }
 	private IJSObjectReference? JsObject { get; set; }
 	private string? PreviousRelativeUrl { get; set; }
-
+	private IDisposable? Registration { get; set; }
+	
 	protected override async Task OnInitializedAsync()
 	{
 		if (RenderLocation is RenderedOnClient)
+		{
 			JsObject = await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Crossfade.razor.js");
 
-		if (RegisterOnNavigationChanged)
-		{
-			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-			NavigationManager.LocationChanged += OnNavigationChanged;
+			if (RegisterOnNavigationChanging)
+			{
+				PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+				Registration = NavigationManager.RegisterLocationChangingHandler(OnNavigationChanging);
+			}
 		}
 	}
 
 	protected override void OnAfterRender(bool firstRender)
 	{
-		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-		if (PrerenderState && !firstRender && RenderLocation is RenderedOnClient && CopiedElement.Value is null)
-			LoadCrossfadeState();
+		if (IsInTransition && NavigationManager.ToBaseRelativePath(NavigationManager.Uri) != PreviousRelativeUrl)
+			((IJSInProcessRuntime)JsRuntime).InvokeVoid("scrollUp", "crossfade-source");
 	}
 
-	private async void OnNavigationChanged(object? o, LocationChangedEventArgs e)
+	private async ValueTask OnNavigationChanging(LocationChangingContext context)
 	{
 		if (NavigationManager.ToBaseRelativePath(NavigationManager.Uri) == PreviousRelativeUrl)
 			return;
@@ -66,38 +66,30 @@
 
 	public async Task ExecuteAsync()
 	{
-		if (!PrerenderState)
-			LoadCrossfadeState();
-
+		if (IsInTransition)
+			return;
+		
+		LoadCrossfadeState();	
 		IsInTransition = true;
-
 		StateHasChanged();
 
 		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
-			IsInTransition = false;
-			CopiedElement = (MarkupString)null!;
 			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+			IsInTransition = false;
+			((IJSInProcessRuntime)JsRuntime).InvokeVoid("removeElement", "crossfade-copy");
 			StateHasChanged();
 		});
 	}
 
 	private void LoadCrossfadeState()
 	{
-		// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-		if (CopiedElement.Value is not null)
-			return;
-
-		if (JsObject is null) return;
-
-		CopiedElement = (MarkupString)((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
-
-		StateHasChanged();
+		if (JsObject is not null)
+			((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy");
 	}
 
 	public void Dispose()
 	{
-		if (RegisterOnNavigationChanged)
-			NavigationManager.LocationChanged -= OnNavigationChanged;
+		Registration?.Dispose();
 	}
 }
