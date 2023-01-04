@@ -20,7 +20,7 @@
 .animation {
     animation-name: fadeIn;
     animation-iteration-count: 1;
-    animation-timing-function: ease-in;
+    animation-timing-function: ease-out;
     animation-duration: .5s;
 }
 

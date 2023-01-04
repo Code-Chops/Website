@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.19.1</Version>
+        <Version>0.20.0</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
@@ -63,7 +63,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.0.1" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.0.2" />
     </ItemGroup>
 
 	<ItemGroup Label="ProjectReferences">

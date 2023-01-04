@@ -21,7 +21,9 @@
 </Content>
 
 @code {
-	private static List<Dictionary<string, object>> ParameterGroups { get; }
+	private static List<string> RandomProjectNames { get; }
+	private static List<Dictionary<string, object>> ParameterGroups { get; set; } = null!;
+	
 	private static string[] ImplementedProjects { get; } =
 	{
 		nameof(ProjectOverviewTitleResource.GenericMath),
@@ -34,9 +36,21 @@
 		
 	static ProjectOverview()
 	{
+		var random = new Random();
+		RandomProjectNames = ProjectOverviewTitleResource.GetValues().OrderBy(_ => random.Next()).ToList();
+	}
+	
+	protected override void OnComponentInitialized()
+	{
+		CreateView();
+		LanguageChangedEvent += CreateView;
+	}
+	
+	private static void CreateView()
+	{
 		ParameterGroups = ProjectOverviewTitleResource
 			.GetMembers()
-			.OrderBy(_ => Random.Shared.Next())
+			.OrderBy(member => RandomProjectNames.IndexOf(member.Name))
 			.Select(member => new Dictionary<string, object>()
 			{
 				["Title"] = member.Value,

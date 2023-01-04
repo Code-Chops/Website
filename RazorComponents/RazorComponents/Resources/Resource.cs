@@ -8,7 +8,7 @@ using CodeChops.MagicEnums.Core;
 namespace CodeChops.Website.RazorComponents.Resources;
 
 public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, IResource
-	where TSelf : Resource<TSelf, TResourceEnum>
+	where TSelf : MagicStringEnum<TSelf>, IResource
 	where TResourceEnum : MagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IMagicEnumCore<ResourceEnum, DiscoveredObject<IResource>>, IImplementationsEnum<IResource>, IInitializable
 {
 	private static string DefaultResourceName { get; }
@@ -30,9 +30,10 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 			ThisLanguageCode = LanguageCodeCache.DefaultLanguageCode;
 			DefaultResourceName = ThisResourceName;
 		}
-		
-		foreach (var property in typeof(TSelf).GetProperties(BindingFlags.Public | BindingFlags.Static))
-			property.GetGetMethod()!.Invoke(obj: null, parameters: null);
+
+		foreach (var member in TResourceEnum.GetMembers())
+			foreach (var property in member.Value.Type.GetProperties(BindingFlags.Public | BindingFlags.Static))
+				property.GetGetMethod()!.Invoke(obj: null, parameters: null);
 	}
 
 	protected static new string CreateMember(string value, Func<TSelf>? memberCreator = null, [CallerMemberName] string name = null!)
@@ -70,7 +71,6 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 			name: name,
 			valueCreator: value.Trim,
 			memberCreator: memberCreator).Value;
-
 	}
 
 	/// <summary>
@@ -79,9 +79,10 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 	/// <exception cref="InvalidOperationException">If the resource has not been found.</exception>
 	public static new string GetSingleMember([CallerMemberName] string? name = null)
 	{
-		return TryGetSingleMember(name!, out var member) 
-			? member.Value 
-			: throw new InvalidOperationException($"Unable to retrieve resource {name} for {ThisResourceName} (or {DefaultResourceName}).");
+		if (TryGetSingleMember(name!, out var member)) 
+			return member.Value;
+
+		throw new InvalidOperationException($"Unable to retrieve resource {name} for {ThisResourceName} (or {DefaultResourceName + LanguageCodeCache.CurrentSimpleLanguageCode}).");
 	}
 	
 	/// <summary>
@@ -101,6 +102,12 @@ public abstract record Resource<TSelf, TResourceEnum> : MagicStringEnum<TSelf>, 
 		
 		return foreignResource.TryGetSingleMember(name, out member);
 	}
+	
+	public static new int GetMemberCount() => MagicStringEnum<TSelf>.GetMemberCount();
+	public static new int GetUniqueValueCount() => MagicStringEnum<TSelf>.GetUniqueValueCount();
+	public static new IEnumerable<TSelf> GetMembers() => MagicStringEnum<TSelf>.GetMembers();
+	public static new IEnumerable<string> GetValues() => MagicStringEnum<TSelf>.GetValues();
+	public static new IEnumerable<TSelf> GetMembers(string memberValue) => MagicStringEnum<TSelf>.GetMembers(memberValue);
 }
 
 [DiscoverImplementations(generateProxies: true)]
