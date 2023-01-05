@@ -1,4 +1,4 @@
-﻿window.copyElement = (sourceId, copyId, prerenderState) =>
+﻿window.copyElement = (sourceId, copyId) =>
 {
     const sourceElement = document.getElementById(sourceId);
     if (sourceElement == null)
@@ -17,28 +17,6 @@
         if (childElement.id === "") continue;
 
         scroll(childElement, copyId);
-    }
-
-    if (prerenderState) {
-        for (let element of getDescendantNodes(sourceElement)) {
-            if (element.id === "") continue;
-
-            element.removeEventListener(
-                "scroll",
-                e => scroll(e.currentTarget, copyId, element.id)
-
-            );
-            element.addEventListener(
-                "scroll",
-                e => scroll(e.currentTarget, copyId, element.id)
-            );
-        }
-
-        for (let childElement of getDescendantNodes(sourceElement)) {
-            if (childElement.id === "") continue;
-
-            scroll(childElement, copyId);
-        }
     }
 }
 

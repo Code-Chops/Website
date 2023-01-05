@@ -25,7 +25,7 @@
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="false">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
         <main id="main">
             @Body
             <Footer></Footer>
@@ -62,17 +62,14 @@
     private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await OnLanguageChangedAsync();
-        NavigationManager.LocationChanged += async (_,_) => await OnLanguageChangedAsync();
+        OnLanguageChangedAsync();
+        NavigationManager.LocationChanged += (_,_) => OnLanguageChangedAsync();
     }
 
-    private async Task OnLanguageChangedAsync()
+    private void OnLanguageChangedAsync()
     {
-        // if (Crossfade is not null) 
-        //     await Crossfade.ExecuteAsync();
-
         Buttons = new MenuButtonData[]
             {
                 new() { HRef="/",           Text = HomeResource.Title },
@@ -83,14 +80,4 @@
         
         StateHasChanged();
     }
-
-    // private async Task OnButtonClickAsync(MenuButtonData button)
-    // {
-    //     if (button.HRef is not null 
-    //         && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri) 
-    //         && Crossfade is not null) 
-    //     {
-    //         await Crossfade.ExecuteAsync();
-    //     }
-    // }
 }
