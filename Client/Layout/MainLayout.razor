@@ -25,7 +25,7 @@
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
+    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350" PrerenderState="false">
         <main id="main">
             @Body
             <Footer></Footer>
@@ -70,27 +70,27 @@
 
     private async Task OnLanguageChangedAsync()
     {
-        if (Crossfade is not null) 
-            await Crossfade.ExecuteAsync();
+        // if (Crossfade is not null) 
+        //     await Crossfade.ExecuteAsync();
 
         Buttons = new MenuButtonData[]
             {
-                new() { HRef="/",           Text = HomeResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b) },
+                new() { HRef="/",           Text = HomeResource.Title },
                 // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
-                new() { HRef="/projects",   Text = ProjectResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b) },
-                new() { HRef="/about",      Text = AboutResource.Title, OnClick = async (_, b) => await OnButtonClickAsync(b)},
+                new() { HRef="/projects",   Text = ProjectResource.Title },
+                new() { HRef="/about",      Text = AboutResource.Title },
             };
         
         StateHasChanged();
     }
 
-    private async Task OnButtonClickAsync(MenuButtonData button)
-    {
-        if (button.HRef is not null 
-            && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri) 
-            && Crossfade is not null) 
-        {
-            await Crossfade.ExecuteAsync();
-        }
-    }
+    // private async Task OnButtonClickAsync(MenuButtonData button)
+    // {
+    //     if (button.HRef is not null 
+    //         && button.HRef.Trim('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri) 
+    //         && Crossfade is not null) 
+    //     {
+    //         await Crossfade.ExecuteAsync();
+    //     }
+    // }
 }

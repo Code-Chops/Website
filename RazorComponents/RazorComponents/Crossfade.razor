@@ -4,7 +4,7 @@
 @if (ChildContent is not null)
 {
 	<span id="crossfade-main">
-		<div id="crossfade-source" style="z-index: @(IsInTransition ? 0 : 1);">
+		<div id="crossfade-source" style="z-index: @(IsAnimating ? 0 : 1);">
 			<span id="crossfade-container">
 				@ChildContent
 			</span>
@@ -18,20 +18,24 @@
 <style>
 	#crossfade-copy {
 		transition: opacity @(AnimationDurationInMilliseconds)ms ease-in;
-		opacity: @(IsInTransition ? 0 : 1);
-		z-index: @(IsInTransition ? 101 : -1);
-		visibility: @(IsInTransition ? "visible" : "hidden")
+		opacity: @(IsAnimating ? 0 : 1);
+		visibility: @(IsAnimating ? "visible" : "hidden");
+		z-index: 101;
 	}
 </style>
 
 @code {
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-	[Parameter] public RenderFragment? ChildContent { get; set; }
-	[Parameter] public int AnimationDurationInMilliseconds { get; set; } = 350;
 	[Inject] public NavigationManager NavigationManager { get; set; } = null!;
 	[Inject] public RenderLocation RenderLocation { get; set; } = null!;
+	[Parameter] public bool PrerenderState { get; set; }
+	[Parameter] public int AnimationDurationInMilliseconds { get; set; } = 350;
 	[Parameter] public bool RegisterOnNavigationChanging { get; set; } = true;
-	private bool IsInTransition { get; set; }
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	private bool StartAnimating { get; set; }
+	private bool IsAnimating { get; set; }
+	private bool HasCopy { get; set; }
+	private bool ShouldScrollUp { get; set; }
 	private IJSObjectReference? JsObject { get; set; }
 	private string? PreviousRelativeUrl { get; set; }
 	private IDisposable? Registration { get; set; }
@@ -47,45 +51,78 @@
 				PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 				Registration = NavigationManager.RegisterLocationChangingHandler(OnNavigationChanging);
 			}
+			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 		}
 	}
 
-	protected override void OnAfterRender(bool firstRender)
+	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		if (IsInTransition && NavigationManager.ToBaseRelativePath(NavigationManager.Uri) != PreviousRelativeUrl)
-			((IJSInProcessRuntime)JsRuntime).InvokeVoid("scrollUp", "crossfade-source");
-	}
-
-	private async ValueTask OnNavigationChanging(LocationChangingContext context)
-	{
-		if (NavigationManager.ToBaseRelativePath(NavigationManager.Uri) == PreviousRelativeUrl)
-			return;
-
-		await ExecuteAsync();
-	}
-
-	public async Task ExecuteAsync()
-	{
-		if (IsInTransition)
-			return;
+		if (StartAnimating && !firstRender && !HasCopy && RenderLocation is RenderedOnClient)
+			await StartAnimation();
 		
-		LoadCrossfadeState();	
-		IsInTransition = true;
-		StateHasChanged();
+		if (ShouldScrollUp)
+			ScrollUp();
+	}
 
-		await Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
+	private void ScrollUp()
+	{
+		ShouldScrollUp = false;
+		((IJSInProcessRuntime)JsRuntime).InvokeVoid("scrollUp", "crossfade-source");
+	}
+
+	private ValueTask OnNavigationChanging(LocationChangingContext context)
+	{
+		var targetLocation = NavigationManager.ToBaseRelativePath(context.TargetLocation);
+		if (targetLocation == PreviousRelativeUrl)
+			return ValueTask.CompletedTask;
+
+		PreviousRelativeUrl = targetLocation;
+		
+		Execute();
+
+		return ValueTask.CompletedTask;
+	}
+
+	public void Execute()
+	{
+		if (IsAnimating)
+			return;
+
+		StartAnimating = true;
+		StateHasChanged();
+	}
+
+	private Task StartAnimation()
+	{
+		StartAnimating = false;
+		IsAnimating = true;
+		ShouldScrollUp = true;
+		CopyElement();
+
+		return Task.Delay(AnimationDurationInMilliseconds).ContinueWith(_ =>
 		{
-			PreviousRelativeUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-			IsInTransition = false;
-			((IJSInProcessRuntime)JsRuntime).InvokeVoid("removeElement", "crossfade-copy");
+			IsAnimating = false;
+			RemoveElement();
 			StateHasChanged();
 		});
 	}
 
-	private void LoadCrossfadeState()
+	private void CopyElement()
 	{
-		if (JsObject is not null)
-			((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy");
+		if (JsObject is null || HasCopy)
+			return;
+		
+		((IJSInProcessRuntime)JsRuntime).Invoke<string>("copyElement", "crossfade-source", "crossfade-copy", PrerenderState);
+		HasCopy = true;
+	}
+	
+	private void RemoveElement()
+	{
+		if (JsObject is null || !HasCopy)
+			return;
+
+		((IJSInProcessRuntime)JsRuntime).InvokeVoid("removeElement", "crossfade-copy");
+		HasCopy = false;
 	}
 
 	public void Dispose()

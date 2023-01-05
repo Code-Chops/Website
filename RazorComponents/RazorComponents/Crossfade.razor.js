@@ -1,4 +1,4 @@
-﻿window.copyElement = (sourceId, copyId) =>
+﻿window.copyElement = (sourceId, copyId, prerenderState) =>
 {
     const sourceElement = document.getElementById(sourceId);
     if (sourceElement == null)
@@ -9,7 +9,7 @@
     if (sourceNode == null)
         return;
     
-    const elem = document.getElementById(copyId+"-inner");
+    const elem = document.getElementById(copyId + "-inner");
 
     elem.after(sourceNode);
 
@@ -17,6 +17,28 @@
         if (childElement.id === "") continue;
 
         scroll(childElement, copyId);
+    }
+
+    if (prerenderState) {
+        for (let element of getDescendantNodes(sourceElement)) {
+            if (element.id === "") continue;
+
+            element.removeEventListener(
+                "scroll",
+                e => scroll(e.currentTarget, copyId, element.id)
+
+            );
+            element.addEventListener(
+                "scroll",
+                e => scroll(e.currentTarget, copyId, element.id)
+            );
+        }
+
+        for (let childElement of getDescendantNodes(sourceElement)) {
+            if (childElement.id === "") continue;
+
+            scroll(childElement, copyId);
+        }
     }
 }
 
@@ -29,7 +51,7 @@ window.scrollUp = (sourceId) => {
         if (element.id === "") continue;
 
         if (typeof element.scroll === "function") {
-            element.scroll({ top: 0 } );
+            element.scroll({ top: 0 });
         }
     }
 }
@@ -37,7 +59,7 @@ window.scrollUp = (sourceId) => {
 window.removeElement = (copyId) => {
     const sourceElement = document.getElementById(copyId);
     for (const node of sourceElement.childNodes)
-        if (node.id !== copyId+"-inner") node.remove();
+        if (node.id !== copyId + "-inner") node.remove();
 }
 
 const getDescendantNodes = (node, all = []) => {
@@ -61,16 +83,11 @@ const scroll = (childElement, copyId) => {
     if (scrollElement == null)
         return;
 
-    console.log("scroll" + childElement.id);
-
     scrollElement.scrollTop = childElement.scrollTop;
     scrollElement.scrollLeft = childElement.scrollLeft;
 }
 
-const origScrollTo = window.scrollTo;
 window.scrollTo = (x, y) => {
-    const shouldSkip = true;
-    if (x === 0 && y === 0 && shouldSkip)
+    if (x === 0 && y === 0)
         return;
-    return origScrollTo.apply(this, arguments);
 };
