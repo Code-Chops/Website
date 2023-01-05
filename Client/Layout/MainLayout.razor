@@ -25,12 +25,12 @@
     
     <div class="border"></div>
     
-    <Crossfade @ref="Crossfade" AnimationDurationInMilliseconds="350">
+    <Crossblade AnimationDuration="350">
         <main id="main">
             @Body
             <Footer></Footer>
         </main>
-    </Crossfade>
+    </Crossblade>
 </div>
 
 <style>
@@ -57,23 +57,21 @@
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
 
     private MenuBar? MenuBar { get; set; }
-    private Crossfade? Crossfade { get; set; }
     private ICollection<MenuButtonData> Buttons { get; set; } = null!;
     private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        OnLanguageChangedAsync();
-        NavigationManager.LocationChanged += (_,_) => OnLanguageChangedAsync();
+        await OnLanguageChangedAsync();
+        NavigationManager.LocationChanged += async (_,_) => await OnLanguageChangedAsync();
     }
 
-    private void OnLanguageChangedAsync()
+    private async Task OnLanguageChangedAsync()
     {
         Buttons = new MenuButtonData[]
             {
                 new() { HRef="/",           Text = HomeResource.Title },
-                // new() { HRef="/blog",       Text=Pages.Blog.BlogResource.Title },
                 new() { HRef="/projects",   Text = ProjectResource.Title },
                 new() { HRef="/about",      Text = AboutResource.Title },
             };

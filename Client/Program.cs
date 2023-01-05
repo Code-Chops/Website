@@ -8,12 +8,9 @@ using Microsoft.JSInterop;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.Services.AddHttpClient();
-
-builder.Services.AddCrossfade(inServerContext: false);
+builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
 
 builder.RootComponents.Add<HeadOutlet>("head::after");
-
-builder.Services.AddSingleton<RenderLocation>(new RenderedOnClient());
 
 var host = builder.Build();
 

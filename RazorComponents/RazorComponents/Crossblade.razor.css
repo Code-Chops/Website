@@ -1,24 +1,23 @@
-﻿#crossfade-main {
+﻿#crossblade-main {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-#crossfade-source {
+#crossblade-source {
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
-#crossfade-copy {
+#crossblade-copy {
     position: absolute;
     width: 100%; 
     height: 100%;
-    overflow: hidden;
     pointer-events: none;
 }
 
-#crossfade-container {
+#crossblade-container {
     width: 100%;
     height: 100%;
 }

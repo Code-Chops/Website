@@ -8,8 +8,8 @@
 }
 
 @code {
-    [Inject] private RenderLocation RenderLocation { get; set; } = null!;
-    [Inject] private IJSRuntime JsInterop { get; set; } = null!;
+    [Inject] protected RenderEnvironment RenderEnvironment { get; set; } = null!;
+    [Inject] protected IJSRuntime JsInterop { get; set; } = null!;
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     private bool ShowApp { get; set; }
@@ -17,11 +17,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        IsRenderedOnClient = RenderLocation is RenderedOnClient;
+        IsRenderedOnClient = RenderEnvironment is not RenderEnvironment.WebassemblyHost;
 
         if (IsRenderedOnClient)
-        {
-            await JsInterop.InvokeVoidAsync("removeSplash");
-        }
+        
+        await JsInterop.InvokeVoidAsync("removeSplash");
     }
 }

@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>0.21.2</Version>
+        <Version>0.21.3</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
@@ -72,10 +72,5 @@
 
     <ItemGroup>
         <ServiceWorker Include="wwwroot\scripts\service-worker.js" PublishedContent="wwwroot\scripts\service-worker.published.js" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\GenericMath\README.md" />
-      <_ContentIncludedByDefault Remove="wwwroot\projects\GenericMath\README.md" />
     </ItemGroup>
 </Project>

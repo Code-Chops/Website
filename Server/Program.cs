@@ -6,13 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddCrossfade(inServerContext: true);
+builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyHost());
 
 builder.Services.AddScoped<HttpClient>();
 
 builder.Services.AddLanguageCodeCache(new [] { "en-GB", "nl-NL" });
-
-builder.Services.AddSingleton<RenderLocation>(new RenderedOnServer());
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {

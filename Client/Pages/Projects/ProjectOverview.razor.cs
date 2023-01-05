@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 namespace CodeChops.Website.Client.Pages.Projects;
 
 public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
@@ -16,7 +16,7 @@ public interface IProjectOverviewResource
 {
 	public static abstract string Baxo { get; }
 	public static abstract string Contracts { get; }
-	public static abstract string Crossfade { get; }
+	public static abstract string Crossblade { get; }
 	public static abstract string DomainModeling { get; }
 	public static abstract string GenericMath { get; }
 	public static abstract string Geometry { get; }
@@ -31,7 +31,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 {
 	public static string Baxo { get; }						= CreateMember("Baxo");
 	public static string Contracts { get; }					= CreateMember("Contracts (DDD)");
-	public static string Crossfade { get; }					= CreateMember("Crossfade");
+	public static string Crossblade { get; }					= CreateMember("Crossblade");
 	public static string DomainModeling { get; }			= CreateMember("Domain modeling (DDD)");
 	public static string GenericMath { get; }				= CreateMember("Generic math");
 	public static string Geometry { get; }					= CreateMember("Geometry");
@@ -53,7 +53,7 @@ Easy use of contracts,<br/>
 adapters and polymorphism
 ");
 	
-	public static string Crossfade					=> CreateMember(@"
+	public static string Crossblade					=> CreateMember(@"
 Blazor component for<br/> 
 crossfades between webpages
 ");
@@ -109,9 +109,9 @@ Baxo
 Eenvoudig gebruik van contracten,<br/>
 adapters en polymorfisme");
 	
-	public static string Crossfade { get; }					= CreateMember(@"
-Blazor component voor een<br/> 
-crossfade tussen webpagina's");
+	public static string Crossblade { get; }					= CreateMember(@"
+Blazor component voor<br/> 
+crossfades tussen webpagina's");
 	
 	public static string DomainModeling { get; }			= CreateMember(@"
 Domeinmodelvorming volgens de<br/>

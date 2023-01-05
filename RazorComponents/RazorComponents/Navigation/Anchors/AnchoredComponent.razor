@@ -6,7 +6,7 @@
 	
 	protected override async Task OnInitializedAsync()
 	{
-		if (RenderLocation is RenderedOnClient)
+		if (RenderEnvironment is not RenderEnvironment.WebassemblyHost)
 		{
 			Registration = NavigationManager.RegisterLocationChangingHandler(OnLocationChanging);
 			
