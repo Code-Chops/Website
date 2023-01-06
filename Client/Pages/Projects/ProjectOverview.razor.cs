@@ -25,13 +25,14 @@ public interface IProjectOverviewResource
 	public static abstract string MagicEnums { get; }
 	public static abstract string VendingMachine { get; }
 	public static abstract string SourceGenerationUtilities { get; }
+	public static abstract string LightResources { get; }
 }
 
 public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
 {
 	public static string Baxo { get; }						= CreateMember("Baxo");
 	public static string Contracts { get; }					= CreateMember("Contracts (DDD)");
-	public static string Crossblade { get; }					= CreateMember("Crossblade");
+	public static string Crossblade { get; }				= CreateMember("Crossblade");
 	public static string DomainModeling { get; }			= CreateMember("Domain modeling (DDD)");
 	public static string GenericMath { get; }				= CreateMember("Generic math");
 	public static string Geometry { get; }					= CreateMember("Geometry");
@@ -40,6 +41,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 	public static string MagicEnums { get; }				= CreateMember("Magic enums");
 	public static string VendingMachine { get; }			= CreateMember("FoodChops");
 	public static string SourceGenerationUtilities { get; }	= CreateMember("Source generation utilities");
+	public static string LightResources { get; }			= CreateMember("LightResources");
 }
 
 public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource, ResourceProxyEnum>, IProjectOverviewResource
@@ -97,6 +99,11 @@ the vending machine change problem
 Utilities to make it easier<br/>
 to implement source generators
 ");
+
+	public static string LightResources				=> CreateMember(@"
+Dynamically loaded light resources 
+for website globalization
+");
 }
 
 public record ProjectOverviewTextResourceNL : Resource<ProjectOverviewTextResourceNL, ResourceProxyEnum>, IProjectOverviewResource
@@ -109,7 +116,7 @@ Baxo
 Eenvoudig gebruik van contracten,<br/>
 adapters en polymorfisme");
 	
-	public static string Crossblade { get; }					= CreateMember(@"
+	public static string Crossblade { get; }				= CreateMember(@"
 Blazor component voor<br/> 
 crossfades tussen webpagina's");
 	
@@ -151,5 +158,10 @@ het wisselgeldprobleem
 	public static string SourceGenerationUtilities { get; }	= CreateMember(@"
 Tools om codegenerators<br/>
 makkelijker te implementeren
+");
+	
+	public static string LightResources { get; }			= CreateMember(@"
+Dynamische weergegeven
+lichte resources voor websitelokalisatie
 ");
 }
