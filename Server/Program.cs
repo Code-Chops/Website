@@ -1,16 +1,17 @@
 using System.Globalization;
-using CodeChops.Website.RazorComponents;
-using CodeChops.Website.RazorComponents.Resources;
+using CodeChops.Crossblade;
+using CodeChops.LightResources;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyHost());
+builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyHost());
 
 builder.Services.AddScoped<HttpClient>();
 
-builder.Services.AddLanguageCodeCache(new [] { "en-GB", "nl-NL" });
+builder.Services.AddLightResources(new LanguageCode[] { new("en-GB"), new("nl-NL") });
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {

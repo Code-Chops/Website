@@ -6,6 +6,11 @@ public static class RazorHelpers
     {
         return predicate ? output : null;
     }
+    
+    public static T? If<T>(bool predicate, T output)
+    {
+	    return predicate ? output : default;
+    }
 
     public static string? If(string? value, string output)
 	{

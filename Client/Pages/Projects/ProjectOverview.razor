@@ -5,13 +5,7 @@
 	<span class="title text-center">
 		<Title Value="@ProjectResource.Title"></Title>
 	</span>
-	
-	<div class="warning">
-		<Box>
-			@ProjectResource.Error
-		</Box>
-	</div>
-	
+
 	<div class="grid">
 		@foreach (var group in ParameterGroups)
 		{
@@ -55,6 +49,7 @@
 			.OrderBy(member => RandomProjectNames.IndexOf(member.Name))
 			.Select(member => new Dictionary<string, object>()
 			{
+				["Code"] = member.Name,
 				["Title"] = member.Value,
 				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
 				["ImagePath"] = $"images/projects/{member.Name}.png",

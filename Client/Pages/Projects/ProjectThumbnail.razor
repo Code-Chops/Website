@@ -1,8 +1,10 @@
-﻿@using CodeChops.DomainDrivenDesign.DomainModeling.Serialization
+﻿@using CodeChops.DomainModeling.Serialization
+
 <a class="project" href="@RelativePath?.Write($"/projects/{RelativePath}/")" id="@ThumbnailId">
 	<div class="text">
 		<h2>@Title</h2>
 		<span class="small-screen-hide">@Text</span>
+		@If(RelativePath is null, (MarkupString)ProjectResource.Error)
 	</div>
 	<span class="image-container border show">
 		<img class="image noSelect" src="@ImagePath" alt="@Title" loading="lazy" id="@ImageId" />
@@ -10,25 +12,26 @@
 </a>
 
 @code {
+	[Parameter] public required string Code { get; set; } = null!;
 	[Parameter] public required string Title { get; set; } = null!;
 	[Parameter] public required MarkupString Text { get; set; }
 	[Parameter] public required string ImagePath { get; set; } = null!;
 	[Parameter] public string? RelativePath { get; set; }
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
+	private IJSObjectReference? JsObject { get; set; }
 	private string ImageId { get; set; } = null!;
 	private string ThumbnailId { get; set; } = null!;
 
 	protected override void OnInitialized()
 	{
-		var id = Title.Replace(' ', '_');
-		ImageId = $"Image{id}";
-		ThumbnailId = $"Thumbnail{id}";
+		ImageId = $"Image{Code}";
+		ThumbnailId = $"Thumbnail{Code}";
 	}
 
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)
 	{
-		if (isFirstRender) 
-			await JsRuntime.InvokeVoidAsync("loadImageAndShow", ImageId, ThumbnailId);
+		if (JsObject is not null)
+			await JsRuntime.InvokeVoidAsync("addThumbnailVisualizations", ImageId, ThumbnailId);
 	}
 }

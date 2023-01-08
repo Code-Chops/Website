@@ -1,15 +1,18 @@
-﻿namespace CodeChops.Website.RazorComponents.Navigation.Menu;
+using System.Runtime.InteropServices;
 
-public record struct MenuButtonData
+namespace CodeChops.Website.RazorComponents.Navigation.Menu;
+
+[StructLayout(LayoutKind.Auto)]
+public readonly record struct MenuButtonData
 {
-    public Func<EventArgs, MenuButtonData, Task> OnClick { get; init; } 
+    public Action<EventArgs, MenuButtonData> OnClick { get; init; } 
     public string? FontAwesomeIcon { get; init; }
     public string? Text { get; init; }
     public string? HRef { get; init; }
 
     public MenuButtonData()
     {
-        this.OnClick = (_, _) => Task.CompletedTask;
+        this.OnClick = (_, _) => { };
         this.FontAwesomeIcon = null;
         this.Text = null;
         this.HRef = null;

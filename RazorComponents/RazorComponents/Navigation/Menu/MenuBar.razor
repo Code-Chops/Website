@@ -1,3 +1,5 @@
+@inherits CodeChops.LightResources.ResourcedComponent
+
 <div class="top-bar">
     <div class="menu-bar navbar navbar-dark">
         <div class="brand noSelect">
@@ -14,9 +16,9 @@
 
         <div class="button-container">
             <div class="navbar-buttons">
-                @foreach(var button in Buttons)
+                @foreach(var button in ButtonsGetter?.Invoke() ?? Array.Empty<MenuButtonData>())
                 {
-                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButtonAsync(e, button) })"></MenuButton>
+                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
                 }
             </div>
             
@@ -30,14 +32,13 @@
 
     <div class="top-bar-shadow @(IsCollapsed ? "hide" : "show")">
         <div class="menu-item-container">
-            @foreach(var button in Buttons)
+            @foreach(var button in ButtonsGetter?.Invoke() ?? Array.Empty<MenuButtonData>())
             {
-                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButtonAsync(e, button) })"></MenuButton>
+                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
             }
         </div>
     </div>
 </div>
-
 
 @code {
     [Parameter] public string Title { get; set; } = null!;
@@ -52,7 +53,7 @@
     [Parameter] public int Height { get; set; } = 80;
     [Parameter] public bool ShowLogo { get; set; } = true;
     [Parameter] public bool ShowTitle { get; set; } = true;
-    [Parameter] public ICollection<MenuButtonData> Buttons { get; set; } = new List<MenuButtonData>();
+    [Parameter] public Func<MenuButtonData[]>? ButtonsGetter { get; set; }
     [Parameter] public int CollapseWidth { get; set; } = 720;
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
     [Parameter] public bool FadeOut { get; set; } = true;
@@ -70,15 +71,10 @@
         if (!IsCollapsed) Toggle();
     }
 
-    public async Task OnClickButtonAsync(EventArgs e, MenuButtonData button)
+    public void OnClickButton(EventArgs e, MenuButtonData button)
     {
         Collapse();
-        await button.OnClick(e, button);
-    }
-
-    public void Refresh()
-    {
-        StateHasChanged();
+        button.OnClick(e, button);
     }
 }
 

@@ -35,11 +35,39 @@ window.blazorColorMode = {
 
 document.documentElement.style.setProperty("--overlay-background-color", window.blazorColorMode.get() === "DarkMode" ? "#1e1e1e" : "white");
 
-window.loadImageAndShow = (imageId, elementToShowId) => {
-    const element = document.getElementById(imageId);
-    element.onload = () => {
-        const elementToShow = document.getElementById(elementToShowId);
-        elementToShow.classList.add("animation");
+window.addThumbnailVisualizations = (imageId, thumbnailId) => {
+    const image = document.getElementById(imageId);
+
+    image.onload = () => {
+        const elementToShow = document.getElementById(imageId);
         elementToShow.style.visibility = "visible";
+
+        const main = document.getElementById("main");
+
+        main.addEventListener("scroll", _ => {
+            if (!isTouchDevice())
+                return;
+
+            const thumbnail = document.getElementById(thumbnailId);
+            const verticalCenter = main.scrollTop + Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) / 2;
+            const rect = thumbnail.getBoundingClientRect();
+            const elementCenter = main.scrollTop + rect.top + rect.height / 2;
+            const value = Math.abs(verticalCenter - elementCenter) / verticalCenter;
+
+            const text = thumbnail.childNodes[0];
+            const opacity = 1 - value - value * 8;
+            text.style.opacity = opacity.toString();
+
+            let brightness = value * 8;
+            if (brightness < .2) brightness = .2;
+            if (brightness > 1) brightness = 1;
+            image.style.filter = "brightness(" + brightness + ")";
+        });
     };
+}
+
+function isTouchDevice() {
+    return (('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0));
 }

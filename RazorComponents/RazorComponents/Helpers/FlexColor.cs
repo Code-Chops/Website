@@ -52,7 +52,7 @@ public readonly record struct FlexColor
 		this.Value = rgbColor;
 	}
 
-	public readonly FlexColor ChangeBrightness(int delta = 40)
+	public FlexColor ChangeBrightness(int delta = 40)
 	{
 		var r = ChangeBrightnessOfPrimaryColor(this.Value.R);
 		var g = ChangeBrightnessOfPrimaryColor(this.Value.G);

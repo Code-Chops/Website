@@ -1,17 +1,19 @@
 ﻿@implements IDisposable
-@inherits CodeChops.Website.RazorComponents.Resources.ResourcedComponent
+@inherits CodeChops.LightResources.ResourcedComponent
 
 @code {
 	private IDisposable? Registration { get; set; }
+	[Inject] public RenderEnvironment RenderEnvironment { get; set; } = null!;
+	protected IJSObjectReference? JsObject { get; set; }
 	
 	protected override async Task OnInitializedAsync()
 	{
-		if (RenderEnvironment is not RenderEnvironment.WebassemblyHost)
-		{
-			Registration = NavigationManager.RegisterLocationChangingHandler(OnLocationChanging);
-			
-			JsObject = await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Navigation/Anchors/AnchoredComponent.razor.js");
-		}
+		if (RenderEnvironment is RenderEnvironment.WebassemblyHost)
+			return;
+		
+		Registration = NavigationManager.RegisterLocationChangingHandler(OnLocationChanging);
+		
+		JsObject = await ((IJSInProcessRuntime)JsRuntime).InvokeAsync<IJSObjectReference>("import", "./_content/CodeChops.Website.RazorComponents/Navigation/Anchors/AnchoredComponent.razor.js");
 
 		NavigationManager.LocationChanged += OnLocationChanged;
 	}
@@ -54,7 +56,7 @@
 		if (index > 0)
 			elementId = elementId[..index];
 
-		if (!String.IsNullOrEmpty(elementId))
+		if (!String.IsNullOrEmpty(elementId) && JsObject is not null)
 			await JsRuntime.InvokeVoidAsync("BlazorScrollToId", elementId.ToLowerInvariant());
 
 		return true;

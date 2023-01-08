@@ -1,11 +1,10 @@
-﻿
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 
 namespace CodeChops.Website.Client.Pages.Blog;
 
 public record BlogResource : Resource<BlogResource, ResourceProxyEnum>
 {
-	public static string Title => CreateMember("Blog");
+	public static string Title	=> CreateMember("Blog");
 }
 
 public record BlogResourceNL : Resource<BlogResourceNL, ResourceProxyEnum>

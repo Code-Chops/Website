@@ -1,4 +1,4 @@
-﻿namespace CodeChops.Website.RazorComponents.Resources;
+﻿namespace CodeChops.Website.RazorComponents;
 
 public static class StringExtensions
 {

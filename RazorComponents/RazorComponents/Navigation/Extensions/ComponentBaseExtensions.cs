@@ -23,7 +23,6 @@ public static class ComponentBaseExtensions
 	private static class PageUrlCache<T>
 	{
 		public static string PageUrl { get; } = (typeof(T).GetCustomAttributes<RouteAttribute>()
-			.OrderBy(attribute => attribute.Template.Length)
-			.FirstOrDefault() ?? throw new InvalidOperationException($"{typeof(T).Name} does not have a {nameof(RouteAttribute)}.")).Template;
+			.MinBy(attribute => attribute.Template.Length) ?? throw new InvalidOperationException($"{typeof(T).Name} does not have a {nameof(RouteAttribute)}.")).Template;
 	}
 }

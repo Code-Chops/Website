@@ -1,6 +1,6 @@
 ﻿@using CodeChops.Website.RazorComponents.Navigation.Menu
 
-<span class="menu-setting small-screen-hide" @onkeydown="@ChangeModeAsync">
+<span class="menu-setting small-screen-hide" @onkeydown="@ChangeMode">
 	<MenuButton Data="MenuButtonData"></MenuButton>
 </span>
 
@@ -20,11 +20,11 @@
 		MenuButtonData = new MenuButtonData()
 		{
 			FontAwesomeIcon = Value == ColorMode.DarkMode ? "fa-moon" : "fa-sun",
-			OnClick = (e, _) => ChangeModeAsync(e)
+			OnClick = (e, _) => ChangeMode(e)
 		};
 	}
 
-	private async Task ChangeModeAsync(EventArgs? e)
+	private void ChangeMode(EventArgs? e)
 	{
 		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) 
 			return;
@@ -40,7 +40,7 @@
 		if (JsRuntime is not IJSInProcessRuntime inProcessRuntime) 
 			return;
 		
-		await inProcessRuntime.InvokeVoidAsync("blazorColorMode.set", Value.Name);
+		inProcessRuntime.InvokeVoid("blazorColorMode.set", Value.Name);
 	}
 
 	internal static void SetMode(ColorMode mode)

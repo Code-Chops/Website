@@ -1,14 +1,15 @@
 using CodeChops.Website.Client.Layout;
-using CodeChops.Website.RazorComponents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
+using CodeChops.Crossblade;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.Services.AddHttpClient();
 builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
+builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyClient());
 
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
@@ -16,13 +17,13 @@ var host = builder.Build();
 
 var jsRuntime = (IJSInProcessRuntime)host.Services.GetRequiredService<IJSRuntime>();
 
-builder.Services.AddLanguageCodeCache(new [] { "en-GB", "nl-NL" });
+builder.Services.AddLightResources(new LanguageCode[] { new("en-GB"), new("nl-NL") });
 
 var currentColorMode = GetCurrentColorMode(jsRuntime);
 ColorModeSelector.SetMode(currentColorMode);
 
 var currentLanguageCode = GetCurrentLanguageCode(jsRuntime);
-LanguageCodeCache.SetLanguageCode(currentLanguageCode);
+LanguageCodeCache.SetCurrentLanguage(currentLanguageCode);
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {

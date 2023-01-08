@@ -5,7 +5,7 @@
 
 @if (LanguageCodeList.Count > 0)
 {
-	<span class="menu-setting small-screen-hide" @onkeydown="@(async e => await ChangeLanguageAsync(e))">
+	<span class="menu-setting small-screen-hide" @onkeydown="@(ChangeLanguage)">
 		<MenuButton Data="@MenuButtonData">@CurrentCountryFlag</MenuButton>
 	</span>
 }
@@ -20,6 +20,7 @@
 	//  The Unicode scalar offset between the ascii letter and the region code.
 	private static readonly int UnicodeScalarValueOffset; // 127397
 	private static ImmutableList<LanguageCode> LanguageCodeList { get; }
+	private bool TriggerLanguageChangedEvents { get; set; }
 	
 	static LanguageSelector()
 	{
@@ -33,24 +34,34 @@
 
 	protected override void OnComponentInitialized()
 	{
-		MenuButtonData = new() { OnClick = (e, _) => ChangeLanguageAsync(e) };
+		MenuButtonData = new() { OnClick = (e, _) => ChangeLanguage(e) };
 		SetCountryFlag();
 	}
 
-	private async Task ChangeLanguageAsync(EventArgs? e)
+	private void ChangeLanguage(EventArgs? e)
 	{
-		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) return;
+		if (e is KeyboardEventArgs { Code: not "Enter" and not "NumpadEnter" }) 
+			return;
+		
+		TriggerLanguageChangedEvents = true;
+	}
 
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (!TriggerLanguageChangedEvents)
+			return;
+		
+		TriggerLanguageChangedEvents = false;
+		
 		var index = LanguageCodeList.IndexOf(LanguageCodeCache.CurrentLanguageCode);
 		var newIndex = (index + 1) % LanguageCodeList.Count;
 		var newLanguageCode = LanguageCodeList[newIndex];
 
-		LanguageCodeCache.SetLanguageCode(newLanguageCode);
+		LanguageCodeCache.SetCurrentLanguage(newLanguageCode);
 		SetCountryFlag();
-
-		TriggerLanguageChangedEvent();
-		
 		await JsRuntime.InvokeVoidAsync("blazorCulture.set", newLanguageCode.Value);
+		
+		TriggerLanguageChangedEvent();
 	}
 
 	private void SetCountryFlag()

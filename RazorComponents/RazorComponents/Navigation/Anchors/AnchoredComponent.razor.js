@@ -1,5 +1,6 @@
 ﻿window.BlazorScrollToId = (id) => {
     const element = document.getElementById(id);
+    
     if (element instanceof HTMLElement) {
         element.scrollIntoView({
             behavior: "smooth",
