@@ -1,4 +1,4 @@
-﻿@using CodeChops.DomainModeling.Serialization
+@using CodeChops.DomainModeling.Serialization
 
 <a class="project" href="@RelativePath?.Write($"/projects/{RelativePath}/")" id="@ThumbnailId">
 	<div class="text">
@@ -19,7 +19,6 @@
 	[Parameter] public string? RelativePath { get; set; }
 	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
-	private IJSObjectReference? JsObject { get; set; }
 	private string ImageId { get; set; } = null!;
 	private string ThumbnailId { get; set; } = null!;
 
@@ -31,7 +30,6 @@
 
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)
 	{
-		if (JsObject is not null)
-			await JsRuntime.InvokeVoidAsync("addThumbnailVisualizations", ImageId, ThumbnailId);
+		await JsRuntime.InvokeVoidAsync("addThumbnailVisualizations", ImageId, ThumbnailId);
 	}
 }
