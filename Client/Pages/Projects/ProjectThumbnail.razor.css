@@ -48,7 +48,7 @@
     position: absolute;
     text-align: center;
     opacity: 0;
-    transition: opacity 0.5s ease-in;            /* vendorless fallback */
+    transition: opacity 0.5s ease-in;    /* vendorless fallback */
     -o-transition: 0.5s ease-in;         /* opera */
     -ms-transition: 0.5s ease-in;        /* IE 10 */
     -moz-transition: 0.5s ease-in;       /* Firefox */
@@ -58,7 +58,7 @@
     color: white;
     width: 90%;
 
-    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 }
 
     .text > h4 {

@@ -97,12 +97,12 @@ the vending machine change problem
 ");
 	
 	public static string SourceGenerationUtilities	=> CreateMember(@"
-Utilities to make it easier<br/>
-to implement source generators
+Utilities to simplify<br/>
+source generators implementation
 ");
 
 	public static string LightResources				=> CreateMember(@"
-Dynamically loaded light resources<br/> 
+Dynamic, light resources<br/> 
 for website globalization
 ");
 }
@@ -162,7 +162,7 @@ makkelijker te implementeren
 ");
 	
 	public static string LightResources { get; }			= CreateMember(@"
-Lichte, dynamische weergegeven<br/>
-resources voor websitelokalisatie
+Lichte, dynamische resources<br/>
+voor websitelokalisatie
 ");
 }

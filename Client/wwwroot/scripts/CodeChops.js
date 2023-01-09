@@ -43,25 +43,32 @@ window.addThumbnailVisualizations = (imageId, thumbnailId) => {
         elementToShow.style.visibility = "visible";
 
         const main = document.getElementById("main");
+        if (!isTouchDevice())
+            return;
+
+        const thumbnail = document.getElementById(thumbnailId);
+        const text = thumbnail.childNodes[0];
+
+        image.style.transition = "unset";
+        text.style.transition = "unset";
+
 
         main.addEventListener("scroll", _ => {
-            if (!isTouchDevice())
-                return;
-
-            const thumbnail = document.getElementById(thumbnailId);
-            const verticalCenter = main.scrollTop + Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) / 2;
+            const mainBounds = main.getBoundingClientRect();
+            const verticalCenter = mainBounds.top + mainBounds.height / 2;
             const rect = thumbnail.getBoundingClientRect();
-            const elementCenter = main.scrollTop + rect.top + rect.height / 2;
+            const elementCenter = mainBounds.top + rect.top + rect.height / 2;
             const value = Math.abs(verticalCenter - elementCenter) / verticalCenter;
 
-            const text = thumbnail.childNodes[0];
-            const opacity = 1 - value - value * 8;
-            text.style.opacity = opacity.toString();
+            let textOpacity = 1 - value;
+            if (textOpacity < 0) textOpacity = 0;
+            if (textOpacity > 1) textOpacity = 1;
+            text.style.opacity = textOpacity.toString();
 
-            let brightness = value * 8;
-            if (brightness < .2) brightness = .2;
-            if (brightness > 1) brightness = 1;
-            image.style.filter = "brightness(" + brightness + ")";
+            let imageBrightness = value;
+            if (imageBrightness < .2) imageBrightness = .2;
+            if (imageBrightness > 1) imageBrightness = 1;
+            image.style.filter = "brightness(" + imageBrightness + ")";
         });
     };
 }
