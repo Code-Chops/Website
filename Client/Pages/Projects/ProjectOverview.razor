@@ -6,8 +6,17 @@
 		<Title Value="@ProjectResource.Title"></Title>
 	</span>
 
+	<h2 class="subtitle">@ProjectResource.Applications</h2>
 	<div class="grid">
-		@foreach (var group in ParameterGroups)
+		@foreach (var group in ParametersByProjectType[false])
+		{
+			<DynamicComponent Type="@typeof(ProjectThumbnail)" Parameters="@group"/>
+		}
+	</div>
+
+	<h2 class="subtitle">@ProjectResource.CodeTooling</h2>
+	<div class="grid">
+		@foreach (var group in ParametersByProjectType[true])
 		{
 			<DynamicComponent Type="@typeof(ProjectThumbnail)" Parameters="@group"/>
 		}
@@ -16,7 +25,7 @@
 
 @code {
 	private static List<string> RandomProjectNames { get; }
-	private static List<Dictionary<string, object>> ParameterGroups { get; set; } = null!;
+	private static Dictionary<bool, List<Dictionary<string, object>>> ParametersByProjectType { get; set; } = null!;
 	
 	private static string[] ImplementedProjects { get; } =
 	{
@@ -45,8 +54,7 @@
 	
 	private static void CreateView()
 	{
-
-		ParameterGroups = ProjectOverviewTitleResource
+		ParametersByProjectType = ProjectOverviewTitleResource
 			.GetMembers()
 			.OrderBy(member => RandomProjectNames.IndexOf(member.Name))
 			.Select(member => new Dictionary<string, object>()
@@ -55,9 +63,14 @@
 				["Title"] = member.Value,
 				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
 				["ImagePath"] = $"images/projects/{member.Name}.png",
-				["Path"] = ProjectHostingUrl.TryGetSingleMember(member.Name, out ProjectHostingUrl? hostingUrl) ? hostingUrl.Value : member.Name,
+				["Path"] = ProjectHostingUrl.TryGetSingleMember(member.Name, out ProjectHostingUrl? hostingUrl) 
+						? hostingUrl.Value
+						: member.Name,
 				["IsDocumentation"] = hostingUrl is null,
+				["IsImplemented"] = ImplementedProjects.Contains(member.Name),
 			})
-			.ToList();
+			.ToList()
+			.GroupBy(parametersOfProject => (bool)parametersOfProject["IsDocumentation"])
+			.ToDictionary(group => group.Key, group => group.ToList());
 	}
 }

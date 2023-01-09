@@ -1,10 +1,10 @@
 @using CodeChops.DomainModeling.Serialization
 
-<a class="project" href="@(IsDocumentation ? Path?.Write($"/projects/{Path}/") : Path)" id="@ThumbnailId">
+<a class="project" href="@GetPath()" id="@ThumbnailId" target=@(IsDocumentation ? "_self" : "_blank")>
 	<div class="text">
 		<h2>@Title</h2>
 		<span class="small-screen-hide">@Text</span>
-		@If(Path is null, (MarkupString)ProjectResource.Error)
+		@If(!IsImplemented, (MarkupString)ProjectResource.Error)
 	</div>
 	<span class="image-container border show">
 		<img class="image noSelect" src="@ImagePath" alt="@Title" loading="lazy" id="@ImageId" />
@@ -16,7 +16,8 @@
 	[Parameter] public required string Title { get; set; } = null!;
 	[Parameter] public required MarkupString Text { get; set; }
 	[Parameter] public required string ImagePath { get; set; } = null!;
-
+	[Parameter] public required bool IsImplemented { get; set; }
+	
 	/// <summary>
 	/// Should be a relative path when <see cref="IsDocumentation"/> is enabled, otherwise an absolute path.
 	/// </summary>
@@ -36,5 +37,15 @@
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)
 	{
 		await JsRuntime.InvokeVoidAsync("addThumbnailVisualizations", ImageId, ThumbnailId);
+	}
+
+	private string? GetPath()
+	{
+		if (!IsImplemented) 
+			return null;
+		
+		return IsDocumentation 
+			? Path?.Write($"/projects/{Path}/") 
+			: Path;
 	}
 }

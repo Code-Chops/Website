@@ -4,3 +4,7 @@
 	grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
 	grid-gap: 10px;
 }
+
+.subtitle {
+	margin-left: 12px;
+}

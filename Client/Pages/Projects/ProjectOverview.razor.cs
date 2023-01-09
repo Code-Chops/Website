@@ -5,12 +5,16 @@ public record ProjectResource : Resource<ProjectResource, ResourceProxyEnum>
 {
 	public static string Title 			=> CreateMember("Projects");
 	public static string Error 			=> CreateMember("<br/><br/>⚠️ Currently not available");
-	}
+	public static string CodeTooling	=> CreateMember("Code tooling");
+	public static string Applications	=> CreateMember("Applications");
+}
 
 public record ProjectResourceNL : Resource<ProjectResourceNL, ResourceProxyEnum>
 {
-	public static string Title { get; }	= CreateMember("Projecten");
-	public static string Error { get; } = CreateMember("<br/><br/>⚠️ Op dit moment niet beschikbaar");
+	public static string Title { get; }			= CreateMember("Projecten");
+	public static string Error { get; } 		= CreateMember("<br/><br/>⚠️ Op dit moment niet beschikbaar");
+	public static string CodeTooling { get; }	= CreateMember("Code tools");
+	public static string Applications { get; }	= CreateMember("Applicaties");
 }
 
 public interface IProjectOverviewResource
@@ -47,6 +51,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 public record ProjectHostingUrl : Resource<ProjectHostingUrl, ResourceProxyEnum>
 {
 	public static string FoodChops { get; } = CreateMember("https://foodchops.azurewebsites.net/");
+	public static string Junctions { get; } = CreateMember("https://junctions.azurewebsites.net/");
 }
 
 public record ProjectOverviewTextResource : Resource<ProjectOverviewTextResource, ResourceProxyEnum>, IProjectOverviewResource
