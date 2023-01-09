@@ -9,11 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Client", "Client\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorComponents", "RazorComponents\RazorComponents\RazorComponents.csproj", "{F8BFCBDE-630D-43AC-B815-06D03D308AF7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Areas", "Areas", "{D84849AD-1223-41C7-9830-C46C5E089542}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{7853B538-95BE-49A3-ACB5-FE493914C877}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Junctions", "Junctions", "{45562D1C-7825-4EB1-A480-78BA5F12A9B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45C10DEC-B6E4-4CC8-8A7C-2F96ED2F9CD2}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,11 +38,10 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {31A276A8-56D3-4E2E-9189-5BDA68ED2180}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F8BFCBDE-630D-43AC-B815-06D03D308AF7} = {7853B538-95BE-49A3-ACB5-FE493914C877}
-		{45562D1C-7825-4EB1-A480-78BA5F12A9B8} = {D84849AD-1223-41C7-9830-C46C5E089542}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31A276A8-56D3-4E2E-9189-5BDA68ED2180}
 	EndGlobalSection
 EndGlobal

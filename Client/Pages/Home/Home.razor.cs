@@ -9,7 +9,7 @@ Welcome
 ");
 
 	public static string Author		=> CreateMember(@"
-Logo, design and website by CodeChops
+Website, logo, animations, and design by CodeChops
 ");
 	
 	public static string Paragraph1 => CreateMember(@"
@@ -30,7 +30,7 @@ Welkom
 ");
 
 	public static string Author { get; }		= CreateMember(@"
-Logo, design en website door CodeChops
+Website, logo, design en animaties door CodeChops
 ");
 	
 	public static string Paragraph1 { get; }	= CreateMember(@"

@@ -1,4 +1,4 @@
-﻿@page "/projects"
+@page "/projects"
 @inherits ResourcedComponent
 
 <Content>
@@ -28,6 +28,7 @@
 		nameof(ProjectOverviewTitleResource.SourceGenerationUtilities),
 		nameof(ProjectOverviewTitleResource.LightResources),
 		nameof(ProjectOverviewTitleResource.Crossblade),
+		nameof(ProjectOverviewTitleResource.FoodChops),
 	};
 		
 	static ProjectOverview()
@@ -44,6 +45,7 @@
 	
 	private static void CreateView()
 	{
+
 		ParameterGroups = ProjectOverviewTitleResource
 			.GetMembers()
 			.OrderBy(member => RandomProjectNames.IndexOf(member.Name))
@@ -53,9 +55,8 @@
 				["Title"] = member.Value,
 				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
 				["ImagePath"] = $"images/projects/{member.Name}.png",
-				["RelativePath"] = ImplementedProjects.Contains(member.Name) 
-						? member.Name 
-						: null!,
+				["Path"] = ProjectHostingUrl.TryGetSingleMember(member.Name, out ProjectHostingUrl? hostingUrl) ? hostingUrl.Value : member.Name,
+				["IsDocumentation"] = hostingUrl is null,
 			})
 			.ToList();
 	}
