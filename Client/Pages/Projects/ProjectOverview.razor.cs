@@ -30,6 +30,7 @@ public interface IProjectOverviewResource
 	public static abstract string FoodChops { get; }
 	public static abstract string SourceGenerationUtilities { get; }
 	public static abstract string LightResources { get; }
+	public static abstract string Blame { get; }
 }
 
 public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResource, ResourceProxyEnum>, IProjectOverviewResource
@@ -46,6 +47,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 	public static string FoodChops { get; }					= CreateMember("FoodChops");
 	public static string SourceGenerationUtilities { get; }	= CreateMember("Source generation utilities");
 	public static string LightResources { get; }			= CreateMember("Light resources");
+	public static string Blame { get; }						= CreateMember("Blame");
 }
 
 public record ProjectHostingUrl : Resource<ProjectHostingUrl, ResourceProxyEnum>
@@ -100,7 +102,7 @@ Better enums in C#<br/>
 Flexible, extendable, and customizable
 ");
 	
-	public static string FoodChops				=> CreateMember(@"
+	public static string FoodChops					=> CreateMember(@"
 Demo of a solution to<br/>
 the vending machine change problem
 ");
@@ -113,6 +115,11 @@ source generators implementation
 	public static string LightResources				=> CreateMember(@"
 Dynamic, light resources<br/> 
 for website globalization
+");
+
+	public static string Blame						=> CreateMember(@"
+Light 2D game engine<br/>
+for Blazor 
 ");
 }
 
@@ -160,7 +167,7 @@ Betere enums in C#<br/>
 Flexibel, uitbreidbaar en aanpasbaar
 ");
 	
-	public static string FoodChops { get; }			= CreateMember(@"
+	public static string FoodChops { get; }					= CreateMember(@"
 Demo van een oplossing voor<br/>
 het wisselgeldprobleem
 ");
@@ -173,5 +180,10 @@ makkelijker te implementeren
 	public static string LightResources { get; }			= CreateMember(@"
 Lichte, dynamische resources<br/>
 voor websitelokalisatie
+");
+
+	public static string Blame { get; }						= CreateMember(@"
+Lichte, 2D game engine<br/>
+voor Blazor 
 ");
 }
