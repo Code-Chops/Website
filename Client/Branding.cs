@@ -11,7 +11,8 @@ public static class Branding
 	public const string Address			= "Oudenoord 330 Utrecht";
 	public const string AddressLink		= "https://goo.gl/maps/RYXDfLQx4sBVmRTN6";
 	public const string GitHubLink		= "https://github.com/Code-Chops";
-	
+	public const string LinkedInLink	= "https://www.linkedin.com/in/max-bergman7";
+
 	public const string FontFamily		= "Montserrat";
 	
 	public static int FontWeight		=> ColorModeSelector.Value == ColorMode.DarkMode ? 170 : 325;
