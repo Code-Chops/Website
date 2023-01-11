@@ -25,15 +25,16 @@ I will also share my recent experiences in software development, as my endeavour
 
 	public static string Paragraph2			=> CreateMember(@"
 My development career focuses mainly on the .NET ecosystem.
-Currently, I am mainly using: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.
+I am mainly using C#, .NET, Blazor, HTML, CSS, TypeScript, JavaScript, and MySQL / PostgreSQL.
 ");
 
 	public static string Paragraph3			=> CreateMember(@"
-Feel free to contact me if you have any questions, remarks or comments. It'll be greatly appreciated!
+At this time, I am only available for remote work. Feel free to contact me for work, questions or comments. It'll be greatly appreciated!
 ");
 
 	public static string Title				=> CreateMember(@"
-About");
+About
+");
 }
 
 public record AboutResourceNL : Resource<AboutResourceNL, ResourceProxyEnum>, IAboutResource
@@ -49,12 +50,12 @@ Omdat mijn streven om de nieuwste technieken te gebruiken een voortdurend proces
 ");
 
 	public static string Paragraph2 { get; }		= CreateMember(@"
-Mijn carrière in software-ontwikkeling focust zich hoofdzakelijk rondom het .NET ecosysteem.
-Momenteel gebruik ik voornamelijk: C#, .NET, Blazor, HTML, TypeScript, JavaScript, and MySQL.
+Mijn carrière in software-ontwikkeling focust zich voornamelijk rondom het .NET ecosysteem.
+Ik gebruik voornamelijk C#, .NET, Blazor, HTML, CSS, TypeScript, JavaScript, en MySQL / PostgreSQL.
 ");
 
 	public static string Paragraph3 { get; }		= CreateMember(@"
-Voel je vrij om contact met me op te nemen bij vragen of opmerkingen. Dit wordt erg gewaardeerd!
+Op dit moment ben ik alleen beschikbaar voor werk op afstand. Voel je vrij om contact op te nemen voor opdrachten, vragen of opmerkingen. Dit wordt erg gewaardeerd!
 ");
 
 	public static string Title { get; }				= CreateMember(@"

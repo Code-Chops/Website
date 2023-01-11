@@ -14,7 +14,7 @@ Website, logo, animations, and design by CodeChops
 	
 	public static string Paragraph1 => CreateMember(@"
 CodeChops delivers top-notch software tailor-made to meet your specific needs. 
-Solutions are built through careful consideration of your company's unique situation during the development process
+Solutions are built through careful consideration of your company's unique situation during the development process.
 ");
 	
 	public static string Paragraph2	=> CreateMember(@"
