@@ -13,6 +13,8 @@ builder.Services.AddScoped<HttpClient>();
 
 builder.Services.AddLightResources(new LanguageCode[] { new("en-GB"), new("nl-NL") });
 
+builder.Services.AddSingleton(builder.Environment);
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
 	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(LanguageCodeCache.CurrentLanguageCode);

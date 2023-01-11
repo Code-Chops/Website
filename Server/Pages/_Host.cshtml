@@ -1,8 +1,9 @@
-﻿@* ReSharper disable Html.PathError *@
+@* ReSharper disable Html.PathError *@
 
 @page "_Host"
 @using CodeChops.Website.Client
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IWebHostEnvironment Environment
 
 <!-- @Html.Raw(Branding.BannerText) -->
 
@@ -73,6 +74,20 @@
     @*         crossorigin="anonymous" *@
     @*         async> *@
     @* </script> *@
+
+    @if (Environment.IsProduction())
+    {
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9LQGQ354K"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-L9LQGQ354K');
+        </script>        
+    }
+
     <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
     <script src="highlight/highlight.min.js"></script>
     <script src="highlight/csharp.min.js"></script>
