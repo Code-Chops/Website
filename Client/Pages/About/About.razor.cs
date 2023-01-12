@@ -19,7 +19,7 @@ COC number: 86790390 - VAT number: NL004317143B09
 
 	public static string Paragraph1			=> CreateMember(@"
 I am Max Bergman, a full-stack senior software engineer.
-This is a place where I share updates of my latest projects and post tips for other developers. 
+This is a place where I share updates of my latest projects and post tips for other developers.
 I will also share my recent experiences in software development, as my endeavour to use the newest techniques is never-ending.
 ");
 

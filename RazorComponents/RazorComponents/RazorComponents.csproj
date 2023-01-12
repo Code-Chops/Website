@@ -54,7 +54,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
-		<PackageReference Include="CodeChops.LightResources" Version="1.0.1" />
+		<PackageReference Include="CodeChops.LightResources" Version="1.0.2" />
     </ItemGroup>
     
     <ItemGroup>
