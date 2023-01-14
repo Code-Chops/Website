@@ -1,4 +1,4 @@
-﻿// Format and beautify code for display.
+// Format and beautify code for display.
 window.highlightCode = () => {
     document.querySelectorAll("pre code").forEach((element) => {
         hljs.highlightElement(element);
@@ -60,7 +60,7 @@ window.addThumbnailVisualizations = (imageId, thumbnailId) => {
             const elementCenter = mainBounds.top + rect.top + rect.height / 2;
             const value = Math.abs(verticalCenter - elementCenter) / verticalCenter;
 
-            let textOpacity = 1 - value;
+            let textOpacity = (1.2 - value * 3);
             if (textOpacity < 0) textOpacity = 0;
             if (textOpacity > 1) textOpacity = 1;
             text.style.opacity = textOpacity.toString();
