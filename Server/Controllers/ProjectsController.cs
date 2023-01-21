@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using CodeChops.Website.Client.Pages.Projects;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace CodeChops.Website.Server.Controllers;
@@ -16,9 +17,11 @@ public class ProjectsController : Controller
 	[Route("/projects/{project}/documentation")]
 	public async Task<IActionResult> GetDocumentationAsync(string project)
 	{
+		if (!ProjectOverviewTitleResource.TryGetSingleMember(memberName: project, out _))
+			return this.BadRequest();
+
 		return this.Ok(await MemoryCache.GetOrCreateAsync(project, async entry =>
 		{
-
 			try
 			{
 				var documentation = await this.HttpClient.GetStringAsync($"https://raw.githubusercontent.com/Code-Chops/{project}/master/README.md");
