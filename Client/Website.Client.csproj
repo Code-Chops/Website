@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>1.1.10</Version>
+        <Version>1.2.0</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
@@ -52,10 +52,10 @@
 
 	<ItemGroup Label="PackageReferences">
 		<PackageReference Include="CodeChops.Crossblade" Version="1.0.2" />
-		<PackageReference Include="CodeChops.DomainModeling" Version="2.4.2" />
-		<PackageReference Include="CodeChops.LightResources" Version="1.1.1" />
-		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.5.2" />
-		<PackageReference Include="CodeChops.MagicEnums" Version="3.6.0" />
+		<PackageReference Include="CodeChops.DomainModeling" Version="2.8.0" />
+		<PackageReference Include="CodeChops.LightResources" Version="1.2.0" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.0" />
+		<PackageReference Include="CodeChops.MagicEnums" Version="3.8.0" />
 		<PackageReference Include="Markdig" Version="0.30.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
