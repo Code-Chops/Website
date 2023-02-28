@@ -9,7 +9,7 @@ public static class Branding
 	public const string EmailAddress	= "hello@codechops.nl";
 	public const string PhoneNumber		= "+31 (0)6 2093 7730";
 	public const string Address			= "Maetsuykerstraat 1A Utrecht";
-	public const string AddressLink		= "https://goo.gl/maps/wfvGGag3e7dD7PL2A";
+	public const string AddressLink		= "https://www.google.nl/maps/place/Maetsuykerstraat+1A,+3531+HR+Utrecht/";
 	public const string GitHubLink		= "https://github.com/Code-Chops";
 	public const string LinkedInLink	= "https://www.linkedin.com/in/max-bergman7";
 

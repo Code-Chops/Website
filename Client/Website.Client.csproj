@@ -3,15 +3,15 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>1.2.0</Version>
+        <Version>1.3.0</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     </PropertyGroup>
     
     <PropertyGroup Label="Blazor">
+        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
         <BlazorWebAssemblyLoadAllGlobalizationData>false</BlazorWebAssemblyLoadAllGlobalizationData>
         <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
         <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
@@ -52,13 +52,13 @@
 
 	<ItemGroup Label="PackageReferences">
 		<PackageReference Include="CodeChops.Crossblade" Version="1.0.2" />
-		<PackageReference Include="CodeChops.DomainModeling" Version="2.8.0" />
+		<PackageReference Include="CodeChops.DomainModeling" Version="2.9.1" />
 		<PackageReference Include="CodeChops.LightResources" Version="1.2.0" />
-		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.0" />
-		<PackageReference Include="CodeChops.MagicEnums" Version="3.8.0" />
-		<PackageReference Include="Markdig" Version="0.30.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.2" />
+		<PackageReference Include="CodeChops.MagicEnums" Version="3.8.1" />
+		<PackageReference Include="Markdig" Version="0.31.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     </ItemGroup>

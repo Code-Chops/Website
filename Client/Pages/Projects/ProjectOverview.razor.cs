@@ -52,7 +52,7 @@ public record ProjectOverviewTitleResource : Resource<ProjectOverviewTitleResour
 
 public record ProjectHostingUrl : Resource<ProjectHostingUrl, ResourceProxyEnum>
 {
-	public static string FoodChops { get; } = CreateMember("https://foodchops.azurewebsites.net/");
+	public static string FoodChops { get; } = CreateMember("/");
 	public static string Junctions { get; } = CreateMember("https://junctions.azurewebsites.net/");
 }
 
@@ -103,8 +103,7 @@ Flexible, extendable, and customizable
 ");
 	
 	public static string FoodChops					=> CreateMember(@"
-Demo of a solution to<br/>
-the vending machine change problem
+Currently under construction
 ");
 	
 	public static string SourceGenerationUtilities	=> CreateMember(@"
@@ -168,8 +167,7 @@ Flexibel, uitbreidbaar en aanpasbaar
 ");
 	
 	public static string FoodChops { get; }					= CreateMember(@"
-Demo van een oplossing voor<br/>
-het wisselgeldprobleem
+Momenteel in ontwikkeling
 ");
 	
 	public static string SourceGenerationUtilities { get; }	= CreateMember(@"
