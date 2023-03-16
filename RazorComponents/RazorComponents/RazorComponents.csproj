@@ -48,13 +48,13 @@
     </ItemGroup>
     
     <ItemGroup Label="PackageReferences">
-		<PackageReference Include="CodeChops.DomainModeling" Version="2.12.3" />
-		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.5" />
+		<PackageReference Include="CodeChops.DomainModeling" Version="2.9.1" />
+		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.2" />
 		<PackageReference Include="ColorHelper" Version="1.8.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
-		<PackageReference Include="CodeChops.LightResources" Version="1.2.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
+		<PackageReference Include="CodeChops.LightResources" Version="1.2.0" />
     </ItemGroup>
     
     <ItemGroup>

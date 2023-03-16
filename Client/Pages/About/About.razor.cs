@@ -29,7 +29,7 @@ I am mainly using C#, .NET, Blazor, HTML, CSS, TypeScript, JavaScript, and MySQL
 ");
 
 	public static string Paragraph3			=> CreateMember(@"
-Feel free to contact me for work, questions or comments. It'll be greatly appreciated!
+At this time, I am only available for remote work. Feel free to contact me for work, questions or comments. It'll be greatly appreciated!
 ");
 
 	public static string Title				=> CreateMember(@"
