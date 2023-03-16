@@ -55,7 +55,7 @@ Ik gebruik voornamelijk C#, .NET, Blazor, HTML, CSS, TypeScript, JavaScript, en 
 ");
 
 	public static string Paragraph3 { get; }		= CreateMember(@"
-Op dit moment ben ik alleen beschikbaar voor werk op afstand. Voel je vrij om contact op te nemen voor opdrachten, vragen of opmerkingen. Dit wordt erg gewaardeerd!
+Voel je vrij om contact op te nemen voor opdrachten, vragen of opmerkingen. Dit wordt erg gewaardeerd!
 ");
 
 	public static string Title { get; }				= CreateMember(@"
