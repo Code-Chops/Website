@@ -60,11 +60,11 @@
 			.Select(member => new Dictionary<string, object>()
 			{
 				["Code"] = member.Name,
-				["Title"] = member.Value,
+				["Title"] = member.Value!,
 				["Text"] = (MarkupString)ProjectOverviewTextResource.GetSingleMember(member.Name),
 				["ImagePath"] = $"images/projects/{member.Name}.png",
 				["Path"] = ProjectHostingUrl.TryGetSingleMember(member.Name, out ProjectHostingUrl? hostingUrl) 
-						? hostingUrl.Value
+						? hostingUrl.Value!
 						: member.Name,
 				["IsDocumentation"] = hostingUrl is null,
 				["IsImplemented"] = ImplementedProjects.Contains(member.Name),
