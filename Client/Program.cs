@@ -43,7 +43,7 @@ static LanguageCode GetCurrentLanguageCode(IJSInProcessRuntime jsRuntime)
 	
 	return SupportedLanguageCodes.TryGetMembers(currentLanguageCode, out _) 
 		? currentLanguageCode 
-		: SupportedLanguageCodes.GetMembers().First();
+		: SupportedLanguageCodes.GetMembers().First().Value;
 }
 
 static ColorMode GetCurrentColorMode(IJSInProcessRuntime jsRuntime)
