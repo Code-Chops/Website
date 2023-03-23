@@ -39,7 +39,7 @@ static LanguageCode GetCurrentLanguageCode(IJSInProcessRuntime jsRuntime)
 	var languageCode = jsRuntime.Invoke<string>("blazorCulture.get");
 
 	if (!LanguageCode.TryCreate(languageCode, out var currentLanguageCode))
-		currentLanguageCode = SupportedLanguageCodes.GetMembers().First();
+		currentLanguageCode = SupportedLanguageCodes.GetMembers().First().Value;
 	
 	return SupportedLanguageCodes.TryGetMembers(currentLanguageCode, out _) 
 		? currentLanguageCode 
