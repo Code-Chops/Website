@@ -47,7 +47,8 @@ Flexible, extendable, and customizable
 ");
 	
 	public static string FoodChops					=> CreateMember(@"
-Currently under construction
+Demo of a solution to<br/>
+the vending machine change problem
 ");
 	
 	public static string SourceGenerationUtilities	=> CreateMember(@"

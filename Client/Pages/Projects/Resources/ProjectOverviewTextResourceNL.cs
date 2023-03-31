@@ -45,7 +45,8 @@ Flexibel, uitbreidbaar en aanpasbaar
 ");
 	
 	public static string FoodChops { get; }					= CreateMember(@"
-Momenteel in ontwikkeling
+Demo van een oplossing voor<br/>
+het wisselgeldprobleem
 ");
 	
 	public static string SourceGenerationUtilities { get; }	= CreateMember(@"
