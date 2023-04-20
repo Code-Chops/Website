@@ -3,7 +3,7 @@
     <PropertyGroup Label="Main">
         <AssemblyName>CodeChops.Website.Client</AssemblyName>
         <RootNamespace>CodeChops.Website.Client</RootNamespace>
-        <Version>1.5.4</Version>
+        <Version>1.5.5</Version>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
@@ -57,7 +57,7 @@
 		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.6" />
 		<PackageReference Include="CodeChops.MagicEnums" Version="3.9.0" />
 		<PackageReference Include="Markdig" Version="0.31.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
