@@ -12,6 +12,7 @@ html {
     tab-size: 4;
     font-variation-settings: 'wght' var(--branding-text-weight);
     letter-spacing: var(--branding-text-spacing);
+    scrollbar-color: #666 #201c29;
 }
 
 html, body {
@@ -112,11 +113,6 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
-html {
-    scrollbar-color: #666 #201c29;
-    -webkit-overflow-scrolling: touch;
-}
 
 ::-webkit-scrollbar {
     width: 16px;
@@ -233,7 +229,6 @@ p {
 }
 
 iframe {
-    opacity: 0.95 !important;
     filter: hue-rotate(321deg) grayscale(0.5) !important;
     z-index: 102 !important;
     max-height: 555px !important;
