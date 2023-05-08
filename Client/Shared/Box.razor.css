@@ -6,9 +6,9 @@
 @media (max-width: 499px) {
 	.box {
 		padding: 10px 5px 10px 10px;
-		border-left: hidden !important;
-		border-right: hidden !important;
-		border-radius: unset !important;
+		/*border-left: hidden !important;*/
+		/*border-right: hidden !important;*/
+		/*border-radius: unset !important;*/
 	}
 }
 

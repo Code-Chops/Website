@@ -236,6 +236,10 @@ iframe {
     bottom: 50px !important;
 }
 
+div:has(iframe) {
+    z-index: 0 !important;
+}
+
 .warning {
     margin-bottom: 30px;
     text-align: center;
