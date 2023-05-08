@@ -23,12 +23,13 @@
              FadeOut="false">
          
         <ColorModeSelector />
+        
         <LanguageSelector />
     </MenuBar>
     
     <div class="border"></div>
     
-    <Crossblade AnimationDuration="350" @ref="@Crossblade">
+    <Crossblade AnimationDuration="350" @ref="@Crossblade" Position="Position.Absolute">
         <main id="main">
             @Body
             <Footer></Footer>
