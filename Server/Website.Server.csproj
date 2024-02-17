@@ -11,6 +11,7 @@
 		<UserSecretsId>Website.Server-131CB2AF-125D-42BE-9E2E-689FF20FC4E4</UserSecretsId>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Website.Server' " />
 	<ItemGroup Label="PackageReferences">
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
 	</ItemGroup>

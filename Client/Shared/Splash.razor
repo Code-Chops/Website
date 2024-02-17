@@ -1,13 +1,19 @@
 ﻿@ChildContent
 
-@* Style not placed in CSS in order to be displayed immediately *@
-<div id="overlay"
-     class="@(If(!IsLoading, "dissolveOverlay"))"
-     style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;">
-</div>
+@if (!ShowSplashScreen && !IsRenderedOnClient)
+    return;
+
+@if (ShowSplashScreen)
+{
+    @* Style not placed in CSS in order to be displayed immediately *@
+    <div id="overlay"
+         class="@(If(!IsLoading, "dissolveOverlay"))"
+         style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;">
+    </div>
+}
 
 <a id="clickableLogo" href="@If(!IsLoading, "/")">
-    <div id="logo" class="@(IsLoading ? "splashLogo" : "attachedLogo")" >
+    <div id="logo" class="@(IsLoading && ShowSplashScreen ? "splashLogo" : "attachedLogo")" >
         <div id="logoBackground"></div>
         <div id="logoM"></div>
         <div id="logoA"></div>
@@ -16,27 +22,34 @@
     </div>
 </a>
 
-@if (IsLoading)
+@if (IsLoading && ShowSplashScreen)
 {
     <div class="loading-progress-text"></div>
 }
 
+<style>
+    .attachedLogo {
+        animation-duration: @(ShowSplashScreen ? "1s" : "0s");
+    }
+
+    :root {
+        --animation-duration: @(!IsRenderedOnClient ? "0.25s" : "0s" );
+        --animation-delay: @(!IsRenderedOnClient ? "0.25s" : "0s");
+    }
+</style>
 
 @code {
-    [Inject] protected RenderEnvironment RenderEnvironment { get; set; } = null!;
+    [Inject] private RenderEnvironment RenderEnvironment { get; set; } = null!;
+
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     private bool IsRenderedOnClient => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
     private bool IsLoading { get; set; } = true;
 
+    private const bool ShowSplashScreen = false;
+
     protected override void OnInitialized()
     {
-        /*
-        Console.WriteLine("OnInitialized");
-        Console.WriteLine($"IsLoading: {IsLoading}");
-        Console.WriteLine($"RenderEnvironment: {RenderEnvironment}");
-        */
-
         if (IsRenderedOnClient)
             IsLoading = false;
 

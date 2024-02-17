@@ -4,6 +4,9 @@
 
 :root {
     --logo-radius: 0px;
+    --animation-direction: normal;
+    --animation-duration: 0.25s;
+    --animation-delay: 0.25s;
 }
 
 /* Dissolve overlay */
@@ -13,7 +16,7 @@
     animation-name: dissolveOverlay;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
-    animation-delay: 0.25s;
+    animation-delay: var(--animation-delay);
 }
 
 @keyframes dissolveOverlay {
@@ -48,12 +51,12 @@
 /* Logo */
 
 .attachedLogo {
-    animation-duration: 1s;
     animation-name: attachLogoToCorner;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
     margin-left: 10px;
     margin-top: 15px;
-    animation-timing-function: ease-in;
 }
 
     .attachedLogo:hover {
@@ -148,7 +151,9 @@
     height: 100px;
     width: 100px;
     z-index: 0;
-    animation: logoBackgroundFadeIn 0.25s;
+    animation: logoBackgroundFadeIn;
+    animation-duration: var(--animation-duration);
+    animation-direction: var(--animation-direction);
     animation-fill-mode: forwards;
     position: absolute;
     border-radius: var(--logo-radius);
@@ -173,8 +178,10 @@
     width: 100px;
     opacity: 0;
     z-index: 1;
-    animation: logoMFadeIn 0.25s;
-    animation-delay: 0.50s;
+    animation: logoMFadeIn;
+    animation-duration: var(--animation-duration);
+    animation-direction: var(--animation-direction);
+    animation-delay: calc(var(--animation-delay) * 2);
     animation-fill-mode: forwards;
     border-bottom-left-radius: var(--logo-radius);
     border-bottom-right-radius: var(--logo-radius);
@@ -214,8 +221,10 @@
     position: absolute;
     z-index: 2;
     opacity: 0;
-    animation: logoAFadeIn 0.25s;
-    animation-delay: 0.75s;
+    animation: logoAFadeIn;
+    animation-duration: var(--animation-duration);
+    animation-direction: var(--animation-direction);
+    animation-delay: calc(var(--animation-delay) * 3);
     animation-fill-mode: forwards;
     border-radius: var(--logo-radius);
 }
@@ -239,8 +248,10 @@
     padding-top: 0;
     z-index: 3;
     opacity: 0;
-    animation: logoXFadeIn 0.25s;
-    animation-delay: 1s;
+    animation: logoXFadeIn;
+    animation-duration: var(--animation-duration);
+    animation-direction: var(--animation-direction);
+    animation-delay: calc(var(--animation-delay) * 4);
     animation-fill-mode: forwards;
     border-radius: var(--logo-radius);
 }
@@ -274,8 +285,10 @@
     padding-top: 0;
     z-index: 4;
     opacity: 0;
-    animation: logoBFadeIn 0.25s;
-    animation-delay: 1.25s;
+    animation: logoBFadeIn;
+    animation-duration: var(--animation-duration);
+    animation-direction: var(--animation-direction);
+    animation-delay: calc(var(--animation-delay) * 5);
     animation-fill-mode: forwards;
     border-top-left-radius: var(--logo-radius);
 }
@@ -310,5 +323,5 @@ html {
     animation: logoShake 2.5s;
     animation-iteration-count: infinite;
     animation-direction: alternate-reverse;
-    animation-delay: 1.5s;
+    animation-delay: calc(var(--animation-delay) * 6);
 }

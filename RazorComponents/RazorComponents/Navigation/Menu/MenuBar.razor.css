@@ -21,7 +21,7 @@
         padding-left: 12px;
         padding-right: 12px;
     }
-        
+
     .top-bar-shadow.hide {
         opacity: 0;
         pointer-events: none;
@@ -57,7 +57,7 @@
         font-size: clamp(1.1rem, 5vw, 6.5vw) !important;
     }
 }
-    
+
 .menu-bar {
     align-items: center;
     background-color: var(--backgroundcolor);

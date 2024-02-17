@@ -60,7 +60,8 @@
 {
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
     [Inject] protected RenderEnvironment RenderEnvironment { get; set; } = null!;
-    [CascadingParameter] protected bool ShowTitle { get; set; } = true;
+
+    private bool ShowTitle => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
 
     private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
     private MenuBar? MenuBar { get; set; }
