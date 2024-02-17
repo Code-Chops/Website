@@ -8,16 +8,16 @@ public class ProjectsController : Controller
 {
 	private HttpClient HttpClient { get; }
 	private static IMemoryCache MemoryCache { get; } = new MemoryCache(new MemoryCacheOptions { ExpirationScanFrequency = TimeSpan.FromHours(1) });
-	
+
 	public ProjectsController(HttpClient httpClient)
 	{
 		this.HttpClient = httpClient;
 	}
 
 	[Route("/projects/{project}/documentation")]
-	public async Task<IActionResult> GetDocumentationAsync(string project)
+	public async Task<IActionResult> GetDocumentationAsync(string? project)
 	{
-		if (!ProjectOverviewTitleResource.TryGetSingleMember(name: project, out ProjectOverviewTitleResource _))
+		if (String.IsNullOrWhiteSpace(project) || !ProjectOverviewTitleResource.TryGetSingleMember(name: project, out ProjectOverviewTitleResource _))
 			return this.BadRequest();
 
 		return this.Ok(await MemoryCache.GetOrCreateAsync(project, async entry =>

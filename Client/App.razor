@@ -1,17 +1,95 @@
-﻿<Splash>
-	<Router AppAssembly="@typeof(App).Assembly">
-		<Found Context="routeData">
-			<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
-			<FocusOnNavigate RouteData="@routeData" Selector="h1"/>
-		</Found>
-		<NotFound>
-			<LayoutView Layout="@typeof(MainLayout)">
-				<Content>
-					<Box>
-						<Title Value="@(GeneralResource.PageNotFound)"></Title>
-					</Box>
-				</Content>
-			</LayoutView>
-		</NotFound>
-	</Router>
-</Splash>
+<!-- @(Branding.BannerText) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Software in service to you.">
+    <meta name="keywords" content="CodeChops, Max Bergman, Full-stack, developer, Websites, Applications, Apps, Back-end, Front-end, C#, .NET, Blazor, SQL, HTML, TypeScript">
+    <meta name="author" content="Max Bergman">
+    <meta property="og:title" content="@Branding.Name" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.png" />
+    <meta property="og:url" content="https://www.codechops.nl" />
+    <title>@Branding.Name</title>
+    <base href="/" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/CodeChopsSplash.css"  />
+    <link rel="stylesheet" href="CodeChops.Website.Client.styles.css" />
+    <link rel="stylesheet" href="highlight/vs2015.min.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;475&display=swap">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+
+    <HeadOutlet @rendermode="@(new InteractiveWebAssemblyRenderMode(prerender: true))" />
+</head>
+
+<body>
+    @* Style not placed in CSS in order to be displayed immediately *@
+    <div id="overlay" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;"></div>
+
+    <a id="clickableLogo">
+        <div id="logo" class="splashLogo" >
+            <div id="logoBackground"></div>
+            <div id="logoM"></div>
+            <div id="logoA"></div>
+            <div id="logoX"></div>
+            <div id="logoB"></div>
+        </div>
+    </a>
+
+    <Routes @rendermode="@(new InteractiveWebAssemblyRenderMode(prerender: false))" />
+
+    @* <div class="giscus"></div> *@
+
+    <div id="blazor-error-ui">
+        @((MarkupString)GeneralResource.Error))
+        <a class="dismiss">🗙</a>
+    </div>
+
+    @* TODO *@
+    @if (false)
+    {
+        <script src="https://giscus.app/client.js"
+                data-repo="Code-Chops/Giscus"
+                data-repo-id="R_kgDOIj6tdg"
+                data-category="General"
+                data-category-id="DIC_kwDOIj6tds4CS69h"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="dark_tritanopia"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9LQGQ354K"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-L9LQGQ354K');
+        </script>
+    }
+
+    <script src="scripts/CodeChops.js"></script>
+    <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
+    <script src="highlight/highlight.min.js"></script>
+    <script src="highlight/csharp.min.js"></script>
+    <script>console.log('text');</script>
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="codechops" data-description="Support me on Buy me a coffee!" data-message="" data-color="@Branding.Colors.Accent" data-position="Left" data-x_margin="18" data-y_margin="18"></script>
+    <script src="_framework/blazor.web.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+</html>

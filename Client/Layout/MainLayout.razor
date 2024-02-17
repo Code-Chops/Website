@@ -13,23 +13,23 @@
              AccentColor="@Branding.Colors.Accent"
              TextColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 200 : -20)"
              HRefColor="@Branding.Colors.Accent.ChangeBrightness(IsDarkMode ? 80 : -20)"
-             FontFamily="@Branding.FontFamily" 
+             FontFamily="@Branding.FontFamily"
              LogoPath="/favicon.png"
-             Title="@Branding.Name" 
+             Title="@Branding.Name"
              ShowTitle="ShowTitle"
              Height="80"
              ShowLogo="false"
              ButtonsGetter="ButtonsGetter"
              FadeOut="false">
-         
+
         <ColorModeSelector />
-        
+
         <LanguageSelector />
     </MenuBar>
-    
+
     <div class="border"></div>
-    
-    <Crossblade AnimationDuration="350" @ref="@Crossblade">
+
+    <Crossblade AnimationDuration="350">
         <main id="main">
             @Body
             <Footer></Footer>
@@ -41,11 +41,11 @@
     :root {
         --branding-text-weight:             @Branding.FontWeight;
         --branding-text-spacing:            @Branding.TextSpacing;
-        
+
         --branding-color-main:              @Branding.Colors.Main;
         --branding-color-accent:            @Branding.Colors.Accent;
         --branding-color-background:        @Branding.Colors.Background;
-        
+
         --branding-color-main-rgb:          @Branding.Colors.Main.Rgb;
         --branding-color-accent-rgb:        @Branding.Colors.Accent.Rgb;
         --branding-color-background-rgb:    @Branding.Colors.Background.Rgb;
@@ -61,9 +61,8 @@
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
     [Inject] protected RenderEnvironment RenderEnvironment { get; set; } = null!;
     [CascadingParameter] protected bool ShowTitle { get; set; } = true;
-    
+
     private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
-    private Crossblade? Crossblade { get; set; }
     private MenuBar? MenuBar { get; set; }
 
     private static MenuButtonData[] ButtonsGetter()

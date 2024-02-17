@@ -1,8 +1,10 @@
-﻿<PageTitle>@Branding.Name @If(Value, $"- {Value}")</PageTitle>
+﻿<PageTitle>
+	@Branding.Name @IfNotNull(Value, $"- {Value}")
+</PageTitle>
 
 @if (Value is not null && ShowTitle)
 {
-	<h2>@Value</h2>					
+	<h2>@Value</h2>
 }
 
 @code {

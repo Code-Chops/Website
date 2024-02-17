@@ -1,11 +1,16 @@
 using System.Globalization;
 using CodeChops.Crossblade;
 using CodeChops.LightResources;
+using CodeChops.Website.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+
+builder.Services.AddRazorComponents()
+	.AddInteractiveWebAssemblyComponents()
+	.AddInteractiveServerComponents();
+
 builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyHost());
 builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyHost());
 
@@ -25,9 +30,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
 	app.UseWebAssemblyDebugging();
-}
 else
 {
 	app.UseExceptionHandler("/Error");
@@ -37,15 +40,16 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseBlazorFrameworkFiles();
-
 // Set up custom content types - associating file extension to MIME type
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAntiforgery();
 
-app.MapRazorPages();
+app.MapRazorComponents<App>()
+	.AddInteractiveWebAssemblyRenderMode()
+	.AddInteractiveServerRenderMode();
+
 app.MapControllers();
-app.MapFallbackToPage("/_Host");
 
 app.Run();

@@ -1,6 +1,5 @@
 using CodeChops.Website.Client.Layout;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 using CodeChops.Crossblade;
@@ -10,8 +9,6 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.Services.AddHttpClient();
 builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
 builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyClient());
-
-builder.RootComponents.Add<HeadOutlet>("head::after");
 
 var host = builder.Build();
 
@@ -40,17 +37,17 @@ static LanguageCode GetCurrentLanguageCode(IJSInProcessRuntime jsRuntime)
 
 	if (!LanguageCode.TryCreate(languageCode, out var currentLanguageCode))
 		currentLanguageCode = SupportedLanguageCodes.GetMembers().First().Value;
-	
-	return SupportedLanguageCodes.TryGetMembers(currentLanguageCode, out _) 
-		? currentLanguageCode 
+
+	return SupportedLanguageCodes.TryGetMembers(currentLanguageCode, out _)
+		? currentLanguageCode
 		: SupportedLanguageCodes.GetMembers().First().Value;
 }
 
 static ColorMode GetCurrentColorMode(IJSInProcessRuntime jsRuntime)
 {
 	var colorMode = jsRuntime.Invoke<string>("blazorColorMode.get");
-	
-	return ColorMode.TryGetSingleMember(colorMode, out var currentColorMode) 
-		? currentColorMode 
+
+	return ColorMode.TryGetSingleMember(colorMode, out var currentColorMode)
+		? currentColorMode
 		: ColorMode.LightMode;
 }

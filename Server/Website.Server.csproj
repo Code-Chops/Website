@@ -3,16 +3,16 @@
 	<PropertyGroup>
 		<AssemblyName>CodeChops.Website.Server</AssemblyName>
 		<RootNamespace>CodeChops.Website.Server</RootNamespace>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12</LangVersion>
 		<Nullable>enable</Nullable>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<LangVersion>11</LangVersion>
 		<UserSecretsId>Website.Server-131CB2AF-125D-42BE-9E2E-689FF20FC4E4</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup Label="PackageReferences">
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
 	</ItemGroup>
 
 	<ItemGroup Label="ProjectReferences">
