@@ -5,20 +5,6 @@ window.highlightCode = () => {
     });
 }
 
-// Remove splash, attach logo, and dissolve overlay.
-// Gets fired from .NET.
-window.removeSplash = () => {
-    const logo = document.getElementById("logo");
-    logo.classList.add("attachedLogo");
-    logo.classList.remove("splashLogo");
-
-    const clickableLogo = document.getElementById("clickableLogo");
-    clickableLogo.href = "/";
-
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("dissolveOverlay");
-}
-
 window.blazorCulture = {
     get: () => window.localStorage["BlazorCulture"]
         ? window.localStorage["BlazorCulture"]

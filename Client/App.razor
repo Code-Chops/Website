@@ -26,26 +26,11 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
 
-    <HeadOutlet @rendermode="@(new InteractiveWebAssemblyRenderMode(prerender: true))" />
+    <HeadOutlet @rendermode="@(new InteractiveAutoRenderMode(prerender: false))" />
 </head>
 
 <body>
-    @* Style not placed in CSS in order to be displayed immediately *@
-    <div id="overlay" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;"></div>
-
-    <a id="clickableLogo">
-        <div id="logo" class="splashLogo" >
-            <div id="logoBackground"></div>
-            <div id="logoM"></div>
-            <div id="logoA"></div>
-            <div id="logoX"></div>
-            <div id="logoB"></div>
-        </div>
-    </a>
-
-    <Routes @rendermode="@(new InteractiveWebAssemblyRenderMode(prerender: false))" />
-
-    @* <div class="giscus"></div> *@
+    <Routes @rendermode="@(new InteractiveAutoRenderMode(prerender: false))" />
 
     <div id="blazor-error-ui">
         @((MarkupString)GeneralResource.Error))
@@ -55,6 +40,8 @@
     @* TODO *@
     @if (false)
     {
+        <div class="giscus"></div>
+
         <script src="https://giscus.app/client.js"
                 data-repo="Code-Chops/Giscus"
                 data-repo-id="R_kgDOIj6tdg"
@@ -87,7 +74,6 @@
     <script src="https://kit.fontawesome.com/6ad8956052.js" crossorigin="anonymous"></script>
     <script src="highlight/highlight.min.js"></script>
     <script src="highlight/csharp.min.js"></script>
-    <script>console.log('text');</script>
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="codechops" data-description="Support me on Buy me a coffee!" data-message="" data-color="@Branding.Colors.Accent" data-position="Left" data-x_margin="18" data-y_margin="18"></script>
     <script src="_framework/blazor.web.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
