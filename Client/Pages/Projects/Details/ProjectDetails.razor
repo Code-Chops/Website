@@ -6,15 +6,15 @@
 
 <Content IsDocumentation="@true">
 	<Title Value="@Title" ShowTitle="@false"></Title>
-	
+
 	<div class="warning">
 		<Box>
 			@GeneralResource.DocumentationLink
-			
+
 			<a href="@Branding.GitHubLink/@Project" target="_blank">@LinkName</a>@(OnlyEnglishText).
 		</Box>
 	</div>
-	
+
 	@if (DocumentationText is not null)
 	{
 		<Box>
@@ -27,35 +27,35 @@
 	[Inject] private IJSRuntime JsInterop { get; set; } = null!;
 	[Inject] HttpClient HttpClient { get; set; } = null!;
 	[Parameter] public required string Project { get; set; } = null!;
-	
-	public string? Title { get; set; }	
+
+	public string? Title { get; set; }
 	public string? DocumentationText { get; set; }
 	public string LinkName => $"{GeneralResource.GitHub} - {Project}";
-	public static string? OnlyEnglishText 
-		=> GeneralResource.OnlyInEnglish.ContainsText() 
-			? $" {GeneralResource.OnlyInEnglish}" 
+	public static string? OnlyEnglishText
+		=> GeneralResource.OnlyInEnglish.ContainsText()
+			? $" {GeneralResource.OnlyInEnglish}"
 			: null;
-	
+
 	private CancellationTokenSource CancellationTokenSource { get; } = new();
-	
+
 	protected override async Task OnInitializedAsync()
 	{
 		HttpClient.BaseAddress = new(NavigationManager.BaseUri);
 		Title = ProjectOverviewTitleResource.GetSingleMember(Project);
-		
+
 		var pipeline = new MarkdownPipelineBuilder()
 			.UsePipeTables()
 			.UseGridTables()
 			.UseAdvancedExtensions()
 			.UseEmojiAndSmiley()
 			.Build();
-		
+
 		var documentationFromServer = await HttpClient.GetStringAsync($"/projects/{Project}/documentation/", CancellationTokenSource.Token);
 		DocumentationText = Markdown.ToHtml(documentationFromServer, pipeline);
 
 		await base.OnInitializedAsync();
 	}
-	
+
 	protected override async Task OnAfterRenderAsync(bool isFirstRender)
 	{
 		if (!isFirstRender)
@@ -63,7 +63,7 @@
 
 		await base.OnAfterRenderAsync(isFirstRender);
 	}
-	
+
 	public new void Dispose()
 	{
 		CancellationTokenSource.Cancel();

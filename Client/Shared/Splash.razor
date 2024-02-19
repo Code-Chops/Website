@@ -46,7 +46,7 @@
     private bool IsRenderedOnClient => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
     private bool IsLoading { get; set; } = true;
 
-    private const bool ShowSplashScreen = false;
+    private const bool ShowSplashScreen = true;
 
     protected override void OnInitialized()
     {

@@ -2,25 +2,39 @@ using System.Globalization;
 using CodeChops.Crossblade;
 using CodeChops.LightResources;
 using CodeChops.Website.Client;
+using Auth0.AspNetCore.Authentication;
+using CodeChops.Website.Server.AuthenticationStateSyncer;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+var services = builder.Services;
 
-builder.Services.AddRazorComponents()
+services.AddCascadingAuthenticationState();
+services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+
+services
+	.AddAuth0WebAppAuthentication(options => {
+		options.Domain = builder.Configuration["Auth0:Domain"]!;
+		options.ClientId = builder.Configuration["Auth0:ClientId"]!;
+	});
+
+services.AddControllersWithViews();
+
+services.AddRazorComponents()
 	.AddInteractiveWebAssemblyComponents()
 	.AddInteractiveServerComponents();
 
-builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyHost());
-builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyHost());
+services.AddCrossblade(new RenderEnvironment.WebassemblyHost());
+services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyHost());
 
-builder.Services.AddScoped<HttpClient>();
+services.AddLightResources(new LanguageCode[] { new("en-GB"), new("nl-NL") });
 
-builder.Services.AddLightResources(new LanguageCode[] { new("en-GB"), new("nl-NL") });
+services.AddSingleton(builder.Environment);
 
-builder.Services.AddSingleton(builder.Environment);
-
-builder.Services.Configure<RequestLocalizationOptions>(options =>
+services.Configure<RequestLocalizationOptions>(options =>
 {
 	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(LanguageCodeCache.CurrentLanguageCode);
 	options.SupportedUICultures = SupportedLanguageCodes.GetValues().Select(languageCode => new CultureInfo(languageCode)).ToList();
@@ -45,6 +59,27 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAntiforgery();
+
+app.UseStatusCodePagesWithRedirects("/page-not-found");
+
+app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
+{
+	var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
+		.WithRedirectUri(redirectUri)
+		.Build();
+
+	await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+});
+
+app.MapGet("/Account/Logout", async (HttpContext httpContext, string redirectUri = "/") =>
+{
+	var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
+		.WithRedirectUri(redirectUri)
+		.Build();
+
+	await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+	await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+});
 
 app.MapRazorComponents<App>()
 	.AddInteractiveWebAssemblyRenderMode()

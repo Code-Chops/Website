@@ -1,12 +1,21 @@
 ﻿<Splash>
 	<Router AppAssembly="@typeof(App).Assembly">
 		<Found Context="routeData">
-			<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+			<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+				<NotAuthorized>
+					<Content MaxWidth="@null">
+						<Box>
+							<Title Value="@(GeneralResource.NotAuthorized)"></Title>
+						</Box>
+					</Content>
+				</NotAuthorized>
+			</AuthorizeRouteView>
+
 			<FocusOnNavigate RouteData="@routeData" Selector="h1"/>
 		</Found>
 		<NotFound>
 			<LayoutView Layout="@typeof(MainLayout)">
-				<Content>
+				<Content MaxWidth="@null">
 					<Box>
 						<Title Value="@(GeneralResource.PageNotFound)"></Title>
 					</Box>

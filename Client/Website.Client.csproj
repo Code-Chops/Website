@@ -45,6 +45,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Website' " />
+	
 	<ItemGroup>
 		<Content Update="wwwroot\scripts\CodeChops.js">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -63,6 +64,7 @@
 		<PackageReference Include="CodeChops.ImplementationDiscovery" Version="1.8.6" />
 		<PackageReference Include="CodeChops.MagicEnums" Version="3.9.0" />
 		<PackageReference Include="Markdig" Version="0.34.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />

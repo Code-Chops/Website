@@ -3,7 +3,7 @@
 @using CodeChops.Website.Client.Pages.About.Resources
 @using CodeChops.Website.Client.Pages.Home.Resources
 @using CodeChops.Website.Client.Pages.Projects.Resources
-@using RenderEnvironment = CodeChops.Website.RazorComponents.RenderEnvironment
+@using CodeChops.Website.Client.Pages.Authentication
 
 @inherits LayoutComponentBase
 
@@ -18,13 +18,15 @@
              Title="@Branding.Name"
              ShowTitle="ShowTitle"
              Height="80"
-             ShowLogo="false"
+             ShowLogo="@false"
              ButtonsGetter="ButtonsGetter"
-             FadeOut="false">
+             FadeOut="@false">
 
         <ColorModeSelector />
 
         <LanguageSelector />
+
+        <Login />
     </MenuBar>
 
     <div class="border"></div>
@@ -58,21 +60,18 @@
 
 @code
 {
-    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    [Inject] protected RenderEnvironment RenderEnvironment { get; set; } = null!;
+    [Inject] public NavigationManager NavigationManager { get; init; } = null!;
+    [Inject] protected RenderEnvironment RenderEnvironment { get; init; } = null!;
 
-    private bool ShowTitle => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
-
-    private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
     private MenuBar? MenuBar { get; set; }
 
-    private static MenuButtonData[] ButtonsGetter()
-    {
-        return new MenuButtonData[]
-        {
-            new() { HRef="/",           Text = HomeResource.Title },
-            new() { HRef="/projects",   Text = ProjectResource.Title },
-            new() { HRef="/about",      Text = AboutResource.Title },
-        };
-    }
+    private bool ShowTitle => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
+    private static bool IsDarkMode => ColorModeSelector.Value == ColorMode.DarkMode;
+
+    private static MenuButtonData[] ButtonsGetter() =>
+    [
+        new() { HRef="/",           Text = HomeResource.Title },
+        new() { HRef="/projects",   Text = ProjectResource.Title },
+        new() { HRef="/about",      Text = AboutResource.Title }
+    ];
 }

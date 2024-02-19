@@ -15,7 +15,7 @@ public class ProjectsController : Controller
 	}
 
 	[Route("/projects/{project}/documentation")]
-	public async Task<IActionResult> GetDocumentationAsync(string? project)
+	public async Task<IActionResult> GetDocumentationAsync(string project)
 	{
 		if (String.IsNullOrWhiteSpace(project) || !ProjectOverviewTitleResource.TryGetSingleMember(name: project, out ProjectOverviewTitleResource _))
 			return this.BadRequest();

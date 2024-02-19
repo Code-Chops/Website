@@ -1,6 +1,6 @@
 ﻿<div id="content" class="@(IsDocumentation ? "documentation" : null)">
-	<article>
-		@ChildContent	
+	<article id="@Guid">
+		@ChildContent
 	</article>
 </div>
 
@@ -10,7 +10,7 @@
 			justify-content: center;
 		}
 	}
-	article {
+	#@Guid {
 		max-width: @(MaxWidth is null ? "none" : $"min(100%, {MaxWidth})");
 	}
 </style>
@@ -19,4 +19,6 @@
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 	[Parameter] public string? MaxWidth { get; set; } = "900px";
 	[Parameter] public bool IsDocumentation { get; set; }
+
+	private string Guid { get; } = "article" + System.Guid.NewGuid().ToString("N");
 }

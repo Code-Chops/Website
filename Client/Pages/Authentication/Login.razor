@@ -1,0 +1,12 @@
+@using CodeChops.Website.RazorComponents.Navigation.Menu
+
+<AuthorizeView>
+    <Authorized>
+        <span class="menu-setting small-screen-hide">
+            <MenuButton Data="@(new () { FontAwesomeIcon = "fa-user", HRef="Account/Logout"})" />
+        </span>
+    </Authorized>
+    <NotAuthorized>
+        <MenuButton Data="@(new () { FontAwesomeIcon = "fa-user-o", HRef="Account/Login?redirectUri=/"})" />
+    </NotAuthorized>
+</AuthorizeView>

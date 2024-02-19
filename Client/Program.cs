@@ -3,12 +3,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 using CodeChops.Crossblade;
+using CodeChops.Website.Client.Pages.Authentication.AuthenticationStateSyncer;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddHttpClient();
-builder.Services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
-builder.Services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyClient());
+var services = builder.Services;
+services.AddHttpClient();
+services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
+services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyClient());
+
+builder.Services.AddAuthorizationCore();
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 
 var host = builder.Build();
 
