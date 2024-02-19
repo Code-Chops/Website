@@ -29,7 +29,7 @@
         <UseNativeHttpHandler>true</UseNativeHttpHandler>
         <UseSystemResourceKeys>true</UseSystemResourceKeys>
 		<NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
-		<RunAOTCompilation>false</RunAOTCompilation>
+		<RunAOTCompilation>true</RunAOTCompilation>
 		<NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
         <WasmNativeStrip>true</WasmNativeStrip>
         <WasmBuildNative>true</WasmBuildNative>
@@ -45,7 +45,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Website' " />
-	
+
 	<ItemGroup>
 		<Content Update="wwwroot\scripts\CodeChops.js">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
