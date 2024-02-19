@@ -7,13 +7,13 @@
 {
     @* Style not placed in CSS in order to be displayed immediately *@
     <div id="overlay"
-         class="@(If(!IsLoading, "dissolveOverlay"))"
+         class="@(If(IsLoading is not true, "dissolveOverlay"))"
          style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;">
     </div>
 }
 
-<a id="clickableLogo" href="@If(!IsLoading, "/")">
-    <div id="logo" class="@(IsLoading && ShowSplashScreen ? "splashLogo" : "attachedLogo")" >
+<a id="clickableLogo" href="@If(IsLoading is not true, "/")">
+    <div id="logo" class="@(IsLoading is true && ShowSplashScreen ? "splashLogo" : "attachedLogo")" >
         <div id="logoBackground"></div>
         <div id="logoM"></div>
         <div id="logoA"></div>
@@ -22,7 +22,7 @@
     </div>
 </a>
 
-@if (IsLoading && ShowSplashScreen)
+@if (IsLoading is true && ShowSplashScreen)
 {
     <div class="loading-progress-text"></div>
 }
@@ -44,7 +44,7 @@
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     private bool IsRenderedOnClient => RenderEnvironment is not RenderEnvironment.WebassemblyHost;
-    private bool IsLoading { get; set; } = true;
+    private bool? IsLoading { get; set; } = true;
 
     private const bool ShowSplashScreen = true;
 
@@ -55,4 +55,12 @@
 
         Console.WriteLine(Branding.BannerText);
     }
+
+    protected override void OnParametersSet()
+    {
+        IsLoading ??= !IsRenderedOnClient;
+
+        base.OnParametersSet();
+    }
+
 }
