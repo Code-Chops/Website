@@ -40,6 +40,9 @@ services.Configure<RequestLocalizationOptions>(options =>
 	options.SupportedUICultures = SupportedLanguageCodes.GetValues().Select(languageCode => new CultureInfo(languageCode)).ToList();
 });
 
+// Temporary workaround, see: https://github.com/dotnet/aspnetcore/issues/52530
+services.Configure<RouteOptions>(options => options.SuppressCheckForUnhandledSecurityMetadata = true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
