@@ -1,13 +1,13 @@
-@page "/page-not-found"
+@page "/unauthorized"
 @inherits ResourcedComponent
 
 <Content MaxWidth="@null">
 	<Box>
-		<Title Value="@(GeneralResource.PageNotFound)"></Title>
+		<Title Value="@(GeneralResource.NotAuthorized)"></Title>
 
 		<div>
 			<a href="/">
-				Go to the home page
+				@GeneralResource.BackToHome
 			</a>
 		</div>
 	</Box>

@@ -1,12 +1,16 @@
 @page "/projects"
 @using CodeChops.Website.Client.Pages.Projects.Resources
 @inherits ResourcedComponent
-@attribute [Authorize]
+
+@{
+	#if UseAuthorization
+		@attribute [Authorize]
+	#endif
+}
 
 <Content>
 	<span class="title text-center">
 		<Title Value="@(ProjectResource.Title)" ShowTitle="@false"></Title>
-		 (hello @(Username))
 	</span>
 
 	<h2 class="subtitle">@ProjectResource.Applications</h2>
