@@ -3,9 +3,3 @@
         <span class="@If(Data.FontAwesomeIcon is not null, $"fa {Data.FontAwesomeIcon}")"></span> @Data.Text @ChildContent
     </a>
 </div>
-
-@code {
-    [Parameter] public MenuButtonData Data { get; set; } = new();
-	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
-    [Inject] NavigationManager NavigationManager { get; set; } = null!;
-}

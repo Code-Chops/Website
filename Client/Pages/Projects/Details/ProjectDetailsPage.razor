@@ -1,0 +1,21 @@
+﻿@implements IDisposable
+@inherits CodeChops.Website.RazorComponents.Navigation.Anchors.AnchoredComponent
+
+<Content IsDocumentation="@true">
+	<Title Value="@Title" ShowTitle="@false"></Title>
+
+	<div class="warning">
+		<Box>
+			@GeneralResource.DocumentationLink
+
+			<a href="@Branding.GitHubLink/@Project" target="_blank">@LinkName</a>@(OnlyEnglishText).
+		</Box>
+	</div>
+
+	@if (DocumentationText is not null)
+	{
+		<Box>
+			@((MarkupString)DocumentationText)
+		</Box>
+	}
+</Content>

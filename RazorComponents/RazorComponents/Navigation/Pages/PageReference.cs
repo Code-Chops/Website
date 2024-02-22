@@ -43,11 +43,12 @@ public class PageReference<T> : PageReference
 	private static string GetRouteFromAttribute()
 	{
 		// Use the shortest route if multiple are specified
-		var routeAttribute = typeof(T).GetCustomAttributes<RouteAttribute>()
-			.OrderBy(attribute => attribute.Template.Length)
-			.FirstOrDefault();
+		var routeAttribute = typeof(T)
+			.GetCustomAttributes<RouteAttribute>()
+			.MinBy(attribute => attribute.Template.Length);
 
-		if (routeAttribute is null) throw new Exception($"{typeof(T)} does not seem to be a concrete Razor page. Is the @page directive missing?");
+		if (routeAttribute is null)
+			throw new Exception($"{typeof(T)} does not seem to be a concrete Razor page. Is the @page directive missing?");
 
 		var result = routeAttribute.Template;
 		return result;

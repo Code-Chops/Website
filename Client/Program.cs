@@ -1,10 +1,10 @@
 using CodeChops.Website.Client.Layout;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.JSInterop;
 using CodeChops.Crossblade;
 using CodeChops.Website.Client.Pages.Authentication.AuthenticationStateSyncer;
 using Microsoft.AspNetCore.Components.Authorization;
+using RenderEnvironment = CodeChops.Crossblade.RenderEnvironment;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
