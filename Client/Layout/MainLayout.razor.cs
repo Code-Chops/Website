@@ -1,9 +1,5 @@
 using CodeChops.Website.Client.Pages.About.Resources;
 using CodeChops.Website.Client.Pages.Home.Resources;
-using CodeChops.Website.Client.Pages.Projects.Resources;
-using CodeChops.Website.RazorComponents;
-using CodeChops.Website.RazorComponents.Navigation.Menu;
-using Microsoft.AspNetCore.Components;
 
 namespace CodeChops.Website.Client.Layout;
 

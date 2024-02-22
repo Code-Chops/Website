@@ -1,8 +1,4 @@
-@using CodeChops.Website.RazorComponents.Navigation.Menu
 @using CodeChops.Crossblade;
-@using CodeChops.Website.Client.Pages.About.Resources
-@using CodeChops.Website.Client.Pages.Home.Resources
-@using CodeChops.Website.Client.Pages.Projects.Resources
 @using CodeChops.Website.Client.Pages.Authentication
 
 @inherits LayoutComponentBase
@@ -26,7 +22,11 @@
 
         <LanguageSelector />
 
+        @{
+#if UseAuthorization
         <Login />
+#endif
+        }
     </MenuBar>
 
     <div class="border"></div>

@@ -1,27 +1,29 @@
-#define UseAuthorization
+// #define UseAuthorization
 
 using System.Globalization;
 using System.Net;
 using CodeChops.Crossblade;
 using CodeChops.LightResources;
 using CodeChops.Website.Client;
+#if UseAuthorization
 using Auth0.AspNetCore.Authentication;
 using CodeChops.Website.Server.AuthenticationStateSyncer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
+#endif
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
+#if UseAuthorization
 services
 	.AddAuth0WebAppAuthentication(options => {
 		options.Domain = builder.Configuration["Auth0:Domain"]!;
 		options.ClientId = builder.Configuration["Auth0:ClientId"]!;
 	});
 
-#if UseAuthorization
 	services.AddCascadingAuthenticationState();
 	services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 #endif
