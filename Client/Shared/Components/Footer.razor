@@ -7,9 +7,5 @@
             <span class="fa fa-linkedin" aria-hidden="true"></span>
         </a>
     </div>
-    <span title="@(Version is not null ? $"Version {Version}" : null)" class="footer-text"> ©️ @DateTime.Now.Year @Branding.Name</span>
+    <span title="@(IfNotNull(Version, $"Version {Version}"))" class="footer-text"> ©️ @DateTime.Now.Year @Branding.Name</span>
 </footer>
-
-@code {
-    private static Version? Version { get; } = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-}
