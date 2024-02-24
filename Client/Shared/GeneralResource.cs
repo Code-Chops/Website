@@ -1,6 +1,6 @@
 // ReSharper disable InconsistentNaming
 
-namespace CodeChops.Website.Client;
+namespace CodeChops.Website.Client.Shared;
 
 public record GeneralResource : Resource<GeneralResource, ResourceProxyEnum>
 {

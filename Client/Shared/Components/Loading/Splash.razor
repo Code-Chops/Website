@@ -7,13 +7,16 @@
 {
     @* Style not placed in CSS in order to be displayed immediately *@
     <div id="overlay"
+         onclick="@((() => { IsLoading = false; Console.WriteLine("fwe"); }))"
          class="@(If(!IsLoading, "dissolveOverlay"))"
          style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--overlay-background-color, white); pointer-events: none; z-index: 1001;">
     </div>
 }
 
 <a id="clickableLogo" href="@If(!IsLoading, "/")">
-    <div id="logo" class="@(IsLoading && ShowSplashScreen ? "splashLogo" : "attachedLogo")" >
+    <div id="logo"
+        onclick="@((() => { IsLoading = false; Console.WriteLine("fwe"); }))"
+        class="@(IsLoading && ShowSplashScreen ? "splashLogo" : "attachedLogo")" >
         <div id="logoBackground"></div>
         <div id="logoM"></div>
         <div id="logoA"></div>

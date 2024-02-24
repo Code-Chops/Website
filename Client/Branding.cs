@@ -1,3 +1,4 @@
+using System.Web;
 using CodeChops.Website.Client.Layout;
 using CodeChops.Website.RazorComponents.Helpers;
 
@@ -26,7 +27,6 @@ public static class Branding
 	}
 
 	public static string BannerText { get; } = $"""
-	                                            
 	                                               ___          _        ___ _
 	                                              / __\___   __| | ___  / __| |__   ___  _ __  ___
 	                                             / /  / _ \ / _` |/ _ \/ /  | '_ \ / _ \| '_ \/ __|
@@ -34,6 +34,5 @@ public static class Branding
 	                                            \____/\___/ \__,_|\___\____/|_| |_|\___/| .__/|___/
 	                                                                                    |_|
 	                                                                           ©{DateTime.Now.Year} by Max Bergman
-
 	                                            """;
 }

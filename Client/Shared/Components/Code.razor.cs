@@ -1,4 +1,4 @@
-namespace CodeChops.Website.Client.Shared;
+namespace CodeChops.Website.Client.Shared.Components;
 
 public partial class Code
 {

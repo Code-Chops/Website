@@ -1,5 +1,4 @@
 using CodeChops.Website.Client.Layout;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using CodeChops.Crossblade;
 using CodeChops.Website.Client.Pages.Authentication.AuthenticationStateSyncer;
@@ -9,7 +8,6 @@ using RenderEnvironment = CodeChops.Crossblade.RenderEnvironment;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 var services = builder.Services;
-services.AddHttpClient();
 services.AddCrossblade(new RenderEnvironment.WebassemblyClient());
 services.AddSingleton<CodeChops.Website.RazorComponents.RenderEnvironment>(new CodeChops.Website.RazorComponents.RenderEnvironment.WebassemblyClient());
 
@@ -28,12 +26,6 @@ ColorModeSelector.SetMode(currentColorMode);
 
 var currentLanguageCode = GetCurrentLanguageCode(jsRuntime);
 LanguageCodeCache.SetCurrentLanguage(currentLanguageCode);
-
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-	options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(currentLanguageCode);
-	options.SupportedUICultures = SupportedLanguageCodes.GetValues().Select(languageCode => new CultureInfo(languageCode)).ToList();
-});
 
 await host.RunAsync();
 
