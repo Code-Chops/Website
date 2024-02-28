@@ -18,7 +18,7 @@ public class Area
 	{
 		this.Pages = pages.ToList() ?? throw new ArgumentNullException(nameof(pages));
 
-		if (this.Pages.Count == 0) throw new ArgumentException("An area must have at least one accessible page.");
+		if (this.Pages.Count is 0) throw new ArgumentException("An area must have at least one accessible page.");
 
 		this.Assembly = this.Pages.Select(page => page.Assembly).Distinct().Single();
 		this.Title = title ?? throw new ArgumentNullException(nameof(title));

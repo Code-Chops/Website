@@ -59,7 +59,7 @@ public static class NavigationManagerExtensions
 		if (subroute.StartsWith('/') && pageUrl.EndsWith('/'))
 			pageUrl = pageUrl.TrimStart('/');
 
-		var pathSeparator = subroute.Length == 0 || subroute[0] == '/' || pageUrl.EndsWith('/')
+		var pathSeparator = subroute.Length is 0 || subroute[0] == '/' || pageUrl.EndsWith('/')
 			? "" // No subroute, or we already have a separator character
 			: "/";
 
@@ -84,7 +84,7 @@ public static class NavigationManagerExtensions
 		// Make null work
 		queryString ??= "";
 
-		var queryStringSeparator = queryString.Length == 0 || queryString[0] == '?'
+		var queryStringSeparator = queryString.Length is 0 || queryString[0] == '?'
 			? "" // No query string, or we already have a separator character
 			: "?";
 
