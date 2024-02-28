@@ -1,7 +1,11 @@
 ﻿@ChildContent
 
-@if (!ShowSplashScreen && !IsRenderedOnClient)
-    return;
+@{
+    Console.WriteLine("fwe");
+    Console.WriteLine(IsLoading);
+    Console.WriteLine(ShowSplashScreen);
+    Console.WriteLine(IsRenderedOnClient);
+}
 
 @if (ShowSplashScreen)
 {

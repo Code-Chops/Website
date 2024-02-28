@@ -5,7 +5,7 @@ public class RedirectForState : ComponentBase
 {
     public const string Route = "/state-reset-redirect";
 
-    [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+    [Inject] private NavigationManager NavigationManager { get; init; } = null!;
 
     [SupplyParameterFromQuery(Name = nameof(Url))] public string? Url { get; init; }
 

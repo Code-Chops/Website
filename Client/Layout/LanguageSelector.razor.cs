@@ -9,7 +9,8 @@ namespace CodeChops.Website.Client.Layout;
 
 public partial class LanguageSelector
 {
-	[Inject] private NavigationManager UriHelper { get; set; } = null!;
+	[Inject] private NavigationManager UriHelper { get; init; } = null!;
+	[Inject] private IJSRuntime JsRuntime { get; init; } = null!;
 
 	public string CurrentCountryFlag { get; set; } = null!;
 
@@ -61,7 +62,7 @@ public partial class LanguageSelector
 		this.SetCountryFlag();
 		await this.JsRuntime.InvokeVoidAsync("blazorCulture.set", newLanguageCode.Value);
 
-		TriggerLanguageChangedEvent();
+		this.TriggerLanguageChangedEvent();
 	}
 
 	private void SetCountryFlag()

@@ -7,8 +7,9 @@ public partial class ProjectDetailsPage : AnchoredComponent
 {
 	public const string Route = "/projects/{project}/";
 
-	[Inject] private IJSRuntime JsInterop { get; set; } = null!;
-	[Inject] private HttpClient HttpClient { get; set; } = null!;
+	[Inject] private NavigationManager NavigationManager { get; init; } = null!;
+	[Inject] private IJSRuntime JsInterop { get; init; } = null!;
+	[Inject] private HttpClient HttpClient { get; init; } = null!;
 
 	[Parameter] public required string Project { get; set; } = null!;
 

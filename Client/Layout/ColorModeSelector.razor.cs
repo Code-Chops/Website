@@ -7,7 +7,7 @@ namespace CodeChops.Website.Client.Layout;
 
 public partial class ColorModeSelector
 {
-	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+	[Inject] private IJSRuntime JsRuntime { get; init; } = null!;
 
 	internal static ColorMode Value { get; private set; } = null!;
 	private MenuButtonData MenuButtonData { get; set; }

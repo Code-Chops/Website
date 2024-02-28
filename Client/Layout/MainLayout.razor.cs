@@ -5,8 +5,7 @@ namespace CodeChops.Website.Client.Layout;
 
 public partial class MainLayout
 {
-	[Inject] public NavigationManager NavigationManager { get; init; } = null!;
-	[Inject] protected RenderEnvironment RenderEnvironment { get; init; } = null!;
+	[Inject] private RenderEnvironment RenderEnvironment { get; init; } = null!;
 
 	private MenuBar? MenuBar { get; set; }
 	private bool ShowTitle => this.RenderEnvironment is not RenderEnvironment.WebassemblyHost;

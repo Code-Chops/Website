@@ -4,7 +4,7 @@ namespace CodeChops.Website.Client.Pages.Projects;
 
 public partial class ProjectThumbnail
 {
-	[Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+	[Inject] public IJSRuntime JsRuntime { get; init; } = null!;
 
 	[Parameter] public required string Code { get; set; } = null!;
 	[Parameter] public required string Title { get; set; } = null!;

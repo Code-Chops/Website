@@ -18,10 +18,10 @@
             <div class="navbar-buttons">
                 @foreach(var button in ButtonsGetter?.Invoke() ?? Array.Empty<MenuButtonData>())
                 {
-                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
+                    <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })" />
                 }
             </div>
-            
+
             @ChildContent
 
             <button class="navbar-toggler" @onclick="Toggle">
@@ -34,49 +34,11 @@
         <div class="menu-item-container">
             @foreach(var button in ButtonsGetter?.Invoke() ?? Array.Empty<MenuButtonData>())
             {
-                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })"></MenuButton>
+                <MenuButton Data="@(button with { OnClick = (e, _) => OnClickButton(e, button) })" />
             }
         </div>
     </div>
 </div>
-
-@code {
-    [Parameter] public string Title { get; set; } = null!;
-    [Parameter] public FlexColor BackgroundColor { get; set; }
-    [Parameter] public FlexColor AccentColor { get; set; }
-    [Parameter] public FlexColor TextColor { get; set; }
-    [Parameter] public FlexColor HRefColor { get; set; }
-    [Parameter] public string? FontFamily { get; set; }
-    [Parameter] public string FontSize { get; set; } = "40px";
-    [Parameter] public string? CustomToggleImage { get; set; }
-    [Parameter] public string? LogoPath { get; set; }
-    [Parameter] public int Height { get; set; } = 80;
-    [Parameter] public bool ShowLogo { get; set; } = true;
-    [Parameter] public bool ShowTitle { get; set; } = true;
-    [Parameter] public Func<MenuButtonData[]>? ButtonsGetter { get; set; }
-    [Parameter] public int CollapseWidth { get; set; } = 720;
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
-    [Parameter] public bool FadeOut { get; set; } = true;
-
-    private bool IsCollapsed { get; set; } = true;
-
-    private void Toggle()
-    {
-        IsCollapsed = !IsCollapsed;
-        StateHasChanged();
-    }
-
-    public void Collapse()
-    {
-        if (!IsCollapsed) Toggle();
-    }
-
-    public void OnClickButton(EventArgs e, MenuButtonData button)
-    {
-        Collapse();
-        button.OnClick(e, button);
-    }
-}
 
 <style>
     :root{
@@ -103,8 +65,8 @@
     .menu-bar {
         height: @(Height)px;
     }
-    
-    @if (FadeOut) 
+
+    @if (FadeOut)
     {
         <text>
         .top-bar-shadow.hide {
@@ -127,7 +89,7 @@
         .navbar-buttons {
             display: none !important;
         }
-        
+
         .menu-setting {
             padding-top: 3px;
             max-width: 20px;
