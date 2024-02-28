@@ -1,5 +1,6 @@
 @using System.Web
-<!-- @(Branding.BannerText) -->
+
+@(new MarkupString($"<!--{Environment.NewLine}{Branding.BannerText}{Environment.NewLine}-->"))
 
 <!DOCTYPE html>
 <html lang="en">
