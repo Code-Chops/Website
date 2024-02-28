@@ -7,7 +7,7 @@ public partial class Splash
 	[Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
 	private bool IsRenderedOnClient => this.RenderEnvironment is not RenderEnvironment.WebassemblyHost;
-	private bool IsLoading { get; set; } = true;
+	private bool IsLoading { get; set; } = ShowSplashScreen;
 	private const bool ShowSplashScreen = true;
 
 	protected override void OnInitialized()
